@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Terp.Domain.Exceptions
+namespace HRM.Domain.Exceptions
 {
     public class UserNotFoundException : Exception
     {

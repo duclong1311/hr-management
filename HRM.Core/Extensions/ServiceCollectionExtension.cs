@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terp.Core.Repositories;
-using Terp.Core.UnitOfWorks;
+using HRM.Core.Repositories;
+using HRM.Core.UnitOfWorks;
 
-namespace Terp.Core.Extensions
+namespace HRM.Core.Extensions
 {
     public static class ServiceCollectionExtension
     {
