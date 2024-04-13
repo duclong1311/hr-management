@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terp.Domain.Models;
+using HRM.Domain.Models;
 using System.Xml.Linq;
-using Terp.Domain.Utils;
+using HRM.Domain.Utils;
 
-namespace Terp.Domain.Configurations
+namespace HRM.Domain.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

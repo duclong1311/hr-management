@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terp.Core.Entities;
+using HRM.Core.Entities;
 
-namespace Terp.Core.Repositories
+namespace HRM.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {

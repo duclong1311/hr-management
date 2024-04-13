@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Terp.Core.Entities
+namespace HRM.Core.Entities
 {
     public interface IEntity
     {
