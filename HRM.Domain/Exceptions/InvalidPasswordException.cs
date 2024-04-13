@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRM.Domain.Exceptions
+namespace Terp.Domain.Exceptions
 {
     public class InvalidPasswordException : Exception
     {

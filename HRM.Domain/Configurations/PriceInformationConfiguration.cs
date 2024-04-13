@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using Terp.Domain.Models;
 
 namespace Terp.Domain.Configurations
 {
-    public class AlternativeProductInformationConfiguration : IEntityTypeConfiguration<AlternativeProductInformation>
+    public class PriceInformationConfiguration : IEntityTypeConfiguration<PriceInformation>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<AlternativeProductInformation> builder)
+        public void Configure(EntityTypeBuilder<PriceInformation> builder)
         {
             builder.HasKey(x => x.Id);
         }

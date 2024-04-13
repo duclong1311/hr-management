@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HRM.Domain.Models;
+using Terp.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HRM.Domain.Configurations
+namespace Terp.Domain.Configurations
 {
     public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
     {

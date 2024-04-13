@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRM.Core.UnitOfWorks
+namespace Terp.Core.UnitOfWorks
 {
     public class UnitOfWork : IUnitOfWork
     {

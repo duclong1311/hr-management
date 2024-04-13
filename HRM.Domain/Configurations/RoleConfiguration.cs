@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HRM.Domain.Models;
+using Terp.Domain.Models;
 
-namespace HRM.Domain.Configurations
+namespace Terp.Domain.Configurations
 {
     public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
