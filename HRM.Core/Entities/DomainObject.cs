@@ -8,6 +8,6 @@ namespace HRM.Core.Entities
 {
     public class DomainObject
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 }
