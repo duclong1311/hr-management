@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240413142840_Initial")]
-    partial class Initial
+    [Migration("20240415064751_Intial")]
+    partial class Intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -196,6 +196,10 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EmailCongTy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -196,6 +196,10 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("LuongCoBan")
                         .HasColumnType("float");
 
