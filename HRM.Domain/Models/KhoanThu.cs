@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRM.Domain.Models
 {
-    public class KhoanThu : DomainObject
+    public class KhoanThu : IEntity
     {
         public string TenKhoan {  get; set; }
         public int SoLuong { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRM.Domain.Models
 {
-    public class ViTri : DomainObject
+    public class ViTri : IEntity
     {
         public string TenViTri {  get; set; }
 

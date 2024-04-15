@@ -8,7 +8,7 @@ using HRM.Core.Entities;
 
 namespace HRM.Core.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
         private DbContext _dbContext;
 

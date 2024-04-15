@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRM.Domain.Models
 {
-    public class User : DomainObject
+    public class User : IEntity
     {
         public string Name { get; set; }
         public string Email { get; set; }

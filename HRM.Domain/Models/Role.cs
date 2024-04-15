@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRM.Domain.Models
 {
-    public class Role : DomainObject
+    public class Role : IEntity
     {
         public string Name { get; set; }
         public string Permission { get; set; }

@@ -2,11 +2,27 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Images\++_logo_red %284%29.png" />
+    <None Remove="Views\Images\back_groud.png" />
+    <None Remove="Views\Images\Currentcy.png" />
+    <None Remove="Views\Images\Information.png" />
+    <None Remove="Views\Images\key-icon.png" />
+    <None Remove="Views\Images\options.png" />
+    <None Remove="Views\Images\PriceInformation.png" />
+    <None Remove="Views\Images\Product.png" />
+    <None Remove="Views\Images\Replace.png" />
+    <None Remove="Views\Images\Supplier.png" />
+    <None Remove="Views\Images\Unit.png" />
+    <None Remove="Views\Images\user-icon.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
@@ -20,6 +36,30 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PasswordBoxMVVM" Version="1.0.5" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HRM.Core\HRM.Core.csproj" />
+    <ProjectReference Include="..\HRM.DbMigrator\HRM.DbMigrator.csproj" />
+    <ProjectReference Include="..\HRM.Domain\HRM.Domain.csproj" />
+    <ProjectReference Include="..\HRM.EFCore\HRM.EFCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Images\++_logo_red (4).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\back_groud.png" />
+    <Resource Include="Views\Images\Currentcy.png" />
+    <Resource Include="Views\Images\Information.png" />
+    <Resource Include="Views\Images\key-icon.png" />
+    <Resource Include="Views\Images\options.png" />
+    <Resource Include="Views\Images\PriceInformation.png" />
+    <Resource Include="Views\Images\Product.png" />
+    <Resource Include="Views\Images\Replace.png" />
+    <Resource Include="Views\Images\Supplier.png" />
+    <Resource Include="Views\Images\Unit.png" />
+    <Resource Include="Views\Images\user-icon.png" />
   </ItemGroup>
 
 </Project>

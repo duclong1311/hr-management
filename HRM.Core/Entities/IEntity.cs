@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace HRM.Core.Entities
 {
-    public interface IEntity
+    public class IEntity
     {
+        public int Id { get; set; }
+
     }
 }
