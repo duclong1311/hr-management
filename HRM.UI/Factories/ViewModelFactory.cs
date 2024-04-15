@@ -14,15 +14,17 @@ namespace HRM.UI.Factories
     {
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
+        private readonly CreateViewModel<MainContentViewModel> _createMainContentViewModel;
 
 
         public ViewModelFactory(CreateViewModel<LoginViewModel> createLoginViewModel,
-            CreateViewModel<RegisterViewModel> createRegisterViewModel)
-    
+            CreateViewModel<RegisterViewModel> createRegisterViewModel,
+            CreateViewModel<MainContentViewModel> createMainContentViewModel)
+
         {
             _createLoginViewModel = createLoginViewModel;
             _createRegisterViewModel = createRegisterViewModel;
-
+            _createMainContentViewModel = createMainContentViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -32,6 +34,8 @@ namespace HRM.UI.Factories
                     return _createLoginViewModel();
                 case EViewTypes.Register:
                     return _createRegisterViewModel();
+                case EViewTypes.MainContent:
+                    return _createMainContentViewModel();
                 default:
                     throw new ArgumentException();
             }
