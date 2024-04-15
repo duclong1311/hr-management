@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240415070424_Intial")]
-    partial class Intial
+    [Migration("20240415092725_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,14 +314,18 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "1",
+                            Name = "admin",
+                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*"
+                        });
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.ViTri", b =>
@@ -339,17 +343,6 @@ namespace HRM.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ViTri");
-                });
-
-            modelBuilder.Entity("HRM.Domain.Models.User", b =>
-                {
-                    b.HasOne("HRM.Domain.Models.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

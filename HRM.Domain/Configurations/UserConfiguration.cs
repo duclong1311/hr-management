@@ -15,7 +15,13 @@ namespace HRM.Domain.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(x => x.Id);
-           
+            builder.HasData(new User()
+            {
+                Id = 1,
+                Name = "admin",
+                Email = "1",
+                Password = CryptographyUtil.SHA256Hash("111111"),
+            });
         }
     }
 }
