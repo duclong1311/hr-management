@@ -24,8 +24,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.BangCong", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("NgayKhongNghiPhep")
                         .HasColumnType("int");
@@ -46,8 +49,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.BangLuong", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double>("ThucLinh")
                         .HasColumnType("float");
@@ -59,8 +65,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.BoPhan", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TenBoPhan")
                         .IsRequired()
@@ -73,8 +82,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.ChucVu", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TenChucVu")
                         .IsRequired()
@@ -87,8 +99,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.HoSo", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Anh")
                         .IsRequired()
@@ -119,8 +134,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.HopDong", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("CheckChuKy")
                         .HasColumnType("bit");
@@ -149,8 +167,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.KhoanKhauTru", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
@@ -169,8 +190,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.KhoanThu", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
@@ -189,10 +213,17 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.NhanSu", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EmailCongTy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -221,8 +252,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.PhucLoiVaPhuCap", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TenKhoan")
                         .IsRequired()
@@ -238,8 +272,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.Role", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -256,14 +293,13 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FingerprintCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -275,9 +311,8 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -288,8 +323,11 @@ namespace HRM.EFCore.Migrations
 
             modelBuilder.Entity("HRM.Domain.Models.ViTri", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TenViTri")
                         .IsRequired()

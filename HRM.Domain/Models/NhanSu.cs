@@ -9,6 +9,7 @@ namespace HRM.Domain.Models
 {
     public class NhanSu : DomainObject
     {
+        public string HoTen {  get; set; }
         public string EmailCongTy {  get; set; }
         public string STK { get; set; }
         public string MaSoBHXH {  get; set; }

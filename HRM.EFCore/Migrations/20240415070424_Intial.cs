@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,8 @@ namespace HRM.EFCore.Migrations
                 name: "BangCongs",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TongTimeOT = table.Column<double>(type: "float", nullable: false),
                     TongSoNgayCong = table.Column<int>(type: "int", nullable: false),
                     NgayNghiPhep = table.Column<int>(type: "int", nullable: false),
@@ -30,7 +31,8 @@ namespace HRM.EFCore.Migrations
                 name: "BangLuongs",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ThucLinh = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
@@ -42,7 +44,8 @@ namespace HRM.EFCore.Migrations
                 name: "BoPhans",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenBoPhan = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -54,7 +57,8 @@ namespace HRM.EFCore.Migrations
                 name: "ChucVus",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +70,8 @@ namespace HRM.EFCore.Migrations
                 name: "HopDongs",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NgayKetThu = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoaiHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -83,7 +88,8 @@ namespace HRM.EFCore.Migrations
                 name: "HoSos",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Anh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GioiTinh = table.Column<bool>(type: "bit", nullable: false),
                     SinhNgay = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -100,7 +106,8 @@ namespace HRM.EFCore.Migrations
                 name: "KhoanKhauTrus",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenKhoan = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     ThanhTien = table.Column<double>(type: "float", nullable: false)
@@ -114,7 +121,8 @@ namespace HRM.EFCore.Migrations
                 name: "KhoanThus",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenKhoan = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     ThanhTien = table.Column<double>(type: "float", nullable: false)
@@ -128,7 +136,9 @@ namespace HRM.EFCore.Migrations
                 name: "NhanSus",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailCongTy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     STK = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaSoBHXH = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -145,7 +155,8 @@ namespace HRM.EFCore.Migrations
                 name: "PhucLoiVaPhuCaps",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenKhoan = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ThanhTien = table.Column<double>(type: "float", nullable: false)
                 },
@@ -158,7 +169,8 @@ namespace HRM.EFCore.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Permission = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -171,7 +183,8 @@ namespace HRM.EFCore.Migrations
                 name: "ViTri",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenViTri = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -183,12 +196,12 @@ namespace HRM.EFCore.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FingerprintCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
