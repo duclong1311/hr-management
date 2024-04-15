@@ -1,13 +1,14 @@
 ﻿<UserControl x:Class="HRM.UI.Views.MainContentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views"
              xmlns:Load="clr-namespace:HRM.UI.CustomControls"
              xmlns:viewModels="clr-namespace:HRM.UI.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100px"
@@ -40,7 +41,7 @@
                 <TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding NhanSuCommand}"
+                                Command="{Binding StaffListCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Currentcy.png"
@@ -56,14 +57,14 @@
                 <TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding ProductCommand}"
+                                Command="{Binding StaffCVCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Product.png"
                                        Height="20"
                                        Width="20"
                                        Margin="0, 0, 4, 0"></Image>
-                                <TextBlock Text="Sản phẩm" />
+                                <TextBlock Text="Hồ sơ nhân sự" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
@@ -71,19 +72,19 @@
                 <TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding CustomerCommand}"
+                                Command="{Binding ContractCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Height="20"
                                        Width="20"
                                        Margin="0, 0, 4, 0"></Image>
-                                <TextBlock Text="Thông tin hàng thay thế" />
+                                <TextBlock Text="Hợp đồng nhân sự" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+                <!--<TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding ProviderCommand}"
@@ -97,8 +98,8 @@
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
-                </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+                </TreeViewItem>-->
+                <!--<TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Command="{Binding UnitCommand}"
                                 Background="Transparent"
@@ -112,7 +113,7 @@
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
-                </TreeViewItem>
+                </TreeViewItem>-->
                 <TreeViewItem IsExpanded="True"
                               Visibility="Collapsed">
                     <TreeViewItem.Header>
@@ -138,20 +139,20 @@
                                Height="16"
                                Width="16"
                                Margin="0, 0, 4, 0"></Image>
-                        <TextBlock Text="Thông tin chào giá" />
+                        <TextBlock Text="Nhập công" />
                     </StackPanel>
                 </TreeViewItem.Header>
                 <TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding PriceInformationCommand}"
+                                Command="{Binding DailyTrackingCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
                                        Height="20"
                                        Width="20"
                                        Margin="0, 0, 4, 0"></Image>
-                                <TextBlock Text="Nhập thông tin chào giá" />
+                                <TextBlock Text="Nhập công hàng ngày" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
@@ -159,20 +160,64 @@
                 <TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding SearchPriceCommand}"
+                                Command="{Binding TrackingReportCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Height="20"
                                        Width="20"
                                        Margin="0, 0, 4, 0"></Image>
-                                <TextBlock Text="Tìm kiếm thông tin chào giá" />
+                                <TextBlock Text="Báo cáo chấm công" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+            </TreeViewItem>
+
+            <TreeViewItem IsExpanded="True">
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="./Images/options.png"
+                               Height="16"
+                               Width="16"
+                               Margin="0, 0, 4, 0"></Image>
+                        <TextBlock Text="Lương thưởng" />
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem IsExpanded="True">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding StaffSalaryCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/PriceInformation.png"
+                                       Height="20"
+                                       Width="20"
+                                       Margin="0, 0, 4, 0"></Image>
+                                <TextBlock Text="Phiếu lương nhân viên" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem IsExpanded="True">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding SalaryReportCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/Replace.png"
+                                       Height="20"
+                                       Width="20"
+                                       Margin="0, 0, 4, 0"></Image>
+                                <TextBlock Text="Bảng lương công ty" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
             </TreeViewItem>
         </TreeView>
+
+
         <Grid Grid.Column="1">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
@@ -191,8 +236,13 @@
             <Grid.Resources>
 
             </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="34*" />
+                <ColumnDefinition Width="11*" />
+            </Grid.ColumnDefinitions>
 
-            <ContentControl Content="{Binding CurrentViewModel}" />
+            <ContentControl Content="{Binding CurrentViewModel}"
+                            Grid.ColumnSpan="2" />
             <!--<Load:LoadingSpinner Visibility="Hidden"/>-->
         </Grid>
     </Grid>
