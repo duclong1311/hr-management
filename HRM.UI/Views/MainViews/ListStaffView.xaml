@@ -77,12 +77,12 @@
             </Grid>
             <Grid Grid.Column="3">
                 <StackPanel>
-                    <TextBox x:Name="tb_BoPhan"
-                             Style="{StaticResource TextBox_ListStaffView}" />
-                    <TextBox x:Name="tb_ChucVu"
-                             Style="{StaticResource TextBox_ListStaffView}" />
-                    <TextBox x:Name="tb_ViTri"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                    <ComboBox x:Name="cbb_BoPhan"
+                              Style="{StaticResource ComboBox_Style}" />
+                    <ComboBox x:Name="cbb_ChucVu"
+                             Style="{StaticResource ComboBox_Style}" />
+                    <ComboBox x:Name="cbb_ViTri"
+                             Style="{StaticResource ComboBox_Style}" />
                     <TextBox x:Name="tb_MaSoThue"
                              Style="{StaticResource TextBox_ListStaffView}" />
                     <TextBox x:Name="tb_NgayVaoLam"
@@ -94,7 +94,7 @@
         <!--Table-->
         <Grid Grid.Row="1">
             <ListView Margin="10"
-                      Name="ListStaffView">
+                      Name="ListStaffView_Pick">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID"
@@ -134,11 +134,14 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Button Content="Thêm nhân sự"
-                        Style="{StaticResource Button_ListStaffView}" />
+                        Style="{StaticResource Button_ListStaffView}" 
+                        Command="{Binding }"/>
                 <Button Content="Sửa thông tin"
-                        Style="{StaticResource Button_ListStaffView}" />
+                        Style="{StaticResource Button_ListStaffView}" 
+                        Command="{Binding }"/>
                 <Button Content="Xóa nhân sự"
-                        Style="{StaticResource Button_ListStaffView}" />
+                        Style="{StaticResource Button_ListStaffView}" 
+                        Command="{Binding }"/>
             </StackPanel>
 
         </Grid>

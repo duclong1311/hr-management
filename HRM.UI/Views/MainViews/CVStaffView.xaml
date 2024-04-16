@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="HRM.UI.Views.MainViews.CVStaffView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d"
+             d:DesignHeight="660"
+             d:DesignWidth="820">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CVStaffView_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="195" />
+            <RowDefinition Height="405" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        
+        <!--Information-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Grid>
+                <Image Source="{Binding }"
+                       Style="{StaticResource Image_Style}" />
+            </Grid>
+            
+            <Grid Grid.Column="1">
+                <StackPanel Margin="0, 10,0,0">
+                    <Label Content="Mã nhân viên: "
+                           Style="{StaticResource Label_Style}" />
+                    <Label Content="Họ tên: "
+                           Style="{StaticResource Label_Style}" />
+                    <Label Content="Bộ phận: "
+                           Style="{StaticResource Label_Style}" />
+                    <Label Content="Chức vụ: "
+                           Style="{StaticResource Label_Style}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="3">
+                <StackPanel Margin="0, 10,0,0">
+                    <Label Content="Vị trí: "
+                           Style="{StaticResource Label_Style}" />
+                    <Label Content="Tình trạng hồ sơ: "
+                           Style="{StaticResource Label_Style}" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <StackPanel  Margin="0, 10,0,0">
+                    <TextBox x:Name="tb_MaNhanVien"
+                             Style="{StaticResource TextBox_Style}" />
+                    <TextBox x:Name="tb_Ten"
+                             Style="{StaticResource TextBox_Style}" />
+                    <ComboBox x:Name="cbb_BoPhan"
+                              Style="{StaticResource Combobox_Style}" />
+                    <ComboBox x:Name="cbb_ChucVu"
+                              Style="{StaticResource Combobox_Style}" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="4">
+                <StackPanel  Margin="0, 10,0,0">
+                    <ComboBox x:Name="cbb_ViTri"
+                             Style="{StaticResource Combobox_Style}" />
+                    <TextBox x:Name="tb_TinhTrangHoSo"
+                             Style="{StaticResource TextBox_Style}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+           <!--Table-->
+        <Grid Grid.Row="1">
+            <ListView Margin="10"
+                      Name="ListStaff">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Họ tên"
+                                        Width="200"
+                                        DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Bộ phận"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Chức vụ"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Vị trí"
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Tình trạng hồ sơ"
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding }" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        
+        <!--Button-->
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Xem hồ sơ"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Thêm hồ sơ"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Sửa hồ sơ"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Xóa hồ sơ"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>
