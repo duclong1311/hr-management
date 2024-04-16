@@ -24,6 +24,8 @@
                 Value="28.62" />
         <Setter Property="FontSize"
                 Value="14" />
+        <Setter Property="Padding"
+                Value="5" />
     </Style>
 
     <Style TargetType="Button"
