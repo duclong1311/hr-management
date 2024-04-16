@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
@@ -208,9 +210,45 @@ namespace HRM.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "BoPhans",
+                columns: new[] { "Id", "TenBoPhan" },
+                values: new object[,]
+                {
+                    { 1, "Lập trình PC" },
+                    { 2, "Cơ khí" },
+                    { 3, "Kinh doanh" },
+                    { 4, "Hành chính nhân sự" },
+                    { 5, "Kế toán" },
+                    { 6, "Kỹ thuật và hạ tầng" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ChucVus",
+                columns: new[] { "Id", "TenChucVu" },
+                values: new object[,]
+                {
+                    { 1, "Nhân viên" },
+                    { 2, "Quản lý" },
+                    { 3, "Trưởng phòng" },
+                    { 4, "Trưởng bộ phận" },
+                    { 5, "Giám đốc" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password" },
                 values: new object[] { 1, "1", "admin", "??_?y??w+???l\0?_?n5?rY?????	?*" });
+
+            migrationBuilder.InsertData(
+                table: "ViTri",
+                columns: new[] { "Id", "TenViTri" },
+                values: new object[,]
+                {
+                    { 1, "VT1" },
+                    { 2, "VT2" },
+                    { 3, "VT3" },
+                    { 4, "VT4" }
+                });
         }
 
         /// <inheritdoc />

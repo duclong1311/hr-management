@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240415092725_update")]
+    [Migration("20240416073847_update")]
     partial class update
     {
         /// <inheritdoc />
@@ -81,6 +81,38 @@ namespace HRM.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BoPhans");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenBoPhan = "Lập trình PC"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TenBoPhan = "Cơ khí"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TenBoPhan = "Kinh doanh"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TenBoPhan = "Hành chính nhân sự"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TenBoPhan = "Kế toán"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            TenBoPhan = "Kỹ thuật và hạ tầng"
+                        });
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.ChucVu", b =>
@@ -98,6 +130,33 @@ namespace HRM.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ChucVus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenChucVu = "Nhân viên"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TenChucVu = "Quản lý"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TenChucVu = "Trưởng phòng"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TenChucVu = "Trưởng bộ phận"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TenChucVu = "Giám đốc"
+                        });
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.HoSo", b =>
@@ -343,6 +402,28 @@ namespace HRM.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ViTri");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenViTri = "VT1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TenViTri = "VT2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TenViTri = "VT3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TenViTri = "VT4"
+                        });
                 });
 #pragma warning restore 612, 618
         }

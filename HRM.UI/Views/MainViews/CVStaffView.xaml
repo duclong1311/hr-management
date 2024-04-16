@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              mc:Ignorable="d"
              d:DesignHeight="660"
-             d:DesignWidth="820">
+             d:DesignWidth="820"
+             Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,22 +21,22 @@
             <RowDefinition Height="405" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        
+
         <!--Information-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
+
             <Grid>
                 <Image Source="{Binding }"
                        Style="{StaticResource Image_Style}" />
             </Grid>
-            
+
             <Grid Grid.Column="1">
                 <StackPanel Margin="0, 10,0,0">
                     <Label Content="Mã nhân viên: "
@@ -60,26 +61,34 @@
             <Grid Grid.Column="2">
                 <StackPanel  Margin="0, 10,0,0">
                     <TextBox x:Name="tb_MaNhanVien"
-                             Style="{StaticResource TextBox_Style}" />
+                             Style="{StaticResource TextBox_Style}"
+                             Text="{Binding Ma, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox x:Name="tb_Ten"
-                             Style="{StaticResource TextBox_Style}" />
+                             Style="{StaticResource TextBox_Style}"
+                             Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" />
                     <ComboBox x:Name="cbb_BoPhan"
-                              Style="{StaticResource Combobox_Style}" />
+                              Style="{StaticResource Combobox_Style}"
+                              ItemsSource="{Binding ListBoPhan}"
+                              SelectedItem="{Binding SlectedBoPhan}"/>
                     <ComboBox x:Name="cbb_ChucVu"
-                              Style="{StaticResource Combobox_Style}" />
+                              Style="{StaticResource Combobox_Style}"
+                              ItemsSource="{Binding ListChucVu}"
+                              SelectedItem="{Binding SelectedChucVu}"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="4">
                 <StackPanel  Margin="0, 10,0,0">
                     <ComboBox x:Name="cbb_ViTri"
-                             Style="{StaticResource Combobox_Style}" />
+                              Style="{StaticResource Combobox_Style}"
+                              ItemsSource="{Binding ListViTri}"/>
                     <TextBox x:Name="tb_TinhTrangHoSo"
-                             Style="{StaticResource TextBox_Style}" />
+                             Style="{StaticResource TextBox_Style}" 
+                             Text="{Binding TinhTrang}"/>
                 </StackPanel>
             </Grid>
         </Grid>
 
-           <!--Table-->
+        <!--Table-->
         <Grid Grid.Row="1">
             <ListView Margin="10"
                       Name="ListStaff">
@@ -87,7 +96,7 @@
                     <GridView>
                         <GridViewColumn Header="ID"
                                         Width="100"
-                                        DisplayMemberBinding="{Binding }" />
+                                        DisplayMemberBinding="{Binding Id}" />
                         <GridViewColumn Header="Họ tên"
                                         Width="200"
                                         DisplayMemberBinding="{Binding }" />
@@ -107,7 +116,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        
+
         <!--Button-->
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal"

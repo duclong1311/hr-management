@@ -1,11 +1,13 @@
 ﻿<UserControl x:Class="HRM.UI.Views.MainViews.WorkProcessView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
-             mc:Ignorable="d" 
-             d:DesignHeight="640" d:DesignWidth="820">
+             mc:Ignorable="d"
+             d:DesignHeight="640"
+             d:DesignWidth="820"
+             Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

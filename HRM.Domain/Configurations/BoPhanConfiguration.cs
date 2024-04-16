@@ -15,6 +15,31 @@ namespace HRM.Domain.Configurations
         public void Configure(EntityTypeBuilder<BoPhan> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasData(new BoPhan()
+            {
+                Id = 1,
+                TenBoPhan = "Lập trình PC",
+            }, new BoPhan()
+            {
+                Id = 2,
+                TenBoPhan = "Cơ khí",
+            }, new BoPhan()
+            {
+                Id = 3,
+                TenBoPhan = "Kinh doanh",
+            }, new BoPhan()
+            {
+                Id = 4,
+                TenBoPhan = "Hành chính nhân sự",
+            }, new BoPhan()
+            {
+                Id = 5,
+                TenBoPhan = "Kế toán",
+            }, new BoPhan()
+            {
+                Id = 6,
+                TenBoPhan = "Kỹ thuật và hạ tầng",
+            });
         }
     }
 }

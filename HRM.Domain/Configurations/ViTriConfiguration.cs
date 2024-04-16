@@ -14,6 +14,23 @@ namespace HRM.Domain.Configurations
         public void Configure(EntityTypeBuilder<ViTri> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasData(new ViTri()
+            {
+                Id = 1,
+                TenViTri = "VT1"
+            }, new ViTri()
+            {
+                Id = 2,
+                TenViTri = "VT2"
+            }, new ViTri()
+            {
+                Id = 3,
+                TenViTri = "VT3"
+            }, new ViTri()
+            {
+                Id = 4,
+                TenViTri = "VT4"
+            });
         }
     }
 }
