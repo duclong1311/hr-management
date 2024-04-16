@@ -236,14 +236,9 @@
             <Grid.Resources>
 
             </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="34*" />
-                <ColumnDefinition Width="11*" />
-            </Grid.ColumnDefinitions>
 
-            <ContentControl Content="{Binding CurrentViewModel}"
-                            Grid.ColumnSpan="2" />
-            <!--<Load:LoadingSpinner Visibility="Hidden"/>-->
+            <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}" />
+            <Load:LoadingSpinner Visibility="Hidden" />
         </Grid>
     </Grid>
 </UserControl>

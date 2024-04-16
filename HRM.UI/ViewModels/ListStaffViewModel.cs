@@ -18,10 +18,12 @@ using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using Microsoft.Identity.Client;
 using HRM.UI.Commands;
+using HRM.UI.Stores;
+using HRM.UI.Factories;
 
 namespace HRM.UI.ViewModels
 {
-    public class StaffCVViewModel : BaseViewModel
+    public class ListStaffViewModel : BaseViewModel
     {
         private ObservableCollection<NhanSu> _list = new ObservableCollection<NhanSu>();
         public ObservableCollection<NhanSu> List
@@ -109,11 +111,24 @@ namespace HRM.UI.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand ResetCommand { get; set; }
+        public ICommand StaffViewCommand { get; set; }
         private IRepository<NhanSu> _repository;
         private IRepository<BoPhan> _boPhanRepository;
         private IRepository<ChucVu> _chucVuRepository;
         private IRepository<ViTri> _viTriRepository;
         private IUnitOfWork _unitOfWork;
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
+
+        public ListStaffViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore)
+        {
+            _viewModelFactory = viewModelFactory;
+            _mainContentStore = mainContentStore;
+            StaffViewCommand = new RelayCommand<object>(p => true, p =>
+            {
+                mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+            });
+        }
 
         /*public NhanSuViewModel(IRepository<NhanSu> repository, IUnitOfWork unitOfWork, IRepository<BoPhan> repositoryBoPhan, IRepository<ChucVu> repositoryChucVu, IRepository<ViTri> repositoryViTri)
         {

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="HRM.UI.Views.ChildContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HRM.UI.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Thông tin bản thân" Command="{Binding PersonInforCommand}" />
+            <Button Content="Quan hệ gia đình" />
+            <Button Content="Quá trình đào tạo" />
+            <Button Content="Quá trình công tác" />
+            <Button Content="Tình trạng hồ sơ" />
+        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.ColumnSpan="2" />
+        
+    </Grid>
+</UserControl>

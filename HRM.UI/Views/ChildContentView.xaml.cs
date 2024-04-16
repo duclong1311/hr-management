@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace HRM.UI.Views
 {
     /// <summary>
-    /// Interaction logic for PersonalInfoView.xaml
+    /// Interaction logic for ChildContentView.xaml
     /// </summary>
-    public partial class PersonalInfoView : UserControl
+    public partial class ChildContentView : UserControl
     {
-        public PersonalInfoView()
+        public ChildContentView()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

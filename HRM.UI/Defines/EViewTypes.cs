@@ -10,13 +10,9 @@ namespace HRM.UI.Defines
     {
         Login,
         Register,
-        Currency,
         MainContent,
-        Unit,
-        Customer,
-        Provider,
-        Product,
-        PriceInformation,
-        SearchPriceInformation
+        PersonalInfor,
+        ListStaff,
+        ChildContent
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HRM.UI.Views.MainViews.PersonalInfoView"
+﻿<UserControl x:Class="HRM.UI.Views.PersonalInfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              mc:Ignorable="d"
              d:DesignHeight="640"
-             d:DesignWidth="820"
+             d:DesignWidth="820" 
              Background="White">
     <UserControl.Resources>
         <ResourceDictionary>

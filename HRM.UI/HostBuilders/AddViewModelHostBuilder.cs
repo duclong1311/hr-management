@@ -21,12 +21,18 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<LoginViewModel>();
                 services.AddScoped<RegisterViewModel>();
                 services.AddScoped<MainContentViewModel>();
+                services.AddScoped<PersonalInforViewModel>();
+                services.AddScoped<ListStaffViewModel>();
+                services.AddScoped<ChildContentViewModel>();
 
                 services.AddScoped<CreateViewModel<LoginViewModel>>(service => () => service.GetRequiredService<LoginViewModel>());
                 services.AddScoped<CreateViewModel<RegisterViewModel>>(service => () => service.GetRequiredService<RegisterViewModel>());
                 services.AddScoped<CreateViewModel<MainContentViewModel>>(service => () => service.GetRequiredService<MainContentViewModel>());
+                services.AddScoped<CreateViewModel<PersonalInforViewModel>>(service => () => service.GetRequiredService<PersonalInforViewModel>());
+                services.AddScoped<CreateViewModel<ListStaffViewModel>>(service => () => service.GetRequiredService<ListStaffViewModel>());
+                services.AddScoped<CreateViewModel<ChildContentViewModel>>(service => () => service.GetRequiredService<ChildContentViewModel>());
                 
-                services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+                services.AddScoped<IViewModelFactory, ViewModelFactory>();
             });
             return host;
         }

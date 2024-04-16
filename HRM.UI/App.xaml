@@ -14,5 +14,14 @@
         <DataTemplate DataType="{x:Type vm:MainContentViewModel}">
             <view:MainContentView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PersonalInforViewModel}">
+            <view:PersonalInfoView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ListStaffViewModel}">
+            <view:ListStaffView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ChildContentViewModel}">
+            <view:ChildContentView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

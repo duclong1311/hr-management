@@ -19,6 +19,7 @@ namespace HRM.UI.HostBuilders
             {
                 services.AddSingleton<NavigationStore>();
                 services.AddSingleton<MainContentStore>();
+                services.AddSingleton<ChildContentStore>();
                 services.AddSingleton<IAuthenticator, Authenticator>();
                 services.AddSingleton<IUserStore, UserStore>();
             });
