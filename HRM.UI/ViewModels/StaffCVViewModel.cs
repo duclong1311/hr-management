@@ -242,10 +242,10 @@ namespace HRM.UI.ViewModels
             SeletedCboBoPhan = ListBoPhan.FirstOrDefault();
 
             ListChucVu = new ObservableCollection<ChucVu>(_chucVuRepository.AsQueryable().Where(x => x.TenChucVu.Contains(FilterBoPhan)).ToList());
-            SeletedCboChucVu = ListBoPhan.FirstOrDefault();
+            SeletedCboChucVu = ListChucVu.FirstOrDefault();
 
-            ListViTri = new ObservableCollection<ViTri>(_boPhanRepository.AsQueryable().Where(x => x.TenBoPhan.Contains(FilterBoPhan)).ToList());
-            SeletedCboBoPhan = ListBoPhan.FirstOrDefault();
+            ListViTri = new ObservableCollection<ViTri>(_vitriRepository.AsQueryable().Where(x => x.TenBoPhan.Contains(FilterBoPhan)).ToList());
+            SeletedCboViTri = ListViTri.FirstOrDefault();
         }
 
         private void LoadData()
