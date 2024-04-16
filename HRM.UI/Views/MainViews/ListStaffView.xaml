@@ -65,27 +65,50 @@
             <Grid Grid.Column="1">
                 <StackPanel>
                     <TextBox x:Name="tb_MaNhanVien"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding MaNhanVien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                     <TextBox x:Name="tb_Ten"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                     <TextBox x:Name="tb_EmailNoiBo"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding EmailNoiBo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                     <TextBox x:Name="tb_STKNganHang"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding STKNganHang, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                     <TextBox x:Name="tb_SoSoBHXH"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding SoBHXH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="3">
                 <StackPanel>
                     <ComboBox x:Name="cbb_BoPhan"
-                              Style="{StaticResource ComboBox_Style}" />
+                              Style="{StaticResource ComboBox_Style}"
+                              ItemsSource="{Binding ListBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              DisplayMemberPath="TenBoPhan"
+                              SelectedItem="{Binding SeletedCboBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedValuePath="Id">
+
+                    </ComboBox>
                     <ComboBox x:Name="cbb_ChucVu"
-                             Style="{StaticResource ComboBox_Style}" />
+                              Style="{StaticResource ComboBox_Style}"
+                              ItemsSource="{Binding ListChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              DisplayMemberPath="TenChucVu"
+                              SelectedItem="{Binding SeletedCboChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedValuePath="Id">
+
+                    </ComboBox>
                     <ComboBox x:Name="cbb_ViTri"
-                             Style="{StaticResource ComboBox_Style}" />
-                    <TextBox x:Name="tb_MaSoThue"
-                             Style="{StaticResource TextBox_ListStaffView}" />
+                              Style="{StaticResource ComboBox_Style}"
+                              ItemsSource="{Binding ListViTri, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              DisplayMemberPath="TenViTri"
+                              SelectedItem="{Binding SeletedCboViTri, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedValuePath="Id">
+                    </ComboBox>
+                        <TextBox x:Name="tb_MaSoThue"
+                             Style="{StaticResource TextBox_ListStaffView}"
+                             Text="{Binding MaSoThue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                     <TextBox x:Name="tb_NgayVaoLam"
                              Style="{StaticResource TextBox_ListStaffView}" />
                 </StackPanel>
@@ -135,14 +158,14 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Button Content="Thêm nhân sự"
-                        Style="{StaticResource Button_ListStaffView}" 
-                        Command="{Binding }"/>
+                        Style="{StaticResource Button_ListStaffView}"
+                        Command="{Binding }" />
                 <Button Content="Sửa thông tin"
-                        Style="{StaticResource Button_ListStaffView}" 
-                        Command="{Binding }"/>
+                        Style="{StaticResource Button_ListStaffView}"
+                        Command="{Binding }" />
                 <Button Content="Xóa nhân sự"
-                        Style="{StaticResource Button_ListStaffView}" 
-                        Command="{Binding }"/>
+                        Style="{StaticResource Button_ListStaffView}"
+                        Command="{Binding }" />
             </StackPanel>
         </Grid>
     </Grid>
