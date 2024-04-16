@@ -1,0 +1,184 @@
+﻿<UserControl x:Class="HRM.UI.Views.MainViews.FamilyInforView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d"
+             d:DesignHeight="640"
+             d:DesignWidth="820">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/FamilyInfor_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="5">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="24"
+                       Margin="0,20,0,20">THÔNG TIN GIA ĐÌNH</TextBlock>
+        </Grid>
+
+        <!--Label-->
+        <Grid Grid.Row="1"
+              Grid.Column="0">
+            <StackPanel>
+                <Label Content="Họ tên cha: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Sinh ngày: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Nghề nghiệp: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Cơ quan công tác: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Chỗ ở hiện nay:"
+                       Style="{StaticResource Label_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+                <Label Content="Họ tên mẹ: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Sinh ngày: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Nghề nghiệp: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Cơ quan công tác: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Chỗ ở hiện nay:"
+                       Style="{StaticResource Label_Style}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Grid.Column="2">
+            <StackPanel>
+                <Label Content="Họ tên anh/chị: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Sinh ngày: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Nghề nghiệp: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Cơ quan công tác: "
+                       Style="{StaticResource Label_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+                <Label Content="Họ tên anh/chị: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Sinh ngày: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Nghề nghiệp: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Cơ quan công tác: "
+                       Style="{StaticResource Label_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+
+                <Label Content="Họ tên anh/chị: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Sinh ngày: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Nghề nghiệp: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Cơ quan công tác: "
+                       Style="{StaticResource Label_Style}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1">
+            <StackPanel>
+                <TextBox x:Name="tb_HoTenCha"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgaySinhCha"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgheNghiepCha"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_CoQuanCha"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_ChoOCha"
+                         Style="{StaticResource TextBox_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+                <TextBox x:Name="tb_HoTenMe"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgaySinhMe"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgheNghiepMe"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_CoQuanMe"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_ChoOMe"
+                         Style="{StaticResource TextBox_Style}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="3"
+              Grid.Row="1">
+            <StackPanel>
+                <TextBox x:Name="tb_HoTenAnhChi1"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgaySinhAnhChi1"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgheNghiepAnhChi1"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_CoQuanAnhChi1"
+                         Style="{StaticResource TextBox_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+                <TextBox x:Name="tb_HoTenAnhChi2"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgaySinhAnhChi2"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgheNghiepAnhChi2"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_CoQuanAnhChi2"
+                         Style="{StaticResource TextBox_Style}" />
+
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+                <TextBox x:Name="tb_HoTenAnhChi3"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgaySinhAnhChi3"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_NgheNghiepAnhChi3"
+                         Style="{StaticResource TextBox_Style}" />
+                <TextBox x:Name="tb_CoQuanAnhChi3"
+                         Style="{StaticResource TextBox_Style}" />
+            </StackPanel>
+        </Grid>
+
+        <!--Button-->
+        <Grid Grid.Row="2"
+              Grid.Column="3">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Hủy bỏ"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Xác nhận"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>
