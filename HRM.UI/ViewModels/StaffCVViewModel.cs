@@ -17,6 +17,7 @@ using HRM.Core.Repositories;
 using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using Microsoft.Identity.Client;
+using HRM.UI.Commands;
 
 namespace HRM.UI.ViewModels
 {
@@ -114,11 +115,12 @@ namespace HRM.UI.ViewModels
         private IRepository<ViTri> _viTriRepository;
         private IUnitOfWork _unitOfWork;
 
-        public NhanSuViewModel(IRepository<NhanSu> repository, IUnitOfWork unitOfWork, IRepository<Unit> repositoryUnit,ILogger logger)
+        /*public NhanSuViewModel(IRepository<NhanSu> repository, IUnitOfWork unitOfWork, IRepository<BoPhan> repositoryBoPhan, IRepository<ChucVu> repositoryChucVu, IRepository<ViTri> repositoryViTri)
         {
             _repository = repository;
-            _unitRepository = repositoryUnit;
-            _logger = logger;
+            _boPhanRepository = repositoryBoPhan;
+            _chucVuRepository = repositoryChucVu;
+            _viTriRepository = repositoryViTri;
             _unitOfWork = unitOfWork;
             LoadCombobox();
             LoadData();
@@ -126,13 +128,13 @@ namespace HRM.UI.ViewModels
             {
                 if (string.IsNullOrEmpty(DisplayName))
                     return false;
-                if (_repository.AsQueryable().Any(x => x.Code == Code))
+                if (_repository.AsQueryable().Any(x => x.MaNhanVien == MaNhanVien))
                     return false;
-                if(SelectedCbo == null) return false;
+                if(SeletedCboBoPhan == null) return false;
                 return true;
             }, async (p) =>
             {
-                var NhanSu = new NhanSu() { Name = DisplayName, Code = Code, Description = Description, UnitId = SelectedCbo.Id };
+                var NhanSu = new NhanSu() { HoTen = DisplayName, MaNhanVien = MaNhanVien, STK = STKNganHang, EmailCongTy = EmailNoiBo };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
@@ -140,7 +142,6 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.CommitAsync();
                     LoadData();
 
-                    _logger.LogWrite(NhanSu, Defines.EModifyTypes.Added);
                 }
                 catch (Exception ex)
                 {
@@ -151,11 +152,11 @@ namespace HRM.UI.ViewModels
             {
                 if (SelectedItem == null)
                     return false;
-                if(_repository.AsQueryable().FirstOrDefaultAsync(x => x.Code != SelectedItem.Code && x.Name == SelectedItem.Name) != null)
+            *//*    if(_repository.AsQueryable().FirstOrDefaultAsync(x => x.Code != SelectedItem.Code && x.Name == SelectedItem.Name) != null)
                 {
                     CanReadOnly = true;
                     return true;
-                }
+                }*//*
 
                 if (!_repository.AsQueryable().Any(x => x.Id == SelectedItem.Id))
                     return false;
@@ -167,7 +168,7 @@ namespace HRM.UI.ViewModels
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                   *//* var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
                     NhanSu.Name = DisplayName;
                     NhanSu.Code = Code;
                     NhanSu.Description = Description;
@@ -176,7 +177,7 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.CommitAsync();
                     LoadData();
 
-                    _logger.LogWrite(NhanSu, Defines.EModifyTypes.Updated);
+                    _logger.LogWrite(NhanSu, Defines.EModifyTypes.Updated);*//*
                 }
                 catch (Exception ex)
                 {
@@ -200,12 +201,12 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
-                    NhanSu.IsDeleted = true;
+                    //NhanSu.IsDeleted = true;
                     await _repository.UpdateAsync(NhanSu);
                     await _unitOfWork.CommitAsync();
                     LoadData();
 
-                    _logger.LogWrite(NhanSu, Defines.EModifyTypes.Deleted);
+                    //_logger.LogWrite(NhanSu, Defines.EModifyTypes.Deleted);
                 }
                 catch (Exception ex)
                 {
@@ -215,16 +216,16 @@ namespace HRM.UI.ViewModels
 
             ResetCommand = new RelayCommand<object>((p) =>
             {
-                if(String.IsNullOrEmpty(DisplayName) && String.IsNullOrEmpty(Description) && String.IsNullOrEmpty(Code))
-                    return false;
+                *//*if(String.IsNullOrEmpty(DisplayName) && String.IsNullOrEmpty(Description) && String.IsNullOrEmpty(Code))
+                    return false;*//*
                 return true;
             }, async (p) =>
             {
                 try
                 {
                     DisplayName = String.Empty;
-                    Code = String.Empty;
-                    Description = String.Empty;
+                 *//*   Code = String.Empty;
+                    Description = String.Empty;*//*
                     CanReadOnly = false;
                     SelectedItem = null;
                 }
@@ -235,7 +236,7 @@ namespace HRM.UI.ViewModels
             }
             );
             LoadData();
-        }
+        }*/
         private void LoadCombobox()
         {
             ListBoPhan = new ObservableCollection<BoPhan>(_boPhanRepository.AsQueryable().Where(x => x.TenBoPhan.Contains(FilterBoPhan)).ToList());
@@ -244,17 +245,17 @@ namespace HRM.UI.ViewModels
             ListChucVu = new ObservableCollection<ChucVu>(_chucVuRepository.AsQueryable().Where(x => x.TenChucVu.Contains(FilterBoPhan)).ToList());
             SeletedCboChucVu = ListChucVu.FirstOrDefault();
 
-            ListViTri = new ObservableCollection<ViTri>(_vitriRepository.AsQueryable().Where(x => x.TenBoPhan.Contains(FilterBoPhan)).ToList());
+            ListViTri = new ObservableCollection<ViTri>(_viTriRepository.AsQueryable().Where(x => x.TenViTri.Contains(FilterBoPhan)).ToList());
             SeletedCboViTri = ListViTri.FirstOrDefault();
         }
 
         private void LoadData()
         {
-            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => !x.IsDeleted).Include(p => p.Unit).ToList());
+          /*  List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => !x.IsDeleted).Include(p => p.Unit).ToList());
             if (!String.IsNullOrWhiteSpace(Filter))
             {
                 List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => !x.IsDeleted).Where(x => x.Name.Contains(Filter) || x.Code.Contains(Filter)).ToList());
-            }
+            }*/
         }
     }
 }
