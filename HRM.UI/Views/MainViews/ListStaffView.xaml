@@ -143,7 +143,6 @@
                         Style="{StaticResource Button_ListStaffView}" 
                         Command="{Binding }"/>
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>
