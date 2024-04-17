@@ -4,5 +4,7 @@
            x:Key="Button_Style">
         <Setter Property="FontSize"
                 Value="12"/>
+        <Setter Property="Margin"
+                Value="3" />
     </Style>
 </ResourceDictionary>

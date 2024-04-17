@@ -21,13 +21,15 @@
     <Style TargetType="TextBox"
            x:Key="TextBox_Style">
         <Setter Property="Margin"
-                Value="5" />
+                Value="10" />
         <Setter Property="Height"
-                Value="40" />
+                Value="30" />
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="Padding"
-                Value="5" />
+                Value="2" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 
     <Style TargetType="TextBlock"
