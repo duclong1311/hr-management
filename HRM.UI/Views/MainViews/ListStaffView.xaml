@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              mc:Ignorable="d"
              d:DesignHeight="660"
@@ -110,8 +111,7 @@
                         <TextBox x:Name="tb_MaSoThue"
                                  Style="{StaticResource TextBox_ListStaffView}"
                                  Text="{Binding MaSoThue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-                        <TextBox x:Name="tb_NgayVaoLam"
-                                 Style="{StaticResource TextBox_ListStaffView}" />
+                        <DatePicker SelectedDate="{Binding Path=NgayVaoLam, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -119,36 +119,38 @@
             <!--Table-->
             <Grid Grid.Row="1">
                 <ListView Margin="10"
-                          Name="ListStaffView_Pick">
+                          Name="ListStaffView_Pick"
+                          ItemsSource="{Binding List}"
+                          SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="ID"
+                            <GridViewColumn Header="Mã nhân viên"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding MaNhanVien}" />
                             <GridViewColumn Header="Họ tên"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding HoTen}" />
                             <GridViewColumn Header="STK"
                                             Width="150"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding STK}" />
                             <GridViewColumn Header="Mã số thuế"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding MaSoThue}" />
                             <GridViewColumn Header="Số sổ BHXH"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding MaSoBHXH}" />
                             <GridViewColumn Header="Bộ phận"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding BoPhan.TenBoPhan}" />
                             <GridViewColumn Header="Chức vụ"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
                             <GridViewColumn Header="Vị trí"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ViTri.TenViTri}" />
                             <GridViewColumn Header="Ngày vào làm"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding NgayVaoLam}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -160,13 +162,13 @@
                             HorizontalAlignment="Center">
                     <Button Content="Thêm nhân sự"
                             Style="{StaticResource Button_ListStaffView}"
-                            Command="{Binding }" />
+                            Command="{Binding AddCommand}" />
                     <Button Content="Sửa thông tin"
                             Style="{StaticResource Button_ListStaffView}"
-                            Command="{Binding }" />
+                            Command="{Binding UpdateCommand}" />
                     <Button Content="Xóa nhân sự"
                             Style="{StaticResource Button_ListStaffView}"
-                            Command="{Binding }" />
+                            Command="{Binding DeleteCommand }" />
                     <Button Content="Xem nhân sự"
                             Style="{StaticResource Button_ListStaffView}"
                             Command="{Binding StaffViewCommand }" />

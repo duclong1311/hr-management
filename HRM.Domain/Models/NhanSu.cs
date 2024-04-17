@@ -17,5 +17,11 @@ namespace HRM.Domain.Models
         public string MaSoThue {  get; set; }
         public DateTime NgayVaoLam { get; set; }
         public double LuongCoBan {  get; set; }
+        public int ViTriId { get; set; }
+        public ViTri ViTri {  get; set; }
+        public int BoPhanId {  get; set; }
+        public BoPhan BoPhan { get; set; }
+        public int ChucVuId {  get; set; }
+        public ChucVu ChucVu { get; set; }
     }
 }
