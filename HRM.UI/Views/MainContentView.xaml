@@ -7,78 +7,78 @@
              xmlns:Load="clr-namespace:HRM.UI.CustomControls"
              xmlns:viewModels="clr-namespace:HRM.UI.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignHeight="810"
+             d:DesignWidth="1060">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainContent_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100px"
-                              MaxWidth="350" />
+                              MaxWidth="300px" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="80" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
         <TreeView Grid.Column="0"
-                  Grid.RowSpan="2">
-            <TreeView.Resources>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="Margin"
-                            Value="2,2,2,2">
-                    </Setter>
-                </Style>
-            </TreeView.Resources>
-            <TreeViewItem IsExpanded="True">
+                  Grid.RowSpan="1"
+                  Grid.Row="1"
+                  Style="{StaticResource TreeView_Style}">
+
+            <!--Tree nhan su-->
+            <TreeViewItem IsExpanded="True"
+                          Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="./Images/options.png"
-                               Height="16"
-                               Width="16"
-                               Margin="0, 0, 4, 0"></Image>
+                               Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Nhân sự" />
                     </StackPanel>
                 </TreeViewItem.Header>
-                <TreeViewItem IsExpanded="True">
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding StaffListCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Currentcy.png"
-                                       Stretch="Fill"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Danh sách nhân sự" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding StaffCVCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Product.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Hồ sơ nhân sự" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding ContractCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Hợp đồng nhân sự" />
                             </StackPanel>
                         </Button>
@@ -115,16 +115,15 @@
                     </TreeViewItem.Header>
                 </TreeViewItem>-->
                 <TreeViewItem IsExpanded="True"
-                              Visibility="Collapsed">
+                              Visibility="Collapsed"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding RoleCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/options.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Chức vụ" />
                             </StackPanel>
                         </Button>
@@ -132,41 +131,39 @@
                 </TreeViewItem>
             </TreeViewItem>
 
-            <TreeViewItem IsExpanded="True">
+            <TreeViewItem IsExpanded="True"
+                          Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="./Images/options.png"
-                               Height="16"
-                               Width="16"
-                               Margin="0, 0, 4, 0"></Image>
+                               Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Nhập công" />
                     </StackPanel>
                 </TreeViewItem.Header>
-                <TreeViewItem IsExpanded="True">
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding DailyTrackingCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Nhập công hàng ngày" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding TrackingReportCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Báo cáo chấm công" />
                             </StackPanel>
                         </Button>
@@ -174,41 +171,40 @@
                 </TreeViewItem>
             </TreeViewItem>
 
-            <TreeViewItem IsExpanded="True">
+            <TreeViewItem IsExpanded="True"
+                          Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="./Images/options.png"
-                               Height="16"
-                               Width="16"
-                               Margin="0, 0, 4, 0"></Image>
+                               Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Lương thưởng" />
                     </StackPanel>
                 </TreeViewItem.Header>
-                <TreeViewItem IsExpanded="True">
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding StaffSalaryCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Phiếu lương nhân viên" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                <TreeViewItem IsExpanded="True">
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
                                 Command="{Binding SalaryReportCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
-                                       Height="20"
-                                       Width="20"
-                                       Margin="0, 0, 4, 0"></Image>
+                                       Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Bảng lương công ty" />
                             </StackPanel>
                         </Button>
@@ -217,19 +213,28 @@
             </TreeViewItem>
         </TreeView>
 
+        <Grid>
+            <Image Source="Images/++_logo_red (2).png"
+                   Width="280" />
+        </Grid>
 
         <Grid Grid.Column="1">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <TextBlock Margin="0 1 0 5"
-                           Text="Xin chào, " />
-                <TextBlock Margin="0 1 0 5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource TextBlock_Style}"
+                           Text="Xin chào,  " />
+                <TextBlock Style="{StaticResource TextBlock_Style}"
                            Text="{Binding CurrentUser.Name}" />
                 <Button Content="Đăng xuất"
-                        Margin="10 0 10 5"
+                        Margin="10"
+                        Height="50"
+                        Width="100"
+                        FontSize="16"
                         Command="{Binding LogoutCommand}"></Button>
             </StackPanel>
         </Grid>
+
         <Grid x:Name="MainContent"
               Grid.Column="1"
               Grid.Row="1">

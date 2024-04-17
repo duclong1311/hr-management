@@ -18,6 +18,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<ListStaffViewModel> _createListStaffViewModel;
         private readonly CreateViewModel<PersonalInforViewModel> _createPersonalInforViewModel;
         private readonly CreateViewModel<ChildContentViewModel> _createChildContentViewModel;
+        private readonly CreateViewModel<StaffCVViewModel> _createStaffCVViewModel;
 
 
         public ViewModelFactory(CreateViewModel<LoginViewModel> createLoginViewModel,
@@ -25,7 +26,8 @@ namespace HRM.UI.Factories
             CreateViewModel<MainContentViewModel> createMainContentViewModel,
             CreateViewModel<ListStaffViewModel> createListStaffViewModel,
             CreateViewModel<PersonalInforViewModel> createPersonalInforViewModel,
-            CreateViewModel<ChildContentViewModel> createChildContentViewModel)
+            CreateViewModel<ChildContentViewModel> createChildContentViewModel,
+            CreateViewModel<StaffCVViewModel> createStaffCVViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
@@ -34,6 +36,7 @@ namespace HRM.UI.Factories
             _createListStaffViewModel = createListStaffViewModel;
             _createPersonalInforViewModel = createPersonalInforViewModel;
             _createChildContentViewModel = createChildContentViewModel;
+            _createStaffCVViewModel = createStaffCVViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -51,6 +54,8 @@ namespace HRM.UI.Factories
                     return _createPersonalInforViewModel();
                 case EViewTypes.ChildContent:
                     return _createChildContentViewModel();
+                case EViewTypes.StaffCV:
+                    return _createStaffCVViewModel();
                 default:
                     throw new ArgumentException();
             }

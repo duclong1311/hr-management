@@ -23,9 +23,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -63,8 +63,7 @@
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Trình độ văn hóa "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Kết nạp Đoàn 
-                                TNCS HCM: "
+                <Label Content="Kết nạp Đoàn"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Kết nạp Đảng: "
                        Style="{StaticResource Label_Style}" />
@@ -143,11 +142,13 @@
                             Orientation="Horizontal">
                     <RadioButton GroupName="CharacterGender"
                                  Content="Nam" 
+                                 FontSize="14"
                                  VerticalAlignment="Center"
                                  Margin="10"
                                  Width="50"/>
                     <RadioButton GroupName="CharacterGender"
                                  Content="Nữ"
+                                 FontSize="14"
                                  VerticalAlignment="Center" 
                                  Margin="10"/>
                 </StackPanel>

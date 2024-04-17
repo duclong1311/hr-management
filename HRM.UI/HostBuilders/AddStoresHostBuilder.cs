@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HRM.UI.States.Staff;
 
 namespace HRM.UI.HostBuilders
 {
@@ -22,6 +23,7 @@ namespace HRM.UI.HostBuilders
                 services.AddSingleton<ChildContentStore>();
                 services.AddSingleton<IAuthenticator, Authenticator>();
                 services.AddSingleton<IUserStore, UserStore>();
+                services.AddSingleton<IStaffStore , StaffStore>();
             });
             return host;
         }

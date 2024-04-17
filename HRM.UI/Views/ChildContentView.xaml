@@ -8,17 +8,25 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainViews/Styles/ChildContentView_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Content="Thông tin bản thân" Command="{Binding PersonInforCommand}" />
-            <Button Content="Quan hệ gia đình" />
-            <Button Content="Quá trình đào tạo" />
-            <Button Content="Quá trình công tác" />
-            <Button Content="Tình trạng hồ sơ" />
+            <Button Style="{StaticResource Button_Style}" Content="Thông tin bản thân" Command="{Binding PersonInforCommand}" />
+            <Button Style="{StaticResource Button_Style}" Content="Quan hệ gia đình" />
+            <Button Style="{StaticResource Button_Style}" Content="Quá trình đào tạo" />
+            <Button Style="{StaticResource Button_Style}" Content="Quá trình công tác" />
+            <Button Style="{StaticResource Button_Style}" Content="Tình trạng hồ sơ" />
+            <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien}" />
         </StackPanel>
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"
                         Grid.ColumnSpan="2" />

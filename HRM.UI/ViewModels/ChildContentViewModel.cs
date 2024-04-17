@@ -1,5 +1,7 @@
-﻿using HRM.UI.Commands;
+﻿using HRM.Domain.Models;
+using HRM.UI.Commands;
 using HRM.UI.Factories;
+using HRM.UI.States.Staff;
 using HRM.UI.Stores;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,13 @@ namespace HRM.UI.ViewModels
     {
         private readonly ChildContentStore _childContentStore;
         private readonly IViewModelFactory _viewModelFactory;
+        private readonly StaffStore _staffStore;
         public ICommand PersonInforCommand { get; set; }
         public BaseViewModel CurrentViewModel => _childContentStore.CurrentViewModel;
-
-        public ChildContentViewModel(ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
+        public NhanSu CurrentNhanSu => _staffStore.CurrentNhanSu;
+        public ChildContentViewModel(StaffStore staffStore, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
+            _staffStore = staffStore;
             _childContentStore = childContentStore;
             _viewModelFactory = viewModelFactory;
             childContentStore.CurrentViewModelChanged += OnCurrenViewModelChanged;

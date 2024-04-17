@@ -16,16 +16,23 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="195" />
-                <RowDefinition Height="405" />
+                <RowDefinition Height="350" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0"
+                  Grid.ColumnSpan="5">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="24"
+                       Margin="0,20,0,20">DANH SÁCH NHÂN SỰ</TextBlock>
+            </Grid>
             <!--Information-->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="1"
+                  Margin="5,0,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
@@ -117,47 +124,63 @@
             </Grid>
 
             <!--Table-->
-            <Grid Grid.Row="1">
-                <ListView Margin="10"
-                          Name="ListStaffView_Pick"
-                          ItemsSource="{Binding List}"
-                          SelectedItem="{Binding SelectedItem}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã nhân viên"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding MaNhanVien}" />
-                            <GridViewColumn Header="Họ tên"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding HoTen}" />
-                            <GridViewColumn Header="STK"
-                                            Width="150"
-                                            DisplayMemberBinding="{Binding STK}" />
-                            <GridViewColumn Header="Mã số thuế"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding MaSoThue}" />
-                            <GridViewColumn Header="Số sổ BHXH"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding MaSoBHXH}" />
-                            <GridViewColumn Header="Bộ phận"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding BoPhan.TenBoPhan}" />
-                            <GridViewColumn Header="Chức vụ"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
-                            <GridViewColumn Header="Vị trí"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding ViTri.TenViTri}" />
-                            <GridViewColumn Header="Ngày vào làm"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding NgayVaoLam}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+            <Grid Grid.Row="2"
+                  Margin="5">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                              VerticalScrollBarVisibility="Hidden">
+                    <ListView Margin="10"
+                              Name="ListStaffView_Pick"
+                              HorizontalContentAlignment="Stretch"
+                              VerticalContentAlignment="Stretch"
+                              ItemsSource="{Binding List}"
+                              SelectedItem="{Binding SelectedItem}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding MaNhanVien}" />
+                                <GridViewColumn Header="Họ tên"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding HoTen}" />
+                                <GridViewColumn Header="STK"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding STK}" />
+                                <GridViewColumn Header="Mã số thuế"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding MaSoThue}" />
+                                <GridViewColumn Header="Số sổ BHXH"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding MaSoBHXH}" />
+                                <GridViewColumn Header="Bộ phận"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding BoPhan.TenBoPhan}" />
+                                <GridViewColumn Header="Chức vụ"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
+                                <GridViewColumn Header="Vị trí"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding ViTri.TenViTri}" />
+                                <GridViewColumn Header="Ngày vào làm"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding NgayVaoLam}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+
             </Grid>
 
             <!--Button-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center">
                     <Button Content="Thêm nhân sự"
@@ -175,5 +198,4 @@
                 </StackPanel>
             </Grid>
         </Grid>
-    </ScrollViewer>
 </UserControl>

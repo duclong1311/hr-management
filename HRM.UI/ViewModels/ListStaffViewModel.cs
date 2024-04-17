@@ -48,12 +48,12 @@ namespace HRM.UI.ViewModels
 
 
         private BoPhan _selectedCboBoPhan;
-        public BoPhan SeletedCboBoPhan { get { return _selectedCboBoPhan; } set { _selectedCboBoPhan = value; } }
+        public BoPhan SeletedCboBoPhan { get { return _selectedCboBoPhan; } set { _selectedCboBoPhan = value; OnPropertyChanged(); } }
 
         private ChucVu _selectedCboChucVu;
-        public ChucVu SeletedCboChucVu { get { return _selectedCboChucVu; } set { _selectedCboChucVu = value; } }
+        public ChucVu SeletedCboChucVu { get { return _selectedCboChucVu; } set { _selectedCboChucVu = value; OnPropertyChanged(); } }
         private ViTri _selectedCboViTri;
-        public ViTri SeletedCboViTri { get { return _selectedCboViTri; } set { _selectedCboViTri = value; } }
+        public ViTri SeletedCboViTri { get { return _selectedCboViTri; } set { _selectedCboViTri = value; OnPropertyChanged(); } }
 
 
         private NhanSu _selectedItem;
@@ -143,10 +143,7 @@ namespace HRM.UI.ViewModels
             _chucVuRepository = repositoryChucVu;
             _viTriRepository = repositoryViTri;
             _unitOfWork = unitOfWork;
-            StaffViewCommand = new RelayCommand<object>(p => true, p =>
-            {
-                mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-            });
+
             LoadCombobox();
             LoadData();
             AddCommand = new RelayCommand<object>((p) =>
@@ -262,7 +259,7 @@ namespace HRM.UI.ViewModels
                     await _repository.DeleteAsync(NhanSu);
                     await _unitOfWork.CommitAsync();
                     LoadData();
-                     
+
 
                 }
                 catch (Exception ex)
