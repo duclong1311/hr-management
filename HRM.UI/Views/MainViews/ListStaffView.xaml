@@ -131,7 +131,9 @@
                     <ListView Margin="10"
                               Name="ListStaffView_Pick"
                               HorizontalContentAlignment="Stretch"
-                              VerticalContentAlignment="Stretch">
+                              VerticalContentAlignment="Stretch"
+                              ItemsSource="{Binding List}"
+                              SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID"

@@ -36,7 +36,8 @@
                          HorizontalAlignment="Right"
                          FontSize="14"
                          VerticalContentAlignment="Center"
-                         Padding="3">
+                         Padding="3"
+                         Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}">
 
                 </TextBox>
             </Grid>
@@ -48,33 +49,35 @@
                 <ListView Margin="10"
                           Name="ListStaffView_Pick"
                           HorizontalContentAlignment="Stretch"
-                          VerticalContentAlignment="Stretch">
+                          VerticalContentAlignment="Stretch"
+                          ItemsSource="{Binding List}"
+                          SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mã nhân viên"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding MaNhanVien}" />
                             <GridViewColumn Header="Họ tên"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding HoTen}" />
                             <GridViewColumn Header="Bộ phận"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding BoPhan.TenBoPhan}" />
                             <GridViewColumn Header="Chức vụ"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
                             <GridViewColumn Header="Vị trí"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ViTri.TenViTri}" />
                             <GridViewColumn Header="Tình trạng hồ sơ"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="150"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding TinhTrangHoSo}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

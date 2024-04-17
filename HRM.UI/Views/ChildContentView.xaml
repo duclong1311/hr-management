@@ -26,6 +26,7 @@
             <Button Style="{StaticResource Button_Style}" Content="Quá trình đào tạo" />
             <Button Style="{StaticResource Button_Style}" Content="Quá trình công tác" />
             <Button Style="{StaticResource Button_Style}" Content="Tình trạng hồ sơ" />
+            <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien}" />
         </StackPanel>
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"
                         Grid.ColumnSpan="2" />
