@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HRM.UI.Views.MainViews.MiniListStaffView"
+﻿<UserControl x:Class="HRM.UI.Views.MiniListStaffView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -19,7 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="420" />
+                <RowDefinition Height="520" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
@@ -29,13 +29,18 @@
                            Margin="0,20,0,20">DANH SÁCH NHÂN SỰ</TextBlock>
             </Grid>
 
+            <!--Searching-->
             <Grid Grid.Row="1">
                 <TextBox Width="200"
                          Margin="10,5,15,0"
-                         HorizontalAlignment="Right">
+                         HorizontalAlignment="Right"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Padding="3">
 
                 </TextBox>
             </Grid>
+            
             <!--Table-->
             <Grid Grid.Row="2"
                   Margin="5">
