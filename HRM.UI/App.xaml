@@ -23,5 +23,8 @@
         <DataTemplate DataType="{x:Type vm:ChildContentViewModel}">
             <view:ChildContentView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:StaffCVViewModel}">
+            <view:MiniListStaffView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
