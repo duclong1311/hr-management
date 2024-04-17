@@ -25,9 +25,9 @@
 
             <Grid Grid.Row="0"
                   Grid.ColumnSpan="5">
-                <TextBlock HorizontalAlignment="Center"
-                           FontSize="24"
-                           Margin="0,20,0,20">QUÁ TRÌNH ĐÀO TẠO</TextBlock>
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="24"
+                       Margin="0,20,0,20">DANH SÁCH NHÂN SỰ</TextBlock>
             </Grid>
             <!--Information-->
             <Grid Grid.Row="1"
