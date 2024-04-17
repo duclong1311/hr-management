@@ -18,11 +18,15 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
         private readonly StaffStore _staffStore;
         public ICommand PersonInforCommand { get; set; }
+        public ICommand FamilyInforCommand { get; set; }
+        public ICommand TrainingProcessCommand { get; set; }
+        public ICommand WorkProcessCommand { get; set; }
+        public ICommand CVStatusCommand { get; set; }
         public BaseViewModel CurrentViewModel => _childContentStore.CurrentViewModel;
-        public NhanSu CurrentNhanSu => _staffStore.CurrentNhanSu;
-        public ChildContentViewModel(StaffStore staffStore, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
+        //public NhanSu CurrentNhanSu => _staffStore.CurrentNhanSu;
+        public ChildContentViewModel(ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
-            _staffStore = staffStore;
+            //_staffStore = staffStore;
             _childContentStore = childContentStore;
             _viewModelFactory = viewModelFactory;
             childContentStore.CurrentViewModelChanged += OnCurrenViewModelChanged;
@@ -31,6 +35,23 @@ namespace HRM.UI.ViewModels
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
             });
+            FamilyInforCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.FamilyInfor);
+            });
+            TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.TrainingProcess);
+            });
+            WorkProcessCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.WorkProcess);
+            });
+            CVStatusCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.CVStatus);
+            });
+
 
         }
         private void OnCurrenViewModelChanged()

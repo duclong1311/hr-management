@@ -22,10 +22,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Style="{StaticResource Button_Style}" Content="Thông tin bản thân" Command="{Binding PersonInforCommand}" />
-            <Button Style="{StaticResource Button_Style}" Content="Quan hệ gia đình" />
-            <Button Style="{StaticResource Button_Style}" Content="Quá trình đào tạo" />
-            <Button Style="{StaticResource Button_Style}" Content="Quá trình công tác" />
-            <Button Style="{StaticResource Button_Style}" Content="Tình trạng hồ sơ" />
+            <Button Style="{StaticResource Button_Style}" Content="Quan hệ gia đình" Command="{Binding FamilyInforCommand}"/>
+            <Button Style="{StaticResource Button_Style}" Content="Quá trình đào tạo" Command="{Binding TrainingProcessCommand}"/>
+            <Button Style="{StaticResource Button_Style}" Content="Quá trình công tác" Command="{Binding WorkProcessCommand}"/>
+            <Button Style="{StaticResource Button_Style}" Content="Tình trạng hồ sơ" Command="{Binding CVStatusCommand}"/>
             <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien}" />
         </StackPanel>
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"

@@ -12,8 +12,13 @@ namespace HRM.UI.Defines
         Register,
         MainContent,
         PersonalInfor,
+        FamilyInfor,
+        TrainingProcess,
+        WorkProcess,
+        CVStatus,
         ListStaff,
         StaffCV,
+        AddCV,
         ChildContent
     }
 }

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HRM.UI.Views.MainViews
+namespace HRM.UI.Views
 {
     /// <summary>
     /// Interaction logic for TrainingProcessView.xaml

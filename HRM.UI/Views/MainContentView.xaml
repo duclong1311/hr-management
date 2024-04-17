@@ -74,12 +74,12 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding ContractCommand}"
+                                Command="{Binding AddResumeCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Hợp đồng nhân sự" />
+                                <TextBlock Text="Thêm sơ yếu lý lịch" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>

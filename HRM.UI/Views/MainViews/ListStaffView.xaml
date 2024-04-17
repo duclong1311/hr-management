@@ -192,9 +192,6 @@
                     <Button Content="Xóa nhân sự"
                             Style="{StaticResource Button_ListStaffView}"
                             Command="{Binding DeleteCommand }" />
-                    <Button Content="Xem nhân sự"
-                            Style="{StaticResource Button_ListStaffView}"
-                            Command="{Binding StaffViewCommand }" />
                 </StackPanel>
             </Grid>
         </Grid>

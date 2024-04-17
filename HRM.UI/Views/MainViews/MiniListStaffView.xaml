@@ -19,7 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="520" />
+                <RowDefinition Height="450" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
@@ -89,7 +89,7 @@
                             HorizontalAlignment="Center">
                     <Button Content="Thêm hồ sơ"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding AddCVCommand}" />
                     <Button Content="Sửa hồ sơ"
                             Style="{StaticResource Button_Style}"
                             Command="{Binding }" />

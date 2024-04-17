@@ -17,6 +17,18 @@
         <DataTemplate DataType="{x:Type vm:PersonalInforViewModel}">
             <view:PersonalInfoView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FamilyInforViewModel}">
+            <view:FamilyInforView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:WorkProcessViewModel}">
+            <view:WorkProcessView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TrainingProcessViewModel}">
+            <view:TrainingProcessView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CVStatusViewModel}">
+            <view:CVStatusView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ListStaffViewModel}">
             <view:ListStaffView />
         </DataTemplate>
