@@ -13,6 +13,7 @@ namespace HRM.UI.Defines
         MainContent,
         PersonalInfor,
         ListStaff,
+        StaffCV,
         ChildContent
     }
 }
