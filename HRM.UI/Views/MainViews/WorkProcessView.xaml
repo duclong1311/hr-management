@@ -35,7 +35,7 @@
                   Grid.ColumnSpan="5">
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="24"
-                           Margin="0,20,0,20">QUÁ TRÌNH ĐÀO TẠO</TextBlock>
+                           Margin="0,20,0,20">QUÁ TRÌNH CÔNG TÁC</TextBlock>
             </Grid>
 
             <!--Label-->
@@ -61,8 +61,10 @@
                   Grid.Row="1">
                 <StackPanel>
                     <TextBox x:Name="tb_TuThangNamDenThangNam"
+                             Text="{Binding TuNgayDenNgay}"
                              Style="{StaticResource TextBox_Style}" />
                     <TextBox x:Name="tb_DonViCongTac"
+                             Text="{Binding DonViCongTac}"
                              Style="{StaticResource TextBox_Style}" />
                 </StackPanel>
             </Grid>
@@ -71,6 +73,7 @@
                   Grid.Row="1">
                 <StackPanel>
                     <TextBox x:Name="tb_ChucVu"
+                             Text="{Binding ChucVu}"
                              Style="{StaticResource TextBox_Style}" />
                 </StackPanel>
             </Grid>
