@@ -23,6 +23,7 @@ namespace HRM.EFCore
         public DbSet<PhucLoiVaPhuCap> PhucLoiVaPhuCaps { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<QuanHeGiaDinh> QuanHeGiaDinhs { get; set; }
         public HRMDbContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,7 @@ namespace HRM.EFCore
             modelBuilder.ApplyConfiguration(new NhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new PhucLoiVaPhuCapConfiguration());
             modelBuilder.ApplyConfiguration(new ViTriConfiguration());
+            modelBuilder.ApplyConfiguration(new QuanHeGiaDinhConfiguration());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,91 +24,91 @@ namespace HRM.UI.ViewModels
         public string HoTenCha
         {
             get { return _hoTenCha; }
-            set { _hoTenCha = value; }
+            set { _hoTenCha = value; OnPropertyChanged(); }
         }
 
-        private string _ngaySinhCha;
-        public string NgaySinhCha
+        private DateTime _ngaySinhCha;
+        public DateTime NgaySinhCha
         {
             get { return _ngaySinhCha; }
-            set { _ngaySinhCha = value; }
+            set { _ngaySinhCha = value; OnPropertyChanged(); }
         }
 
         private string _ngheNghiepCha;
         public string NgheNghiepCha
         {
             get { return _ngheNghiepCha; }
-            set { _ngheNghiepCha = value; }
+            set { _ngheNghiepCha = value; OnPropertyChanged(); }
         }
 
         private string _coQuanCongTacCha;
         public string CoQuanCongTacCha
         {
             get { return _coQuanCongTacCha; }
-            set { _coQuanCongTacCha = value; }
+            set { _coQuanCongTacCha = value; OnPropertyChanged(); }
         }
 
         private string _choOCha;
         public string ChoOCha
         {
             get { return _choOCha; }
-            set { _choOCha = value; }
+            set { _choOCha = value; OnPropertyChanged(); }
         }
 
         private string _hoTenMe;
-        private string HoTenMe
+        public string HoTenMe
         {
             get { return _hoTenMe; }
-            set { _hoTenMe = value; }
+            set { _hoTenMe = value; OnPropertyChanged(); }
         }
 
-        private string _ngaySinhMe;
-        public string NgaySinhMe
+        private DateTime _ngaySinhMe;
+        public DateTime NgaySinhMe
         {
             get { return _ngaySinhMe; }
-            set { _ngaySinhMe = value; }
+            set { _ngaySinhMe = value; OnPropertyChanged(); }
         }
 
         private string _ngheNghiepMe;
         public string NgheNghiepMe
         {
             get { return _ngheNghiepMe; }
-            set { _ngheNghiepMe = value; }
+            set { _ngheNghiepMe = value; OnPropertyChanged(); }
         }
 
         private string _coQuanCongTacMe;
         public string CoQuanCongTacMe
         {
             get { return _coQuanCongTacMe; }
-            set { _coQuanCongTacMe = value; }
+            set { _coQuanCongTacMe = value; OnPropertyChanged(); }
         }
 
         private string _choOMe;
         public string ChoOMe
         {
             get { return _choOMe; }
-            set { _choOMe = value; }
+            set { _choOMe = value; OnPropertyChanged(); }
         }
 
         private string _hoTenAnhChi;
         public string HoTenAnhChi
         {
             get { return _hoTenAnhChi; }
-            set { _hoTenAnhChi = value; }
+            set { _hoTenAnhChi = value; OnPropertyChanged(); }
         }
 
         private string _namSinh;
         public string NamSinh
         {
             get { return _namSinh; }
-            set { _namSinh = value; }
+            set { _namSinh = value; OnPropertyChanged(); }
         }
 
         private string _ngheNghiep;
         public string NgheNghiep
         {
             get { return _ngheNghiep; }
-            set { _ngheNghiep = value; }
+            set { _ngheNghiep = value; OnPropertyChanged(); }
         }
 
         private string _coQuanCongTac;
@@ -133,12 +133,12 @@ namespace HRM.UI.ViewModels
                 var QuanHeGiaDinh = new QuanHeGiaDinh()
                 {
                     HoTenCha = HoTenCha,
-                    NgaySinhCha = DateTime.Parse(NgaySinhCha),
+                    NgaySinhCha = NgaySinhCha,
                     NgheNghiepCha = NgheNghiepCha,
                     CoQuanCongTacCha = CoQuanCongTacCha,
                     ChoOCha = ChoOCha,
                     HoTenMe = HoTenMe,
-                    NgaySinhMe = DateTime.Parse(NgaySinhMe),
+                    NgaySinhMe = NgaySinhMe,
                     NgheNghiepMe = NgheNghiepMe,
                     CoQuanCongTacMe = CoQuanCongTacMe,
                     ChoOMe = ChoOMe,

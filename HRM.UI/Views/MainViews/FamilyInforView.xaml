@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="640"
              d:DesignWidth="820"
@@ -19,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="500" />
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -106,16 +107,15 @@
               Grid.Row="1">
             <StackPanel>
                 <TextBox x:Name="tb_HoTenCha"
-                         Text="{Binding HoTenCha}"
+                         Text="{Binding HoTenCha, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgaySinhCha"
-                         Text="{Binding NgaySinhCha}"
-                         Style="{StaticResource TextBox_Style}" />
+                <DatePicker Height="50"
+                            SelectedDate="{Binding Path=NgaySinhCha, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
                 <TextBox x:Name="tb_NgheNghiepCha"
                          Text="{Binding NgheNghiepCha}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox x:Name="tb_CoQuanCha"
-                         Text="{Binding CoQuanCha}"
+                         Text="{Binding CoQuanCongTacCha}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox x:Name="tb_ChoOCha"
                          Text="{Binding ChoOCha}"
@@ -126,14 +126,13 @@
                 <TextBox x:Name="tb_HoTenMe"
                          Text="{Binding HoTenMe}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgaySinhMe"
-                         Text="{Binding NgaySinhMe}"
-                         Style="{StaticResource TextBox_Style}" />
+                <DatePicker Height="50"
+                            SelectedDate="{Binding Path=NgaySinhMe, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
                 <TextBox x:Name="tb_NgheNghiepMe"
                          Text="{Binding NgheNghiepMe}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox x:Name="tb_CoQuanMe"
-                         Text="{Binding CoQuanMe}"
+                         Text="{Binding CoQuanCongTacMe}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox x:Name="tb_ChoOMe"
                          Text="{Binding ChoOMe}"
@@ -191,7 +190,7 @@
                         Command="{Binding }" />
                 <Button Content="Xác nhận"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding AddCommand}" />
             </StackPanel>
 
         </Grid>
