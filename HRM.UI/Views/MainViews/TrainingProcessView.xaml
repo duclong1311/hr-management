@@ -75,7 +75,7 @@
             <StackPanel>
                 <TextBox x:Name="tb_TenCoSoDaoTao"
                          Style="{StaticResource TextBox_Style}"
-                         Text="{Binding NoiDaoTao}" />
+                         Text="{Binding TenTruong}" />
                 <TextBox x:Name="tb_VanBangChungChi"
                          Text="{Binding VanBangChungChi}"
                          Style="{StaticResource TextBox_Style}" />
@@ -89,7 +89,7 @@
                         HorizontalAlignment="Center">
                 <Button Content="Thêm quá trình"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding AddCommand}" />
                 <Button Content="Sửa quá trình"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding }" />

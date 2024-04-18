@@ -9,7 +9,7 @@ namespace HRM.Domain.Models
 {
     public class QuaTrinhCongTac : IEntity
     {
-        public DateTime TuNgayDenNgay { get; set; }
+        public string TuNgayDenNgay { get; set; }
         public string DonViCongTac { get; set; }
         public string ChucVu { get; set; }
     }

@@ -85,7 +85,7 @@
                             HorizontalAlignment="Center">
                     <Button Content="Thêm quá trình"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding AddCommand}" />
                     <Button Content="Sửa quá trình"
                             Style="{StaticResource Button_Style}"
                             Command="{Binding }" />
