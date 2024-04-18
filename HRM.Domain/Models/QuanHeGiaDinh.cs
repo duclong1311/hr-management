@@ -11,7 +11,7 @@ namespace HRM.Domain.Models
     {
         public string HoTenCha { get; set; }
         public DateTime NgaySinhCha {  get; set; }
-        public string NgheNghiep { get; set; }
+        public string NgheNghiepCha { get; set; }
         public string CoQuanCongTacCha { get; set; }   
         public string ChoOCha { get; set; }
         public string HoTenMe { get; set; }

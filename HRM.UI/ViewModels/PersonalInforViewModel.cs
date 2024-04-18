@@ -169,7 +169,6 @@ namespace HRM.UI.ViewModels
                         MessageBox.Show("Lỗi hệ thống");
                     }
                     await _unitOfWork.CommitAsync();
-
                 }
                 catch (Exception ex)
                 {

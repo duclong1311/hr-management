@@ -107,15 +107,19 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Từ tháng năm đến tháng năm"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="200"
                                         DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Tên trường/ cơ sở đào tạo"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="200"
                                         DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Hình thức đào tạo"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="150"
                                         DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Văn bằng chứng chỉ"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="150"
                                         DisplayMemberBinding="{Binding }" />
                     </GridView>
