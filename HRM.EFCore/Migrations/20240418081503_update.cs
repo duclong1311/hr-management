@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class addmigrationupdate : Migration
+    public partial class update : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,12 +92,24 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Anh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GioiTinh = table.Column<bool>(type: "bit", nullable: false),
-                    SinhNgay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NoiSinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NguyenQuan = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DanToc = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Anh = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GioiTinh = table.Column<bool>(type: "bit", nullable: true),
+                    SinhNgay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NoiSinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NguyenQuan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DanToc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TonGiao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CCCD = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CapNgay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NoiCap = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrinhDoVanHoa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KetNapDoan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NoiKetNapDoan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KetNapDang = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NoiketNapDang = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    KhenThuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SoThich = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

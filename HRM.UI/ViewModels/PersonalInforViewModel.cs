@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HRM.UI.ViewModels
@@ -23,9 +24,9 @@ namespace HRM.UI.ViewModels
             get { return _hoTen; }
             set { _hoTen = value; }
         }
-        private string _ngaySinh;
+        private DateTime _ngaySinh;
 
-        public string NgaySinh
+        public DateTime NgaySinh
         {
             get { return _ngaySinh; }
             set { _ngaySinh = value; }
@@ -107,9 +108,9 @@ namespace HRM.UI.ViewModels
             get { return _tonGiao; }
             set { _tonGiao = value; }
         }
-        private string _capNgay;
+        private DateTime _capNgay;
 
-        public string CapNgay
+        public DateTime CapNgay
         {
             get { return _capNgay; }
             set { _capNgay = value; }
@@ -141,16 +142,32 @@ namespace HRM.UI.ViewModels
                 var HoSo = new HoSo()
                 {
                     HoTen = HoTen,
-                    SinhNgay = DateTime.Parse(NgaySinh),
+                    SinhNgay = NgaySinh,
                     NguyenQuan = NguyenQuan,
                     DanToc = DanToc,
-                    CCCD = CCCD
-
+                    NoiSinh =NoiSinh,
+                    CCCD = CCCD,
+                    TonGiao = TonGiao,
+                    CapNgay = CapNgay,
+                    TrinhDoVanHoa = TrinhDoVanHoa,
+                    KetNapDang = KetNapDang,
+                    KetNapDoan = KetNapDoan,
+                    NoiketNapDang = NoiKetNapDang,
+                    NoiKetNapDoan = NoiKetNapDoan,
+                    KhenThuong = KhenThuong,
+                    SoThich = SoThich,
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
                     HoSo = await _hosoRepository.AddAsync(HoSo);
+                    if(HoSo !=null)
+                    {
+                        MessageBox.Show("Thêm thành công");
+                    } else
+                    {
+                        MessageBox.Show("Lỗi hệ thống");
+                    }
                     await _unitOfWork.CommitAsync();
 
                 }

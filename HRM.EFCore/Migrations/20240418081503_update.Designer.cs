@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240417135911_add-migration update")]
-    partial class addmigrationupdate
+    [Migration("20240418081503_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,26 +168,58 @@ namespace HRM.EFCore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Anh")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CCCD")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CapNgay")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DanToc")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("GioiTinh")
+                    b.Property<bool?>("GioiTinh")
                         .HasColumnType("bit");
 
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KetNapDang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KetNapDoan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KhenThuong")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NguyenQuan")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoiCap")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoiKetNapDoan")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NoiSinh")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SinhNgay")
+                    b.Property<string>("NoiketNapDang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SinhNgay")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("SoThich")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TonGiao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrinhDoVanHoa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

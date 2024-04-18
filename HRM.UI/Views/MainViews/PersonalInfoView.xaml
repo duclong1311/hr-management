@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="640"
              d:DesignWidth="820" 
@@ -101,11 +102,9 @@
             <StackPanel>
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding HoTen}"
-                         x:Name="tb_HoTen"/>
-                
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding NgaySinh}"
-                         x:Name="tb_NgaySinh"/>
+                         x:Name="tb_HoTen" />
+                <DatePicker Height="50" SelectedDate="{Binding Path=NgaySinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NguyenQuan}"
@@ -173,11 +172,8 @@
                          Text="{Binding TonGiao}"
                          x:Name="tb_TonGiao"/>
                 
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding CapNgay}"
-                         
-                         x:Name="tb_CapNgay"/>
-                
+                <DatePicker Height="50" SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+
                 <TextBlock Style="{StaticResource TextBlock_Style}" />
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
@@ -200,7 +196,7 @@
                         Command="{Binding }" />
                 <Button Content="Xác nhận"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding AddCommand}" />
             </StackPanel>
         </Grid>
     </Grid>
