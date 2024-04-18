@@ -11,6 +11,7 @@ namespace HRM.Domain.Models
     public class HoSo : IEntity
     {
         public string Anh { get; set; }
+        public string HoTen { get; set; }
         public bool GioiTinh { get; set; }
         public DateTime SinhNgay { get; set; }
         public string NoiSinh { get; set; }
