@@ -23,7 +23,6 @@ namespace HRM.Domain.Models
         public string TrinhDoVanHoa { get; set; }
         public string KetNapDoan { get; set; }
         public string NoiKetNapDoan { get; set; }
-
         public string KetNapDang { get; set; }
         public string NoiketNapDang {  get; set; }
         public string KhenThuong { get; set; }  

@@ -99,34 +99,44 @@
         <Grid Grid.Row="1"
               Grid.Column="2">
             <StackPanel>
-                <TextBox Style="{StaticResource TextBox_Style}" 
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding HoTen}"
                          x:Name="tb_HoTen"/>
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding NgaySinh}"
                          x:Name="tb_NgaySinh"/>
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding NguyenQuan}"
                          x:Name="tb_NguyenQuan" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding DanToc}"
                          x:Name="tb_DanToc" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding CCCD}"
                          x:Name="tb_SoCCCD" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding TrinhDoVanHoa}"
                          x:Name="tb_TrinhDoVanHoa" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding KetNapDoan}"
                          x:Name="tb_KetNapDoan" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding KetNapDang}"
                          x:Name="tb_KetNapDang" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding KhenThuong}"
                          x:Name="tb_KhenThuong" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding SoThich}"
                          x:Name="tb_SoThich" />
             </StackPanel>
         </Grid>
@@ -154,22 +164,28 @@
                 </StackPanel>
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         x:Name="tb_NoiSinh"/>
+                         x:Name="tb_NoiSinh"
+                         Text="{Binding NoiSinh}"/>
                 
                 <TextBlock Style="{StaticResource TextBlock_Style}" />
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding TonGiao}"
                          x:Name="tb_TonGiao"/>
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding CapNgay}"
+                         
                          x:Name="tb_CapNgay"/>
                 
                 <TextBlock Style="{StaticResource TextBlock_Style}" />
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding NoiKetNapDoan}"
                          x:Name="tb_NoiKetNapDoan"/>
                 
                 <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding NoiKetNapDang}"
                          x:Name="tb_NoiKetNapDang"/>
             </StackPanel>
         </Grid>
