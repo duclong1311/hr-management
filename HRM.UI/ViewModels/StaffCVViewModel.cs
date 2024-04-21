@@ -44,7 +44,7 @@ namespace HRM.UI.ViewModels
             {
                 _filter = value;
                 OnPropertyChanged();
-                LoadData();
+                //LoadData();
             }
         }
         private readonly IRepository<NhanSu> _repository;
@@ -65,7 +65,7 @@ namespace HRM.UI.ViewModels
             {
                 mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
             });
-            LoadData();
+            //LoadData();
 
         }
         private void LoadData()

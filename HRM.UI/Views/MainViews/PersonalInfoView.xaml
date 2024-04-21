@@ -7,7 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="640"
-             d:DesignWidth="820" 
+             d:DesignWidth="820"
              Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -19,14 +19,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="500" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition />
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -41,9 +41,8 @@
                 <Image Style="{StaticResource Image_Style}"
                        Source="{Binding }" />
                 <Button Content="Upload Image"
-                        Height="30"
-                        Width="120"
-                        Margin="10"
+                        Style="{StaticResource Button_Style}"
+                        Height="35"
                         Command="{Binding }" />
             </StackPanel>
         </Grid>
@@ -62,13 +61,9 @@
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Số CCCD "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Trình độ văn hóa "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Kết nạp Đoàn"
-                       Style="{StaticResource Label_Style}" />
+                <!--<Label Content="Kết nạp Đoàn"
+                       Style="{StaticResource Label_Style}" />-->
                 <Label Content="Kết nạp Đảng: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Khen thưởng/Kỷ luật:"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Sở thích: "
                        Style="{StaticResource Label_Style}" />
@@ -79,17 +74,17 @@
             <StackPanel>
                 <Label Content="Giới tính: "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Nơi sinh: "
-                       Style="{StaticResource Label_Style}" />
+                <!--<Label Content="Nơi sinh: "
+                       Style="{StaticResource Label_Style}" />-->
                 <Label Content=" "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tôn giáo: "
                        Style="{StaticResource Label_Style}" />
+                <Label Content=" "
+                       Style="{StaticResource Label_Style}" />
                 <Label Content="Cấp ngày: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content=" "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Tại: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
                        Style="{StaticResource Label_Style}" />
@@ -103,36 +98,30 @@
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding HoTen}"
                          x:Name="tb_HoTen" />
-                <DatePicker Height="50" SelectedDate="{Binding Path=NgaySinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                <DatePicker Style="{StaticResource DatePicker_Style}"
+                            SelectedDate="{Binding Path=NgaySinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
 
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NguyenQuan}"
                          x:Name="tb_NguyenQuan" />
 
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding DanToc}"
-                         x:Name="tb_DanToc" />
+                <ComboBox Style="{StaticResource Combobox_Style}"
+                          Text="{Binding DanToc}"
+                          x:Name="tb_DanToc" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding CCCD}"
                          x:Name="tb_SoCCCD" />
 
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding TrinhDoVanHoa}"
-                         x:Name="tb_TrinhDoVanHoa" />
 
-                <TextBox Style="{StaticResource TextBox_Style}"
+                <!--<TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding KetNapDoan}"
-                         x:Name="tb_KetNapDoan" />
+                         x:Name="tb_KetNapDoan" />-->
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding KetNapDang}"
                          x:Name="tb_KetNapDang" />
-
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding KhenThuong}"
-                         x:Name="tb_KhenThuong" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding SoThich}"
@@ -150,39 +139,38 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
                     <RadioButton GroupName="CharacterGender"
-                                 Content="Nam" 
+                                 Content="Nam"
                                  FontSize="14"
                                  VerticalAlignment="Center"
                                  Margin="10"
-                                 Width="50"/>
+                                 Width="50" />
                     <RadioButton GroupName="CharacterGender"
                                  Content="Nữ"
                                  FontSize="14"
-                                 VerticalAlignment="Center" 
-                                 Margin="10"/>
+                                 VerticalAlignment="Center"
+                                 Margin="10" />
                 </StackPanel>
-                
-                <TextBox Style="{StaticResource TextBox_Style}"
+
+                <!--<TextBox Style="{StaticResource TextBox_Style}"
                          x:Name="tb_NoiSinh"
-                         Text="{Binding NoiSinh}"/>
-                
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-                
-                <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding TonGiao}"
-                         x:Name="tb_TonGiao"/>
-                
-                <DatePicker Height="50" SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                         Text="{Binding NoiSinh}" />-->
 
                 <TextBlock Style="{StaticResource TextBlock_Style}" />
-                
+
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding NoiKetNapDoan}"
-                         x:Name="tb_NoiKetNapDoan"/>
-                
+                         Text="{Binding TonGiao}"
+                         x:Name="tb_TonGiao" />
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+
+                <DatePicker Style="{StaticResource DatePicker_Style}"
+                            SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+
+
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NoiKetNapDang}"
-                         x:Name="tb_NoiKetNapDang"/>
+                         x:Name="tb_NoiKetNapDang" />
             </StackPanel>
         </Grid>
 

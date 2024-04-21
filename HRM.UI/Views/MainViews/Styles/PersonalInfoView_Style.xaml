@@ -46,5 +46,35 @@
                 Value="10" />
         <Setter Property="Width"
                 Value="100" />
+        <Setter Property="FontSize"
+                Value="14" />
+    </Style>
+    
+    <Style TargetType="ComboBox"
+           x:Key="Combobox_Style">
+        <Setter Property="Margin"
+                Value="10" />
+        <Setter Property="Height"
+                Value="30" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="2" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+    </Style>
+
+    <Style TargetType="DatePicker"
+           x:Key="DatePicker_Style">
+        <Setter Property="Margin"
+                Value="10" />
+        <Setter Property="Height"
+                Value="30" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="2" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

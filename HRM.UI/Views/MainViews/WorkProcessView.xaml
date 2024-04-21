@@ -102,13 +102,16 @@
                           Name="ListStaffView_Pick">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Từ tháng năm đến tháng năm"
+                            <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
+                                            Header="Từ tháng năm đến tháng năm"
                                             Width="200"
                                             DisplayMemberBinding="{Binding }" />
-                            <GridViewColumn Header="Đơn vị công tác"
+                            <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
+                                            Header="Đơn vị công tác"
                                             Width="200"
                                             DisplayMemberBinding="{Binding }" />
-                            <GridViewColumn Header="Chức vụ"
+                            <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
+                                            Header="Chức vụ"
                                             Width="150"
                                             DisplayMemberBinding="{Binding }" />
                         </GridView>

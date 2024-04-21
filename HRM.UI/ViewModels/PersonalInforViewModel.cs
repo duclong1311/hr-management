@@ -138,7 +138,6 @@ namespace HRM.UI.ViewModels
                     NgaySinh = NgaySinh,
                     NguyenQuan = NguyenQuan,
                     DanToc = DanToc,
-                    NoiSinh =NoiSinh,
                     CCCD = CCCD,
                     TonGiao = TonGiao,
                     KetNapDang = KetNapDang,

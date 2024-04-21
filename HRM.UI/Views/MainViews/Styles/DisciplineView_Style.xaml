@@ -8,6 +8,14 @@
                 Value="14" />
     </Style>
 
+    <Style TargetType="TextBlock"
+           x:Key="TextBlock_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="FontSize"
+                Value="14" />
+    </Style>
+
     <Style TargetType="TextBox"
            x:Key="TextBox_Style">
         <Setter Property="Margin"
@@ -26,16 +34,41 @@
                 Value="10" />
         <Setter Property="Width"
                 Value="100" />
+        <Setter Property="FontSize"
+                Value="14" />
+    </Style>
+
+    <Style TargetType="ComboBox"
+           x:Key="ComboBox_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="Height"
+                Value="28.62" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="5" />
     </Style>
 
     <Style TargetType="GridViewColumnHeader"
-           x:Key="Header_style">
+           x:Key="GridViewHeader_Style">
         <Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
         <Setter Property="HorizontalContentAlignment"
                 Value="Center" />
+        <Setter Property="IsHitTestVisible"
+                Value="False" />
+    </Style>
 
+    <Style TargetType="DatePicker"
+           x:Key="DatePicker_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="Height"
+                Value="28.62" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="5" />
     </Style>
 </ResourceDictionary>

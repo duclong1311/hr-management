@@ -19,7 +19,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="500" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="60" />
+            <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,107 +37,51 @@
                        FontSize="24"
                        Margin="0,20,0,20">THÔNG TIN GIA ĐÌNH</TextBlock>
         </Grid>
-
         <!--Label-->
         <Grid Grid.Row="1"
               Grid.Column="0">
             <StackPanel>
-                <Label Content="Họ tên cha: "
+                <Label Content="Mối quan hệ: "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Sinh ngày: "
+                <Label Content="Họ và tên:  "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Nghề nghiệp: "
+                <Label Content="Năm sinh:  "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Cơ quan công tác: "
+                <Label Content="Nơi ở:  "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Chỗ ở hiện nay:"
-                       Style="{StaticResource Label_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-                <Label Content="Họ tên mẹ: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Sinh ngày: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Nghề nghiệp: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Cơ quan công tác: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Chỗ ở hiện nay:"
+                <Label Content="Nghề nghiệp:  "
                        Style="{StaticResource Label_Style}" />
             </StackPanel>
         </Grid>
-
         <Grid Grid.Row="1"
               Grid.Column="2">
             <StackPanel>
-                <Label Content="Họ tên anh/chị: "
+                <Label Content="Quê quán (Tỉnh/Thành): "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Sinh ngày: "
+                <Label Content="Quê quán (Quận/Huyện): "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Nghề nghiệp: "
+                <Label Content="Quê quán (Phường/Xã): "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Cơ quan công tác: "
+                <Label Content="Đơn vị công tác: "
                        Style="{StaticResource Label_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-                <!--<Label Content="Họ tên anh/chị: "
+                <Label Content="Chức vụ: "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Sinh ngày: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Nghề nghiệp: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Cơ quan công tác: "
-                       Style="{StaticResource Label_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-
-                <Label Content="Họ tên anh/chị: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Sinh ngày: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Nghề nghiệp: "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Cơ quan công tác: "
-                       Style="{StaticResource Label_Style}" />-->
             </StackPanel>
         </Grid>
 
+        <!--Textbox-->
         <Grid Grid.Column="1"
               Grid.Row="1">
             <StackPanel>
-                <TextBox x:Name="tb_HoTenCha"
-                         Text="{Binding HoTenCha, UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox Style="{StaticResource ComboBox_Style}"
+                         Text="{Binding TuNgayDenNgay}" />
+                <TextBox Text="{Binding HinhThucDaoTao}"
                          Style="{StaticResource TextBox_Style}" />
-                <DatePicker Height="50"
-                            SelectedDate="{Binding Path=NgaySinhCha, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
-                <TextBox x:Name="tb_NgheNghiepCha"
-                         Text="{Binding NgheNghiepCha}"
+                <DatePicker Text="{Binding HinhThucDaoTao}"
+                            Style="{StaticResource DatePicker_Style}" />
+                <TextBox Text="{Binding HinhThucDaoTao}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_CoQuanCha"
-                         Text="{Binding CoQuanCongTacCha}"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_ChoOCha"
-                         Text="{Binding ChoOCha}"
-                         Style="{StaticResource TextBox_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-                <TextBox x:Name="tb_HoTenMe"
-                         Text="{Binding HoTenMe}"
-                         Style="{StaticResource TextBox_Style}" />
-                <DatePicker Height="50"
-                            SelectedDate="{Binding Path=NgaySinhMe, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
-                <TextBox x:Name="tb_NgheNghiepMe"
-                         Text="{Binding NgheNghiepMe}"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_CoQuanMe"
-                         Text="{Binding CoQuanCongTacMe}"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_ChoOMe"
-                         Text="{Binding ChoOMe}"
+                <TextBox Text="{Binding NgheNghiep}"
                          Style="{StaticResource TextBox_Style}" />
             </StackPanel>
         </Grid>
@@ -143,46 +89,86 @@
         <Grid Grid.Column="3"
               Grid.Row="1">
             <StackPanel>
-                <TextBox x:Name="tb_HoTenAnhChi1"
-                         Text="{Binding HoTenAnhChi}"
+                <ComboBox Style="{StaticResource ComboBox_Style}"
+                          Text="{Binding TenTruong}" />
+                <ComboBox Text="{Binding VanBangChungChi}"
+                          Style="{StaticResource ComboBox_Style}" />
+                <ComboBox Text="{Binding VanBangChungChi}"
+                          Style="{StaticResource ComboBox_Style}" />
+                <TextBox Text="{Binding HinhThucDaoTao}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgaySinhAnhChi1"
-                         Text="{Binding NamSinh}"
+                <TextBox Text="{Binding HinhThucDaoTao}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="NgheNghiep"
-                         Text="{Binding NgheNghiep}"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="CoQuanCongTac"
-                         Text="{Binding CoQuanCongTac}"
-                         Style="{StaticResource TextBox_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-                <!--<TextBox x:Name="tb_HoTenAnhChi2"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgaySinhAnhChi2"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgheNghiepAnhChi2"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_CoQuanAnhChi2"
-                         Style="{StaticResource TextBox_Style}" />
-
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
-                <TextBox x:Name="tb_HoTenAnhChi3"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgaySinhAnhChi3"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_NgheNghiepAnhChi3"
-                         Style="{StaticResource TextBox_Style}" />
-                <TextBox x:Name="tb_CoQuanAnhChi3"
-                         Style="{StaticResource TextBox_Style}" />-->
             </StackPanel>
         </Grid>
 
         <!--Button-->
         <Grid Grid.Row="2"
-              Grid.Column="3">
+              Grid.ColumnSpan="4">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Thêm thông tin"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding AddCommand}" />
+                <Button Content="Sửa thông tin"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Xóa thông tin"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+            </StackPanel>
+        </Grid>
+
+        <!--Table-->
+        <Grid Grid.Row="3"
+              Grid.ColumnSpan="4">
+            <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                          VerticalScrollBarVisibility="Hidden">
+                <ListView Margin="10"
+                          Name="ListStaffView_Pick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mối quan hệ"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Họ và tên"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Năm sinh"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="70"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Nơi ở"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="70"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Nghề nghiệp"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="145"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Đơn vị công tác"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="145"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Chức vụ"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="145"
+                                            DisplayMemberBinding="{Binding }" />
+                            <GridViewColumn Header="Quê quán(Tỉnh/Thành)"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="145"
+                                            DisplayMemberBinding="{Binding }" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+
+        <!--Button-->
+        <Grid Grid.Row="4"
+              Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <Button Content="Hủy bỏ"
@@ -190,9 +176,8 @@
                         Command="{Binding }" />
                 <Button Content="Xác nhận"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding }" />
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>
