@@ -10,7 +10,7 @@ namespace HRM.Domain.Models
     public class NhanSu : IEntity
     {
         //Sơ yếu lý lịch
-        public string? MaNhanSu {  get; set; }
+        public string? MaNhanVien {  get; set; }
         public string? Anh { get; set; }
         public string? HoTen {  get; set; }
         public DateOnly? NgaySinh { get; set; }
@@ -19,7 +19,7 @@ namespace HRM.Domain.Models
         public string? NguyenQuan { get; set; }
         public string? DanToc { get; set; }
         public string? TonGiao { get; set; }
-        public string? SoCCCD { get; set; }
+        public string? CCCD { get; set; }
         public bool? KetNapDang { get; set; }
         public string? NoiketNapDang { get; set; }
         public string? SoThich { get; set; }

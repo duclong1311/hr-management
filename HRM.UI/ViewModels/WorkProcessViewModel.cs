@@ -26,11 +26,11 @@ namespace HRM.UI.ViewModels
             set {  _tuNgayDenNgay = value; OnPropertyChanged(); }
         }
 
-        private string _donViCongTac;
-        public string DonViCongTac
+        private string _noiCongTac;
+        public string NoiCongTac
         {
-            get { return _donViCongTac; }
-            set { _donViCongTac = value; OnPropertyChanged(); }
+            get { return _noiCongTac; }
+            set { _noiCongTac = value; OnPropertyChanged(); }
         }
 
         private string _chucVu;
@@ -52,7 +52,7 @@ namespace HRM.UI.ViewModels
                 var QuaTrinhCongTac = new QuaTrinhCongTac()
                 {
                     TuNgayDenNgay = TuNgayDenNgay,
-                    DonViCongTac = DonViCongTac,
+                    NoiCongTac = NoiCongTac,
                     ChucVu = ChucVu,
                 };
                 await _unitOfWork.BeginTransactionAsync();

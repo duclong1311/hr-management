@@ -15,7 +15,7 @@ namespace HRM.UI.ViewModels
     public class PersonalInforViewModel : BaseViewModel
     {
         private IUnitOfWork _unitOfWork;
-        private IRepository<HoSo> _hosoRepository;
+        private IRepository<NhanSu> _hosoRepository;
         public ICommand AddCommand { get; set; }
         private string _hoTen;
 
@@ -24,9 +24,9 @@ namespace HRM.UI.ViewModels
             get { return _hoTen; }
             set { _hoTen = value; }
         }
-        private DateTime _ngaySinh;
+        private DateOnly _ngaySinh;
 
-        public DateTime NgaySinh
+        public DateOnly NgaySinh
         {
             get { return _ngaySinh; }
             set { _ngaySinh = value; }
@@ -59,16 +59,9 @@ namespace HRM.UI.ViewModels
             get { return _trinhDoVanHoa; }
             set { _trinhDoVanHoa = value; }
         }
-        private string _ketNapDoan;
+        private bool _ketNapDang;
 
-        public string KetNapDoan
-        {
-            get { return _ketNapDoan; }
-            set { _ketNapDoan = value; }
-        }
-        private string _ketNapDang;
-
-        public string KetNapDang
+        public bool KetNapDang
         {
             get { return _ketNapDang; }
             set { _ketNapDang = value; }
@@ -129,7 +122,7 @@ namespace HRM.UI.ViewModels
             get { return _noiKetNapDang; }
             set { _noiKetNapDang = value; }
         }
-        public PersonalInforViewModel(IRepository<HoSo> hosoRepository, IUnitOfWork unitOfWork)
+        public PersonalInforViewModel(IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork)
         {
             _hosoRepository = hosoRepository;
             _unitOfWork = unitOfWork;
@@ -139,29 +132,24 @@ namespace HRM.UI.ViewModels
                 return true;
             }, async (p) =>
             {
-                var HoSo = new HoSo()
+                var NhanSu = new NhanSu()
                 {
                     HoTen = HoTen,
-                    SinhNgay = NgaySinh,
+                    NgaySinh = NgaySinh,
                     NguyenQuan = NguyenQuan,
                     DanToc = DanToc,
                     NoiSinh =NoiSinh,
                     CCCD = CCCD,
                     TonGiao = TonGiao,
-                    CapNgay = CapNgay,
-                    TrinhDoVanHoa = TrinhDoVanHoa,
                     KetNapDang = KetNapDang,
-                    KetNapDoan = KetNapDoan,
                     NoiketNapDang = NoiKetNapDang,
-                    NoiKetNapDoan = NoiKetNapDoan,
-                    KhenThuong = KhenThuong,
                     SoThich = SoThich,
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    HoSo = await _hosoRepository.AddAsync(HoSo);
-                    if(HoSo !=null)
+                    NhanSu = await _hosoRepository.AddAsync(NhanSu);
+                    if(NhanSu !=null)
                     {
                         MessageBox.Show("Thêm thành công");
                     } else

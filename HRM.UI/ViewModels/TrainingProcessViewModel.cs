@@ -28,11 +28,17 @@ namespace HRM.UI.ViewModels
             set { _tuNgayDenNgay = value; OnPropertyChanged(); }
         }
 
-        private string _tenTruong;
-        public string TenTruong
+        private string _noiDaoTao;
+        public string NoiDaoTao
         {
-            get { return _tenTruong; }
-            set { _tenTruong = value; OnPropertyChanged(); }
+            get { return _noiDaoTao; }
+            set { _noiDaoTao = value; OnPropertyChanged(); }
+        }
+        private string _nganhHoc;
+        public string NganhHoc
+        {
+            get { return _nganhHoc; }
+            set { _nganhHoc = value; OnPropertyChanged(); }
         }
 
         private string _hinhThucDaoTao;
@@ -63,8 +69,9 @@ namespace HRM.UI.ViewModels
                 var QuaTrinhDaoTao = new QuaTrinhDaoTao()
                 {
                     TuNgayDenNgay = TuNgayDenNgay,
-                    TenTruong = TenTruong,
+                    NoiDaoTao = NoiDaoTao,
                     HinhThucDaoTao = HinhThucDaoTao,
+                    NganhHoc = NganhHoc,
                     VanBangChungChi = VanBangChungChi,
                 };
                 await _unitOfWork.BeginTransactionAsync();

@@ -20,88 +20,32 @@ namespace HRM.UI.ViewModels
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
         public ICommand AddCommand { get; set; }
 
-        private string _hoTenCha;
-        public string HoTenCha
+        private string _moiQuanHe;
+        public string MoiQuanHe
         {
-            get { return _hoTenCha; }
-            set { _hoTenCha = value; OnPropertyChanged(); }
+            get { return _moiQuanHe; }
+            set { _moiQuanHe = value; OnPropertyChanged(); }
         }
 
-        private DateTime _ngaySinhCha;
-        public DateTime NgaySinhCha
+        private string _hoVaTen;
+        public string HoVaTen
         {
-            get { return _ngaySinhCha; }
-            set { _ngaySinhCha = value; OnPropertyChanged(); }
+            get { return _hoVaTen; }
+            set { _hoVaTen = value; OnPropertyChanged(); }
         }
 
-        private string _ngheNghiepCha;
-        public string NgheNghiepCha
-        {
-            get { return _ngheNghiepCha; }
-            set { _ngheNghiepCha = value; OnPropertyChanged(); }
-        }
-
-        private string _coQuanCongTacCha;
-        public string CoQuanCongTacCha
-        {
-            get { return _coQuanCongTacCha; }
-            set { _coQuanCongTacCha = value; OnPropertyChanged(); }
-        }
-
-        private string _choOCha;
-        public string ChoOCha
-        {
-            get { return _choOCha; }
-            set { _choOCha = value; OnPropertyChanged(); }
-        }
-
-        private string _hoTenMe;
-        public string HoTenMe
-        {
-            get { return _hoTenMe; }
-            set { _hoTenMe = value; OnPropertyChanged(); }
-        }
-
-        private DateTime _ngaySinhMe;
-        public DateTime NgaySinhMe
-        {
-            get { return _ngaySinhMe; }
-            set { _ngaySinhMe = value; OnPropertyChanged(); }
-        }
-
-        private string _ngheNghiepMe;
-        public string NgheNghiepMe
-        {
-            get { return _ngheNghiepMe; }
-            set { _ngheNghiepMe = value; OnPropertyChanged(); }
-        }
-
-        private string _coQuanCongTacMe;
-        public string CoQuanCongTacMe
-        {
-            get { return _coQuanCongTacMe; }
-            set { _coQuanCongTacMe = value; OnPropertyChanged(); }
-        }
-
-        private string _choOMe;
-        public string ChoOMe
-        {
-            get { return _choOMe; }
-            set { _choOMe = value; OnPropertyChanged(); }
-        }
-
-        private string _hoTenAnhChi;
-        public string HoTenAnhChi
-        {
-            get { return _hoTenAnhChi; }
-            set { _hoTenAnhChi = value; OnPropertyChanged(); }
-        }
-
-        private string _namSinh;
-        public string NamSinh
+        private DateOnly _namSinh;
+        public DateOnly NamSinh
         {
             get { return _namSinh; }
             set { _namSinh = value; OnPropertyChanged(); }
+        }
+
+        private string _queQuan;
+        public string QueQuan
+        {
+            get { return _queQuan; }
+            set { _queQuan = value; OnPropertyChanged(); }
         }
 
         private string _ngheNghiep;
@@ -111,13 +55,26 @@ namespace HRM.UI.ViewModels
             set { _ngheNghiep = value; OnPropertyChanged(); }
         }
 
-        private string _coQuanCongTac;
-        public string CoQuanCongTac
+        private string _donViCongTac;
+        public string DonViCongTac
         {
-            get { return _coQuanCongTac; }
-            set { _coQuanCongTac = value; }
+            get { return _donViCongTac; }
+            set { _donViCongTac = value; OnPropertyChanged(); }
         }
 
+        private string _noiO;
+        public string NoiO
+        {
+            get { return _noiO; }
+            set { _noiO = value; OnPropertyChanged(); }
+        }
+
+        private string _chucVu;
+        public string ChucVu
+        {
+            get { return _chucVu; }
+            set { _chucVu = value; OnPropertyChanged(); }
+        }
         public FamilyInforViewModel(IUnitOfWork unitOfWork, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository)
         {
             _unitOfWork = unitOfWork;
@@ -132,16 +89,14 @@ namespace HRM.UI.ViewModels
             {
                 var QuanHeGiaDinh = new QuanHeGiaDinh()
                 {
-                    HoTenCha = HoTenCha,
-                    NgaySinhCha = NgaySinhCha,
-                    NgheNghiepCha = NgheNghiepCha,
-                    CoQuanCongTacCha = CoQuanCongTacCha,
-                    ChoOCha = ChoOCha,
-                    HoTenMe = HoTenMe,
-                    NgaySinhMe = NgaySinhMe,
-                    NgheNghiepMe = NgheNghiepMe,
-                    CoQuanCongTacMe = CoQuanCongTacMe,
-                    ChoOMe = ChoOMe,
+                    MoiQuanHe = MoiQuanHe,
+                    HoVaTen = HoVaTen,
+                    NamSinh = NamSinh,
+                    QueQuan = QueQuan,
+                    NgheNghiep = NgheNghiep,
+                    DonViCongTac = DonViCongTac,
+                    NoiO = NoiO,
+                    ChucVu = ChucVu,
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try

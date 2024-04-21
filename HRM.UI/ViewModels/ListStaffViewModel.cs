@@ -43,18 +43,11 @@ namespace HRM.UI.ViewModels
         public ObservableCollection<ChucVu> ListChucVu { get => _listChucVu; set { _listChucVu = value; OnPropertyChanged(); } }
 
 
-        private ObservableCollection<ViTri> _listViTri = new ObservableCollection<ViTri>();
-        public ObservableCollection<ViTri> ListViTri { get => _listViTri; set { _listViTri = value; OnPropertyChanged(); } }
-
-
         private BoPhan _selectedCboBoPhan;
         public BoPhan SeletedCboBoPhan { get { return _selectedCboBoPhan; } set { _selectedCboBoPhan = value; OnPropertyChanged(); } }
 
         private ChucVu _selectedCboChucVu;
         public ChucVu SeletedCboChucVu { get { return _selectedCboChucVu; } set { _selectedCboChucVu = value; OnPropertyChanged(); } }
-        private ViTri _selectedCboViTri;
-        public ViTri SeletedCboViTri { get { return _selectedCboViTri; } set { _selectedCboViTri = value; OnPropertyChanged(); } }
-
 
         private NhanSu _selectedItem;
         public NhanSu SelectedItem
@@ -67,13 +60,12 @@ namespace HRM.UI.ViewModels
                 {
                     MaNhanVien = _selectedItem.MaNhanVien;
                     DisplayName = _selectedItem.HoTen;
-                    EmailNoiBo = _selectedItem.EmailCongTy;
+                    //EmailNoiBo = _selectedItem.EmailCongTy;
                     STKNganHang = _selectedItem.STK;
                     SoBHXH = _selectedItem.MaSoBHXH;
                     MaSoThue = _selectedItem.MaSoThue;
                     SeletedCboBoPhan = SelectedItem.BoPhan;
                     SeletedCboChucVu = SelectedItem.ChucVu;
-                    SeletedCboViTri = SelectedItem.ViTri;
                 }
                 OnPropertyChanged();
             }
@@ -129,19 +121,17 @@ namespace HRM.UI.ViewModels
         private IRepository<NhanSu> _repository;
         private IRepository<BoPhan> _boPhanRepository;
         private IRepository<ChucVu> _chucVuRepository;
-        private IRepository<ViTri> _viTriRepository;
         private IUnitOfWork _unitOfWork;
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
 
-        public ListStaffViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository, IUnitOfWork unitOfWork, IRepository<BoPhan> repositoryBoPhan, IRepository<ChucVu> repositoryChucVu, IRepository<ViTri> repositoryViTri)
+        public ListStaffViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository, IUnitOfWork unitOfWork, IRepository<BoPhan> repositoryBoPhan, IRepository<ChucVu> repositoryChucVu)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _repository = repository;
             _boPhanRepository = repositoryBoPhan;
             _chucVuRepository = repositoryChucVu;
-            _viTriRepository = repositoryViTri;
             _unitOfWork = unitOfWork;
 
             LoadCombobox();
@@ -161,12 +151,10 @@ namespace HRM.UI.ViewModels
                     HoTen = DisplayName,
                     MaNhanVien = MaNhanVien,
                     STK = STKNganHang,
-                    EmailCongTy = EmailNoiBo,
+                    //EmailCongTy = EmailNoiBo,
                     MaSoBHXH = SoBHXH,
                     MaSoThue = MaSoThue,
-                    NgayVaoLam = NgayVaoLam,
                     BoPhanId = SeletedCboBoPhan.Id,
-                    ViTriId = SeletedCboViTri.Id,
                     ChucVuId = SeletedCboChucVu.Id,
                 };
                 await _unitOfWork.BeginTransactionAsync();
@@ -200,12 +188,10 @@ namespace HRM.UI.ViewModels
                     NhanSu.HoTen = DisplayName;
                     NhanSu.MaNhanVien = MaNhanVien;
                     NhanSu.STK = STKNganHang;
-                    NhanSu.EmailCongTy = EmailNoiBo;
+                    //NhanSu.EmailCongTy = EmailNoiBo;
                     NhanSu.MaSoBHXH = SoBHXH;
                     NhanSu.MaSoThue = MaSoThue;
-                    NhanSu.NgayVaoLam = NgayVaoLam;
                     NhanSu.BoPhanId = SeletedCboBoPhan.Id;
-                    NhanSu.ViTriId = SeletedCboViTri.Id;
                     NhanSu.ChucVuId = SeletedCboChucVu.Id;
                     await _repository.UpdateAsync(NhanSu);
                     await _unitOfWork.CommitAsync();
@@ -276,9 +262,6 @@ namespace HRM.UI.ViewModels
 
             ListChucVu = new ObservableCollection<ChucVu>(_chucVuRepository.AsQueryable().Where(x => x.TenChucVu.Contains(FilterBoPhan)).ToList());
             SeletedCboChucVu = ListChucVu.FirstOrDefault();
-
-            ListViTri = new ObservableCollection<ViTri>(_viTriRepository.AsQueryable().Where(x => x.TenViTri.Contains(FilterBoPhan)).ToList());
-            SeletedCboViTri = ListViTri.FirstOrDefault();
         }
 
         private void LoadData()
