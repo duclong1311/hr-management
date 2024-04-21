@@ -9,7 +9,7 @@ namespace HRM.Domain.Models
 {
     public class BangCong : IEntity
     {
-        public int Thang { get; set; }
+        public DateOnly ThangNam { get; set; }
         public double TongTimeOT { get; set; }
         public int TongSoNgayCong {  get; set; }
         public float DiMuonVeSom { get; set; }

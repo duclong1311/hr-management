@@ -9,15 +9,13 @@ namespace HRM.Domain.Models
 {
     public class QuanHeGiaDinh : IEntity
     {
-        public string HoTenCha { get; set; }
-        public DateTime NgaySinhCha {  get; set; }
-        public string NgheNghiepCha { get; set; }
-        public string CoQuanCongTacCha { get; set; }   
-        public string ChoOCha { get; set; }
-        public string HoTenMe { get; set; }
-        public DateTime NgaySinhMe { get; set; }
-        public string NgheNghiepMe { get; set; }
-        public string CoQuanCongTacMe { get; set; }
-        public string ChoOMe { get; set; }
+        public string MoiQuanHe { get; set; }
+        public string HoVaTen { get; set; } 
+        public DateOnly NamSinh { get; set; }
+        public string QueQuan { get; set; }
+        public string NgheNghiep { get; set; }  
+        public string DonViCongTac { get; set; }
+        public string NoiO { get; set; }
+        public string ChucVu { get; set; }  
     }
 }

@@ -10,35 +10,35 @@ namespace HRM.Domain.Models
     public class NhanSu : IEntity
     {
         //Sơ yếu lý lịch
-        public string MaNhanSu {  get; set; }
-        public string Anh { get; set; }
-        public string HoTen {  get; set; }
-        public DateOnly NgaySinh { get; set; }
-        public bool GioiTinh { get; set; }
-        public string NoiSinh { get; set; }
-        public string NguyenQuan { get; set; }
-        public string DanToc { get; set; }
-        public string TonGiao { get; set; }
-        public string SoCCCD { get; set; }
+        public string? MaNhanSu {  get; set; }
+        public string? Anh { get; set; }
+        public string? HoTen {  get; set; }
+        public DateOnly? NgaySinh { get; set; }
+        public bool? GioiTinh { get; set; }
+        public string? NoiSinh { get; set; }
+        public string? NguyenQuan { get; set; }
+        public string? DanToc { get; set; }
+        public string? TonGiao { get; set; }
+        public string? SoCCCD { get; set; }
         public bool? KetNapDang { get; set; }
         public string? NoiketNapDang { get; set; }
         public string? SoThich { get; set; }
 
         //Thông tin nhận lương
-        public string STK { get; set; }
-        public string MaSoBHXH {  get; set; }
-        public string MaSoThue {  get; set; }
+        public string? STK { get; set; }
+        public string? MaSoBHXH {  get; set; }
+        public string? MaSoThue {  get; set; }
 
         //Thông tin để tính lương
-        public double LuongCoBan {  get; set; }
-        public double PhuCapDiLai { get; set; }
-        public double PhuCapAnTrua { get; set; }    
-        public double PhucLoi { get; set; } 
+        public double? LuongCoBan {  get; set; }
+        public double? PhuCapDiLai { get; set; }
+        public double? PhuCapAnTrua { get; set; }    
+        public double? PhucLoi { get; set; } 
 
         //...
-        public int BoPhanId {  get; set; }
-        public BoPhan BoPhan { get; set; }
-        public int ChucVuId {  get; set; }
-        public ChucVu ChucVu { get; set; }
+        public int? BoPhanId {  get; set; }
+        public BoPhan? BoPhan { get; set; }
+        public int? ChucVuId {  get; set; }
+        public ChucVu? ChucVu { get; set; }
     }
 }
