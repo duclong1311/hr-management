@@ -10,6 +10,7 @@ namespace HRM.Domain.Models
     public class ChucVu : IEntity
     {
         public string TenChucVu {  get; set; }
+        public double PhuCapChucVu { get; set;}
         
     }
 }
