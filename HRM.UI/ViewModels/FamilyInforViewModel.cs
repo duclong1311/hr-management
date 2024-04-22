@@ -1,5 +1,6 @@
 ﻿ using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace HRM.UI.ViewModels
 
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
         public ICommand AddCommand { get; set; }
+        public ObservableCollection<string> TinhThanhData { get; set; }
+        public ObservableCollection<string> MoiQuanHeData { get; set; }
 
         private string _moiQuanHe;
         public string MoiQuanHe
@@ -42,7 +45,7 @@ namespace HRM.UI.ViewModels
         }
 
         private string _queQuan;
-        public string QueQuan
+        public string TinhThanh
         {
             get { return _queQuan; }
             set { _queQuan = value; OnPropertyChanged(); }
@@ -75,10 +78,25 @@ namespace HRM.UI.ViewModels
             get { return _chucVu; }
             set { _chucVu = value; OnPropertyChanged(); }
         }
+        private void LoadComboBoxData()
+        {
+            TinhThanhData = new ObservableCollection<string>();
+            TinhThanhData.Add("Hà Nội");
+            TinhThanhData.Add("Hồ Chí Minh");
+            TinhThanhData.Add("Đà Nẵng");
+
+            MoiQuanHeData = new ObservableCollection<string>();
+            MoiQuanHeData.Add("Cha");
+            MoiQuanHeData.Add("Mẹ");
+            MoiQuanHeData.Add("Con");
+
+        }
         public FamilyInforViewModel(IUnitOfWork unitOfWork, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository)
         {
             _unitOfWork = unitOfWork;
             _quanHeGiaDinhRepository = quanHeGiaDinhRepository;
+
+            LoadComboBoxData();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -94,7 +112,7 @@ namespace HRM.UI.ViewModels
                     NamSinh = NamSinh,
                     NoiO = NoiO,
                     NgheNghiep = NgheNghiep,
-                    QueQuan = QueQuan,
+                    QueQuan = TinhThanh,
                     DonViCongTac = DonViCongTac,
                     ChucVu = ChucVu,
                 };

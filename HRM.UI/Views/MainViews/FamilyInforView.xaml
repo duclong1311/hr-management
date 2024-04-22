@@ -74,7 +74,8 @@
               Grid.Row="1">
             <StackPanel>
                 <ComboBox Style="{StaticResource ComboBox_Style}"
-                          Text="{Binding MoiQuanHe}" />
+                          ItemsSource="{Binding MoiQuanHeData}"
+                          SelectedItem="{Binding MoiQuanHe}" />
                 <TextBox Text="{Binding HoVaTen}"
                          Style="{StaticResource TextBox_Style}" />
                 <DatePicker Text="{Binding NamSinh}"
@@ -90,10 +91,13 @@
               Grid.Row="1">
             <StackPanel>
                 <ComboBox Style="{StaticResource ComboBox_Style}"
-                          Text="{Binding QueQuan}" />
-                <ComboBox Text="{Binding VanBangChungChi}"
+                          ItemsSource="{Binding TinhThanhData}"
+                          SelectedItem="{Binding TinhThanh}" />
+                <ComboBox ItemsSource="{Binding QuanHuyenData}"
+                          SelectedItem="{Binding QuanHuyen}"
                           Style="{StaticResource ComboBox_Style}" />
-                <ComboBox Text="{Binding QueQuan}"
+                <ComboBox ItemsSource="{Binding PhuongXaData}"
+                          SelectedItem="{Binding PhuongXa}"
                           Style="{StaticResource ComboBox_Style}" />
                 <TextBox Text="{Binding DonViCongTac}"
                          Style="{StaticResource TextBox_Style}" />
