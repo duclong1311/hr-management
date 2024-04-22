@@ -42,7 +42,8 @@
                         <TextBlock Text="Nhân sự" />
                     </StackPanel>
                 </TreeViewItem.Header>
-                <TreeViewItem IsExpanded="True"
+
+                <!--<TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
@@ -55,7 +56,8 @@
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
-                </TreeViewItem>
+                </TreeViewItem>-->
+                
                 <TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
@@ -65,7 +67,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Product.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Hồ sơ nhân sự" />
+                                <TextBlock Text="Danh sách nhân sự" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
@@ -74,16 +76,17 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding AddResumeCommand}"
+                                Command="{Binding AddCVCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Thêm sơ yếu lý lịch" />
+                                <TextBlock Text="Thêm hồ sơ" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
+                
                 <!--<TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
@@ -114,6 +117,7 @@
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>-->
+                
                 <TreeViewItem IsExpanded="True"
                               Visibility="Collapsed"
                               Style="{StaticResource TreeViewItem_Style}">

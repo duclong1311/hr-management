@@ -64,7 +64,7 @@
                              Text="{Binding TuNgayDenNgay}"
                              Style="{StaticResource TextBox_Style}" />
                     <TextBox x:Name="tb_DonViCongTac"
-                             Text="{Binding DonViCongTac}"
+                             Text="{Binding NoiCongTac}"
                              Style="{StaticResource TextBox_Style}" />
                 </StackPanel>
             </Grid>

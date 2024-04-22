@@ -51,7 +51,7 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
         public ICommand StaffViewCommand { get; set; }
-        public ICommand AddCVCommand { get; set; }
+        //public ICommand AddCVCommand { get; set; }
         public StaffCVViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository)
         {
             _repository = repository;
@@ -61,10 +61,10 @@ namespace HRM.UI.ViewModels
             {
                 mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
             });
-            AddCVCommand = new RelayCommand<object>(p => true, p => 
-            {
-                mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-            });
+            //AddCVCommand = new RelayCommand<object>(p => true, p => 
+            //{
+            //    mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+            //});
             //LoadData();
 
         }

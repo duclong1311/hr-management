@@ -74,12 +74,12 @@
               Grid.Row="1">
             <StackPanel>
                 <ComboBox Style="{StaticResource ComboBox_Style}"
-                         Text="{Binding TuNgayDenNgay}" />
-                <TextBox Text="{Binding HinhThucDaoTao}"
+                          Text="{Binding MoiQuanHe}" />
+                <TextBox Text="{Binding HoVaTen}"
                          Style="{StaticResource TextBox_Style}" />
-                <DatePicker Text="{Binding HinhThucDaoTao}"
+                <DatePicker Text="{Binding NamSinh}"
                             Style="{StaticResource DatePicker_Style}" />
-                <TextBox Text="{Binding HinhThucDaoTao}"
+                <TextBox Text="{Binding NoiO}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox Text="{Binding NgheNghiep}"
                          Style="{StaticResource TextBox_Style}" />
@@ -90,14 +90,14 @@
               Grid.Row="1">
             <StackPanel>
                 <ComboBox Style="{StaticResource ComboBox_Style}"
-                          Text="{Binding TenTruong}" />
+                          Text="{Binding QueQuan}" />
                 <ComboBox Text="{Binding VanBangChungChi}"
                           Style="{StaticResource ComboBox_Style}" />
-                <ComboBox Text="{Binding VanBangChungChi}"
+                <ComboBox Text="{Binding QueQuan}"
                           Style="{StaticResource ComboBox_Style}" />
-                <TextBox Text="{Binding HinhThucDaoTao}"
+                <TextBox Text="{Binding DonViCongTac}"
                          Style="{StaticResource TextBox_Style}" />
-                <TextBox Text="{Binding HinhThucDaoTao}"
+                <TextBox Text="{Binding ChucVu}"
                          Style="{StaticResource TextBox_Style}" />
             </StackPanel>
         </Grid>

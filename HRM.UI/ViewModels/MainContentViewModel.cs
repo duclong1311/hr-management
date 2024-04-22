@@ -22,6 +22,7 @@ namespace HRM.UI.ViewModels
         public ICommand LogoutCommand { get; set; }
         public ICommand StaffListCommand { get; set; }
         public ICommand StaffCVCommand { get; set; }
+        public ICommand AddCVCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -48,6 +49,11 @@ namespace HRM.UI.ViewModels
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.StaffCV);
             });
+            AddCVCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+            });
+
 
         }
 

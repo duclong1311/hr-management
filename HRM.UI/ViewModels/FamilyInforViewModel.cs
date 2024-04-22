@@ -92,10 +92,10 @@ namespace HRM.UI.ViewModels
                     MoiQuanHe = MoiQuanHe,
                     HoVaTen = HoVaTen,
                     NamSinh = NamSinh,
-                    QueQuan = QueQuan,
-                    NgheNghiep = NgheNghiep,
-                    DonViCongTac = DonViCongTac,
                     NoiO = NoiO,
+                    NgheNghiep = NgheNghiep,
+                    QueQuan = QueQuan,
+                    DonViCongTac = DonViCongTac,
                     ChucVu = ChucVu,
                 };
                 await _unitOfWork.BeginTransactionAsync();

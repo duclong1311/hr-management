@@ -40,4 +40,16 @@
                 Value="Center" />
 
     </Style>
+
+    <Style TargetType="ComboBox"
+           x:Key="ComboBox_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="Height"
+                Value="28.62" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="5" />
+    </Style>
 </ResourceDictionary>
