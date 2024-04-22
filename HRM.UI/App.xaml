@@ -14,6 +14,8 @@
         <DataTemplate DataType="{x:Type vm:MainContentViewModel}">
             <view:MainContentView />
         </DataTemplate>
+        
+        <!--Child content-->
         <DataTemplate DataType="{x:Type vm:PersonalInforViewModel}">
             <view:PersonalInfoView />
         </DataTemplate>
@@ -26,6 +28,13 @@
         <DataTemplate DataType="{x:Type vm:TrainingProcessViewModel}">
             <view:TrainingProcessView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RemunerativeViewModel}">
+            <view:RemunerativeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DisciplineViewModel}">
+            <view:DisciplineView />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type vm:CVStatusViewModel}">
             <view:CVStatusView />
         </DataTemplate>

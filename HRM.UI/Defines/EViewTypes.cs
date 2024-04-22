@@ -15,7 +15,10 @@ namespace HRM.UI.Defines
         FamilyInfor,
         TrainingProcess,
         WorkProcess,
-        CVStatus,
+        // ----------------------Khen thuong, ky luat----------------------
+        Remunerative,
+        Discipline,
+        // --------------------------------------------
         ListStaff,
         StaffCV,
         AddCV,

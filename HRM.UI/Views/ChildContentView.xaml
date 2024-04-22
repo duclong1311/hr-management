@@ -20,16 +20,31 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Style="{StaticResource Button_Style}" Content="Thông tin bản thân" Command="{Binding PersonInforCommand}" />
-            <Button Style="{StaticResource Button_Style}" Content="Quan hệ gia đình" Command="{Binding FamilyInforCommand}"/>
-            <Button Style="{StaticResource Button_Style}" Content="Quá trình đào tạo" Command="{Binding TrainingProcessCommand}"/>
-            <Button Style="{StaticResource Button_Style}" Content="Quá trình công tác" Command="{Binding WorkProcessCommand}"/>
-            <Button Style="{StaticResource Button_Style}" Content="Tình trạng hồ sơ" Command="{Binding CVStatusCommand}"/>
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal">
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Thông tin bản thân"
+                    Command="{Binding PersonInforCommand}" />
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Quan hệ gia đình"
+                    Command="{Binding FamilyInforCommand}" />
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Quá trình đào tạo"
+                    Command="{Binding TrainingProcessCommand}" />
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Quá trình công tác"
+                    Command="{Binding WorkProcessCommand}" />
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Khen Thưởng"
+                    Command="{Binding RemunerativeCommand}" />
+            <Button Style="{StaticResource Button_Style}"
+                    Content="Kỷ luật"
+                    Command="{Binding DisciplineCommand}" />
             <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien}" />
         </StackPanel>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"
+        <ContentControl Grid.Row="1"
+                        Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"
                         Grid.ColumnSpan="2" />
-        
+
     </Grid>
 </UserControl>

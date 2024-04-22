@@ -21,7 +21,8 @@ namespace HRM.UI.ViewModels
         public ICommand FamilyInforCommand { get; set; }
         public ICommand TrainingProcessCommand { get; set; }
         public ICommand WorkProcessCommand { get; set; }
-        public ICommand CVStatusCommand { get; set; }
+        public ICommand DisciplineCommand { get; set; }
+        public ICommand RemunerativeCommand { get; set; }
         public BaseViewModel CurrentViewModel => _childContentStore.CurrentViewModel;
         //public NhanSu CurrentNhanSu => _staffStore.CurrentNhanSu;
         public ChildContentViewModel(ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
@@ -47,9 +48,13 @@ namespace HRM.UI.ViewModels
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.WorkProcess);
             });
-            CVStatusCommand = new RelayCommand<object>(p => true, p =>
+            DisciplineCommand = new RelayCommand<object>(p => true, p =>
             {
-                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.CVStatus);
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Discipline);
+            });
+            RemunerativeCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Remunerative);
             });
 
 

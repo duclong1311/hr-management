@@ -16,11 +16,15 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
         private readonly CreateViewModel<MainContentViewModel> _createMainContentViewModel;
         private readonly CreateViewModel<ListStaffViewModel> _createListStaffViewModel;
+
         private readonly CreateViewModel<PersonalInforViewModel> _createPersonalInforViewModel;
         private readonly CreateViewModel<FamilyInforViewModel> _createFamilyInforViewModel;
         private readonly CreateViewModel<TrainingProcessViewModel> _createTrainingProcessViewModel;
         private readonly CreateViewModel<WorkProcessViewModel> _createWorkProcessViewModel;
-        private readonly CreateViewModel<CVStatusViewModel> _createCVStatusViewModel;
+        private readonly CreateViewModel<DisciplineViewModel> _createDisciplineViewModel;
+        private readonly CreateViewModel<RemunerativeViewModel> _createRemunerativeViewModel;
+
+
         private readonly CreateViewModel<ChildContentViewModel> _createChildContentViewModel;
         private readonly CreateViewModel<StaffCVViewModel> _createStaffCVViewModel;
         private readonly CreateViewModel<AddCVViewModel> _createAddCVViewModel;
@@ -30,11 +34,15 @@ namespace HRM.UI.Factories
             CreateViewModel<RegisterViewModel> createRegisterViewModel,
             CreateViewModel<MainContentViewModel> createMainContentViewModel,
             CreateViewModel<ListStaffViewModel> createListStaffViewModel,
+
             CreateViewModel<PersonalInforViewModel> createPersonalInforViewModel,
             CreateViewModel<FamilyInforViewModel> createFamilyInforViewModel,
             CreateViewModel<TrainingProcessViewModel> createTrainingProcessViewModel,
             CreateViewModel<WorkProcessViewModel> createWorkProcessViewModel,
-            CreateViewModel<CVStatusViewModel> createCVStatusViewModel,
+            CreateViewModel<RemunerativeViewModel> createRemunerativeViewModel,
+            CreateViewModel<DisciplineViewModel> createDisciplineViewModel,
+
+
             CreateViewModel<ChildContentViewModel> createChildContentViewModel,
             CreateViewModel<StaffCVViewModel> createStaffCVViewModel,
             CreateViewModel<AddCVViewModel> createAddCVViewModel)
@@ -44,11 +52,14 @@ namespace HRM.UI.Factories
             _createRegisterViewModel = createRegisterViewModel;
             _createMainContentViewModel = createMainContentViewModel;
             _createListStaffViewModel = createListStaffViewModel;
+
             _createPersonalInforViewModel = createPersonalInforViewModel;
             _createFamilyInforViewModel = createFamilyInforViewModel;
             _createTrainingProcessViewModel = createTrainingProcessViewModel;
             _createWorkProcessViewModel = createWorkProcessViewModel;
-            _createCVStatusViewModel = createCVStatusViewModel;
+            _createRemunerativeViewModel = createRemunerativeViewModel;
+            _createDisciplineViewModel = createDisciplineViewModel;
+
             _createChildContentViewModel = createChildContentViewModel;
             _createStaffCVViewModel = createStaffCVViewModel;
             _createAddCVViewModel = createAddCVViewModel;
@@ -73,8 +84,11 @@ namespace HRM.UI.Factories
                     return _createTrainingProcessViewModel();
                 case EViewTypes.WorkProcess:
                     return _createWorkProcessViewModel();
-                case EViewTypes.CVStatus:
-                    return _createCVStatusViewModel();
+                case EViewTypes.Remunerative:
+                    return _createRemunerativeViewModel();
+                case EViewTypes.Discipline:
+                    return _createDisciplineViewModel();
+
                 case EViewTypes.ChildContent:
                     return _createChildContentViewModel();
                 case EViewTypes.StaffCV:
