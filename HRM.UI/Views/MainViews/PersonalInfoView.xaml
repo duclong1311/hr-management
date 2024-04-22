@@ -39,11 +39,11 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <Image Style="{StaticResource Image_Style}"
-                       Source="{Binding }" />
+                       Source="{Binding ImageSource}" />
                 <Button Content="Upload Image"
                         Style="{StaticResource Button_Style}"
                         Height="35"
-                        Command="{Binding }" />
+                        Command="{Binding UploadImageCommand}" />
             </StackPanel>
         </Grid>
 
@@ -84,8 +84,6 @@
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Cấp ngày: "
                        Style="{StaticResource Label_Style}" />
-                <Label Content=" "
-                       Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
                        Style="{StaticResource Label_Style}" />
             </StackPanel>
@@ -107,7 +105,8 @@
                          x:Name="tb_NguyenQuan" />
 
                 <ComboBox Style="{StaticResource Combobox_Style}"
-                          Text="{Binding DanToc}"
+                          ItemsSource="{Binding EthnicityData}"
+                          SelectedItem="{Binding DanToc}"
                           x:Name="tb_DanToc" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
@@ -143,12 +142,16 @@
                                  FontSize="14"
                                  VerticalAlignment="Center"
                                  Margin="10"
-                                 Width="50" />
+                                 Width="50"
+                                 CommandParameter="Male"
+                                 Command="{Binding SelectGenderCommand}" />
                     <RadioButton GroupName="CharacterGender"
                                  Content="Nữ"
                                  FontSize="14"
                                  VerticalAlignment="Center"
-                                 Margin="10" />
+                                 Margin="10"
+                                 CommandParameter="Female"
+                                 Command="{Binding SelectGenderCommand}" />
                 </StackPanel>
 
                 <!--<TextBox Style="{StaticResource TextBox_Style}"
@@ -165,7 +168,6 @@
 
                 <DatePicker Style="{StaticResource DatePicker_Style}"
                             SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
 
 
                 <TextBox Style="{StaticResource TextBox_Style}"
