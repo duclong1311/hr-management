@@ -63,9 +63,10 @@
             <StackPanel>
                 <TextBox x:Name="tb_TuThangNamDenThangNam"
                          Style="{StaticResource TextBox_Style}"
-                         Text="{Binding TuNgayDenNgay}"/>
+                         Text="{Binding TuNgayDenNgay}" />
                 <ComboBox x:Name="tb_HinhThucDaoTao"
-                         Text="{Binding HinhThucDaoTao}"
+                          ItemsSource="{Binding HinhThucDaoTaoData}"
+                          SelectedItem="{Binding HinhThucDaoTao}"
                           Style="{StaticResource ComboBox_Style}" />
             </StackPanel>
         </Grid>
@@ -73,11 +74,10 @@
         <Grid Grid.Column="3"
               Grid.Row="1">
             <StackPanel>
-                <TextBox x:Name="tb_TenCoSoDaoTao"
-                         Style="{StaticResource TextBox_Style}"
+                <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NoiDaoTao}" />
-                <ComboBox x:Name="tb_VanBangChungChi"
-                         Text="{Binding VanBangChungChi}"
+                <ComboBox ItemsSource="{Binding VanBangChungChiData}"
+                          SelectedItem="{Binding VanBangChungChi}"
                           Style="{StaticResource ComboBox_Style}" />
             </StackPanel>
         </Grid>

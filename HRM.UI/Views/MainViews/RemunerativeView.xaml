@@ -62,7 +62,8 @@
                   Grid.Row="1">
                 <StackPanel>
                     <ComboBox Style="{StaticResource ComboBox_Style}"
-                              Text="{Binding CapKhenThuong}" />
+                              SelectedItem="{Binding CapKhenThuong}"
+                              ItemsSource="{Binding CapKhenThuongData}"/>
                     <TextBox Text="{Binding ThamQuyen}"
                              Style="{StaticResource TextBox_Style}" />
                     <DatePicker Text="{Binding ThoiGianBanHanh}"

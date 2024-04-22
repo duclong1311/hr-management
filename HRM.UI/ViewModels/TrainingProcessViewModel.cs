@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using System.Linq.Expressions;
 using HRM.UI.Commands;
+using System.Collections.ObjectModel;
 
 namespace HRM.UI.ViewModels
 {
@@ -20,6 +21,8 @@ namespace HRM.UI.ViewModels
         private IUnitOfWork _unitOfWork;
         private IRepository<QuaTrinhDaoTao> _quaTrinhDaoTaoRepository;
         public ICommand AddCommand { get; set; }
+        public ObservableCollection<string> HinhThucDaoTaoData { get; set; }
+        public ObservableCollection<string> VanBangChungChiData { get; set; }
 
         private string _tuNgayDenNgay;
         public string TuNgayDenNgay
@@ -54,11 +57,27 @@ namespace HRM.UI.ViewModels
             get { return _vanBangChungChi; }
             set { _vanBangChungChi = value; OnPropertyChanged(); }
         }
+        private void LoadComboBoxData()
+        {
+            HinhThucDaoTaoData = new ObservableCollection<string>();
+            HinhThucDaoTaoData.Add("Chính quy");
+            HinhThucDaoTaoData.Add("Không chính quy");
+            HinhThucDaoTaoData.Add("Đào tạo từ xa");
+
+            VanBangChungChiData = new ObservableCollection<string>();
+            VanBangChungChiData.Add("Cử nhân");
+            VanBangChungChiData.Add("Kỹ sư");
+            VanBangChungChiData.Add("Thạc sĩ");
+            VanBangChungChiData.Add("Tiến sĩ");
+
+        }
 
         public TrainingProcessViewModel(IRepository<QuaTrinhDaoTao> QuaTrinhRepository, IUnitOfWork unitOfWork)
         {
             _quaTrinhDaoTaoRepository = QuaTrinhRepository;
             _unitOfWork = unitOfWork;
+
+            LoadComboBoxData();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
