@@ -398,5 +398,3 @@ FodyWeavers.xsd
 *.sln.iml
 HRM.DbMigrator/appsettings.json
 \!appsettings.json
-/!appsettings.json
-!appsettings.json
