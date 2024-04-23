@@ -23,6 +23,7 @@ namespace HRM.UI.ViewModels
         public ICommand StaffListCommand { get; set; }
         public ICommand StaffCVCommand { get; set; }
         public ICommand AddCVCommand { get; set; }
+        public ICommand TrackingCommand { get; set; }  
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -52,6 +53,10 @@ namespace HRM.UI.ViewModels
             AddCVCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+            });
+            TrackingCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Tracking);
             });
 
 

@@ -15,13 +15,15 @@ namespace HRM.UI.Defines
         FamilyInfor,
         TrainingProcess,
         WorkProcess,
-        // ----------------------Khen thuong, ky luat----------------------
+        // ---------------------- Khen thưởng, kỷ luật ----------------------
         Remunerative,
         Discipline,
         // --------------------------------------------
         ListStaff,
         StaffCV,
         AddCV,
-        ChildContent
+        ChildContent,
+        // ----------------------- Nhập công -----------------------
+        Tracking
     }
 }

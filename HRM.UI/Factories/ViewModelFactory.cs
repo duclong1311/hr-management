@@ -28,6 +28,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<ChildContentViewModel> _createChildContentViewModel;
         private readonly CreateViewModel<StaffCVViewModel> _createStaffCVViewModel;
         private readonly CreateViewModel<AddCVViewModel> _createAddCVViewModel;
+        private readonly CreateViewModel<TrackingViewModel> _createTrackingViewModel;
 
 
         public ViewModelFactory(CreateViewModel<LoginViewModel> createLoginViewModel,
@@ -45,7 +46,9 @@ namespace HRM.UI.Factories
 
             CreateViewModel<ChildContentViewModel> createChildContentViewModel,
             CreateViewModel<StaffCVViewModel> createStaffCVViewModel,
-            CreateViewModel<AddCVViewModel> createAddCVViewModel)
+            CreateViewModel<AddCVViewModel> createAddCVViewModel,
+
+            CreateViewModel<TrackingViewModel> createTrackingViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
@@ -63,6 +66,8 @@ namespace HRM.UI.Factories
             _createChildContentViewModel = createChildContentViewModel;
             _createStaffCVViewModel = createStaffCVViewModel;
             _createAddCVViewModel = createAddCVViewModel;
+
+            _createTrackingViewModel = createTrackingViewModel; 
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -95,6 +100,9 @@ namespace HRM.UI.Factories
                     return _createStaffCVViewModel();
                 case EViewTypes.AddCV:
                     return _createAddCVViewModel();
+                    // Nhập chấm công
+                case EViewTypes.Tracking:
+                    return _createTrackingViewModel();
                 default:
                     throw new ArgumentException();
             }
