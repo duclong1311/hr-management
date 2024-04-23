@@ -11,7 +11,6 @@ namespace HRM.Domain.Models
     {
         public string TuNgayDenNgay { get; set; }
         public string NoiDaoTao { get; set; }
-        public string NganhHoc { get; set; }   
         public string HinhThucDaoTao { get; set; }
         public string VanBangChungChi { get; set; }
     }
