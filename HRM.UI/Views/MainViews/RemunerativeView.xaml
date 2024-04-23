@@ -64,7 +64,7 @@
                     <ComboBox Style="{StaticResource ComboBox_Style}"
                               SelectedItem="{Binding CapKhenThuong}"
                               ItemsSource="{Binding CapKhenThuongData}"/>
-                    <TextBox Text="{Binding ThamQuyen}"
+                    <TextBox Text="{Binding ThamQuyenKhenThuong}"
                              Style="{StaticResource TextBox_Style}" />
                     <DatePicker Text="{Binding ThoiGianBanHanh}"
                                 Style="{StaticResource DatePicker_Style}" />

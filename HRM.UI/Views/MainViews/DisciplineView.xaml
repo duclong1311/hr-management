@@ -33,7 +33,7 @@
                   Grid.ColumnSpan="5">
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="24"
-                           Margin="0,20,0,20">THÔNG TIN GIA ĐÌNH</TextBlock>
+                           Margin="0,20,0,20">KỶ LUẬT</TextBlock>
             </Grid>
             <!--Label-->
             <Grid Grid.Row="1"
@@ -62,8 +62,9 @@
                   Grid.Row="1">
                 <StackPanel>
                     <ComboBox Style="{StaticResource ComboBox_Style}"
-                              Text="{Binding CapKyLuat}" />
-                    <TextBox Text="{Binding ThamQuyen}"
+                              SelectedItem="{Binding CapKyLuat}"
+                              ItemsSource="{Binding CapKyLuatData}" />
+                    <TextBox Text="{Binding ThamQuyenKyLuat}"
                              Style="{StaticResource TextBox_Style}" />
                     <DatePicker Text="{Binding ThoiGianBanHanh}"
                                 Style="{StaticResource DatePicker_Style}" />

@@ -138,13 +138,5 @@ namespace HRM.UI.ViewModels
             });
         }
     }
-        //HoTenAnhChi = hoTenAnhChi;
-        //    HoTenAnhChi = hoTenAnhChi;
-        //    NamSinh = namSinh;
-        //    NamSinh = namSinh;
-        //    NgheNghiep = ngheNghiep;
-        //    NgheNghiep = ngheNghiep;
-        //    CoQuanCongTac = coQuanCongTac;
-        //    CoQuanCongTac = coQuanCongTac;
 }
 
