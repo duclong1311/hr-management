@@ -106,7 +106,6 @@ namespace HRM.UI.ViewModels
                 {
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiDaoTao = NoiDaoTao,
-                    NganhHoc = NganhHoc,
                     HinhThucDaoTao = HinhThucDaoTao,
                     VanBangChungChi = VanBangChungChi,
                 };
