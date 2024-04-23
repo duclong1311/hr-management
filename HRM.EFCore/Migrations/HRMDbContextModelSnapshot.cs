@@ -417,8 +417,8 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("NamSinh")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("NamSinh")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NgheNghiep")
                         .IsRequired()

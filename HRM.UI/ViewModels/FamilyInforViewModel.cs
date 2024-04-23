@@ -11,17 +11,52 @@ using HRM.Core.Repositories;
 using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using HRM.UI.Commands;
+using HRM.UI.Factories;
+using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
     public class FamilyInforViewModel : BaseViewModel
     {
+        private ObservableCollection<QuanHeGiaDinh> _list = new ObservableCollection<QuanHeGiaDinh>();
+        public ObservableCollection<QuanHeGiaDinh> List
+        {
+            get => _list;
+            set
+            {
+                _list = value;
+                OnPropertyChanged();
+            }
+        }
         private IUnitOfWork _unitOfWork;
 
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ObservableCollection<string> TinhThanhData { get; set; }
         public ObservableCollection<string> MoiQuanHeData { get; set; }
+
+        private QuanHeGiaDinh _selectedItem;
+        public QuanHeGiaDinh SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                {
+                    MoiQuanHe = SelectedItem.MoiQuanHe;
+                    HoVaTen = SelectedItem.HoVaTen;
+                    NamSinh = SelectedItem.NamSinh;
+                    TinhThanh = TinhThanh;
+                    NgheNghiep = NgheNghiep;
+                    DonViCongTac = DonViCongTac;
+                    ChucVu = ChucVu;
+                }
+                OnPropertyChanged();
+            }
+        }
 
         private string _moiQuanHe;
         public string MoiQuanHe
@@ -37,13 +72,16 @@ namespace HRM.UI.ViewModels
             set { _hoVaTen = value; OnPropertyChanged(); }
         }
 
-        private DateOnly _namSinh;
-        public DateOnly NamSinh
+        private DateTime _bidDate = DateTime.Now;
+        public DateTime NamSinh
         {
-            get { return _namSinh; }
-            set { _namSinh = value; OnPropertyChanged(); }
+            get { return _bidDate; }
+            set
+            {
+                _bidDate = value.Date;
+                OnPropertyChanged();
+            }
         }
-
         private string _queQuan;
         public string TinhThanh
         {
@@ -91,16 +129,21 @@ namespace HRM.UI.ViewModels
             MoiQuanHeData.Add("Con");
 
         }
-        public FamilyInforViewModel(IUnitOfWork unitOfWork, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository)
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
+        public FamilyInforViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            _viewModelFactory = viewModelFactory;
+            _mainContentStore = mainContentStore;
             _quanHeGiaDinhRepository = quanHeGiaDinhRepository;
-
+            _unitOfWork = unitOfWork;
             LoadComboBoxData();
+            LoadData();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-
+                if (string.IsNullOrEmpty(HoVaTen))
+                    return false;
                 return true;
             }, async (p) =>
 
@@ -120,15 +163,17 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     QuanHeGiaDinh = await _quanHeGiaDinhRepository.AddAsync(QuanHeGiaDinh);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
                     if (QuanHeGiaDinh != null)
                     {
                         MessageBox.Show("Thêm thành công");
+                        LoadData();
                     }
                     else
                     {
                         MessageBox.Show("Lỗi hệ thống");
                     }
-                    await _unitOfWork.CommitAsync();
 
                 }
                 catch (Exception ex)
@@ -136,6 +181,38 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.RollbackAsync();
                 }
             });
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var QuanHeGiaDinh = await _quanHeGiaDinhRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    await _quanHeGiaDinhRepository.DeleteAsync(QuanHeGiaDinh);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
+
+
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            }
+            );
+        }
+        private void LoadData()
+        {
+            List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository.AsQueryable().ToList());
+            /*            if (!String.IsNullOrWhiteSpace(Filter))
+                        {
+                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+                        }*/
         }
     }
 }

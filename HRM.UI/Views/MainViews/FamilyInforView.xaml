@@ -16,6 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -78,8 +79,7 @@
                           SelectedItem="{Binding MoiQuanHe}" />
                 <TextBox Text="{Binding HoVaTen}"
                          Style="{StaticResource TextBox_Style}" />
-                <DatePicker Text="{Binding NamSinh}"
-                            Style="{StaticResource DatePicker_Style}" />
+                <DatePicker SelectedDate="{Binding Path=BidDate, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
                 <TextBox Text="{Binding NoiO}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox Text="{Binding NgheNghiep}"
@@ -119,7 +119,7 @@
                         Command="{Binding }" />
                 <Button Content="Xóa thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding DeleteCommand}" />
             </StackPanel>
         </Grid>
 
@@ -129,41 +129,44 @@
             <ScrollViewer HorizontalScrollBarVisibility="Visible"
                           VerticalScrollBarVisibility="Hidden">
                 <ListView Margin="10"
-                          Name="ListStaffView_Pick">
+                          Name="ListStaffView_Pick"
+                          Width="936"
+                          ItemsSource="{Binding List}"
+                          SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mối quan hệ"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding MoiQuanHe}" />
                             <GridViewColumn Header="Họ và tên"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding HoVaTen}" />
                             <GridViewColumn Header="Năm sinh"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="70"
-                                            DisplayMemberBinding="{Binding }" />
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding NamSinh, StringFormat='dd/MM/yyyy '}" />
                             <GridViewColumn Header="Nơi ở"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="70"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding NoiO}" />
                             <GridViewColumn Header="Nghề nghiệp"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="145"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding NgheNghiep}" />
                             <GridViewColumn Header="Đơn vị công tác"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="145"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding DonViCongTac}" />
                             <GridViewColumn Header="Chức vụ"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="145"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ChucVu}" />
                             <GridViewColumn Header="Quê quán(Tỉnh/Thành)"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="145"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding QueQuan}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

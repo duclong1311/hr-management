@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240423061502_update")]
-    partial class update
+    [Migration("20240423095010_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -416,8 +416,8 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("NamSinh")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("NamSinh")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NgheNghiep")
                         .IsRequired()

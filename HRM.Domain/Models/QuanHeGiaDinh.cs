@@ -11,7 +11,7 @@ namespace HRM.Domain.Models
     {
         public string MoiQuanHe { get; set; }
         public string HoVaTen { get; set; } 
-        public DateOnly NamSinh { get; set; }
+        public DateTime NamSinh { get; set; }
         public string QueQuan { get; set; }
         public string NgheNghiep { get; set; }  
         public string DonViCongTac { get; set; }
