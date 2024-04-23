@@ -11,6 +11,5 @@ namespace HRM.Domain.Models
     {
         public string TenChucVu {  get; set; }
         public double PhuCapChucVu { get; set;}
-        
     }
 }
