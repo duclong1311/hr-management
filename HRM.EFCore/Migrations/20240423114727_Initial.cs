@@ -85,7 +85,8 @@ namespace HRM.EFCore.Migrations
                     ThamQuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThoiGianBanHanh = table.Column<DateOnly>(type: "date", nullable: false)
+                    ThoiGianBanHanh = table.Column<DateOnly>(type: "date", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

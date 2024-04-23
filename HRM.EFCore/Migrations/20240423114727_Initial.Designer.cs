@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240423095010_Initial")]
+    [Migration("20240423114727_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -196,6 +196,10 @@ namespace HRM.EFCore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CapKhenThuong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -54,7 +54,6 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<CreateViewModel<ChildContentViewModel>>(service => () => service.GetRequiredService<ChildContentViewModel>());
                 services.AddScoped<CreateViewModel<StaffCVViewModel>>(service => () => service.GetRequiredService<StaffCVViewModel>());
                 services.AddScoped<CreateViewModel<AddCVViewModel>>(service => () => service.GetRequiredService<AddCVViewModel>());
-                services.AddScoped<CreateViewModel<FamilyInforViewModel>>(service => () => service.GetRequiredService<FamilyInforViewModel>());
                 
                 services.AddScoped<IViewModelFactory, ViewModelFactory>();
             });

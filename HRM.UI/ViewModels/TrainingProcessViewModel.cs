@@ -106,6 +106,7 @@ namespace HRM.UI.ViewModels
                 {
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiDaoTao = NoiDaoTao,
+                    NganhHoc = NganhHoc,
                     HinhThucDaoTao = HinhThucDaoTao,
                     VanBangChungChi = VanBangChungChi,
                 };
@@ -113,12 +114,17 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     QuaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AddAsync(QuaTrinhDaoTao);
-                    await _unitOfWork.CommitAsync();
                     LoadData();
                     if (QuaTrinhDaoTao != null)
+                    {
                         MessageBox.Show("Thêm thành công");
+                        LoadData();
+
+                    }
+
                     else
                         MessageBox.Show("Lỗi hệ thống");
+                    await _unitOfWork.CommitAsync();
                 }
                 catch (Exception e)
                 {

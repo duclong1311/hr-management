@@ -77,16 +77,18 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     QuaTrinhCongTac = await _quaTrinhCongTacRepository.AddAsync(QuaTrinhCongTac);
-                    await _unitOfWork.CommitAsync();
                     LoadData();
                     if (QuaTrinhCongTac != null)
                     {
                         MessageBox.Show("Thêm thành công");
+                        LoadData();
+
                     }
                     else
                     {
                         MessageBox.Show("Lỗi hệ thống");
                     }
+                    await _unitOfWork.CommitAsync();
 
                 }
                 catch (Exception ex)
