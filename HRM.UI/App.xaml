@@ -47,5 +47,8 @@
         <DataTemplate DataType="{x:Type vm:StaffCVViewModel}">
             <view:MiniListStaffView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TrackingViewModel}">
+            <view:TrackingView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

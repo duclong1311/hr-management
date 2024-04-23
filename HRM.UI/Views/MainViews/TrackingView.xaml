@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="HRM.UI.Views.TrackingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="640" d:DesignWidth="820">
+    <Grid>
+        <StackPanel>
+            <Button Height="50" Content="Import Data" Command="{Binding ImportDataCommand}"/>
+            <DataGrid ItemsSource="{Binding BangCongDataList}"
+                      AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã nhân viên"
+                                        Binding="{Binding }" />
+                    <DataGridTextColumn Header="Họ và tên"
+                                        Binding="{Binding }" />
+                    <DataGridTextColumn Header="Số công thường"
+                                        Binding="{Binding TongSoNgayCong}"/>
+                    <DataGridTextColumn Header="Số công CN"
+                                        Binding="{Binding TongSoNgayCongCN}" />
+                    <DataGridTextColumn Header="Số công ngày lễ"
+                                        Binding="{Binding TongSoNgayCongNgayLe}" />
+                    <DataGridTextColumn Header="Số giờ tăng ca"
+                                        Binding="{Binding TongTimeOT}" />
+                    <DataGridTextColumn Header="Số ngày nghỉ phép"
+                                        Binding="{Binding NgayNghiPhep}" />
+                    <DataGridTextColumn Header="Đi muộn về sớm"
+                                        Binding="{Binding DiMuonVeSom}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
