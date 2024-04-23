@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRM.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace HRM.UI.Views
         public RemunerativeView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as RemunerativeViewModel).Load();
         }
     }
 }

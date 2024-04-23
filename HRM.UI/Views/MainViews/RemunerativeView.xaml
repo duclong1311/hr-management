@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
              d:DesignHeight="640" d:DesignWidth="820">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -104,29 +105,31 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Visible"
                               VerticalScrollBarVisibility="Hidden">
                     <ListView Margin="10"
-                              Name="ListStaffView_Pick">
+                              Name="ListStaffView_Pick"
+                              SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Cấp khen thưởng"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding CapKhenThuong}" />
                                 <GridViewColumn Header="Thẩm quyền khen thưởng"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="200"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding ThamQuyen}" />
                                 <GridViewColumn Header="Nội dung khen thưởng"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding NoiDung}" />
                                 <GridViewColumn Header="Số quyết định"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding SoQuyetDinh}" />
                                 <GridViewColumn Header="Thời gian ban hành"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="140"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding ThoiGianBanHanh}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

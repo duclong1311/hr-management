@@ -40,7 +40,7 @@
             <Button Style="{StaticResource Button_Style}"
                     Content="Kỷ luật"
                     Command="{Binding DisciplineCommand}" />
-            <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien}" />
+            <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
         <ContentControl Grid.Row="1"
                         Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"

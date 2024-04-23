@@ -14,5 +14,6 @@ namespace HRM.Domain.Models
         public string NoiDung { get; set; }
         public string SoQuyetDinh { get; set; } 
         public DateOnly ThoiGianBanHanh { get; set; }
+        public string MaNhanVien {  get; set; }
     }
 }

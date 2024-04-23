@@ -10,7 +10,9 @@ namespace HRM.UI.States.Users
     public interface IUserStore
     {
         User CurrentUser { get; set; }
+        NhanSu CurrentNhanSu { get; set; }
 
         event Action StateChanged;
+        event Action StateChanged1;
     }
 }

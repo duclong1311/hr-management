@@ -9,11 +9,22 @@ using HRM.Domain.Models;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
+using HRM.UI.States.Users;
 
 namespace HRM.UI.ViewModels
 {
     public class RemunerativeViewModel : BaseViewModel
     {
+        private ObservableCollection<KhenThuong> _list = new ObservableCollection<KhenThuong>();
+        public ObservableCollection<KhenThuong> List
+        {
+            get => _list;
+            set
+            {
+                _list = value;
+                OnPropertyChanged();
+            }
+        }
         private IUnitOfWork _unitOfWork;
 
         private IRepository<KhenThuong> _khenThuongRespository;
@@ -81,13 +92,15 @@ namespace HRM.UI.ViewModels
             CapKhenThuongData.Add("Cấp 2");
             CapKhenThuongData.Add("Cấp 2");
         }
-
-        public RemunerativeViewModel(IUnitOfWork unitOfWork, IRepository<KhenThuong> KhenThuongRepository)
+        private readonly IUserStore _userStore;
+        public RemunerativeViewModel(IUserStore userStore, IUnitOfWork unitOfWork, IRepository<KhenThuong> KhenThuongRepository)
         {
             _unitOfWork = unitOfWork;
             _khenThuongRespository = KhenThuongRepository;
+            _userStore = userStore;
 
             LoadComboBoxData();
+            Load();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -101,6 +114,7 @@ namespace HRM.UI.ViewModels
                     ThoiGianBanHanh = ThoiGianBanHanh,
                     NoiDung = NoiDung,
                     SoQuyetDinh = SoQuyetDinh,
+                    MaNhanVien = _userStore.CurrentNhanSu.MaNhanVien
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
@@ -121,7 +135,13 @@ namespace HRM.UI.ViewModels
                 {
                     await _unitOfWork.RollbackAsync();
                 }
+                Load();
+                LoadComboBoxData();
             });
+        }
+        public void Load()
+        {
+            List = new ObservableCollection<KhenThuong>(_khenThuongRespository.AsQueryable().Where(x=> x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
         }
     }
 }

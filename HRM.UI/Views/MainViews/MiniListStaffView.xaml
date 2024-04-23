@@ -51,8 +51,8 @@
                               Name="ListStaffView_Pick"
                               HorizontalContentAlignment="Stretch"
                               VerticalContentAlignment="Stretch"
-                              ItemsSource="{Binding List}"
-                              SelectedItem="{Binding SelectedItem}">
+                              ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã nhân viên"

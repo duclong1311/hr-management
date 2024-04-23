@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using HRM.UI.ViewModels;
 using HRM.UI.Factories;
+using HRM.UI.Views;
 
 
 namespace HRM.UI.HostBuilders
@@ -33,6 +34,7 @@ namespace HRM.UI.HostBuilders
                 
                 services.AddScoped<ListStaffViewModel>();
                 services.AddScoped<ChildContentViewModel>();
+                services.AddScoped<ChildContentView>();
                 services.AddScoped<StaffCVViewModel>();
                 services.AddScoped<AddCVViewModel>();
                 

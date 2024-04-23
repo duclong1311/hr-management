@@ -4,6 +4,7 @@ using HRM.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    partial class HRMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240423092751_update1")]
+    partial class update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,6 +203,9 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NhanSuId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NoiDung")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -216,6 +222,8 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NhanSuId");
 
                     b.ToTable("KhenThuongs");
                 });
@@ -490,6 +498,17 @@ namespace HRM.EFCore.Migrations
                             Name = "admin",
                             Password = "??_?y??w+???l\0?_?n5?rY?????	?*"
                         });
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.KhenThuong", b =>
+                {
+                    b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
+                        .WithMany()
+                        .HasForeignKey("NhanSuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NhanSu");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.NhanSu", b =>

@@ -2,6 +2,7 @@
 using HRM.Domain.Models;
 using HRM.UI.Commands;
 using HRM.UI.Factories;
+using HRM.UI.States.Authenticator;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace HRM.UI.ViewModels
@@ -33,7 +35,7 @@ namespace HRM.UI.ViewModels
             set
             {
                 _selectedItem = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
         private string _filter;
@@ -50,22 +52,27 @@ namespace HRM.UI.ViewModels
         private readonly IRepository<NhanSu> _repository;
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
+        private readonly IAuthenticator _authenticator;
         public ICommand StaffViewCommand { get; set; }
         //public ICommand AddCVCommand { get; set; }
-        public StaffCVViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository)
+        public StaffCVViewModel(IAuthenticator authenticator, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository)
         {
+            _authenticator = authenticator;
             _repository = repository;
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
-            StaffViewCommand = new RelayCommand<object>(p => true, p =>
-            {
-                mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-            });
+            LoadData();
+
+            /*            StaffViewCommand = new RelayCommand<object>(p => true, async p =>
+                        {
+                            mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+                            await _authenticator.LoginNhanSu(SelectedItem.MaNhanVien);
+                        });*/
+            StaffViewCommand = new StaffViewCommand(authenticator,this, mainContentStore, viewModelFactory);
             //AddCVCommand = new RelayCommand<object>(p => true, p => 
             //{
             //    mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
             //});
-            //LoadData();
 
         }
         private void LoadData()

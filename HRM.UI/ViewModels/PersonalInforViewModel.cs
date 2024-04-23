@@ -133,6 +133,13 @@ namespace HRM.UI.ViewModels
             get { return _noiKetNapDang; }
             set { _noiKetNapDang = value; OnPropertyChanged(); }
         }
+        private string _maNhanVien;
+
+        public string MaNhanVien
+        {
+            get { return _maNhanVien; }
+            set { _maNhanVien = value; OnPropertyChanged(); }
+        }
 
         //Image
         private ImageSource _imageSource;
@@ -218,6 +225,7 @@ namespace HRM.UI.ViewModels
             {
                 var NhanSu = new NhanSu()
                 {
+                    MaNhanVien = MaNhanVien,
                     Anh = ImageSource.ToString(),
                     HoTen = HoTen,
                     GioiTinh = GioiTinh,

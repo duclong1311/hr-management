@@ -51,6 +51,8 @@
         <Grid Grid.Row="1"
               Grid.Column="1">
             <StackPanel>
+                <Label Content="Mã nhân viên: "
+                       Style="{StaticResource Label_Style}" />
                 <Label Content="Họ và tên: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Sinh ngày: "
@@ -92,7 +94,14 @@
         <!--TextBox-->
         <Grid Grid.Row="1"
               Grid.Column="2">
-            <StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="79*" />
+                <RowDefinition Height="21*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.RowSpan="2">
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding MaNhanVien}"
+                         x:Name="tb_Manv" />
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding HoTen}"
                          x:Name="tb_HoTen" />
