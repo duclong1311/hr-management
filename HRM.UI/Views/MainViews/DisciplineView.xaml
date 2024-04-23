@@ -104,29 +104,30 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Visible"
                               VerticalScrollBarVisibility="Hidden">
                     <ListView Margin="10"
-                              Name="ListStaffView_Pick">
+                              Name="ListStaffView_Pick"
+                              ItemsSource="{Binding List}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Cấp kỷ luật"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding CapKyLuat}" />
                                 <GridViewColumn Header="Thẩm quyền kỷ luật"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="200"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding ThamQuyen}" />
                                 <GridViewColumn Header="Nội dung kỷ luật"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding NoiDung}" />
                                 <GridViewColumn Header="Số quyết định"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding SoQuyetDinh}" />
                                 <GridViewColumn Header="Thời gian ban hành"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="140"
-                                                DisplayMemberBinding="{Binding }" />
+                                                DisplayMemberBinding="{Binding ThoiGianBanHanh}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

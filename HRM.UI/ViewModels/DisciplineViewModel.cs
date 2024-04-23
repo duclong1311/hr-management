@@ -10,13 +10,24 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows;
+using HRM.UI.Factories;
+using HRM.UI.Stores;
 
 namespace HRM.UI.ViewModels
 {
     public class DisciplineViewModel : BaseViewModel
     {
+        private ObservableCollection<KyLuat> _list = new ObservableCollection<KyLuat>();
+        public ObservableCollection<KyLuat> List
+        {
+            get => _list;
+            set
+            {
+                _list = value;
+                OnPropertyChanged();
+            }
+        }
         private IUnitOfWork _unitOfWork;
-
         private IRepository<KyLuat> _kyLuatRespository;
         public ICommand AddCommand { get; set; }
         public ObservableCollection<string> CapKyLuatData { get; set; }
@@ -82,13 +93,16 @@ namespace HRM.UI.ViewModels
             CapKyLuatData.Add("Cấp 2");
             CapKyLuatData.Add("Cấp 2");
         }
-
-        public DisciplineViewModel(IUnitOfWork unitOfWork, IRepository<KyLuat> KyLuatRepository)
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
+        public DisciplineViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<KyLuat> KyLuatRepository, IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            _viewModelFactory = viewModelFactory;
+            _mainContentStore = mainContentStore;
             _kyLuatRespository = KyLuatRepository;
-
+            _unitOfWork = unitOfWork;
             LoadComboBoxData();
+            LoadData();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -107,15 +121,17 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     KyLuat = await _kyLuatRespository.AddAsync(KyLuat);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
                     if (KyLuat != null)
                     {
                         MessageBox.Show("Thêm thành công");
+                        LoadData();
                     }
                     else
                     {
                         MessageBox.Show("Lỗi hệ thống");
                     }
-                    await _unitOfWork.CommitAsync();
 
                 }
                 catch (Exception ex)
@@ -123,6 +139,14 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.RollbackAsync();
                 }
             });
+        }
+        private void LoadData()
+        {
+            List = new ObservableCollection<KyLuat>(_kyLuatRespository.AsQueryable().ToList());
+            /*            if (!String.IsNullOrWhiteSpace(Filter))
+                        {
+                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+                        }*/
         }
     }
 }

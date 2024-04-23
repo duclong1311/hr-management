@@ -13,12 +13,25 @@ using System.Windows;
 using System.Linq.Expressions;
 using HRM.UI.Commands;
 using System.Collections.ObjectModel;
+using HRM.UI.Factories;
+using HRM.UI.Stores;
 
 namespace HRM.UI.ViewModels
 {
     public class TrainingProcessViewModel : BaseViewModel
     {
+        private ObservableCollection<QuaTrinhDaoTao> _list = new ObservableCollection<QuaTrinhDaoTao>();
+        public ObservableCollection<QuaTrinhDaoTao> List
+        {
+            get => _list;
+            set
+            {
+                _list = value;
+                OnPropertyChanged();
+            }
+        }
         private IUnitOfWork _unitOfWork;
+
         private IRepository<QuaTrinhDaoTao> _quaTrinhDaoTaoRepository;
         public ICommand AddCommand { get; set; }
         public ObservableCollection<string> HinhThucDaoTaoData { get; set; }
@@ -72,12 +85,16 @@ namespace HRM.UI.ViewModels
 
         }
 
-        public TrainingProcessViewModel(IRepository<QuaTrinhDaoTao> QuaTrinhRepository, IUnitOfWork unitOfWork)
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
+        public TrainingProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork)
         {
-            _quaTrinhDaoTaoRepository = QuaTrinhRepository;
+            _viewModelFactory = viewModelFactory;
+            _mainContentStore = mainContentStore;
+            _quaTrinhDaoTaoRepository = quaTrinhDaoTaoRepository;
             _unitOfWork = unitOfWork;
-
             LoadComboBoxData();
+            LoadData();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -90,18 +107,18 @@ namespace HRM.UI.ViewModels
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiDaoTao = NoiDaoTao,
                     HinhThucDaoTao = HinhThucDaoTao,
-                    NganhHoc = NganhHoc,
                     VanBangChungChi = VanBangChungChi,
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
                     QuaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AddAsync(QuaTrinhDaoTao);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
                     if (QuaTrinhDaoTao != null)
                         MessageBox.Show("Thêm thành công");
                     else
                         MessageBox.Show("Lỗi hệ thống");
-                    await _unitOfWork.CommitAsync();
                 }
                 catch (Exception e)
                 {
@@ -109,6 +126,14 @@ namespace HRM.UI.ViewModels
 
                 }
             });
+        }
+        private void LoadData()
+        {
+            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().ToList());
+            /*            if (!String.IsNullOrWhiteSpace(Filter))
+                        {
+                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+                        }*/
         }
     }
 }

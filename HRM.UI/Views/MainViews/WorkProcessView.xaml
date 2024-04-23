@@ -99,21 +99,22 @@
             <Grid Grid.Row="3"
                   Grid.ColumnSpan="4">
                 <ListView Margin="10"
-                          Name="ListStaffView_Pick">
+                          Name="ListStaffView_Pick"
+                          ItemsSource="{Binding List}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
                                             Header="Từ tháng năm đến tháng năm"
                                             Width="200"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding TuNgayDenNgay}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
                                             Header="Đơn vị công tác"
                                             Width="200"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding NoiCongTac}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource Header_style}"
                                             Header="Chức vụ"
                                             Width="150"
-                                            DisplayMemberBinding="{Binding }" />
+                                            DisplayMemberBinding="{Binding ChucVu}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
