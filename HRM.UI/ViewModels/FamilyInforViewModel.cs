@@ -19,6 +19,9 @@ namespace HRM.UI.ViewModels
 {
     public class FamilyInforViewModel : BaseViewModel
     {
+        private readonly ChildContentStore _childContentStore;
+        public ICommand TrainingProcessCommand { get; set; }
+
         private ObservableCollection<QuanHeGiaDinh> _list = new ObservableCollection<QuanHeGiaDinh>();
         public ObservableCollection<QuanHeGiaDinh> List
         {
@@ -49,10 +52,11 @@ namespace HRM.UI.ViewModels
                     MoiQuanHe = SelectedItem.MoiQuanHe;
                     HoVaTen = SelectedItem.HoVaTen;
                     NamSinh = SelectedItem.NamSinh;
-                    TinhThanh = TinhThanh;
-                    NgheNghiep = NgheNghiep;
-                    DonViCongTac = DonViCongTac;
-                    ChucVu = ChucVu;
+                    TinhThanh = SelectedItem.QueQuan;
+                    NoiO = SelectedItem.NoiO;
+                    NgheNghiep = SelectedItem.NgheNghiep;
+                    DonViCongTac = SelectedItem.DonViCongTac;
+                    ChucVu = SelectedItem.ChucVu;
                 }
                 OnPropertyChanged();
             }
@@ -72,13 +76,13 @@ namespace HRM.UI.ViewModels
             set { _hoVaTen = value; OnPropertyChanged(); }
         }
 
-        private DateTime _bidDate = DateTime.Now;
+        private DateTime _namSinh;
         public DateTime NamSinh
         {
-            get { return _bidDate; }
+            get { return _namSinh; }
             set
             {
-                _bidDate = value.Date;
+                _namSinh = value.Date;
                 OnPropertyChanged();
             }
         }
@@ -126,19 +130,27 @@ namespace HRM.UI.ViewModels
             MoiQuanHeData = new ObservableCollection<string>();
             MoiQuanHeData.Add("Cha");
             MoiQuanHeData.Add("Mẹ");
+            MoiQuanHeData.Add("Anh trai");
+            MoiQuanHeData.Add("Em trai");
+            MoiQuanHeData.Add("Chị gái");
+            MoiQuanHeData.Add("Em gái");
             MoiQuanHeData.Add("Con");
-
         }
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
-        public FamilyInforViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork)
+        public FamilyInforViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _quanHeGiaDinhRepository = quanHeGiaDinhRepository;
             _unitOfWork = unitOfWork;
+            _childContentStore = childContentStore;
             LoadComboBoxData();
             LoadData();
+            TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.TrainingProcess);
+            });
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -196,8 +208,6 @@ namespace HRM.UI.ViewModels
                     await _quanHeGiaDinhRepository.DeleteAsync(QuanHeGiaDinh);
                     await _unitOfWork.CommitAsync();
                     LoadData();
-
-
                 }
                 catch (Exception ex)
                 {

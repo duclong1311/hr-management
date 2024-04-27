@@ -8,7 +8,8 @@
              xmlns:viewModels="clr-namespace:HRM.UI.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="810"
-             d:DesignWidth="1060">
+             d:DesignWidth="1060"
+             >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

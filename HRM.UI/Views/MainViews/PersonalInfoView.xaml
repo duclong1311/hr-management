@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
-             d:DesignHeight="640"
+             d:DesignHeight="800"
              d:DesignWidth="820"
              Background="White">
     <UserControl.Resources>
@@ -16,10 +16,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0,0,20,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="500" />
+            <RowDefinition Height="560" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -69,6 +69,13 @@
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Sở thích: "
                        Style="{StaticResource Label_Style}" />
+                <Label Content="STK ngân hàng: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Mã số BHXH: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Mã số thuế: "
+                       Style="{StaticResource Label_Style}" />
+                
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1"
@@ -80,13 +87,21 @@
                        Style="{StaticResource Label_Style}" />-->
                 <Label Content=" "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Tôn giáo: "
+                <Label Content=" "
                        Style="{StaticResource Label_Style}" />
                 <Label Content=" "
                        Style="{StaticResource Label_Style}" />
+                <Label Content="Tôn giáo: "
+                       Style="{StaticResource Label_Style}" />
+
                 <Label Content="Cấp ngày: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
+                       Style="{StaticResource Label_Style}" />
+
+                <Label Content="Chức vụ: "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Bộ phận: "
                        Style="{StaticResource Label_Style}" />
             </StackPanel>
         </Grid>
@@ -134,6 +149,17 @@
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding SoThich}"
                          x:Name="tb_SoThich" />
+
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding STK}" />
+                
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding MaSoBHXH}" />
+
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding MaSoThue}" />
+
+                
             </StackPanel>
         </Grid>
 
@@ -168,20 +194,35 @@
                          Text="{Binding NoiSinh}" />-->
 
                 <TextBlock Style="{StaticResource TextBlock_Style}" />
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
+                <TextBlock Style="{StaticResource TextBlock_Style}" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding TonGiao}"
                          x:Name="tb_TonGiao" />
-                <TextBlock Style="{StaticResource TextBlock_Style}" />
-
 
                 <DatePicker Style="{StaticResource DatePicker_Style}"
                             SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
 
-
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NoiKetNapDang}"
                          x:Name="tb_NoiKetNapDang" />
+
+                <ComboBox x:Name="cbb_BoPhan"
+                          Style="{StaticResource Combobox_Style}"
+                          ItemsSource="{Binding ListBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          DisplayMemberPath="TenBoPhan"
+                          SelectedItem="{Binding SeletedCboBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          SelectedValuePath="Id" />
+
+
+                <ComboBox x:Name="cbb_ChucVu"
+                          Style="{StaticResource Combobox_Style}"
+                          ItemsSource="{Binding ListChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          DisplayMemberPath="TenChucVu"
+                          SelectedItem="{Binding SeletedCboChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          SelectedValuePath="Id" />
+
             </StackPanel>
         </Grid>
 
@@ -190,12 +231,12 @@
               Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Content="Hủy bỏ"
-                        Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
-                <Button Content="Xác nhận"
+                <Button Content="Lưu lại"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding AddCommand}" />
+                <Button Content="Trang tiếp"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding FamilyInforCommand }" />
             </StackPanel>
         </Grid>
     </Grid>

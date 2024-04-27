@@ -33,8 +33,13 @@ namespace HRM.EFCore.Migrations
                     b.Property<float>("DiMuonVeSom")
                         .HasColumnType("real");
 
-                    b.Property<int>("NgayKhongNghiPhep")
-                        .HasColumnType("int");
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NgayNghiPhep")
                         .HasColumnType("int");
@@ -46,6 +51,12 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("TongSoNgayCong")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TongSoNgayCongCN")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TongSoNgayCongNgayLe")
                         .HasColumnType("int");
 
                     b.Property<double>("TongTimeOT")
@@ -269,8 +280,8 @@ namespace HRM.EFCore.Migrations
                     b.Property<string>("CCCD")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("CapNgay")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("CapNgay")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("ChucVuId")
                         .HasColumnType("int");
@@ -284,8 +295,8 @@ namespace HRM.EFCore.Migrations
                     b.Property<string>("HoTen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("KetNapDang")
-                        .HasColumnType("bit");
+                    b.Property<string>("KetNapDang")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("LuongCoBan")
                         .HasColumnType("float");
@@ -299,23 +310,14 @@ namespace HRM.EFCore.Migrations
                     b.Property<string>("MaSoThue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly?>("NgaySinh")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("NgaySinh")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NguyenQuan")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NoiketNapDang")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("PhuCapAnTrua")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhuCapDiLai")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhucLoi")
-                        .HasColumnType("float");
 
                     b.Property<string>("STK")
                         .HasColumnType("nvarchar(max)");

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class hrm : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,12 +20,15 @@ namespace HRM.EFCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThangNam = table.Column<DateOnly>(type: "date", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TongTimeOT = table.Column<double>(type: "float", nullable: false),
                     TongSoNgayCong = table.Column<int>(type: "int", nullable: false),
+                    TongSoNgayCongCN = table.Column<int>(type: "int", nullable: false),
+                    TongSoNgayCongNgayLe = table.Column<int>(type: "int", nullable: false),
                     DiMuonVeSom = table.Column<float>(type: "real", nullable: false),
                     ThuongChuyenCan = table.Column<bool>(type: "bit", nullable: false),
-                    NgayNghiPhep = table.Column<int>(type: "int", nullable: false),
-                    NgayKhongNghiPhep = table.Column<int>(type: "int", nullable: false)
+                    NgayNghiPhep = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,23 +203,20 @@ namespace HRM.EFCore.Migrations
                     MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Anh = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgaySinh = table.Column<DateOnly>(type: "date", nullable: true),
+                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: true),
                     GioiTinh = table.Column<bool>(type: "bit", nullable: true),
                     NguyenQuan = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DanToc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TonGiao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CCCD = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CapNgay = table.Column<DateOnly>(type: "date", nullable: false),
-                    KetNapDang = table.Column<bool>(type: "bit", nullable: true),
+                    CapNgay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    KetNapDang = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NoiketNapDang = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SoThich = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     STK = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaSoBHXH = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaSoThue = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LuongCoBan = table.Column<double>(type: "float", nullable: true),
-                    PhuCapDiLai = table.Column<double>(type: "float", nullable: true),
-                    PhuCapAnTrua = table.Column<double>(type: "float", nullable: true),
-                    PhucLoi = table.Column<double>(type: "float", nullable: true),
                     BoPhanId = table.Column<int>(type: "int", nullable: true),
                     ChucVuId = table.Column<int>(type: "int", nullable: true)
                 },

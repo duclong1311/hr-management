@@ -17,12 +17,12 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="20,0,20,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="60" />
-            <RowDefinition />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="350" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
               Grid.ColumnSpan="5">
             <TextBlock HorizontalAlignment="Center"
                        FontSize="24"
-                       Margin="0,20,0,20">THÔNG TIN GIA ĐÌNH</TextBlock>
+                       Margin="0,20,0,20">QUAN HỆ GIA ĐÌNH</TextBlock>
         </Grid>
         <!--Label-->
         <Grid Grid.Row="1"
@@ -59,10 +59,6 @@
             <StackPanel>
                 <Label Content="Quê quán (Tỉnh/Thành): "
                        Style="{StaticResource Label_Style}" />
-                <Label Content="Quê quán (Quận/Huyện): "
-                       Style="{StaticResource Label_Style}" />
-                <Label Content="Quê quán (Phường/Xã): "
-                       Style="{StaticResource Label_Style}" />
                 <Label Content="Đơn vị công tác: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Chức vụ: "
@@ -79,7 +75,8 @@
                           SelectedItem="{Binding MoiQuanHe}" />
                 <TextBox Text="{Binding HoVaTen}"
                          Style="{StaticResource TextBox_Style}" />
-                <DatePicker SelectedDate="{Binding Path=BidDate, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                <DatePicker SelectedDate="{Binding Path = NamSinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"
+                            Style="{StaticResource DatePicker_Style}" />
                 <TextBox Text="{Binding NoiO}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox Text="{Binding NgheNghiep}"
@@ -93,12 +90,6 @@
                 <ComboBox Style="{StaticResource ComboBox_Style}"
                           ItemsSource="{Binding TinhThanhData}"
                           SelectedItem="{Binding TinhThanh}" />
-                <ComboBox ItemsSource="{Binding QuanHuyenData}"
-                          SelectedItem="{Binding QuanHuyen}"
-                          Style="{StaticResource ComboBox_Style}" />
-                <ComboBox ItemsSource="{Binding PhuongXaData}"
-                          SelectedItem="{Binding PhuongXa}"
-                          Style="{StaticResource ComboBox_Style}" />
                 <TextBox Text="{Binding DonViCongTac}"
                          Style="{StaticResource TextBox_Style}" />
                 <TextBox Text="{Binding ChucVu}"
@@ -107,32 +98,42 @@
         </Grid>
 
         <!--Button-->
-        <Grid Grid.Row="2"
+        <!--<Grid Grid.Row="2"
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Button Content="Thêm thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding }" />
                 <Button Content="Sửa thông tin"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding }" />
                 <Button Content="Xóa thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding DeleteCommand}" />
+                        Command="{Binding }" />
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
         <!--Table-->
         <Grid Grid.Row="3"
               Grid.ColumnSpan="4">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                          VerticalScrollBarVisibility="Hidden">
+            
                 <ListView Margin="10"
                           Name="ListStaffView_Pick"
-                          Width="936"
+                          Width="auto"
+                          BorderBrush="Black"
                           ItemsSource="{Binding List}"
                           SelectedItem="{Binding SelectedItem}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mối quan hệ"
@@ -165,12 +166,33 @@
                                             DisplayMemberBinding="{Binding ChucVu}" />
                             <GridViewColumn Header="Quê quán(Tỉnh/Thành)"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="145"
+                                            Width="160"
                                             DisplayMemberBinding="{Binding QueQuan}" />
+                            <GridViewColumn Header=" "
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Sửa"
+                                                Command="{Binding UpdateCommand}"
+                                                Width="45" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header=" "
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Xóa"
+                                                Command="{Binding DeleteCommand}"
+                                                Width="45" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ScrollViewer>
         </Grid>
 
         <!--Button-->
@@ -178,12 +200,12 @@
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Content="Hủy bỏ"
+                <Button Content="Lưu lại"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
-                <Button Content="Xác nhận"
+                        Command="{Binding AddCommand}" />
+                <Button Content="Trang tiếp"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding TrainingProcessCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

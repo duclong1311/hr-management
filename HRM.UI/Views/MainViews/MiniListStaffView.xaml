@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              mc:Ignorable="d"
-             d:DesignHeight="620"
+             d:DesignHeight="800"
              d:DesignWidth="880">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,12 +14,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="10,0,10,0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="450" />
+                <RowDefinition Height="550" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
 
@@ -41,19 +41,31 @@
 
                 </TextBox>
             </Grid>
-            
+
             <!--Table-->
             <Grid Grid.Row="2"
                   Margin="5">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                              VerticalScrollBarVisibility="Hidden">
                     <ListView Margin="10"
-                              Name="ListStaffView_Pick"
+                              BorderBrush="Black"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                               HorizontalContentAlignment="Stretch"
                               VerticalContentAlignment="Stretch"
                               ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        <ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                            <Setter Property="Width"
+                                    Value="auto" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Mã nhân viên"
                                                 HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
@@ -71,10 +83,49 @@
                                                 HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                                 Width="100"
                                                 DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
+                                <GridViewColumn Header="Ngày sinh"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding NgaySinh}" />
+                                <GridViewColumn Header="Giới tính"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding GioiTinh}" />
+                                <GridViewColumn Header="Nguyên quán"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding NguyenQuan}" />
+                                <GridViewColumn Header="Dân tộc"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding DanToc}" />
+                                <GridViewColumn Header="Tôn giáo"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding TonGiao}" />
+                                <GridViewColumn Header="Số CCCD"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding CCCD}" />
+                                <GridViewColumn Header="Kết nạp Đảng"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding KetNapDang}" />
+                                <GridViewColumn Header="STK cá nhân"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding STK}" />
+                                <GridViewColumn Header="Mã số BHXH"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding MaSoBHXH}" />
+                                <GridViewColumn Header="Mã số thuế"
+                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding MaSoThue}" />
                             </GridView>
                         </ListView.View>
-                    </ListView>
-                </ScrollViewer>
+                </ListView>
             </Grid>
 
             <!--Button-->

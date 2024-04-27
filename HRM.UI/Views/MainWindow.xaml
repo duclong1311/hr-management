@@ -11,6 +11,7 @@
         Width="1080"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        WindowState="Maximized"
         ResizeMode="NoResize"
         Background="Transparent"
         FontSize="20"

@@ -15,11 +15,14 @@ using HRM.UI.Commands;
 using System.Collections.ObjectModel;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
     public class TrainingProcessViewModel : BaseViewModel
     {
+        public ICommand DeleteCommand { get; set; }
+        public ICommand WorkProcessCommand { get; set; }
         private ObservableCollection<QuaTrinhDaoTao> _list = new ObservableCollection<QuaTrinhDaoTao>();
         public ObservableCollection<QuaTrinhDaoTao> List
         {
@@ -70,6 +73,24 @@ namespace HRM.UI.ViewModels
             get { return _vanBangChungChi; }
             set { _vanBangChungChi = value; OnPropertyChanged(); }
         }
+        private QuaTrinhDaoTao _selectedItem;
+        public QuaTrinhDaoTao SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                {
+                    TuNgayDenNgay = SelectedItem.TuNgayDenNgay;
+                    HinhThucDaoTao = SelectedItem.HinhThucDaoTao;
+                    NganhHoc = SelectedItem.NganhHoc;
+                    NoiDaoTao = SelectedItem.NoiDaoTao;
+                    VanBangChungChi = SelectedItem.VanBangChungChi;
+                }
+                OnPropertyChanged();
+            }
+        }
         private void LoadComboBoxData()
         {
             HinhThucDaoTaoData = new ObservableCollection<string>();
@@ -87,18 +108,24 @@ namespace HRM.UI.ViewModels
 
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
-        public TrainingProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork)
+        private readonly ChildContentStore _childContentStore;
+
+        public TrainingProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _quaTrinhDaoTaoRepository = quaTrinhDaoTaoRepository;
+            _childContentStore = childContentStore;
             _unitOfWork = unitOfWork;
             LoadComboBoxData();
             LoadData();
-
+            WorkProcessCommand = new Commands.RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.WorkProcess);
+            });
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-
+                // can excute?
                 return true;
             }, async (p) =>
             {
@@ -106,6 +133,7 @@ namespace HRM.UI.ViewModels
                 {
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiDaoTao = NoiDaoTao,
+                    NganhHoc = NganhHoc,
                     HinhThucDaoTao = HinhThucDaoTao,
                     VanBangChungChi = VanBangChungChi,
                 };
@@ -131,6 +159,28 @@ namespace HRM.UI.ViewModels
 
                 }
             });
+
+            DeleteCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var quaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    await _quaTrinhDaoTaoRepository.DeleteAsync(quaTrinhDaoTao);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            }
+            );
         }
         private void LoadData()
         {

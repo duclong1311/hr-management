@@ -12,11 +12,14 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
     public class WorkProcessViewModel : BaseViewModel
     {
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
         private ObservableCollection<QuaTrinhCongTac> _list = new ObservableCollection<QuaTrinhCongTac>();
         public ObservableCollection<QuaTrinhCongTac> List
         {
@@ -31,6 +34,7 @@ namespace HRM.UI.ViewModels
 
         private IRepository<QuaTrinhCongTac> _quaTrinhCongTacRepository;
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         private string _tuNgayDenNgay;
         public string TuNgayDenNgay
@@ -52,8 +56,23 @@ namespace HRM.UI.ViewModels
             get { return _chucVu; }
             set { _chucVu = value; OnPropertyChanged(); }
         }
-        private readonly IViewModelFactory _viewModelFactory;
-        private readonly MainContentStore _mainContentStore;
+        private QuaTrinhCongTac _selectedItem;
+        public QuaTrinhCongTac SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                {
+                    TuNgayDenNgay = SelectedItem.TuNgayDenNgay;
+                    NoiCongTac = SelectedItem.NoiCongTac;
+                    ChucVu = SelectedItem.ChucVu;
+                }
+                OnPropertyChanged();
+            }
+        }
+        
         public WorkProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhCongTac> quaTrinhCongTacRepository, IUnitOfWork unitOfWork)
         {
             _viewModelFactory = viewModelFactory;
@@ -96,6 +115,28 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.RollbackAsync();
                 }
             });
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var quaTrinhCongTac = await _quaTrinhCongTacRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    await _quaTrinhCongTacRepository.DeleteAsync(quaTrinhCongTac);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            }
+            );
         }
         private void LoadData()
         {

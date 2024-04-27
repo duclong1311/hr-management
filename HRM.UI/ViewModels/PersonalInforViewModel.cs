@@ -16,6 +16,8 @@ using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Runtime.CompilerServices;
+using HRM.UI.Stores;
+using HRM.UI.Factories;
 
 namespace HRM.UI.ViewModels
 {
@@ -24,10 +26,45 @@ namespace HRM.UI.ViewModels
         private IUnitOfWork _unitOfWork;
 
         private IRepository<NhanSu> _hosoRepository;
+        private IRepository<NhanSu> _repository;
+        private IRepository<BoPhan> _boPhanRepository;
+        private IRepository<ChucVu> _chucVuRepository;
+        private readonly IViewModelFactory _viewModelFactory;
         public ICommand AddCommand { get; set; }
         public ICommand UploadImageCommand { get; set; }
         public ICommand SelectGenderCommand { get; set; }
+        public ICommand FamilyInforCommand { get; set; }
         public ObservableCollection<string> EthnicityData { get; set; }
+
+        private ObservableCollection<BoPhan> _listBoPhan;
+        public ObservableCollection<BoPhan> ListBoPhan 
+        {
+            get => _listBoPhan; 
+            set 
+            { 
+                _listBoPhan = value; OnPropertyChanged(); 
+            } 
+        }
+
+        private ObservableCollection<ChucVu> _listChucVu;
+        public ObservableCollection<ChucVu> ListChucVu 
+        {
+            get => _listChucVu; 
+            set 
+            {
+                _listChucVu = value; OnPropertyChanged(); 
+            } 
+        }
+        private string _filterBoPhan = "";
+        public string FilterBoPhan { get => _filterBoPhan; set { _filterBoPhan = value; OnPropertyChanged(); LoadComboBoxData(); } }
+        private string _filterChucVu = "";
+        public string FilterChucVu { get => _filterChucVu; set { _filterChucVu = value; OnPropertyChanged(); LoadComboBoxData(); } }
+
+        private BoPhan _selectedCboBoPhan;
+        public BoPhan SeletedCboBoPhan { get { return _selectedCboBoPhan; } set { _selectedCboBoPhan = value; OnPropertyChanged(); } }
+
+        private ChucVu _selectedCboChucVu;
+        public ChucVu SeletedCboChucVu { get { return _selectedCboChucVu; } set { _selectedCboChucVu = value; OnPropertyChanged(); } }
 
         private string _hoTen;
         public string HoTen
@@ -35,9 +72,9 @@ namespace HRM.UI.ViewModels
             get { return _hoTen; }
             set { _hoTen = value; OnPropertyChanged(); }
         }
-        private DateOnly _ngaySinh;
+        private DateTime _ngaySinh;
 
-        public DateOnly NgaySinh
+        public DateTime NgaySinh
         {
             get { return _ngaySinh; }
             set { _ngaySinh = value; OnPropertyChanged(); }
@@ -70,9 +107,9 @@ namespace HRM.UI.ViewModels
             get { return _trinhDoVanHoa; }
             set { _trinhDoVanHoa = value; OnPropertyChanged(); }
         }
-        private bool _ketNapDang;
+        private string _ketNapDang;
 
-        public bool KetNapDang
+        public string KetNapDang
         {
             get { return _ketNapDang; }
             set { _ketNapDang = value; OnPropertyChanged(); }
@@ -112,9 +149,9 @@ namespace HRM.UI.ViewModels
             get { return _tonGiao; }
             set { _tonGiao = value; OnPropertyChanged(); }
         }
-        private DateOnly _capNgay;
+        private DateTime _capNgay;
 
-        public DateOnly CapNgay
+        public DateTime CapNgay
         {
             get { return _capNgay; }
             set { _capNgay = value; OnPropertyChanged(); }
@@ -139,6 +176,35 @@ namespace HRM.UI.ViewModels
         {
             get { return _maNhanVien; }
             set { _maNhanVien = value; OnPropertyChanged(); }
+        }
+        private string _sTK;
+        public string STK
+        {
+            get
+            {
+                return _sTK;
+            }
+            set { _sTK = value; OnPropertyChanged(); }
+        }
+
+        private string _maSoBHXH;
+        public string MaSoBHXH
+        {
+            get
+            {
+                return _maSoBHXH;
+            }
+            set { _maSoBHXH = value; OnPropertyChanged(); }
+        }
+
+        private string _maSoThue;
+        public string MaSoThue
+        {
+            get
+            {
+                return _maSoThue;
+            }
+            set { _maSoThue = value; OnPropertyChanged(); }
         }
 
         //Image
@@ -183,6 +249,10 @@ namespace HRM.UI.ViewModels
         //Combobox 
         private void LoadComboBoxData()
         {
+            ListBoPhan = new ObservableCollection<BoPhan>();
+
+            ListChucVu = new ObservableCollection<ChucVu>();
+
             EthnicityData = new ObservableCollection<string>();
             EthnicityData.Add("Kinh");
             EthnicityData.Add("Mông");
@@ -202,10 +272,16 @@ namespace HRM.UI.ViewModels
             }
         }
 
-        public PersonalInforViewModel(IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork)
+        public PersonalInforViewModel(IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
             _hosoRepository = hosoRepository;
             _unitOfWork = unitOfWork;
+            _viewModelFactory = viewModelFactory;
+
+            FamilyInforCommand = new Commands.RelayCommand<object>(p => true, p =>
+            {
+                childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.FamilyInfor);
+            });
             //Load combobox
             LoadComboBoxData();
 
@@ -233,10 +309,16 @@ namespace HRM.UI.ViewModels
                     NguyenQuan = NguyenQuan,
                     DanToc = DanToc,
                     CCCD = CCCD,
+                    CapNgay = CapNgay,
                     TonGiao = TonGiao,
                     KetNapDang = KetNapDang,
                     NoiketNapDang = NoiKetNapDang,
                     SoThich = SoThich,
+                    STK = STK, 
+                    MaSoBHXH = MaSoBHXH,
+                    MaSoThue = MaSoThue,
+                    //BoPhanId = SeletedCboBoPhan.Id,
+                    //ChucVuId = SeletedCboChucVu.Id,
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
@@ -257,6 +339,8 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.RollbackAsync();
                 }
             });
+
+
         }
     }
 }

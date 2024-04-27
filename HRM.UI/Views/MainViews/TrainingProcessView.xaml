@@ -15,12 +15,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20,0,20,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="60" />
-            <RowDefinition />
+            <RowDefinition Height="400"/>
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -41,9 +41,11 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <StackPanel>
-                <Label Content="Từ tháng năm đến tháng năm: "
+                <Label Content="Thời gian đào tạo: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Hình thức đào tạo:  "
+                       Style="{StaticResource Label_Style}" />
+                <Label Content="Ngành học:  "
                        Style="{StaticResource Label_Style}" />
             </StackPanel>
         </Grid>
@@ -68,6 +70,8 @@
                           ItemsSource="{Binding HinhThucDaoTaoData}"
                           SelectedItem="{Binding HinhThucDaoTao}"
                           Style="{StaticResource ComboBox_Style}" />
+                <TextBox Style="{StaticResource TextBox_Style}"
+                         Text="{Binding NganhHoc}" />
             </StackPanel>
         </Grid>
 
@@ -83,13 +87,13 @@
         </Grid>
 
         <!--Button-->
-        <Grid Grid.Row="2"
+        <!--<Grid Grid.Row="2"
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <Button Content="Thêm quá trình"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding }" />
                 <Button Content="Sửa quá trình"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding }" />
@@ -97,24 +101,40 @@
                         Style="{StaticResource Button_Style}"
                         Command="{Binding }" />
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
         <!--Table-->
         <Grid Grid.Row="3"
               Grid.ColumnSpan="4">
             <ListView Margin="10"
                       Name="ListStaffView_Pick"
-                      ItemsSource="{Binding List}">
+                      BorderBrush="Black"
+                      ItemsSource="{Binding List}"
+                      SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Left" />
+                        <Setter Property="Padding"
+                                Value="5" />
+                        <Setter Property="FontSize"
+                                Value="14" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Từ tháng năm đến tháng năm"
+                        <GridViewColumn Header="Thời gian đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                        Width="200"
+                                        Width="140"
                                         DisplayMemberBinding="{Binding TuNgayDenNgay}" />
                         <GridViewColumn Header="Tên trường/ cơ sở đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="200"
                                         DisplayMemberBinding="{Binding NoiDaoTao}" />
+                        <GridViewColumn Header="Ngành học"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                        Width="140"
+                                        DisplayMemberBinding="{Binding NganhHoc}" />
                         <GridViewColumn Header="Hình thức đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="150"
@@ -123,6 +143,26 @@
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="150"
                                         DisplayMemberBinding="{Binding VanBangChungChi}" />
+                        <GridViewColumn Header=" "
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                        Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Sửa"
+                                            Command="{Binding UpdateCommand}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header=" "
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                        Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Xóa"
+                                            Command="{Binding DeleteCommand}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -133,12 +173,12 @@
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Content="Hủy bỏ"
+                <Button Content="Lưu lại"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
-                <Button Content="Xác nhận"
+                        Command="{Binding AddCommand}" />
+                <Button Content="Trang tiếp"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding WorkProcessCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

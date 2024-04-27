@@ -13,14 +13,14 @@ namespace HRM.Domain.Models
         public string? MaNhanVien { get; set; }
         public string? Anh { get; set; }
         public string? HoTen {  get; set; }
-        public DateOnly? NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
         public bool? GioiTinh { get; set; }
         public string? NguyenQuan { get; set; }
         public string? DanToc { get; set; }
         public string? TonGiao { get; set; }
         public string? CCCD { get; set; }
-        public DateOnly CapNgay { get; set; }
-        public bool? KetNapDang { get; set; }
+        public DateTime CapNgay { get; set; }
+        public string? KetNapDang { get; set; }
         public string? NoiketNapDang { get; set; }
         public string? SoThich { get; set; }
 
@@ -31,9 +31,9 @@ namespace HRM.Domain.Models
 
         //Thông tin để tính lương
         public double? LuongCoBan {  get; set; }
-        public double? PhuCapDiLai { get; set; }
-        public double? PhuCapAnTrua { get; set; }    
-        public double? PhucLoi { get; set; } 
+        //public double? PhuCapDiLai { get; set; }
+        //public double? PhuCapAnTrua { get; set; }    
+        //public double? PhucLoi { get; set; } 
 
         //...
         public int? BoPhanId {  get; set; }
