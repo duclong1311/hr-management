@@ -44,7 +44,7 @@
                     </StackPanel>
                 </TreeViewItem.Header>
 
-                <TreeViewItem IsExpanded="True"
+                <!--<TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
@@ -57,7 +57,7 @@
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
-                </TreeViewItem>
+                </TreeViewItem>-->
                 
                 <TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">
@@ -77,6 +77,34 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
+                                Command="{Binding StaffCVCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/Product.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Bộ phận" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding StaffCVCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/Product.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Chức vụ" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
                                 Command="{Binding AddCVCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
@@ -87,7 +115,37 @@
                         </Button>
                     </TreeViewItem.Header>
                 </TreeViewItem>
-                
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding AddCVCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/Replace.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Khen thưởng, thi đua" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding AddCVCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/Replace.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Hợp đồng" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+
                 <!--<TreeViewItem IsExpanded="True">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
@@ -195,7 +253,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Phiếu lương nhân viên" />
+                                <TextBlock Text="Ứng lương" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
@@ -210,7 +268,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Bảng lương công ty" />
+                                <TextBlock Text="Tính lương" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>

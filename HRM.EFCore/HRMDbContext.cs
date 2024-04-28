@@ -21,6 +21,7 @@ namespace HRM.EFCore
         public DbSet<QuanHeGiaDinh> QuanHeGiaDinhs { get; set; }
         public DbSet<QuaTrinhCongTac> QuaTrinhCongTacs { get; set; }
         public DbSet<QuaTrinhDaoTao> QuaTrinhDaoTaos { get; set; }
+        public DbSet<UngLuong> UngLuongs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public HRMDbContext(DbContextOptions options) : base(options) { }
@@ -36,6 +37,7 @@ namespace HRM.EFCore
             modelBuilder.ApplyConfiguration(new QuanHeGiaDinhConfiguration());
             modelBuilder.ApplyConfiguration(new QuaTrinhCongTacConfiguration());
             modelBuilder.ApplyConfiguration(new QuaTrinhDaoTaoConfiguration());
+            modelBuilder.ApplyConfiguration(new UngLuongConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }

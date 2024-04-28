@@ -32,6 +32,9 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<NhanSu> ListNhanSu { get; set; }
+       
         private IUnitOfWork _unitOfWork;
 
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
@@ -61,7 +64,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-
+       
         private string _moiQuanHe;
         public string MoiQuanHe
         {
@@ -135,6 +138,8 @@ namespace HRM.UI.ViewModels
             MoiQuanHeData.Add("Chị gái");
             MoiQuanHeData.Add("Em gái");
             MoiQuanHeData.Add("Con");
+
+            ListNhanSu = new ObservableCollection<NhanSu>();
         }
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;

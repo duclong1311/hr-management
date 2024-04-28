@@ -42,6 +42,8 @@
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <StackPanel>
+                    <Label Content="Mã nhân viên: "
+                           Style="{StaticResource Label_Style}" />
                     <Label Content="Từ tháng năm đến tháng năm: "
                            Style="{StaticResource Label_Style}" />
                     <Label Content="Đơn vị công tác:  "
@@ -60,6 +62,8 @@
             <Grid Grid.Column="1"
                   Grid.Row="1">
                 <StackPanel>
+                    <ComboBox ItemsSource="{Binding }"
+                              Style="{StaticResource ComboBox_Style}" />
                     <TextBox x:Name="tb_TuThangNamDenThangNam"
                              Text="{Binding TuNgayDenNgay}"
                              Style="{StaticResource TextBox_Style}" />
@@ -115,6 +119,10 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding }" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Header="Từ ngày đến ngày"
                                             Width="150"

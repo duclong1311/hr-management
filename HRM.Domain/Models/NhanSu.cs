@@ -40,5 +40,7 @@ namespace HRM.Domain.Models
         public BoPhan? BoPhan { get; set; }
         public int? ChucVuId {  get; set; }
         public ChucVu? ChucVu { get; set; }
+        public int? QuaTrinhDaoTaoId { get; set; }
+        public int? QuaTrinhCongTacId { get; set; }
     }
 }

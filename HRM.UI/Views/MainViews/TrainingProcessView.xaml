@@ -20,7 +20,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="60" />
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="400" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -41,6 +41,8 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <StackPanel>
+                <Label Content="Mã nhân viên: "
+                       Style="{StaticResource Label_Style}" />
                 <Label Content="Thời gian đào tạo: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Hình thức đào tạo:  "
@@ -63,6 +65,10 @@
         <Grid Grid.Column="1"
               Grid.Row="1">
             <StackPanel>
+
+                <ComboBox ItemsSource="{Binding HinhThucDaoTaoData}"
+                          SelectedItem="{Binding HinhThucDaoTao}"
+                          Style="{StaticResource ComboBox_Style}" />
                 <TextBox x:Name="tb_TuThangNamDenThangNam"
                          Style="{StaticResource TextBox_Style}"
                          Text="{Binding TuNgayDenNgay}" />
@@ -123,6 +129,10 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
+                        <GridViewColumn Header="Mã nhân viên"
+                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Thời gian đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="140"

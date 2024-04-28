@@ -1,0 +1,186 @@
+﻿<UserControl x:Class="HRM.UI.Views.MainViews.PositionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d"
+             d:DesignHeight="640"
+             d:DesignWidth="820">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/PositionView_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Margin="20,0,20,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="330" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="24"
+                               Margin="0,20,0,20">CHỨC VỤ</TextBlock>
+                </Grid>
+
+                <!--Label-->
+                <Grid Grid.Row="1"
+                      Grid.Column="0">
+                    <StackPanel>
+                        <Label Content="Mã nhân viên: "
+                               Style="{StaticResource Label_Style}" />
+                        <Label Content="Số hợp đồng: "
+                               Style="{StaticResource Label_Style}" />
+                        <Label Content="Loại hợp đồng:  "
+                               Style="{StaticResource Label_Style}" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1"
+                      Grid.Column="2">
+                    <StackPanel>
+                        <Label Content="Ngày bắt đầu: "
+                               Style="{StaticResource Label_Style}" />
+                        <Label Content="Ngày kết thúc: "
+                               Style="{StaticResource Label_Style}" />
+                    </StackPanel>
+                </Grid>
+
+                <!--Textbox-->
+                <Grid Grid.Column="1"
+                      Grid.Row="1">
+                    <StackPanel>
+                        <ComboBox ItemsSource="{Binding }"
+                                  Style="{StaticResource ComboBox_Style}" />
+                        <TextBox x:Name="tb_TuThangNamDenThangNam"
+                                 Text="{Binding TuNgayDenNgay}"
+                                 Style="{StaticResource TextBox_Style}" />
+                        <TextBox x:Name="tb_DonViCongTac"
+                                 Text="{Binding NoiCongTac}"
+                                 Style="{StaticResource TextBox_Style}" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="3"
+                      Grid.Row="1">
+                    <StackPanel>
+                        <TextBox Text="{Binding ChucVu}"
+                                 Style="{StaticResource TextBox_Style}" />
+                        <TextBox Text="{Binding ChucVu}"
+                                 Style="{StaticResource TextBox_Style}" />
+                    </StackPanel>
+                </Grid>
+
+                <!--Button-->
+                <!--<Grid Grid.Row="2"
+               Grid.ColumnSpan="4">
+             <StackPanel Orientation="Horizontal"
+                         HorizontalAlignment="Center">
+                 <Button Content="Thêm quá trình"
+                         Style="{StaticResource Button_Style}"
+                         Command="{Binding AddCommand}" />
+                 <Button Content="Sửa quá trình"
+                         Style="{StaticResource Button_Style}"
+                         Command="{Binding }" />
+                 <Button Content="Xóa quá trình"
+                         Style="{StaticResource Button_Style}"
+                         Command="{Binding }" />
+             </StackPanel>
+         </Grid>-->
+
+                <!--Table-->
+                <Grid Grid.Row="3"
+                      Grid.ColumnSpan="4">
+                    <ListView Margin="10"
+                              Name="ListStaffView_Pick"
+                              BorderBrush="Black"
+                              ItemsSource="{Binding List}"
+                              SelectedItem="{Binding SelectedItem}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Left" />
+                                <Setter Property="Padding"
+                                        Value="5,0,0,0" />
+                                <Setter Property="FontSize"
+                                        Value="14" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã nhân viên"
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding }" />
+                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Header="Số hợp đồng"
+                                                Width="120"
+                                                DisplayMemberBinding="{Binding TuNgayDenNgay}" />
+                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Header="Loại hợp đồng"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding NoiCongTac}" />
+                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Header="Ngày bắt đầu"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding ChucVu}" />
+                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Header="Ngày kết thúc"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding ChucVu}" />
+                                <GridViewColumn Header=" "
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Sửa"
+                                                    Command="{Binding UpdateCommand}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header=" "
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Xóa"
+                                                    Command="{Binding DeleteCommand}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+                <!--Button-->
+                <Grid Grid.Row="4"
+                      Grid.ColumnSpan="4">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Content="Hủy bỏ"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding }" />
+                        <Button Content="Lưu lại"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding AddCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
