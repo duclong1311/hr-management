@@ -72,8 +72,8 @@ namespace HRM.UI.ViewModels
                             }
                         }
                     }
-                    dataModel.MaNhanVien = string.Join(", ", MaNhanVienList);
-                    dataModel.HoTen = string.Join(", ", HoTenList);
+                    //dataModel.NhanSu = string.Join(", ", MaNhanVienList);
+                    //dataModel.HoTen = string.Join(", ", HoTenList);
 
                     int TongSoNgayCong;
                     if (int.TryParse(worksheet.Cells[row, 3].Value?.ToString(), out TongSoNgayCong))

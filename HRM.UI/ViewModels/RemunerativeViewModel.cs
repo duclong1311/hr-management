@@ -15,8 +15,8 @@ namespace HRM.UI.ViewModels
 {
     public class RemunerativeViewModel : BaseViewModel
     {
-        private ObservableCollection<KhenThuong> _list = new ObservableCollection<KhenThuong>();
-        public ObservableCollection<KhenThuong> List
+        private ObservableCollection<KhenThuongKyLuat> _list = new ObservableCollection<KhenThuongKyLuat>();
+        public ObservableCollection<KhenThuongKyLuat> List
         {
             get => _list;
             set
@@ -27,9 +27,19 @@ namespace HRM.UI.ViewModels
         }
         private IUnitOfWork _unitOfWork;
 
-        private IRepository<KhenThuong> _khenThuongRespository;
+        private IRepository<KhenThuongKyLuat> _khenThuongRespository;
         public ICommand AddCommand { get; set; }
         public ObservableCollection<string> CapKhenThuongData { get; set; }
+        private int _nhanSuId { get; set; }
+        public int NhanSuId
+        {
+            get { return _nhanSuId; }
+            set
+            {
+                _nhanSuId = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _capKhenThuong;
         public string CapKhenThuong
@@ -41,36 +51,45 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private string _thamQuyenKhenThuong;
-        public string ThamQuyenKhenThuong
+        private string _capKyLuat;
+        public string CapKyLuat
         {
-            get { return _thamQuyenKhenThuong; }
+            get { return _capKyLuat; }
             set
             {
-                _thamQuyenKhenThuong = value;
+                _capKyLuat = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateOnly _thoiGianBanHanh;
-        public DateOnly ThoiGianBanHanh
+        private string _tenHinhThucKhenThuong;
+        public string TenHinhThucKhenThuong
         {
-            get { return _thoiGianBanHanh; }
+            get { return _tenHinhThucKhenThuong; }
             set
             {
-                _thoiGianBanHanh = value;
+                _tenHinhThucKhenThuong = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _tenHinhThucKyLuat;
+        public string TenHinhThucKyLuat
+        {
+            get { return _tenHinhThucKyLuat; }
+            set
+            {
+                _tenHinhThucKyLuat = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _noiDung;
-        public string NoiDung
+        private DateTime _ngayQuyetDinh;
+        public DateTime NgayQuyetDinh
         {
-            get { return _noiDung; }
+            get { return _ngayQuyetDinh; }
             set
             {
-                _noiDung = value;
+                _ngayQuyetDinh = value;
                 OnPropertyChanged();
             }
         }
@@ -93,7 +112,7 @@ namespace HRM.UI.ViewModels
             CapKhenThuongData.Add("Cấp 2");
         }
         private readonly IUserStore _userStore;
-        public RemunerativeViewModel(IUserStore userStore, IUnitOfWork unitOfWork, IRepository<KhenThuong> KhenThuongRepository)
+        public RemunerativeViewModel(IUserStore userStore, IUnitOfWork unitOfWork, IRepository<KhenThuongKyLuat> KhenThuongRepository)
         {
             _unitOfWork = unitOfWork;
             _khenThuongRespository = KhenThuongRepository;
@@ -107,14 +126,15 @@ namespace HRM.UI.ViewModels
                 return true;
             }, async (p) =>
             {
-                var KhenThuong = new KhenThuong()
+                var KhenThuong = new KhenThuongKyLuat()
                 {
                     CapKhenThuong = CapKhenThuong,
-                    ThamQuyen = ThamQuyenKhenThuong,
-                    ThoiGianBanHanh = ThoiGianBanHanh,
-                    NoiDung = NoiDung,
+                    TenHinhThucKhenThuong = TenHinhThucKhenThuong,
+                    CapKyLuat = CapKyLuat,
+                    TenHinhThucKyLuat = TenHinhThucKyLuat,
+                    NgayQuyetDinh = NgayQuyetDinh,
                     SoQuyetDinh = SoQuyetDinh,
-                    MaNhanVien = _userStore.CurrentNhanSu.MaNhanVien
+                    //NhanSuId = _userStore.CurrentNhanSu.NhanSuId
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
@@ -141,7 +161,7 @@ namespace HRM.UI.ViewModels
         }
         public void Load()
         {
-            List = new ObservableCollection<KhenThuong>(_khenThuongRespository.AsQueryable().Where(x=> x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongRespository.AsQueryable().Where(x=> x.NhanSuId.ToString() == _userStore.CurrentNhanSu.MaNhanVien).ToList());
         }
     }
 }

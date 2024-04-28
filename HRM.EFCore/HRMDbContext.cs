@@ -15,7 +15,7 @@ namespace HRM.EFCore
         public DbSet<BoPhan> BoPhans { get; set; }
         public DbSet<ChucVu> ChucVus { get; set; }
         public DbSet<HopDong> HopDongs { get; set; }
-        public DbSet<KhenThuong> KhenThuongs { get; set; }
+        public DbSet<KhenThuongKyLuat> KhenThuongs { get; set; }
         public DbSet<KyLuat> KyLuats { get; set; }
         public DbSet<NhanSu> NhanSus { get; set; }
         public DbSet<QuanHeGiaDinh> QuanHeGiaDinhs { get; set; }

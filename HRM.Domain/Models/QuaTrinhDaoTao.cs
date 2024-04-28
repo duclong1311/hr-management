@@ -9,11 +9,12 @@ namespace HRM.Domain.Models
 {
     public class QuaTrinhDaoTao : IEntity
     {
-        public NhanSu MaNhanVien { get; set; }
+        public int NhanSuId { get; set; }
         public string TuNgayDenNgay { get; set; }
         public string NoiDaoTao { get; set; }
         public string NganhHoc { get; set; }
         public string HinhThucDaoTao { get; set; }
         public string VanBangChungChi { get; set; }
+        public NhanSu NhanSu { get; set; }
     }
 }

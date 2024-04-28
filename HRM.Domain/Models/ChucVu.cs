@@ -11,5 +11,7 @@ namespace HRM.Domain.Models
     {
         public string TenChucVu {  get; set; }
         public double PhuCapChucVu { get; set;}
+        public DateTime NgayBatDau { get; set; }
+        public DateTime NgayKetThuc { get; set; }
     }
 }

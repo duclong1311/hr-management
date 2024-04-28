@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HRM.Domain.Configurations
 {
-    public class KhenThuongConfiguration : IEntityTypeConfiguration<KhenThuong>
+    public class KhenThuongConfiguration : IEntityTypeConfiguration<KhenThuongKyLuat>
     {
-        public void Configure(EntityTypeBuilder<KhenThuong> builder)
+        public void Configure(EntityTypeBuilder<KhenThuongKyLuat> builder)
         {
             builder.HasKey(x => x.Id);
         }

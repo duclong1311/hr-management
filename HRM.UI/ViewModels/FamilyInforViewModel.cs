@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +12,7 @@ using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using HRM.UI.Commands;
 using HRM.UI.Factories;
+using HRM.UI.States.Staff;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,8 +34,6 @@ namespace HRM.UI.ViewModels
             }
         }
 
-        private ObservableCollection<NhanSu> ListNhanSu { get; set; }
-       
         private IUnitOfWork _unitOfWork;
 
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
@@ -64,7 +63,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-       
+
         private string _moiQuanHe;
         public string MoiQuanHe
         {
@@ -123,6 +122,7 @@ namespace HRM.UI.ViewModels
             get { return _chucVu; }
             set { _chucVu = value; OnPropertyChanged(); }
         }
+
         private void LoadComboBoxData()
         {
             TinhThanhData = new ObservableCollection<string>();
@@ -139,7 +139,6 @@ namespace HRM.UI.ViewModels
             MoiQuanHeData.Add("Em gái");
             MoiQuanHeData.Add("Con");
 
-            ListNhanSu = new ObservableCollection<NhanSu>();
         }
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
