@@ -74,8 +74,8 @@
               Grid.Row="1">
             <StackPanel>
                 <ComboBox Style="{StaticResource ComboBox_Style}"
-                          ItemsSource="{Binding ListNhanVien}"
-                          SelectedItem="{Binding NhanSu.MaNhanVien}" />
+                          ItemsSource="{Binding ListNhanSu }"
+                          SelectedItem="{Binding SelectedCboNhanSu}" />
                 <ComboBox Style="{StaticResource ComboBox_Style}"
                           ItemsSource="{Binding MoiQuanHeData}"
                           SelectedItem="{Binding MoiQuanHe}" />

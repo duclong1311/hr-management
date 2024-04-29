@@ -161,7 +161,7 @@ namespace HRM.UI.ViewModels
         }
         public void Load()
         {
-            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongRespository.AsQueryable().Where(x=> x.NhanSuId.ToString() == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+            //List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongRespository.AsQueryable().Where(x=> x.NhanSuId.ToString() == _userStore.CurrentNhanSu.MaNhanVien).ToList());
         }
     }
 }

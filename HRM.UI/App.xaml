@@ -14,7 +14,6 @@
         <DataTemplate DataType="{x:Type vm:MainContentViewModel}">
             <view:MainContentView />
         </DataTemplate>
-        
         <!--Child content-->
         <DataTemplate DataType="{x:Type vm:PersonalInforViewModel}">
             <view:PersonalInfoView />
@@ -34,7 +33,6 @@
         <DataTemplate DataType="{x:Type vm:DisciplineViewModel}">
             <view:DisciplineView />
         </DataTemplate>
-
         <DataTemplate DataType="{x:Type vm:CVStatusViewModel}">
             <view:CVStatusView />
         </DataTemplate>
@@ -47,8 +45,20 @@
         <DataTemplate DataType="{x:Type vm:StaffCVViewModel}">
             <view:MiniListStaffView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ContractViewModel}">
+            <view:ContractView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DepartmentViewModel}">
+            <view:DepartmentView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PositionViewModel}">
+            <view:PositionView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:TrackingViewModel}">
             <view:TrackingView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AdvanceSalaryViewModel}">
+            <view:AdvanceSalaryView />
         </DataTemplate>
     </Application.Resources>
 </Application>

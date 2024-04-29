@@ -23,7 +23,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<RegisterViewModel>();
                 services.AddScoped<MainContentViewModel>();
 
-                //Child content view
+                //Child content
                 services.AddScoped<PersonalInforViewModel>();
                 services.AddScoped<FamilyInforViewModel>();
                 services.AddScoped<TrainingProcessViewModel>();
@@ -36,10 +36,16 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<ChildContentViewModel>();
                 services.AddScoped<ChildContentView>();
                 services.AddScoped<StaffCVViewModel>();
+                services.AddScoped<DepartmentViewModel>();
+                services.AddScoped<PositionViewModel>();
+                services.AddScoped<ContractViewModel>();
                 services.AddScoped<AddCVViewModel>();
                 services.AddScoped<FamilyInforViewModel>();
                 services.AddScoped<TrackingViewModel>();
-                
+                // Lương
+                services.AddScoped<AdvanceSalaryViewModel>();
+
+
                 services.AddScoped<CreateViewModel<LoginViewModel>>(service => () => service.GetRequiredService<LoginViewModel>());
                 services.AddScoped<CreateViewModel<RegisterViewModel>>(service => () => service.GetRequiredService<RegisterViewModel>());
                 services.AddScoped<CreateViewModel<MainContentViewModel>>(service => () => service.GetRequiredService<MainContentViewModel>());
@@ -55,7 +61,13 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<CreateViewModel<ChildContentViewModel>>(service => () => service.GetRequiredService<ChildContentViewModel>());
                 services.AddScoped<CreateViewModel<StaffCVViewModel>>(service => () => service.GetRequiredService<StaffCVViewModel>());
                 services.AddScoped<CreateViewModel<AddCVViewModel>>(service => () => service.GetRequiredService<AddCVViewModel>());
+                services.AddScoped<CreateViewModel<DepartmentViewModel>>(service => () => service.GetRequiredService<DepartmentViewModel>());
+                services.AddScoped<CreateViewModel<ContractViewModel>>(service => () => service.GetRequiredService<ContractViewModel>());
+                services.AddScoped<CreateViewModel<PositionViewModel>>(service => () => service.GetRequiredService<PositionViewModel>());
                 services.AddScoped<CreateViewModel<TrackingViewModel>>(service => () => service.GetRequiredService<TrackingViewModel>());
+                // Lương
+                services.AddScoped<CreateViewModel<AdvanceSalaryViewModel>>(service => () => service.GetRequiredService<AdvanceSalaryViewModel>());
+
 
                 services.AddScoped<IViewModelFactory, ViewModelFactory>();
             });

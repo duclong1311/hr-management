@@ -23,7 +23,12 @@ namespace HRM.UI.ViewModels
         public ICommand StaffListCommand { get; set; }
         public ICommand StaffCVCommand { get; set; }
         public ICommand AddCVCommand { get; set; }
+        public ICommand DepartmentCommand { get; set; }
+        public ICommand PositionCommand { get; set; }
+        public ICommand ContractCommand { get; set; }
         public ICommand TrackingCommand { get; set; }  
+        public ICommand RemunerativeCommand { get; set; }
+        public ICommand AdvanceSalaryCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -50,16 +55,36 @@ namespace HRM.UI.ViewModels
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.StaffCV);
             });
+            DepartmentCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Department);
+            });
+            PositionCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Position);
+            });
             AddCVCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+            });
+            RemunerativeCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Remunerative);
+            });
+            ContractCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
             });
             TrackingCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Tracking);
             });
 
-
+            //Lương 
+            AdvanceSalaryCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AdvanceSalary);
+            });
         }
 
         private void OnCurrenViewModelChanged()

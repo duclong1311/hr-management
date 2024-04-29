@@ -21,9 +21,14 @@ namespace HRM.UI.Defines
         // --------------------------------------------
         ListStaff,
         StaffCV,
+        Department,
+        Position,
         AddCV,
+        Contract,
         ChildContent,
-        // ----------------------- Nhập công -----------------------
-        Tracking
+        // ----------------------- Công cán -----------------------
+        Tracking,
+        // ----------------------- Lương thưởng -----------------------
+        AdvanceSalary
     }
 }

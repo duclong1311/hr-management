@@ -16,58 +16,61 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
         private readonly CreateViewModel<MainContentViewModel> _createMainContentViewModel;
         private readonly CreateViewModel<ListStaffViewModel> _createListStaffViewModel;
-
         private readonly CreateViewModel<PersonalInforViewModel> _createPersonalInforViewModel;
         private readonly CreateViewModel<FamilyInforViewModel> _createFamilyInforViewModel;
         private readonly CreateViewModel<TrainingProcessViewModel> _createTrainingProcessViewModel;
         private readonly CreateViewModel<WorkProcessViewModel> _createWorkProcessViewModel;
         private readonly CreateViewModel<DisciplineViewModel> _createDisciplineViewModel;
         private readonly CreateViewModel<RemunerativeViewModel> _createRemunerativeViewModel;
-
-
         private readonly CreateViewModel<ChildContentViewModel> _createChildContentViewModel;
         private readonly CreateViewModel<StaffCVViewModel> _createStaffCVViewModel;
         private readonly CreateViewModel<AddCVViewModel> _createAddCVViewModel;
+        private readonly CreateViewModel<DepartmentViewModel> _createDepartmentViewModel;
+        private readonly CreateViewModel<PositionViewModel> _createPositionViewModel;
+        private readonly CreateViewModel<ContractViewModel> _createContractViewModel;
         private readonly CreateViewModel<TrackingViewModel> _createTrackingViewModel;
+        private readonly CreateViewModel<AdvanceSalaryViewModel> _createAdvanceSalaryViewModel;
+
 
 
         public ViewModelFactory(CreateViewModel<LoginViewModel> createLoginViewModel,
             CreateViewModel<RegisterViewModel> createRegisterViewModel,
             CreateViewModel<MainContentViewModel> createMainContentViewModel,
             CreateViewModel<ListStaffViewModel> createListStaffViewModel,
-
             CreateViewModel<PersonalInforViewModel> createPersonalInforViewModel,
             CreateViewModel<FamilyInforViewModel> createFamilyInforViewModel,
             CreateViewModel<TrainingProcessViewModel> createTrainingProcessViewModel,
             CreateViewModel<WorkProcessViewModel> createWorkProcessViewModel,
             CreateViewModel<RemunerativeViewModel> createRemunerativeViewModel,
             CreateViewModel<DisciplineViewModel> createDisciplineViewModel,
-
-
             CreateViewModel<ChildContentViewModel> createChildContentViewModel,
             CreateViewModel<StaffCVViewModel> createStaffCVViewModel,
             CreateViewModel<AddCVViewModel> createAddCVViewModel,
-
-            CreateViewModel<TrackingViewModel> createTrackingViewModel)
+            CreateViewModel<DepartmentViewModel> createDepartmentViewModel,
+            CreateViewModel<PositionViewModel> createPositionViewModel,
+            CreateViewModel<ContractViewModel> createContractViewModel,
+            CreateViewModel<TrackingViewModel> createTrackingViewModel,
+            CreateViewModel<AdvanceSalaryViewModel> createAdvanceSalaryViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
             _createRegisterViewModel = createRegisterViewModel;
             _createMainContentViewModel = createMainContentViewModel;
             _createListStaffViewModel = createListStaffViewModel;
-
             _createPersonalInforViewModel = createPersonalInforViewModel;
             _createFamilyInforViewModel = createFamilyInforViewModel;
             _createTrainingProcessViewModel = createTrainingProcessViewModel;
             _createWorkProcessViewModel = createWorkProcessViewModel;
             _createRemunerativeViewModel = createRemunerativeViewModel;
             _createDisciplineViewModel = createDisciplineViewModel;
-
             _createChildContentViewModel = createChildContentViewModel;
             _createStaffCVViewModel = createStaffCVViewModel;
             _createAddCVViewModel = createAddCVViewModel;
-
-            _createTrackingViewModel = createTrackingViewModel; 
+            _createDepartmentViewModel = createDepartmentViewModel;
+            _createPositionViewModel = createPositionViewModel;
+            _createContractViewModel = createContractViewModel;
+            _createTrackingViewModel = createTrackingViewModel;
+            _createAdvanceSalaryViewModel = createAdvanceSalaryViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -93,16 +96,22 @@ namespace HRM.UI.Factories
                     return _createRemunerativeViewModel();
                 case EViewTypes.Discipline:
                     return _createDisciplineViewModel();
-
                 case EViewTypes.ChildContent:
                     return _createChildContentViewModel();
                 case EViewTypes.StaffCV:
                     return _createStaffCVViewModel();
+                case EViewTypes.Department:
+                    return _createDepartmentViewModel();
+                case EViewTypes.Position:
+                    return _createPositionViewModel();
                 case EViewTypes.AddCV:
                     return _createAddCVViewModel();
-                    // Nhập chấm công
+                case EViewTypes.Contract:
+                    return _createContractViewModel();
                 case EViewTypes.Tracking:
                     return _createTrackingViewModel();
+                case EViewTypes.AdvanceSalary:
+                    return _createAdvanceSalaryViewModel();
                 default:
                     throw new ArgumentException();
             }
