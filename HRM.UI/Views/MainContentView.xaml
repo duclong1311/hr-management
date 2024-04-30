@@ -200,7 +200,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="./Images/options.png"
                                Style="{StaticResource Image_Style}" />
-                        <TextBlock Text="Nhập công" />
+                        <TextBlock Text="Chấm công" />
                     </StackPanel>
                 </TreeViewItem.Header>
                 <TreeViewItem IsExpanded="True"
@@ -212,7 +212,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Nhập công" />
+                                <TextBlock Text="Bảng công" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
