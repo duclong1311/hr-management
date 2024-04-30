@@ -397,6 +397,9 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MaNhanVien")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NoiCongTac")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -420,6 +423,9 @@ namespace HRM.EFCore.Migrations
 
                     b.Property<string>("HinhThucDaoTao")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NganhHoc")

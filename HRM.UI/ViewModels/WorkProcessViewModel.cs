@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
+using HRM.UI.States.Users;
 
 namespace HRM.UI.ViewModels
 {
@@ -20,6 +21,9 @@ namespace HRM.UI.ViewModels
     {
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
+        private readonly ChildContentStore _childContentStore;
+        private readonly IUserStore _userStore;
+
         private ObservableCollection<QuaTrinhCongTac> _list = new ObservableCollection<QuaTrinhCongTac>();
         public ObservableCollection<QuaTrinhCongTac> List
         {
@@ -30,9 +34,11 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private IUnitOfWork _unitOfWork;
 
         private IRepository<QuaTrinhCongTac> _quaTrinhCongTacRepository;
+
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
@@ -72,13 +78,15 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        public WorkProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhCongTac> quaTrinhCongTacRepository, IUnitOfWork unitOfWork)
+
+        public WorkProcessViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhCongTac> quaTrinhCongTacRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _quaTrinhCongTacRepository = quaTrinhCongTacRepository;
+            _childContentStore = childContentStore;
             _unitOfWork = unitOfWork;
+            _userStore = userStore;
             LoadData();
 
             AddCommand = new RelayCommand<object>((p) =>
@@ -88,6 +96,7 @@ namespace HRM.UI.ViewModels
             {
                 var QuaTrinhCongTac = new QuaTrinhCongTac()
                 {
+                    MaNhanVien = userStore.CurrentNhanSu.MaNhanVien,
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiCongTac = NoiCongTac,
                     ChucVu = ChucVu,
@@ -96,6 +105,7 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     QuaTrinhCongTac = await _quaTrinhCongTacRepository.AddAsync(QuaTrinhCongTac);
+                    await _unitOfWork.CommitAsync();
                     LoadData();
                     if (QuaTrinhCongTac != null)
                     {
@@ -107,7 +117,6 @@ namespace HRM.UI.ViewModels
                     {
                         MessageBox.Show("Lỗi hệ thống");
                     }
-                    await _unitOfWork.CommitAsync();
 
                 }
                 catch (Exception ex)
@@ -138,13 +147,9 @@ namespace HRM.UI.ViewModels
             }
             );
         }
-        private void LoadData()
+        public void LoadData()
         {
-            List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository.AsQueryable().ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
+            List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
         }
     }
 }

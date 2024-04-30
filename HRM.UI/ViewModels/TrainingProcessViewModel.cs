@@ -16,13 +16,12 @@ using System.Collections.ObjectModel;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
+using HRM.UI.States.Users;
 
 namespace HRM.UI.ViewModels
 {
     public class TrainingProcessViewModel : BaseViewModel
     {
-        public ICommand DeleteCommand { get; set; }
-        public ICommand WorkProcessCommand { get; set; }
         private ObservableCollection<QuaTrinhDaoTao> _list = new ObservableCollection<QuaTrinhDaoTao>();
         public ObservableCollection<QuaTrinhDaoTao> List
         {
@@ -33,10 +32,15 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private IUnitOfWork _unitOfWork;
 
         private IRepository<QuaTrinhDaoTao> _quaTrinhDaoTaoRepository;
+
         public ICommand AddCommand { get; set; }
+        public ICommand WorkProcessCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+
         public ObservableCollection<string> HinhThucDaoTaoData { get; set; }
         public ObservableCollection<string> VanBangChungChiData { get; set; }
 
@@ -91,6 +95,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private void LoadComboBoxData()
         {
             HinhThucDaoTaoData = new ObservableCollection<string>();
@@ -109,28 +114,34 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
         private readonly ChildContentStore _childContentStore;
+        private readonly IUserStore _userStore;
 
-        public TrainingProcessViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
+        public TrainingProcessViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _quaTrinhDaoTaoRepository = quaTrinhDaoTaoRepository;
             _childContentStore = childContentStore;
             _unitOfWork = unitOfWork;
+            _userStore = userStore;
             LoadComboBoxData();
             LoadData();
+
             WorkProcessCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.WorkProcess);
             });
+
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
                 // can excute?
                 return true;
             }, async (p) =>
             {
+
                 var QuaTrinhDaoTao = new QuaTrinhDaoTao()
                 {
+                    MaNhanVien = userStore.CurrentNhanSu.MaNhanVien,
                     TuNgayDenNgay = TuNgayDenNgay,
                     NoiDaoTao = NoiDaoTao,
                     NganhHoc = NganhHoc,
@@ -141,7 +152,9 @@ namespace HRM.UI.ViewModels
                 try
                 {
                     QuaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AddAsync(QuaTrinhDaoTao);
+                    await _unitOfWork.CommitAsync();    
                     LoadData();
+
                     if (QuaTrinhDaoTao != null)
                     {
                         MessageBox.Show("Thêm thành công");
@@ -151,7 +164,6 @@ namespace HRM.UI.ViewModels
 
                     else
                         MessageBox.Show("Lỗi hệ thống");
-                    await _unitOfWork.CommitAsync();
                 }
                 catch (Exception e)
                 {
@@ -182,13 +194,9 @@ namespace HRM.UI.ViewModels
             }
             );
         }
-        private void LoadData()
+        public void LoadData()
         {
-            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
+            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
         }
     }
 }
