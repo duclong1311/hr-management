@@ -43,8 +43,6 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <StackPanel>
-                <Label Content="Mã nhân viên: "
-                       Style="{StaticResource Label_Style}" />
                 <Label Content="Mối quan hệ: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Họ và tên:  "
@@ -74,9 +72,7 @@
         <Grid Grid.Column="1"
               Grid.Row="1">
             <StackPanel>
-                <ComboBox Style="{StaticResource ComboBox_Style}"
-                          ItemsSource="{Binding ListNhanSu }"
-                          SelectedItem="{Binding SelectedCboNhanSu}" />
+               
                 <ComboBox Style="{StaticResource ComboBox_Style}"
                           ItemsSource="{Binding MoiQuanHeData}"
                           SelectedItem="{Binding MoiQuanHe}" />
@@ -144,10 +140,6 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Mã nhân viên"
-                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                        Width="100"
-                                        DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Mối quan hệ"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="100"
