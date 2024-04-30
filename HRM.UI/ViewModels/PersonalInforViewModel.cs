@@ -335,7 +335,7 @@ namespace HRM.UI.ViewModels
         public string CoppyLink = "";
         private void SaveImageToFolder(string filePath)
         {
-            string directoryPath = "PersonImage";  // Modify the path as needed
+            string directoryPath = @"D:\PersonInfo\";  // Modify the path as needed
             string newFileName = $"Image_{DateTime.Now:yyyyMMddHHmmss}.jpg";  // Tạo tên mới cho file dựa trên thời gian
             string destinationPath = Path.Combine(directoryPath, newFileName);
 
@@ -343,7 +343,7 @@ namespace HRM.UI.ViewModels
                 Directory.CreateDirectory(directoryPath);
 
             File.Copy(filePath, destinationPath, true);  // Lưu file với tên mới
-            CoppyLink = "PersonImage/" + newFileName;
+            CoppyLink = @"D:\PersonInfo\" + newFileName;
         }
         public void LoadData()
         {

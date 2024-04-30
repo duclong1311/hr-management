@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240430084730_Test")]
-    partial class Test
+    [Migration("20240430092123_create")]
+    partial class create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
