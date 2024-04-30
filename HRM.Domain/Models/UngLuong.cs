@@ -9,7 +9,6 @@ namespace HRM.Domain.Models
 {
     public class UngLuong : IEntity
     {
-        public int? NhanSuId { get; set; }
         public NhanSu? NhanSu { get; set; }
         public double SoTienUng { get; set; }
         public DateTime NgayUngLuong{ get; set;}

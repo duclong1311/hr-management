@@ -9,7 +9,6 @@ namespace HRM.Domain.Models
 {
     public class QuaTrinhDaoTao : IEntity
     {
-        public int NhanSuId { get; set; }
         public string TuNgayDenNgay { get; set; }
         public string NoiDaoTao { get; set; }
         public string NganhHoc { get; set; }

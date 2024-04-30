@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240430052454_create")]
-    partial class create
+    [Migration("20240430084235_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace HRM.EFCore.Migrations
                     b.Property<float>("DiMuonVeSom")
                         .HasColumnType("real");
 
-                    b.Property<int>("Nam")
+                    b.Property<int?>("Nam")
                         .HasColumnType("int");
 
                     b.Property<int>("NgayNghiPhep")
@@ -45,11 +45,8 @@ namespace HRM.EFCore.Migrations
                     b.Property<int?>("NhanSuId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Thang")
+                    b.Property<int?>("Thang")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ThuongChuyenCan")
-                        .HasColumnType("bit");
 
                     b.Property<int>("TongSoNgayCong")
                         .HasColumnType("int");
@@ -63,7 +60,7 @@ namespace HRM.EFCore.Migrations
                     b.Property<double>("TongTimeOT")
                         .HasColumnType("float");
 
-                    b.Property<double>("UngLuong")
+                    b.Property<double?>("UngLuong")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -348,6 +345,14 @@ namespace HRM.EFCore.Migrations
 
                     b.HasIndex("ChucVuId");
 
+                    b.HasIndex("QuaTrinhCongTacId")
+                        .IsUnique()
+                        .HasFilter("[QuaTrinhCongTacId] IS NOT NULL");
+
+                    b.HasIndex("QuaTrinhDaoTaoId")
+                        .IsUnique()
+                        .HasFilter("[QuaTrinhDaoTaoId] IS NOT NULL");
+
                     b.ToTable("NhanSus");
                 });
 
@@ -395,12 +400,6 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NhanSuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NhanSuId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("NoiCongTac")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -410,8 +409,6 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("NhanSuId1");
 
                     b.ToTable("QuaTrinhCongTacs");
                 });
@@ -432,12 +429,6 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NhanSuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NhanSuId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("NoiDaoTao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -451,8 +442,6 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("NhanSuId1");
 
                     b.ToTable("QuaTrinhDaoTaos");
                 });
@@ -626,6 +615,14 @@ namespace HRM.EFCore.Migrations
                         .WithMany()
                         .HasForeignKey("ChucVuId");
 
+                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", null)
+                        .WithOne("NhanSu")
+                        .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhCongTacId");
+
+                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", null)
+                        .WithOne("NhanSu")
+                        .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhDaoTaoId");
+
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
@@ -650,28 +647,6 @@ namespace HRM.EFCore.Migrations
                     b.Navigation("NhanSu");
                 });
 
-            modelBuilder.Entity("HRM.Domain.Models.QuaTrinhCongTac", b =>
-                {
-                    b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
-                        .WithMany()
-                        .HasForeignKey("NhanSuId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NhanSu");
-                });
-
-            modelBuilder.Entity("HRM.Domain.Models.QuaTrinhDaoTao", b =>
-                {
-                    b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
-                        .WithMany()
-                        .HasForeignKey("NhanSuId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NhanSu");
-                });
-
             modelBuilder.Entity("HRM.Domain.Models.QuanHeGiaDinh", b =>
                 {
                     b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
@@ -688,6 +663,18 @@ namespace HRM.EFCore.Migrations
                         .HasForeignKey("NhanSuId");
 
                     b.Navigation("NhanSu");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.QuaTrinhCongTac", b =>
+                {
+                    b.Navigation("NhanSu")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.QuaTrinhDaoTao", b =>
+                {
+                    b.Navigation("NhanSu")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class create : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +54,38 @@ namespace HRM.EFCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KyLuats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuaTrinhCongTacs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TuNgayDenNgay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NoiCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuaTrinhCongTacs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuaTrinhDaoTaos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TuNgayDenNgay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NoiDaoTao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NganhHoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HinhThucDaoTao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VanBangChungChi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuaTrinhDaoTaos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,6 +158,16 @@ namespace HRM.EFCore.Migrations
                         column: x => x.ChucVuId,
                         principalTable: "ChucVus",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_NhanSus_QuaTrinhCongTacs_QuaTrinhCongTacId",
+                        column: x => x.QuaTrinhCongTacId,
+                        principalTable: "QuaTrinhCongTacs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_NhanSus_QuaTrinhDaoTaos_QuaTrinhDaoTaoId",
+                        column: x => x.QuaTrinhDaoTaoId,
+                        principalTable: "QuaTrinhDaoTaos",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -134,17 +176,16 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true),
-                    Thang = table.Column<int>(type: "int", nullable: false),
-                    Nam = table.Column<int>(type: "int", nullable: false),
+                    Thang = table.Column<int>(type: "int", nullable: true),
+                    Nam = table.Column<int>(type: "int", nullable: true),
                     TongTimeOT = table.Column<double>(type: "float", nullable: false),
                     TongSoNgayCong = table.Column<int>(type: "int", nullable: false),
                     TongSoNgayCongCN = table.Column<int>(type: "int", nullable: false),
                     TongSoNgayCongNgayLe = table.Column<int>(type: "int", nullable: false),
                     DiMuonVeSom = table.Column<float>(type: "real", nullable: false),
-                    ThuongChuyenCan = table.Column<bool>(type: "bit", nullable: false),
                     NgayNghiPhep = table.Column<int>(type: "int", nullable: false),
-                    UngLuong = table.Column<double>(type: "float", nullable: false)
+                    UngLuong = table.Column<double>(type: "float", nullable: true),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,12 +203,12 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     SoHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoaiHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChiTietHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ChiTietHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -185,13 +226,13 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     CapKhenThuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenHinhThucKhenThuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CapKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenHinhThucKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayQuyetDinh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -238,7 +279,6 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     MoiQuanHe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NamSinh = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -246,7 +286,8 @@ namespace HRM.EFCore.Migrations
                     NgheNghiep = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DonViCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NoiO = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -256,54 +297,6 @@ namespace HRM.EFCore.Migrations
                         column: x => x.NhanSuId,
                         principalTable: "NhanSus",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuaTrinhCongTacs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: false),
-                    TuNgayDenNgay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NoiCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NhanSuId1 = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QuaTrinhCongTacs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QuaTrinhCongTacs_NhanSus_NhanSuId1",
-                        column: x => x.NhanSuId1,
-                        principalTable: "NhanSus",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuaTrinhDaoTaos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: false),
-                    TuNgayDenNgay = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NoiDaoTao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NganhHoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HinhThucDaoTao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VanBangChungChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NhanSuId1 = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QuaTrinhDaoTaos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QuaTrinhDaoTaos_NhanSus_NhanSuId1",
-                        column: x => x.NhanSuId1,
-                        principalTable: "NhanSus",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -393,19 +386,23 @@ namespace HRM.EFCore.Migrations
                 column: "ChucVuId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NhanSus_QuaTrinhCongTacId",
+                table: "NhanSus",
+                column: "QuaTrinhCongTacId",
+                unique: true,
+                filter: "[QuaTrinhCongTacId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NhanSus_QuaTrinhDaoTaoId",
+                table: "NhanSus",
+                column: "QuaTrinhDaoTaoId",
+                unique: true,
+                filter: "[QuaTrinhDaoTaoId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_QuanHeGiaDinhs_NhanSuId",
                 table: "QuanHeGiaDinhs",
                 column: "NhanSuId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_QuaTrinhCongTacs_NhanSuId1",
-                table: "QuaTrinhCongTacs",
-                column: "NhanSuId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_QuaTrinhDaoTaos_NhanSuId1",
-                table: "QuaTrinhDaoTaos",
-                column: "NhanSuId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UngLuongs_NhanSuId",
@@ -435,12 +432,6 @@ namespace HRM.EFCore.Migrations
                 name: "QuanHeGiaDinhs");
 
             migrationBuilder.DropTable(
-                name: "QuaTrinhCongTacs");
-
-            migrationBuilder.DropTable(
-                name: "QuaTrinhDaoTaos");
-
-            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
@@ -457,6 +448,12 @@ namespace HRM.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "ChucVus");
+
+            migrationBuilder.DropTable(
+                name: "QuaTrinhCongTacs");
+
+            migrationBuilder.DropTable(
+                name: "QuaTrinhDaoTaos");
         }
     }
 }
