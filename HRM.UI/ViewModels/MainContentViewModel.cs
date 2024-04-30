@@ -66,8 +66,8 @@ namespace HRM.UI.ViewModels
             });
             AddCVCommand = new RelayCommand<object>(p => true, p =>
             {
-                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
                 _userStore.CurrentNhanSu = null;
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
             });
             RemunerativeCommand = new RelayCommand<object>(p => true, p =>
             {

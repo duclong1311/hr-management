@@ -32,6 +32,10 @@ namespace HRM.UI.Views
         {
 
         }
+        private void Load(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as PersonalInforViewModel).LoadData();
+        }
 
 
     }

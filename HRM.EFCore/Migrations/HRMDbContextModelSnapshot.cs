@@ -373,6 +373,10 @@ namespace HRM.EFCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ChucVuId");
+
+                    b.HasIndex("NhanSuId");
+
                     b.ToTable("NhanSuChucVus");
                 });
 
@@ -622,6 +626,25 @@ namespace HRM.EFCore.Migrations
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>
+                {
+                    b.HasOne("HRM.Domain.Models.ChucVu", "ChucVu")
+                        .WithMany()
+                        .HasForeignKey("ChucVuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
+                        .WithMany()
+                        .HasForeignKey("NhanSuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChucVu");
+
+                    b.Navigation("NhanSu");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.QuaTrinhCongTac", b =>

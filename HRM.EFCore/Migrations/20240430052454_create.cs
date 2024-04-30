@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Create : Migration
+    public partial class create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,23 +54,6 @@ namespace HRM.EFCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KyLuats", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NhanSuChucVus",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: false),
-                    ChucVuId = table.Column<int>(type: "int", nullable: false),
-                    PhuCapChucVu = table.Column<double>(type: "float", nullable: false),
-                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NhanSuChucVus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,6 +204,35 @@ namespace HRM.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NhanSuChucVus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NhanSuId = table.Column<int>(type: "int", nullable: false),
+                    ChucVuId = table.Column<int>(type: "int", nullable: false),
+                    PhuCapChucVu = table.Column<double>(type: "float", nullable: false),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NhanSuChucVus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NhanSuChucVus_ChucVus_ChucVuId",
+                        column: x => x.ChucVuId,
+                        principalTable: "ChucVus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NhanSuChucVus_NhanSus_NhanSuId",
+                        column: x => x.NhanSuId,
+                        principalTable: "NhanSus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuanHeGiaDinhs",
                 columns: table => new
                 {
@@ -358,6 +370,16 @@ namespace HRM.EFCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_KhenThuongs_NhanSuId",
                 table: "KhenThuongs",
+                column: "NhanSuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NhanSuChucVus_ChucVuId",
+                table: "NhanSuChucVus",
+                column: "ChucVuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NhanSuChucVus_NhanSuId",
+                table: "NhanSuChucVus",
                 column: "NhanSuId");
 
             migrationBuilder.CreateIndex(

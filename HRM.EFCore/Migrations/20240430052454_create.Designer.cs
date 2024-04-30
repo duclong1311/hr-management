@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240429193447_Create")]
-    partial class Create
+    [Migration("20240430052454_create")]
+    partial class create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -376,6 +376,10 @@ namespace HRM.EFCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ChucVuId");
+
+                    b.HasIndex("NhanSuId");
+
                     b.ToTable("NhanSuChucVus");
                 });
 
@@ -625,6 +629,25 @@ namespace HRM.EFCore.Migrations
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>
+                {
+                    b.HasOne("HRM.Domain.Models.ChucVu", "ChucVu")
+                        .WithMany()
+                        .HasForeignKey("ChucVuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
+                        .WithMany()
+                        .HasForeignKey("NhanSuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChucVu");
+
+                    b.Navigation("NhanSu");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.QuaTrinhCongTac", b =>

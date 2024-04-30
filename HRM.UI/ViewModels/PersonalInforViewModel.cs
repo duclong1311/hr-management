@@ -248,12 +248,14 @@ namespace HRM.UI.ViewModels
 
         public PersonalInforViewModel(IUserStore userStore, IRepository<BoPhan> bophanRepository, IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
-            LoadData();
+            _userStore = userStore;
             _hosoRepository = hosoRepository;
             _boPhanRepository = bophanRepository;
             _unitOfWork = unitOfWork;
             _viewModelFactory = viewModelFactory;
-            _userStore = userStore;
+
+            LoadData();
+
 
             FamilyInforCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
@@ -350,9 +352,10 @@ namespace HRM.UI.ViewModels
         }
         public void LoadData()
         {
-            if (_userStore != null)
+            if (_userStore.CurrentNhanSu != null)
             {
                 NhanSu NhanSu = _hosoRepository.AsQueryable().FirstOrDefault(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien);
+                MaNhanVien = NhanSu.MaNhanVien;
                 ImageSource = NhanSu.Anh;
                 HoTen = NhanSu.HoTen;
                 NgaySinh = (DateTime)NhanSu.NgaySinh;
@@ -367,7 +370,23 @@ namespace HRM.UI.ViewModels
                 TonGiao = NhanSu.TonGiao;
                 CapNgay = NhanSu.CapNgay;
                 NoiKetNapDang = NhanSu.NoiketNapDang;
-                _selectedCboBoPhan.Id = (int)NhanSu.BoPhanId;
+                SeletedCboBoPhan.Id = (int)NhanSu.BoPhanId;
+            }
+            else
+            {
+                MaNhanVien = "";
+                ImageSource = "";
+                HoTen = "";
+                NguyenQuan = "";
+                DanToc = "";
+                CCCD = ""   ;
+                KetNapDang = "";
+                SoThich = "";
+                STK = "";
+                MaSoBHXH = "";
+                MaSoThue = "";
+                TonGiao = "";
+                NoiKetNapDang = "";
             }
         }
     }
