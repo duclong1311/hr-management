@@ -8,7 +8,7 @@
              d:DesignHeight="640" d:DesignWidth="820">
     <Grid>
         <StackPanel>
-            <Button Height="50" Content="Import Data" Command="{Binding ImportDataCommand}"/>
+            <Button Height="50" Content="Nhập từ File" Command="{Binding ImportDataCommand}"/>
             <DataGrid ItemsSource="{Binding BangCongDataList}"
                       AutoGenerateColumns="False" >
                 <DataGrid.Columns>
@@ -31,6 +31,10 @@
 
                 </DataGrid.Columns>
             </DataGrid>
+            <Button Height="50"
+                    Content="Lưu lại"
+                    Command="{Binding AddCommand}" />
+
         </StackPanel>
     </Grid>
 </UserControl>

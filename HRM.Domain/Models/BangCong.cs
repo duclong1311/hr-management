@@ -10,16 +10,15 @@ namespace HRM.Domain.Models
     public class BangCong : IEntity
     {
         public int? NhanSuId { get; set; }
-        public int Thang { get; set; }
-        public int Nam { get; set; }
+        public int? Thang { get; set; }
+        public int? Nam { get; set; }
         public double TongTimeOT { get; set; }
         public int TongSoNgayCong {  get; set; }
         public int TongSoNgayCongCN {  get; set; }
         public int TongSoNgayCongNgayLe { get; set; }
         public float DiMuonVeSom { get; set; }
-        public bool ThuongChuyenCan { get; set; }   
         public int NgayNghiPhep { get; set; }
-        public double UngLuong { get; set; }
+        public double? UngLuong { get; set; }
         public NhanSu? NhanSu { get; set; }
     }
 }
