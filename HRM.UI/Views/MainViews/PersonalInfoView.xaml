@@ -39,7 +39,7 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <Image Style="{StaticResource Image_Style}"
-                       Source="{Binding ImageSource}" />
+                       Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 <Button Content="Upload Image"
                         Style="{StaticResource Button_Style}"
                         Height="35"
@@ -75,7 +75,7 @@
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Mã số thuế: "
                        Style="{StaticResource Label_Style}" />
-                
+
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1"
@@ -97,9 +97,6 @@
                 <Label Content="Cấp ngày: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
-                       Style="{StaticResource Label_Style}" />
-
-                <Label Content="Chức vụ: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Bộ phận: "
                        Style="{StaticResource Label_Style}" />
@@ -152,14 +149,14 @@
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding STK}" />
-                
+
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding MaSoBHXH}" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding MaSoThue}" />
 
-                
+
             </StackPanel>
         </Grid>
 
@@ -212,17 +209,7 @@
                           Style="{StaticResource Combobox_Style}"
                           ItemsSource="{Binding ListBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                           DisplayMemberPath="TenBoPhan"
-                          SelectedItem="{Binding SeletedCboBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                          SelectedValuePath="Id" />
-
-
-                <ComboBox x:Name="cbb_ChucVu"
-                          Style="{StaticResource Combobox_Style}"
-                          ItemsSource="{Binding ListChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                          DisplayMemberPath="TenChucVu"
-                          SelectedItem="{Binding SeletedCboChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                          SelectedValuePath="Id" />
-
+                          SelectedItem="{Binding SeletedCboBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </StackPanel>
         </Grid>
 

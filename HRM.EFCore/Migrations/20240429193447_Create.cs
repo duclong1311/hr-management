@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class hrm : Migration
+    public partial class Create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,10 +32,7 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhuCapChucVu = table.Column<double>(type: "float", nullable: false),
-                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,6 +54,23 @@ namespace HRM.EFCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KyLuats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NhanSuChucVus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NhanSuId = table.Column<int>(type: "int", nullable: false),
+                    ChucVuId = table.Column<int>(type: "int", nullable: false),
+                    PhuCapChucVu = table.Column<double>(type: "float", nullable: false),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NhanSuChucVus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,7 +226,7 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: false),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     MoiQuanHe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NamSinh = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -229,8 +243,7 @@ namespace HRM.EFCore.Migrations
                         name: "FK_QuanHeGiaDinhs_NhanSus_NhanSuId",
                         column: x => x.NhanSuId,
                         principalTable: "NhanSus",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -317,14 +330,14 @@ namespace HRM.EFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "ChucVus",
-                columns: new[] { "Id", "NgayBatDau", "NgayKetThuc", "PhuCapChucVu", "TenChucVu" },
+                columns: new[] { "Id", "TenChucVu" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0.0, "Nhân viên" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0.0, "Quản lý" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0.0, "Trưởng phòng" },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0.0, "Trưởng bộ phận" },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0.0, "Giám đốc" }
+                    { 1, "Nhân viên" },
+                    { 2, "Quản lý" },
+                    { 3, "Trưởng phòng" },
+                    { 4, "Trưởng bộ phận" },
+                    { 5, "Giám đốc" }
                 });
 
             migrationBuilder.InsertData(
@@ -392,6 +405,9 @@ namespace HRM.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "KyLuats");
+
+            migrationBuilder.DropTable(
+                name: "NhanSuChucVus");
 
             migrationBuilder.DropTable(
                 name: "QuanHeGiaDinhs");

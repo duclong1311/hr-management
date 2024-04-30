@@ -24,6 +24,7 @@ namespace HRM.EFCore
         public DbSet<UngLuong> UngLuongs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<NhanSuChucVu> NhanSuChucVus { get; set; }
         public HRMDbContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,7 @@ namespace HRM.EFCore
             modelBuilder.ApplyConfiguration(new UngLuongConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanSuChucVuConfiguration());
         }
     }
 }

@@ -77,7 +77,7 @@ namespace HRM.UI.ViewModels
         }
         private void LoadData()
         {
-            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.BoPhan).Include(x => x.ChucVu));
+            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.BoPhan).ToList());
             if (!String.IsNullOrWhiteSpace(Filter))
             {
                 List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());

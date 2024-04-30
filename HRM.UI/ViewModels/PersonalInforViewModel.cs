@@ -18,6 +18,8 @@ using CommunityToolkit.Mvvm.Input;
 using System.Runtime.CompilerServices;
 using HRM.UI.Stores;
 using HRM.UI.Factories;
+using System.IO;
+using HRM.UI.States.Users;
 
 namespace HRM.UI.ViewModels
 {
@@ -26,9 +28,8 @@ namespace HRM.UI.ViewModels
         private IUnitOfWork _unitOfWork;
 
         private IRepository<NhanSu> _hosoRepository;
-        private IRepository<NhanSu> _repository;
         private IRepository<BoPhan> _boPhanRepository;
-        private IRepository<ChucVu> _chucVuRepository;
+        private IUserStore _userStore;
         private readonly IViewModelFactory _viewModelFactory;
         public ICommand AddCommand { get; set; }
         public ICommand UploadImageCommand { get; set; }
@@ -37,23 +38,23 @@ namespace HRM.UI.ViewModels
         public ObservableCollection<string> EthnicityData { get; set; }
 
         private ObservableCollection<BoPhan> _listBoPhan;
-        public ObservableCollection<BoPhan> ListBoPhan 
+        public ObservableCollection<BoPhan> ListBoPhan
         {
-            get => _listBoPhan; 
-            set 
-            { 
-                _listBoPhan = value; OnPropertyChanged(); 
-            } 
+            get => _listBoPhan;
+            set
+            {
+                _listBoPhan = value; OnPropertyChanged();
+            }
         }
 
         private ObservableCollection<ChucVu> _listChucVu;
-        public ObservableCollection<ChucVu> ListChucVu 
+        public ObservableCollection<ChucVu> ListChucVu
         {
-            get => _listChucVu; 
-            set 
+            get => _listChucVu;
+            set
             {
-                _listChucVu = value; OnPropertyChanged(); 
-            } 
+                _listChucVu = value; OnPropertyChanged();
+            }
         }
         private string _filterBoPhan = "";
         public string FilterBoPhan { get => _filterBoPhan; set { _filterBoPhan = value; OnPropertyChanged(); LoadComboBoxData(); } }
@@ -208,8 +209,8 @@ namespace HRM.UI.ViewModels
         }
 
         //Image
-        private ImageSource _imageSource;
-        public ImageSource ImageSource
+        private string _imageSource;
+        public string ImageSource
         {
             get { return _imageSource; }
             set
@@ -218,40 +219,13 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        public void UploadImage()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif";
-            openFileDialog.Multiselect = false;
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string selectedImagePath = openFileDialog.FileName;
-
-                try
-                {
-                    BitmapImage bitmapImage = new BitmapImage(new Uri(selectedImagePath));
-
-                    ImageSource = bitmapImage;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error loading image: " + ex.Message);
-                }
-            }
-        }
-        public bool CanUploadImage()
-        {
-            return true;
-        }
         //Combobox 
         private void LoadComboBoxData()
         {
-            ListBoPhan = new ObservableCollection<BoPhan>();
-
-            ListChucVu = new ObservableCollection<ChucVu>();
+            ListBoPhan = new ObservableCollection<BoPhan>(_boPhanRepository.AsQueryable().ToList());
+            SeletedCboBoPhan = ListBoPhan.FirstOrDefault();
 
             EthnicityData = new ObservableCollection<string>();
             EthnicityData.Add("Kinh");
@@ -272,11 +246,14 @@ namespace HRM.UI.ViewModels
             }
         }
 
-        public PersonalInforViewModel(IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
+        public PersonalInforViewModel(IUserStore userStore, IRepository<BoPhan> bophanRepository, IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
+            LoadData();
             _hosoRepository = hosoRepository;
+            _boPhanRepository = bophanRepository;
             _unitOfWork = unitOfWork;
             _viewModelFactory = viewModelFactory;
+            _userStore = userStore;
 
             FamilyInforCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
@@ -290,7 +267,23 @@ namespace HRM.UI.ViewModels
             SelectGenderCommand = new CommunityToolkit.Mvvm.Input.RelayCommand<object>(SelectGender);
 
             //Upload ảnh
-            UploadImageCommand = new Commands.RelayCommand<object>(p => CanUploadImage(), p => UploadImage());
+            UploadImageCommand = new Commands.RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg",
+                    Title = "Select an image file"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    ImageSource = openFileDialog.FileName;  // Update the UI
+                    SaveImageToFolder(openFileDialog.FileName);  // Save the file
+                }
+            });
 
             // Thêm thông tin bản thân vào database
             AddCommand = new Commands.RelayCommand<object>((p) =>
@@ -302,7 +295,7 @@ namespace HRM.UI.ViewModels
                 var NhanSu = new NhanSu()
                 {
                     MaNhanVien = MaNhanVien,
-                    Anh = ImageSource.ToString(),
+                    Anh = CoppyLink.ToString(),
                     HoTen = HoTen,
                     GioiTinh = GioiTinh,
                     NgaySinh = NgaySinh,
@@ -314,10 +307,10 @@ namespace HRM.UI.ViewModels
                     KetNapDang = KetNapDang,
                     NoiketNapDang = NoiKetNapDang,
                     SoThich = SoThich,
-                    STK = STK, 
+                    STK = STK,
                     MaSoBHXH = MaSoBHXH,
                     MaSoThue = MaSoThue,
-                    //BoPhanId = SeletedCboBoPhan.Id,
+                    BoPhanId = SeletedCboBoPhan.Id,
                     //ChucVuId = SeletedCboChucVu.Id,
                 };
                 await _unitOfWork.BeginTransactionAsync();
@@ -341,6 +334,41 @@ namespace HRM.UI.ViewModels
             });
 
 
+        }
+        public string CoppyLink = "";
+        private void SaveImageToFolder(string filePath)
+        {
+            string directoryPath = "PersonImage";  // Modify the path as needed
+            string newFileName = $"Image_{DateTime.Now:yyyyMMddHHmmss}.jpg";  // Tạo tên mới cho file dựa trên thời gian
+            string destinationPath = Path.Combine(directoryPath, newFileName);
+
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            File.Copy(filePath, destinationPath, true);  // Lưu file với tên mới
+            CoppyLink = "PersonImage/" + newFileName;
+        }
+        public void LoadData()
+        {
+            if (_userStore != null)
+            {
+                NhanSu NhanSu = _hosoRepository.AsQueryable().FirstOrDefault(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien);
+                ImageSource = NhanSu.Anh;
+                HoTen = NhanSu.HoTen;
+                NgaySinh = (DateTime)NhanSu.NgaySinh;
+                NguyenQuan = NhanSu.NguyenQuan;
+                DanToc = NhanSu.DanToc;
+                CCCD = NhanSu.CCCD;
+                KetNapDang = NhanSu.KetNapDang;
+                SoThich = NhanSu.SoThich;
+                STK = NhanSu.STK;
+                MaSoBHXH = NhanSu.MaSoBHXH;
+                MaSoThue = NhanSu.MaSoThue;
+                TonGiao = NhanSu.TonGiao;
+                CapNgay = NhanSu.CapNgay;
+                NoiKetNapDang = NhanSu.NoiketNapDang;
+                _selectedCboBoPhan.Id = (int)NhanSu.BoPhanId;
+            }
         }
     }
 }

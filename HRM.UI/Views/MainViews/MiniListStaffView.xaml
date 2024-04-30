@@ -79,10 +79,6 @@
                                                 HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                                 Width="100"
                                                 DisplayMemberBinding="{Binding BoPhan.TenBoPhan}" />
-                                <GridViewColumn Header="Chức vụ"
-                                                HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
-                                                Width="100"
-                                                DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
                                 <GridViewColumn Header="Ngày sinh"
                                                 HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                                 Width="100"

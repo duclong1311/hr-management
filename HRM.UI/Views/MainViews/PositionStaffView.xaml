@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="HRM.UI.Views.PositionStaffView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid Margin="20,0,20,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="330" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="24"
+                               Margin="0,20,0,20">CHỨC VỤ</TextBlock>
+                </Grid>
+
+                <!--Label-->
+                <Grid Grid.Row="1"
+                      Grid.Column="0">
+                    <StackPanel>
+                        <Label Content="Mã nhân viên: " />
+                        <Label Content="Chức vụ: " />
+                        <Label Content="PhuCapChuVu:  " />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1"
+                      Grid.Column="2">
+                    <StackPanel>
+                        <Label Content="Ngày bắt đầu: " />
+                        <Label Content="Ngày kết thúc: " />
+                    </StackPanel>
+                </Grid>
+
+                <!--Textbox-->
+                <Grid Grid.Column="1"
+                      Grid.Row="1">
+                    <StackPanel>
+                        <ComboBox SelectedItem="{Binding SelectedNhanSu}" ItemsSource="{Binding ListNhanSu }" DisplayMemberPath="MaNhanVien" />
+                        <ComboBox SelectedItem="{Binding SelectedChucVu}" ItemsSource="{Binding ListChucVu }" DisplayMemberPath="TenChucVu"/>
+                        <TextBox x:Name="tb_DonViCongTac"
+                                 Text="{Binding PhuCapChucVu, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="3"
+                      Grid.Row="1">
+                    <StackPanel>
+                        <DatePicker SelectedDate="{Binding NgayBatDau, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker SelectedDate="{Binding NgayKetThuc, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel VerticalAlignment="Center"
+                            Grid.Row="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button Command="{Binding AddCommand}"
+                            Width="100px"
+                            Height="50"
+                            Margin="5,5,5,5"
+                            Content="Thêm" />
+                    <Button Command="{Binding UpdateCommand}"
+                            Width="100px"
+                            Height="50"
+                            Margin="5,5,5,5"
+                            Content="Sửa" />
+                    <Button Command="{Binding DeleteCommand}"
+                            Width="100px"
+                            Height="50"
+                            Margin="5,5,5,5"
+                            Content="Xóa" />
+                </StackPanel>
+                <Grid Grid.Row="3"
+                      Grid.ColumnSpan="4">
+                    <ListView Margin="10"
+                              Name="ListStaffView_Pick"
+                              BorderBrush="Black"
+                              ItemsSource="{Binding ListNhanSuChucVu}"
+                              SelectedItem="{Binding SelectedItem}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Left" />
+                                <Setter Property="Padding"
+                                        Value="5,0,0,0" />
+                                <Setter Property="FontSize"
+                                        Value="14" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã nhân viên"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
+                                <GridViewColumn Header="Tên nhân viên"
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding NhanSu.HoTen }" />
+                                <GridViewColumn Header="Chức vụ"
+                                                Width="120"
+                                                DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
+                                <GridViewColumn Header="Phụ cấp chức vụ"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding PhuCapChucVu}" />
+                                <GridViewColumn Header="Ngày bắt đầu"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding NgayBatDau}" />
+                                <GridViewColumn Header="Ngày kết thúc"
+                                                Width="150"
+                                                DisplayMemberBinding="{Binding NgayKetThuc}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+

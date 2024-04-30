@@ -29,6 +29,7 @@ namespace HRM.UI.ViewModels
         public ICommand TrackingCommand { get; set; }  
         public ICommand RemunerativeCommand { get; set; }
         public ICommand AdvanceSalaryCommand { get; set; }
+        public ICommand PositionStaffCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -65,7 +66,8 @@ namespace HRM.UI.ViewModels
             });
             AddCVCommand = new RelayCommand<object>(p => true, p =>
             {
-                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
+                _userStore.CurrentNhanSu = null;
             });
             RemunerativeCommand = new RelayCommand<object>(p => true, p =>
             {
@@ -78,6 +80,10 @@ namespace HRM.UI.ViewModels
             TrackingCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Tracking);
+            });
+            PositionStaffCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PositionStaff);
             });
 
             //Lương 
