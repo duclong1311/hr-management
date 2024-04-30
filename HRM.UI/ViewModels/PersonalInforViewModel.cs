@@ -253,21 +253,16 @@ namespace HRM.UI.ViewModels
             _boPhanRepository = bophanRepository;
             _unitOfWork = unitOfWork;
             _viewModelFactory = viewModelFactory;
-
+            LoadComboBoxData();
             LoadData();
-
-
             FamilyInforCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
                 childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.FamilyInfor);
             });
             //Load combobox
-            LoadComboBoxData();
-
             //Handle radio button
             GioiTinh = true;
             SelectGenderCommand = new CommunityToolkit.Mvvm.Input.RelayCommand<object>(SelectGender);
-
             //Upload ảnh
             UploadImageCommand = new Commands.RelayCommand<object>(p =>
             {
@@ -379,7 +374,7 @@ namespace HRM.UI.ViewModels
                 HoTen = "";
                 NguyenQuan = "";
                 DanToc = "";
-                CCCD = ""   ;
+                CCCD = "";
                 KetNapDang = "";
                 SoThich = "";
                 STK = "";

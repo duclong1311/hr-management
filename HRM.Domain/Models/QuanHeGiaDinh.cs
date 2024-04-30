@@ -9,6 +9,7 @@ namespace HRM.Domain.Models
 {
     public class QuanHeGiaDinh : IEntity
     {
+        public string MaNhanVien {  get; set; }
         public string MoiQuanHe { get; set; }
         public string HoVaTen { get; set; } 
         public DateTime NamSinh { get; set; }

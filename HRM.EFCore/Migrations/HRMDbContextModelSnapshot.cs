@@ -463,6 +463,10 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MaNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MoiQuanHe")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

@@ -75,7 +75,7 @@ namespace HRM.UI.ViewModels
             //});
 
         }
-        private void LoadData()
+        public void LoadData()
         {
             List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.BoPhan).ToList());
             if (!String.IsNullOrWhiteSpace(Filter))

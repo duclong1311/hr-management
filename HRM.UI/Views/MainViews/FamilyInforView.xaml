@@ -8,7 +8,8 @@
              mc:Ignorable="d"
              d:DesignHeight="640"
              d:DesignWidth="820"
-             Background="White">
+             Background="White"
+             Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -279,6 +279,7 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MoiQuanHe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NamSinh = table.Column<DateTime>(type: "datetime2", nullable: false),

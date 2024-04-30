@@ -13,6 +13,7 @@ using HRM.Domain.Models;
 using HRM.UI.Commands;
 using HRM.UI.Factories;
 using HRM.UI.States.Staff;
+using HRM.UI.States.Users;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
 
@@ -142,13 +143,15 @@ namespace HRM.UI.ViewModels
         }
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
-        public FamilyInforViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
+        private readonly IUserStore _userStore;
+        public FamilyInforViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _quanHeGiaDinhRepository = quanHeGiaDinhRepository;
             _unitOfWork = unitOfWork;
             _childContentStore = childContentStore;
+            _userStore = userStore;
             LoadComboBoxData();
             LoadData();
             TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
@@ -166,6 +169,7 @@ namespace HRM.UI.ViewModels
             {
                 var QuanHeGiaDinh = new QuanHeGiaDinh()
                 {
+                    MaNhanVien = _userStore.CurrentNhanSu.MaNhanVien,
                     MoiQuanHe = MoiQuanHe,
                     HoVaTen = HoVaTen,
                     NamSinh = NamSinh,
@@ -220,9 +224,9 @@ namespace HRM.UI.ViewModels
             }
             );
         }
-        private void LoadData()
+        public void LoadData()
         {
-            List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository.AsQueryable().ToList());
+            List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository.AsQueryable().Where(x=> x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
             /*            if (!String.IsNullOrWhiteSpace(Filter))
                         {
                             List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
