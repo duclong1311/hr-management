@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\NewFolder - Copy\**" />
+    <EmbeddedResource Remove="ViewModels\NewFolder - Copy\**" />
+    <None Remove="ViewModels\NewFolder - Copy\**" />
+    <Page Remove="ViewModels\NewFolder - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Images\++_logo_red %282%29.png" />
     <None Remove="Views\Images\++_logo_red %284%29.png" />
     <None Remove="Views\Images\back_groud.png" />

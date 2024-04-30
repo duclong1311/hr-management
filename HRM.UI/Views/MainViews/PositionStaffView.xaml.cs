@@ -1,5 +1,4 @@
-﻿using HRM.UI.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,22 +16,13 @@ using System.Windows.Shapes;
 namespace HRM.UI.Views
 {
     /// <summary>
-    /// Interaction logic for PersonalInfoView.xaml
+    /// Interaction logic for PositionStaffView.xaml
     /// </summary>
-    public partial class PersonalInfoView : UserControl
+    public partial class PositionStaffView : UserControl
     {
-        public PersonalInfoView()
+        public PositionStaffView()
         {
             InitializeComponent();
         }
-
-  
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-
     }
 }

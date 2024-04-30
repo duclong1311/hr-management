@@ -26,6 +26,7 @@ namespace HRM.UI.Defines
         AddCV,
         Contract,
         ChildContent,
+        PositionStaff,
         // ----------------------- Công cán -----------------------
         Tracking,
         // ----------------------- Lương thưởng -----------------------

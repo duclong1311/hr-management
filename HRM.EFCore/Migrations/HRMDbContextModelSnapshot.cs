@@ -127,15 +127,6 @@ namespace HRM.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("NgayBatDau")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("NgayKetThuc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("PhuCapChucVu")
-                        .HasColumnType("float");
-
                     b.Property<string>("TenChucVu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -148,41 +139,26 @@ namespace HRM.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            NgayBatDau = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayKetThuc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhuCapChucVu = 0.0,
                             TenChucVu = "Nhân viên"
                         },
                         new
                         {
                             Id = 2,
-                            NgayBatDau = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayKetThuc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhuCapChucVu = 0.0,
                             TenChucVu = "Quản lý"
                         },
                         new
                         {
                             Id = 3,
-                            NgayBatDau = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayKetThuc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhuCapChucVu = 0.0,
                             TenChucVu = "Trưởng phòng"
                         },
                         new
                         {
                             Id = 4,
-                            NgayBatDau = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayKetThuc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhuCapChucVu = 0.0,
                             TenChucVu = "Trưởng bộ phận"
                         },
                         new
                         {
                             Id = 5,
-                            NgayBatDau = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayKetThuc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhuCapChucVu = 0.0,
                             TenChucVu = "Giám đốc"
                         });
                 });
@@ -372,6 +348,34 @@ namespace HRM.EFCore.Migrations
                     b.ToTable("NhanSus");
                 });
 
+            modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChucVuId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NgayBatDau")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayKetThuc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NhanSuId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PhuCapChucVu")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NhanSuChucVus");
+                });
+
             modelBuilder.Entity("HRM.Domain.Models.QuaTrinhCongTac", b =>
                 {
                     b.Property<int>("Id")
@@ -477,7 +481,7 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NhanSuId")
+                    b.Property<int?>("NhanSuId")
                         .HasColumnType("int");
 
                     b.Property<string>("NoiO")
@@ -646,9 +650,7 @@ namespace HRM.EFCore.Migrations
                 {
                     b.HasOne("HRM.Domain.Models.NhanSu", "NhanSu")
                         .WithMany()
-                        .HasForeignKey("NhanSuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NhanSuId");
 
                     b.Navigation("NhanSu");
                 });

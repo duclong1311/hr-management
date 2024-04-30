@@ -14,39 +14,14 @@ using HRM.UI.Commands;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HRM.UI.ViewModels
 {
     public class DepartmentViewModel : BaseViewModel
     {
-        private readonly IViewModelFactory _viewModelFactory;
-        private readonly MainContentStore _mainContentStore;
-        private IUnitOfWork _unitOfWork;
-        private IRepository<BoPhan> _boPhanRepository;
-        public ICommand AddCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-
-        private string _tenBoPhan;
-        public string TenBoPhan
-        {
-            get { return _tenBoPhan; }
-            set
-            {
-                _tenBoPhan = value;
-                OnPropertyChanged();
-            }
-        }
-
         private ObservableCollection<BoPhan> _list = new ObservableCollection<BoPhan>();
-        public ObservableCollection<BoPhan> List
-        {
-            get => _list;
-            set
-            {
-                _list = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<BoPhan> List { get => _list; set { _list = value; OnPropertyChanged(); } }
         private BoPhan _selectedItem;
         public BoPhan SelectedItem
         {
@@ -56,54 +31,69 @@ namespace HRM.UI.ViewModels
                 _selectedItem = value;
                 if (_selectedItem != null)
                 {
-                    TenBoPhan = SelectedItem.TenBoPhan;
+                    DisplayName = _selectedItem.TenBoPhan;
                 }
                 OnPropertyChanged();
             }
         }
+        private string _displayName;
+        public string DisplayName { get => _displayName; set { _displayName = value; OnPropertyChanged(); } }
+        public ICommand AddCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        private IRepository<BoPhan> _repository;
+        private IUnitOfWork _unitOfWork;
 
-        private void LoadData()
+        public DepartmentViewModel(IRepository<BoPhan> repository, IUnitOfWork unitOfWork)
         {
-            List = new ObservableCollection<BoPhan>(_boPhanRepository.AsQueryable().ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
-        }
-
-        public DepartmentViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<BoPhan> BoPhanRepository, IUnitOfWork unitOfWork)
-        {
-            _viewModelFactory = viewModelFactory;
-            _mainContentStore = mainContentStore;
-            _boPhanRepository = BoPhanRepository;
+            _repository = repository;
             _unitOfWork = unitOfWork;
-
+            LoadData();
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(DisplayName))
+                    return false;
+                if (_repository.AsQueryable().Any(x => x.TenBoPhan == DisplayName))
+                    return false;
                 return true;
             }, async (p) =>
-
             {
-                var BoPhan = new BoPhan()
-                {
-                    TenBoPhan = TenBoPhan
-                };
+                var unit = new BoPhan() { TenBoPhan = DisplayName };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    BoPhan = await _boPhanRepository.AddAsync(BoPhan);
+                    unit = await _repository.AddAsync(unit);
                     await _unitOfWork.CommitAsync();
                     LoadData();
-                    if (BoPhan != null)
-                    {
-                        MessageBox.Show("Thêm thành công");
-                        LoadData();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Lỗi hệ thống");
-                    }
 
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            });
+
+            UpdateCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+
+                if (!_repository.AsQueryable().Any(x => x.Id == SelectedItem.Id))
+                    return false;
+
+                return true;
+
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var unit = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    unit.TenBoPhan = DisplayName;
+                    await _repository.UpdateAsync(unit);
+                    await _unitOfWork.CommitAsync();
+
+                    LoadData();
                 }
                 catch (Exception ex)
                 {
@@ -118,23 +108,27 @@ namespace HRM.UI.ViewModels
                 return true;
             }, async (p) =>
             {
+                if (!_repository.AsQueryable().Any(x => x.Id == SelectedItem.Id))
+                    return;
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    var QuanHeGiaDinh = await _boPhanRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
-                    await _boPhanRepository.DeleteAsync(QuanHeGiaDinh);
+                    var unit = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    await _repository.DeleteAsync(unit);
                     await _unitOfWork.CommitAsync();
+
                     LoadData();
                 }
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
                 }
-            }
-            );
+            });
 
-            LoadData();
         }
-
+        private void LoadData()
+        {
+            List = new ObservableCollection<BoPhan>(_repository.AsQueryable().ToList());
+        }
     }
 }

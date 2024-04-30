@@ -60,5 +60,8 @@
         <DataTemplate DataType="{x:Type vm:AdvanceSalaryViewModel}">
             <view:AdvanceSalaryView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PostionStaffViewModel}">
+            <view:PositionStaffView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
