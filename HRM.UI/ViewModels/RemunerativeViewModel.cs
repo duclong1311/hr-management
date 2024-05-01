@@ -66,7 +66,7 @@ namespace HRM.UI.ViewModels
             }
         }
 
-        private DateTime _ngayQuyetDinh;
+        private DateTime _ngayQuyetDinh = DateTime.Today;
         public DateTime NgayQuyetDinh
         {
             get { return _ngayQuyetDinh; }
@@ -74,6 +74,14 @@ namespace HRM.UI.ViewModels
             {
                 _ngayQuyetDinh = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public void CheckNullDateTimeValue()
+        {
+            if (NgayQuyetDinh == DateTime.MinValue)
+            {
+                NgayQuyetDinh = new DateTime(1900, 1, 1);
             }
         }
 
@@ -128,7 +136,8 @@ namespace HRM.UI.ViewModels
             _childContentStore = childContentStore;
             _userStore = userStore;
 
-            LoadComboBoxData();
+            LoadComboBoxData(); 
+            //CheckNullDateTimeValue();
             Load();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>

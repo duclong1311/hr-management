@@ -74,5 +74,7 @@
                 Value="Short" />
         <Setter Property="DisplayDateStart"
                 Value="01/01/1900" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>
