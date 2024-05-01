@@ -70,5 +70,9 @@
                 Value="14" />
         <Setter Property="Padding"
                 Value="5" />
+        <Setter Property="SelectedDateFormat"
+                Value="Short" />
+        <Setter Property="DisplayDateStart"
+                Value="01/01/1900" />
     </Style>
 </ResourceDictionary>

@@ -78,10 +78,10 @@
             <Grid Grid.Column="3"
                   Grid.Row="1">
                 <StackPanel>
-                    <DatePicker SelectedDate="{Binding Path=NgayQuyetDinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"
-                                Style="{StaticResource DatePicker_Style}"
-                                DisplayDateStart="1/1/1900"
-                                SelectedDateFormat="Short" />
+                    <DatePicker SelectedDate="{Binding Path=NgayQuyetDinh, 
+                                                Mode=TwoWay, 
+                                                TargetNullValue={x:Static System:DateTime.Now}}"
+                                Style="{StaticResource DatePicker_Style}" />
 
                     <TextBox Text="{Binding SoQuyetDinh}"
                              Style="{StaticResource TextBox_Style}" />
