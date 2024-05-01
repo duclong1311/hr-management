@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
 using HRM.UI.States.Users;
+using HRM.UI.Factories;
+using HRM.UI.Stores;
 
 namespace HRM.UI.ViewModels
 {
@@ -27,22 +29,12 @@ namespace HRM.UI.ViewModels
         }
         private IUnitOfWork _unitOfWork;
 
-        private IRepository<KhenThuongKyLuat> _khenThuongRespository;
+        private IRepository<KhenThuongKyLuat> _khenThuongKyLuatRespository;
         public ICommand AddCommand { get; set; }
         public ObservableCollection<string> CapKhenThuongData { get; set; }
-        private int _nhanSuId { get; set; }
-        public int NhanSuId
-        {
-            get { return _nhanSuId; }
-            set
-            {
-                _nhanSuId = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string _capKhenThuong;
-        public string CapKhenThuong
+        public string CapKhenThuongKyLuat
         {
             get { return _capKhenThuong; }
             set
@@ -51,34 +43,25 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string _capKyLuat;
-        public string CapKyLuat
+
+        private string _tenHinhThuc;
+        public string TenHinhThuc
         {
-            get { return _capKyLuat; }
+            get { return _tenHinhThuc; }
             set
             {
-                _capKyLuat = value;
+                _tenHinhThuc = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _tenHinhThucKhenThuong;
-        public string TenHinhThucKhenThuong
+        private string _noiDung;
+        public string NoiDung
         {
-            get { return _tenHinhThucKhenThuong; }
+            get { return _noiDung; }
             set
             {
-                _tenHinhThucKhenThuong = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _tenHinhThucKyLuat;
-        public string TenHinhThucKyLuat
-        {
-            get { return _tenHinhThucKyLuat; }
-            set
-            {
-                _tenHinhThucKyLuat = value;
+                _noiDung = value;
                 OnPropertyChanged();
             }
         }
@@ -104,18 +87,45 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        private KhenThuongKyLuat _selectedItem;
+        public KhenThuongKyLuat SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                {
+                    CapKhenThuongKyLuat = SelectedItem.CapKhenThuongKyLuat;
+                    TenHinhThuc = SelectedItem.TenHinhThuc;
+                    NoiDung = SelectedItem.NoiDung;
+                    NgayQuyetDinh = (DateTime)SelectedItem.NgayQuyetDinh;
+                    SoQuyetDinh = SelectedItem.SoQuyetDinh;
+                }
+                OnPropertyChanged();
+            }
+        }
         private void LoadComboBoxData()
         {
             CapKhenThuongData = new ObservableCollection<string>();
-            CapKhenThuongData.Add("Cấp 1");
-            CapKhenThuongData.Add("Cấp 2");
-            CapKhenThuongData.Add("Cấp 2");
+            CapKhenThuongData.Add("Cá nhân");
+            CapKhenThuongData.Add("Đội, nhóm");
+            CapKhenThuongData.Add("Bộ phận");
+            CapKhenThuongData.Add("Công ty");
         }
+        private readonly IViewModelFactory _viewModelFactory;
+        private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
-        public RemunerativeViewModel(IUserStore userStore, IUnitOfWork unitOfWork, IRepository<KhenThuongKyLuat> KhenThuongRepository)
+        private readonly ChildContentStore _childContentStore;
+
+
+        public RemunerativeViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<KhenThuongKyLuat> khenThuongKyLuatRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
+            _viewModelFactory = viewModelFactory;
+            _mainContentStore = mainContentStore;
+            _khenThuongKyLuatRespository = khenThuongKyLuatRepository;
             _unitOfWork = unitOfWork;
-            _khenThuongRespository = KhenThuongRepository;
+            _childContentStore = childContentStore;
             _userStore = userStore;
 
             LoadComboBoxData();
@@ -123,45 +133,55 @@ namespace HRM.UI.ViewModels
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(TenHinhThuc))
+                    return false;
                 return true;
             }, async (p) =>
             {
-                var KhenThuong = new KhenThuongKyLuat()
+                var KhenThuongKyLuat = new KhenThuongKyLuat()
                 {
-                    CapKhenThuong = CapKhenThuong,
-                    TenHinhThucKhenThuong = TenHinhThucKhenThuong,
-                    CapKyLuat = CapKyLuat,
-                    TenHinhThucKyLuat = TenHinhThucKyLuat,
+                    MaNhanVien = userStore.CurrentNhanSu.MaNhanVien,
+                    CapKhenThuongKyLuat = CapKhenThuongKyLuat,
+                    TenHinhThuc = TenHinhThuc,
+                    NoiDung = NoiDung,
                     NgayQuyetDinh = NgayQuyetDinh,
                     SoQuyetDinh = SoQuyetDinh,
-                    //NhanSuId = _userStore.CurrentNhanSu.NhanSuId
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    KhenThuong = await _khenThuongRespository.AddAsync(KhenThuong);
-                    if (KhenThuong != null)
+                    KhenThuongKyLuat = await _khenThuongKyLuatRespository.AddAsync(KhenThuongKyLuat);
+                    await _unitOfWork.CommitAsync();
+                    Load();
+                    if (KhenThuongKyLuat != null)
                     {
                         MessageBox.Show("Thêm thành công");
+
+                        TenHinhThuc = string.Empty; 
+                        NoiDung = string.Empty; 
+                        NgayQuyetDinh = DateTime.Now; 
+                        SoQuyetDinh = string.Empty;
+
+                        Load();
                     }
                     else
                     {
                         MessageBox.Show("Lỗi hệ thống");
                     }
-                    await _unitOfWork.CommitAsync();
-
                 }
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
                 }
-                Load();
-                LoadComboBoxData();
             });
         }
         public void Load()
         {
-            //List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongRespository.AsQueryable().Where(x=> x.NhanSuId.ToString() == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+            /*            if (!String.IsNullOrWhiteSpace(Filter))
+                        {
+                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+                        }*/
         }
     }
 }

@@ -9,12 +9,12 @@ namespace HRM.Domain.Models
 {
     public class KhenThuongKyLuat : IEntity
     {
-        public string? CapKhenThuong { get; set; }
-        public string? TenHinhThucKhenThuong { get; set; }
-        public string? CapKyLuat { get; set; }
-        public string? TenHinhThucKyLuat { get; set; }
-        public DateTime NgayQuyetDinh { get; set; }
-        public string SoQuyetDinh { get; set; }
+        public string? MaNhanVien { get; set; }
+        public string? CapKhenThuongKyLuat { get; set; }
+        public string? TenHinhThuc { get; set; }
+        public DateTime? NgayQuyetDinh { get; set; }
+        public string? SoQuyetDinh { get; set; }
+        public string? NoiDung { get; set; }
         public NhanSu? NhanSu { get; set; }  
     }
 }

@@ -64,6 +64,8 @@ namespace HRM.UI.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand PositionStaffCommand { get; set; }
+
         private IRepository<ChucVu> _chucVuRepository;
         private IRepository<NhanSu> _nhanSuRepository;
         private IRepository<NhanSuChucVu> _nhanSuChucVuRepository;
@@ -116,5 +118,6 @@ namespace HRM.UI.ViewModels
         {
             ListNhanSuChucVu = new ObservableCollection<NhanSuChucVu>(_nhanSuChucVuRepository.AsQueryable().ToList());
         }
+
     }
 }

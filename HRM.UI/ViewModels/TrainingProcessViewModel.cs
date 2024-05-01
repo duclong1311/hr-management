@@ -108,7 +108,6 @@ namespace HRM.UI.ViewModels
             VanBangChungChiData.Add("Kỹ sư");
             VanBangChungChiData.Add("Thạc sĩ");
             VanBangChungChiData.Add("Tiến sĩ");
-
         }
 
         private readonly IViewModelFactory _viewModelFactory;
@@ -124,6 +123,7 @@ namespace HRM.UI.ViewModels
             _childContentStore = childContentStore;
             _unitOfWork = unitOfWork;
             _userStore = userStore;
+
             LoadComboBoxData();
             LoadData();
 

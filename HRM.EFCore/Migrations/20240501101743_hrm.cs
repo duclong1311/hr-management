@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class hrm : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -205,11 +205,13 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SoHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LoaiHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChiTietHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SoHopDong = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LoaiHopDong = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LuongCoBan = table.Column<double>(type: "float", nullable: true),
+                    HeSoLuong = table.Column<float>(type: "real", nullable: true),
                     NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -228,12 +230,12 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CapKhenThuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TenHinhThucKhenThuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CapKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TenHinhThucKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayQuyetDinh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CapKhenThuongKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TenHinhThuc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayQuyetDinh = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

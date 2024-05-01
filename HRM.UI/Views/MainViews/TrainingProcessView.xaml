@@ -67,9 +67,6 @@
               Grid.Row="1">
             <StackPanel>
 
-                <ComboBox ItemsSource="{Binding HinhThucDaoTaoData}"
-                          SelectedItem="{Binding HinhThucDaoTao}"
-                          Style="{StaticResource ComboBox_Style}" />
                 <TextBox x:Name="tb_TuThangNamDenThangNam"
                          Style="{StaticResource TextBox_Style}"
                          Text="{Binding TuNgayDenNgay}" />

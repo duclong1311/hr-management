@@ -1,12 +1,14 @@
 ﻿<UserControl x:Class="HRM.UI.Views.RemunerativeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded"
-             d:DesignHeight="640" d:DesignWidth="820">
+             d:DesignHeight="640"
+             d:DesignWidth="820">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,25 +36,26 @@
                   Grid.ColumnSpan="5">
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="24"
-                           Margin="0,20,0,20">KHEN THƯỞNG</TextBlock>
+                           Margin="0,20,0,20">THI ĐUA KHEN THƯỞNG</TextBlock>
             </Grid>
             <!--Label-->
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <StackPanel>
-                    <Label Content="Cấp khen thưởng: "
+                    <Label Content="Cấp khen thưởng, kỷ luật: "
                            Style="{StaticResource Label_Style}" />
-                    <Label Content="Thẩm quyền khen thưởng  "
+                    <Label Content="Hình thức khen thưởng, kỷ luật: "
                            Style="{StaticResource Label_Style}" />
-                    <Label Content="Thời gian ban hành  "
+                    <Label Content="Nội dung: "
                            Style="{StaticResource Label_Style}" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1"
                   Grid.Column="2">
                 <StackPanel>
-                    <Label Content="Nội dung: "
+                    <Label Content="Ngày quyết định:  "
                            Style="{StaticResource Label_Style}" />
+
                     <Label Content="Số quyết định: "
                            Style="{StaticResource Label_Style}" />
                 </StackPanel>
@@ -63,20 +66,23 @@
                   Grid.Row="1">
                 <StackPanel>
                     <ComboBox Style="{StaticResource ComboBox_Style}"
-                              SelectedItem="{Binding CapKhenThuong}"
-                              ItemsSource="{Binding CapKhenThuongData}"/>
-                    <TextBox Text="{Binding ThamQuyenKhenThuong}"
+                              SelectedItem="{Binding CapKhenThuongKyLuat}"
+                              ItemsSource="{Binding CapKhenThuongData}" />
+                    <TextBox Text="{Binding TenHinhThuc}"
                              Style="{StaticResource TextBox_Style}" />
-                    <DatePicker Text="{Binding ThoiGianBanHanh}"
-                                Style="{StaticResource DatePicker_Style}" />
+                    <TextBox Text="{Binding NoiDung}"
+                             Style="{StaticResource TextBox_Style}" />
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="3"
                   Grid.Row="1">
                 <StackPanel>
-                    <TextBox Text="{Binding NoiDung}"
-                             Style="{StaticResource TextBox_Style}" />
+                    <DatePicker SelectedDate="{Binding Path=NgayQuyetDinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}"
+                                Style="{StaticResource DatePicker_Style}"
+                                DisplayDateStart="1/1/1900"
+                                SelectedDateFormat="Short" />
+
                     <TextBox Text="{Binding SoQuyetDinh}"
                              Style="{StaticResource TextBox_Style}" />
                 </StackPanel>
@@ -102,38 +108,48 @@
             <!--Table-->
             <Grid Grid.Row="3"
                   Grid.ColumnSpan="4">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                              VerticalScrollBarVisibility="Hidden">
-                    <ListView Margin="10"
-                              Name="ListStaffView_Pick"
-                              SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Cấp khen thưởng"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding CapKhenThuong}" />
-                                <GridViewColumn Header="Thẩm quyền khen thưởng"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="200"
-                                                DisplayMemberBinding="{Binding ThamQuyen}" />
-                                <GridViewColumn Header="Nội dung khen thưởng"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding NoiDung}" />
-                                <GridViewColumn Header="Số quyết định"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding SoQuyetDinh}" />
-                                <GridViewColumn Header="Thời gian ban hành"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="140"
-                                                DisplayMemberBinding="{Binding ThoiGianBanHanh}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
+
+                <ListView  Margin="10"
+                           Width="auto"
+                           BorderBrush="Black"
+                           SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                           ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Cấp khen thưởng"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding CapKhenThuongKyLuat}" />
+                            <GridViewColumn Header="Hình thức khen thưởng, kỷ luật"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="200"
+                                            DisplayMemberBinding="{Binding TenHinhThuc}" />
+                            <GridViewColumn Header="Nội dung"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding NoiDung}" />
+                            <GridViewColumn Header="Số quyết định"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding SoQuyetDinh}" />
+                            <GridViewColumn Header="Thời gian ban hành"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="140"
+                                            DisplayMemberBinding="{Binding NgayQuyetDinh, StringFormat=\{0:d\}}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
             </Grid>
 
             <!--Button-->

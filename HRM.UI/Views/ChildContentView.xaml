@@ -35,11 +35,11 @@
                     Content="Quá trình công tác"
                     Command="{Binding WorkProcessCommand}" />
             <Button Style="{StaticResource Button_Style}"
-                    Content="Khen Thưởng"
-                    Command="{Binding RemunerativeCommand}" />
+                    Content="Hợp đồng"
+                    Command="{Binding WorkProcessCommand}" />
             <Button Style="{StaticResource Button_Style}"
-                    Content="Kỷ luật"
-                    Command="{Binding DisciplineCommand}" />
+                    Content="Thi đua"
+                    Command="{Binding RemunerativeCommand}" />
             <TextBlock Text="{Binding CurrentNhanSu.MaNhanVien, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
         <ContentControl Grid.Row="1"

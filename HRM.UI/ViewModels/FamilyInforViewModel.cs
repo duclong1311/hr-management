@@ -152,8 +152,10 @@ namespace HRM.UI.ViewModels
             _unitOfWork = unitOfWork;
             _childContentStore = childContentStore;
             _userStore = userStore;
+
             LoadComboBoxData();
             LoadData();
+
             TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.TrainingProcess);
