@@ -79,7 +79,7 @@ namespace HRM.UI.ViewModels
             set { _hoVaTen = value; OnPropertyChanged(); }
         }
 
-        private DateTime _namSinh;
+        private DateTime _namSinh = DateTime.Now;
         public DateTime NamSinh
         {
             get { return _namSinh; }

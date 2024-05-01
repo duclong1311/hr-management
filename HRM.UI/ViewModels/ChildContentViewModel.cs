@@ -23,6 +23,7 @@ namespace HRM.UI.ViewModels
         public ICommand TrainingProcessCommand { get; set; }
         public ICommand WorkProcessCommand { get; set; }
         public ICommand DisciplineCommand { get; set; }
+        public ICommand ContractCommand { get; set; }
         public ICommand RemunerativeCommand { get; set; }
         public NhanSu CurrentNhanSu => _userStore.CurrentNhanSu;
         public BaseViewModel CurrentViewModel => _childContentStore.CurrentViewModel;
@@ -59,9 +60,12 @@ namespace HRM.UI.ViewModels
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Remunerative);
             });
+            ContractCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
+            });
 
-
-        }
+    }
         private void OnCurrenViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));

@@ -150,7 +150,7 @@ namespace HRM.UI.ViewModels
             get { return _tonGiao; }
             set { _tonGiao = value; OnPropertyChanged(); }
         }
-        private DateTime _capNgay;
+        private DateTime _capNgay = DateTime.Now;
 
         public DateTime CapNgay
         {

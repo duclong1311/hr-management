@@ -42,8 +42,6 @@
         <Grid Grid.Row="1"
               Grid.Column="0">
             <StackPanel>
-                <Label Content="Mã nhân viên: "
-                       Style="{StaticResource Label_Style}" />
                 <Label Content="Thời gian đào tạo: "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Hình thức đào tạo:  "
@@ -127,10 +125,6 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Mã nhân viên"
-                                        HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                        Width="100"
-                                        DisplayMemberBinding="{Binding }" />
                         <GridViewColumn Header="Thời gian đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="140"

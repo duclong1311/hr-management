@@ -64,4 +64,22 @@
         <Setter Property="Padding"
                 Value="5" />
     </Style>
+
+    <Style TargetType="DatePicker"
+           x:Key="DatePicker_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="Height"
+                Value="30" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Padding"
+                Value="5" />
+        <Setter Property="SelectedDateFormat"
+                Value="Short" />
+        <Setter Property="DisplayDateStart"
+                Value="01/01/1900" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+    </Style>
 </ResourceDictionary>

@@ -120,8 +120,6 @@
                          x:Name="tb_HoTen" />
                 <DatePicker Style="{StaticResource DatePicker_Style}"
                             SelectedDate="{Binding Path=NgaySinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
-
-
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding NguyenQuan}"
                          x:Name="tb_NguyenQuan" />

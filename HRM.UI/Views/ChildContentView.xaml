@@ -36,7 +36,7 @@
                     Command="{Binding WorkProcessCommand}" />
             <Button Style="{StaticResource Button_Style}"
                     Content="Hợp đồng"
-                    Command="{Binding WorkProcessCommand}" />
+                    Command="{Binding ContractCommand}" />
             <Button Style="{StaticResource Button_Style}"
                     Content="Thi đua"
                     Command="{Binding RemunerativeCommand}" />
