@@ -63,5 +63,8 @@
         <DataTemplate DataType="{x:Type vm:PostionStaffViewModel}">
             <view:PositionStaffView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ListContractViewModel}">
+            <view:ListContractView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

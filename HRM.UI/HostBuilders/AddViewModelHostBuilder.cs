@@ -29,16 +29,17 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<TrainingProcessViewModel>();
                 services.AddScoped<WorkProcessViewModel>();
                 services.AddScoped<RemunerativeViewModel>();
+                services.AddScoped<ContractViewModel>();
                 services.AddScoped<DisciplineViewModel>();
-                
-                
+
+
                 services.AddScoped<ListStaffViewModel>();
+                services.AddScoped<ListContractViewModel>();
                 services.AddScoped<ChildContentViewModel>();
                 services.AddScoped<ChildContentView>();
                 services.AddScoped<StaffCVViewModel>();
                 services.AddScoped<DepartmentViewModel>();
                 services.AddScoped<PositionViewModel>();
-                services.AddScoped<ContractViewModel>();
                 services.AddScoped<AddCVViewModel>();
                 services.AddScoped<FamilyInforViewModel>();
                 services.AddScoped<TrackingViewModel>();
@@ -59,6 +60,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<CreateViewModel<DisciplineViewModel>>(service => () => service.GetRequiredService<DisciplineViewModel>());
 
                 services.AddScoped<CreateViewModel<ListStaffViewModel>>(service => () => service.GetRequiredService<ListStaffViewModel>());
+                services.AddScoped<CreateViewModel<ListContractViewModel>>(service => () => service.GetRequiredService<ListContractViewModel>());
                 services.AddScoped<CreateViewModel<ChildContentViewModel>>(service => () => service.GetRequiredService<ChildContentViewModel>());
                 services.AddScoped<CreateViewModel<StaffCVViewModel>>(service => () => service.GetRequiredService<StaffCVViewModel>());
                 services.AddScoped<CreateViewModel<AddCVViewModel>>(service => () => service.GetRequiredService<AddCVViewModel>());

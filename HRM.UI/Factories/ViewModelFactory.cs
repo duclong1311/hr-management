@@ -16,6 +16,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<RegisterViewModel> _createRegisterViewModel;
         private readonly CreateViewModel<MainContentViewModel> _createMainContentViewModel;
         private readonly CreateViewModel<ListStaffViewModel> _createListStaffViewModel;
+        private readonly CreateViewModel<ListContractViewModel> _createListContractViewModel;
         private readonly CreateViewModel<PersonalInforViewModel> _createPersonalInforViewModel;
         private readonly CreateViewModel<FamilyInforViewModel> _createFamilyInforViewModel;
         private readonly CreateViewModel<TrainingProcessViewModel> _createTrainingProcessViewModel;
@@ -38,6 +39,7 @@ namespace HRM.UI.Factories
             CreateViewModel<RegisterViewModel> createRegisterViewModel,
             CreateViewModel<MainContentViewModel> createMainContentViewModel,
             CreateViewModel<ListStaffViewModel> createListStaffViewModel,
+            CreateViewModel<ListContractViewModel> createListContractViewModel,
             CreateViewModel<PersonalInforViewModel> createPersonalInforViewModel,
             CreateViewModel<FamilyInforViewModel> createFamilyInforViewModel,
             CreateViewModel<TrainingProcessViewModel> createTrainingProcessViewModel,
@@ -59,6 +61,7 @@ namespace HRM.UI.Factories
             _createRegisterViewModel = createRegisterViewModel;
             _createMainContentViewModel = createMainContentViewModel;
             _createListStaffViewModel = createListStaffViewModel;
+            _createListContractViewModel = createListContractViewModel;
             _createPersonalInforViewModel = createPersonalInforViewModel;
             _createFamilyInforViewModel = createFamilyInforViewModel;
             _createTrainingProcessViewModel = createTrainingProcessViewModel;
@@ -87,6 +90,8 @@ namespace HRM.UI.Factories
                     return _createMainContentViewModel();
                 case EViewTypes.ListStaff:
                     return _createListStaffViewModel();
+                case EViewTypes.ListContract:
+                    return _createListContractViewModel();
                 case EViewTypes.PersonalInfor:
                     return _createPersonalInforViewModel();
                 case EViewTypes.FamilyInfor:

@@ -26,6 +26,7 @@ namespace HRM.UI.ViewModels
         public ICommand DepartmentCommand { get; set; }
         public ICommand PositionCommand { get; set; }
         public ICommand ContractCommand { get; set; }
+        public ICommand ListContractCommand { get; set; }
         public ICommand TrackingCommand { get; set; }  
         public ICommand RemunerativeCommand { get; set; }
         public ICommand AdvanceSalaryCommand { get; set; }
@@ -76,6 +77,10 @@ namespace HRM.UI.ViewModels
             ContractCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
+            });
+            ListContractCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListContract);
             });
             TrackingCommand = new RelayCommand<object>(p => true, p =>
             {

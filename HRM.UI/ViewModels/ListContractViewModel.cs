@@ -4,18 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using HRM.Core.Repositories;
 using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using HRM.UI.Factories;
 using HRM.UI.States.Users;
 using HRM.UI.Stores;
+using System.Windows.Input;
+using System.Windows;
 
 namespace HRM.UI.ViewModels
 {
-    public class ContractViewModel : BaseViewModel
+    public class ListContractViewModel : BaseViewModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IViewModelFactory _viewModelFactory;
@@ -34,16 +34,6 @@ namespace HRM.UI.ViewModels
             {
                 _list = value;
                 OnPropertyChanged();
-            }
-        }
-        private ObservableCollection<NhanSu> _listNhanVien = new ObservableCollection<NhanSu>();
-        public ObservableCollection<NhanSu> ListNhanVien
-        {
-            get { return _listNhanVien; }
-            set
-            {
-                _listNhanVien = value;
-                OnPropertyChanged(nameof(ListNhanVien));
             }
         }
         private string _maNhanVien { get; set; }
@@ -107,7 +97,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ContractViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<HopDong> hopDongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
+        public ListContractViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<HopDong> hopDongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
@@ -116,7 +106,7 @@ namespace HRM.UI.ViewModels
             _childContentStore = childContentStore;
             _userStore = userStore;
 
-            Load();
+            
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -127,7 +117,6 @@ namespace HRM.UI.ViewModels
             {
                 var HopDong = new HopDong()
                 {
-                    MaNhanVien = userStore.CurrentNhanSu.MaNhanVien,
                     SoHopDong = SoHopDong,
                     LoaiHopDong = LoaiHopDong,
                     NgayBatDau = NgayBatDau,
@@ -140,7 +129,6 @@ namespace HRM.UI.ViewModels
                 {
                     HopDong = await _hopDongRepository.AddAsync(HopDong);
                     await _unitOfWork.CommitAsync();
-                    Load();
                     if (HopDong != null)
                     {
                         MessageBox.Show("Thêm thành công");
@@ -152,7 +140,6 @@ namespace HRM.UI.ViewModels
                         LuongCoBan = 0;
                         HeSoLuong = 0;
 
-                        Load();
                     }
                     else
                     {
@@ -165,13 +152,14 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        public void Load()
-        {
-            List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
-        }
+        //public void Load()
+        //{
+        //    List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+        //    /*            if (!String.IsNullOrWhiteSpace(Filter))
+        //                {
+        //                    List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+        //                }*/
+        //}
     }
 }
+

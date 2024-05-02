@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="HRM.UI.Views.ContractView"
+﻿<UserControl x:Class="HRM.UI.Views.ListContractView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
@@ -36,13 +36,15 @@
                       Grid.ColumnSpan="5">
                     <TextBlock HorizontalAlignment="Center"
                                FontSize="24"
-                               Margin="0,20,0,20">HỢP ĐỒNG</TextBlock>
+                               Margin="0,20,0,20">HỢP ĐỒNG NHÂN VIÊN</TextBlock>
                 </Grid>
 
                 <!--Label-->
                 <Grid Grid.Row="1"
                       Grid.Column="0">
                     <StackPanel>
+                        <Label Content="Mã nhân viên: "
+                               Style="{StaticResource Label_Style}" />
                         <Label Content="Số hợp đồng: "
                                Style="{StaticResource Label_Style}" />
                         <Label Content="Loại hợp đồng:  "
@@ -67,7 +69,11 @@
                 <Grid Grid.Column="1"
                       Grid.Row="1">
                     <StackPanel>
-
+                        <ComboBox Style="{StaticResource ComboBox_Style}"
+                                  SelectedValue="{Binding MaNhanVien}"
+                                  DisplayMemberPath="MaNhanVien"
+                                  SelectedValuePath="MaNhanVien"
+                                  ItemsSource="{Binding NhanVienList}" />
                         <TextBox Text="{Binding SoHopDong}"
                                  Style="{StaticResource TextBox_Style}" />
                         <TextBox Text="{Binding LoaiHopDong}"
@@ -81,12 +87,12 @@
                       Grid.Row="1">
                     <StackPanel>
                         <DatePicker SelectedDate="{Binding Path=NgayBatDau, 
-                            Mode=TwoWay, 
-                            TargetNullValue={x:Static System:DateTime.Now}}"
+                         Mode=TwoWay, 
+                         TargetNullValue={x:Static System:DateTime.Now}}"
                                     Style="{StaticResource DatePicker_Style}" />
                         <DatePicker SelectedDate="{Binding Path=NgayKetThuc, 
-                            Mode=TwoWay, 
-                            TargetNullValue={x:Static System:DateTime.Now}}"
+                         Mode=TwoWay, 
+                         TargetNullValue={x:Static System:DateTime.Now}}"
                                     Style="{StaticResource DatePicker_Style}" />
                         <TextBox Text="{Binding HeSoLuong}"
                                  Style="{StaticResource TextBox_Style}" />

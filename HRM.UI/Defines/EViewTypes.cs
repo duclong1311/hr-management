@@ -25,6 +25,7 @@ namespace HRM.UI.Defines
         Position,
         AddCV,
         Contract,
+        ListContract,
         ChildContent,
         PositionStaff,
         // ----------------------- Công cán -----------------------
