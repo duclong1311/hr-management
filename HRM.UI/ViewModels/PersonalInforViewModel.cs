@@ -229,8 +229,52 @@ namespace HRM.UI.ViewModels
 
             EthnicityData = new ObservableCollection<string>();
             EthnicityData.Add("Kinh");
-            EthnicityData.Add("Mông");
-            EthnicityData.Add("Tày");
+            EthnicityData.Add("Tày");
+            EthnicityData.Add("Thái");
+            EthnicityData.Add("Mường");
+            EthnicityData.Add("H'Mông");
+            EthnicityData.Add("Dao");
+            EthnicityData.Add("Khơ Mú");
+            EthnicityData.Add("Nùng");
+            EthnicityData.Add("Gia Rai");
+            EthnicityData.Add("Ê Đê (Ê Đêh)");
+            EthnicityData.Add("Ba Na");
+            EthnicityData.Add("Xơ Đăng");
+            EthnicityData.Add("Chăm");
+            EthnicityData.Add("Sán Chay");
+            EthnicityData.Add("Cơ Ho");
+            EthnicityData.Add("Chu Ru");
+            EthnicityData.Add("Giáy");
+            EthnicityData.Add("Lào");
+            EthnicityData.Add("Lự");
+            EthnicityData.Add("M'Nông");
+            EthnicityData.Add("Xtiêng");
+            EthnicityData.Add("Bru - Vân Kiều");
+            EthnicityData.Add("Cơ Tu");
+            EthnicityData.Add("Ta Ôi");
+            EthnicityData.Add("Co");
+            EthnicityData.Add("Ro Mam");
+            EthnicityData.Add("Khơ Me");
+            EthnicityData.Add("Hrê");
+            EthnicityData.Add("Ra Glai");
+            EthnicityData.Add("Xinh Mun");
+            EthnicityData.Add("Cho Ro");
+            EthnicityData.Add("Hà Nhì");
+            EthnicityData.Add("La Chí");
+            EthnicityData.Add("La Ha");
+            EthnicityData.Add("Pu Péo");
+            EthnicityData.Add("Chứt");
+            EthnicityData.Add("Lô Lô");
+            EthnicityData.Add("Mảng");
+            EthnicityData.Add("Pà Thẻn");
+            EthnicityData.Add("Cờ Lao");
+            EthnicityData.Add("Bố Y");
+            EthnicityData.Add("La Hu");
+            EthnicityData.Add("Lự");
+            EthnicityData.Add("Ngái");
+            EthnicityData.Add("Pák Tu");
+            EthnicityData.Add("Chơ Ro");
+            EthnicityData.Add("Xinh Mun");
         }
 
         //Handle radio button function

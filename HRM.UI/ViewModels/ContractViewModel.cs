@@ -22,7 +22,6 @@ namespace HRM.UI.ViewModels
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
         private readonly ChildContentStore _childContentStore;
-
         private IRepository<HopDong> _hopDongRepository;
         public ICommand AddCommand { get; set; }
 

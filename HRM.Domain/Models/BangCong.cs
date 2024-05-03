@@ -1,4 +1,5 @@
 ﻿using HRM.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace HRM.Domain.Models
 {
     public class BangCong : IEntity
     {
+        public string? MaNhanVien { get; set; }
+        public string? HoTen { get; set; }
         public int? Thang { get; set; }
         public int? Nam { get; set; }
         public double TongTimeOT { get; set; }

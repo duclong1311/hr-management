@@ -67,7 +67,7 @@
         <Setter Property="Margin"
                 Value="5" />
         <Setter Property="Height"
-                Value="30" />
+                Value="40" />
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="Padding"
@@ -78,5 +78,17 @@
                 Value="01/01/1900" />
         <Setter Property="VerticalContentAlignment"
                 Value="Center" />
+    </Style>
+
+    <Style TargetType="GridViewColumnHeader"
+           x:Key="GridViewHeader_Style">
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+        <Setter Property="IsHitTestVisible"
+                Value="False" />
+        <Setter Property="Padding"
+                Value="5,0,0,0" />
     </Style>
 </ResourceDictionary>

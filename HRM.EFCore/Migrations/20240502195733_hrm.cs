@@ -178,6 +178,8 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Thang = table.Column<int>(type: "int", nullable: true),
                     Nam = table.Column<int>(type: "int", nullable: true),
                     TongTimeOT = table.Column<double>(type: "float", nullable: false),

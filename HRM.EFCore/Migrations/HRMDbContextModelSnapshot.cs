@@ -33,6 +33,12 @@ namespace HRM.EFCore.Migrations
                     b.Property<float>("DiMuonVeSom")
                         .HasColumnType("real");
 
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Nam")
                         .HasColumnType("int");
 
