@@ -189,7 +189,9 @@ namespace HRM.UI.ViewModels
             _bangCongRepository = BangCongRepository;
             _unitOfWork = unitOfWork;
             LoadComboBoxData();
+
             ImportDataCommand = new Commands.RelayCommand<object>(p => CanImportExcelData(), p => ImportExcelData(OpenFilePath().ToString()));
+
             AddCommand = new Commands.RelayCommand<object>((p) => CanSaveData(), 
                 async (p) =>
             {
@@ -218,9 +220,6 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.CommitAsync();
                     MessageBox.Show("Thêm thành công");
                     BangCongDataList.Clear();
-
-                    // Sau khi thêm thành công, có thể làm gì đó khác tại đây (ví dụ: load lại dữ liệu)
-
                 }
                 catch (Exception ex)
                 {
@@ -230,13 +229,5 @@ namespace HRM.UI.ViewModels
             });
 
         }
-        //private void LoadData()
-        //{
-        //    List = new ObservableCollection<QuanHeGiaDinh>(BangCong.AsQueryable().ToList());
-        //    /*            if (!String.IsNullOrWhiteSpace(Filter))
-        //                {
-        //                    List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-        //                }*/
-        //}
     }
 }

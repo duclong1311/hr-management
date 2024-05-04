@@ -30,6 +30,7 @@ namespace HRM.UI.Defines
         PositionStaff,
         // ----------------------- Công cán -----------------------
         Tracking,
+        ListTracking,
         // ----------------------- Lương thưởng -----------------------
         AdvanceSalary
     }

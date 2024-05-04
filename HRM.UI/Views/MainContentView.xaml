@@ -226,7 +226,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Bảng công" />
+                                <TextBlock Text="Nhập công" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
@@ -236,7 +236,7 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding TrackingReportCommand}"
+                                Command="{Binding ListTrackingTableCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"

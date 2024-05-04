@@ -66,5 +66,8 @@
         <DataTemplate DataType="{x:Type vm:ListContractViewModel}">
             <view:ListContractView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ListTrackingTableViewModel}">
+            <view:ListTrackingTableView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
