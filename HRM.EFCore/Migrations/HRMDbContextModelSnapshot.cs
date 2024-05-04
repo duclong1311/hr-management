@@ -63,9 +63,6 @@ namespace HRM.EFCore.Migrations
                     b.Property<double>("TongTimeOT")
                         .HasColumnType("float");
 
-                    b.Property<double?>("UngLuong")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NhanSuId");
@@ -541,16 +538,21 @@ namespace HRM.EFCore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("NgayUngLuong")
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayUngLuong")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("NhanSuId")
                         .HasColumnType("int");
 
-                    b.Property<double>("SoTienUng")
+                    b.Property<double?>("SoTienUng")
                         .HasColumnType("float");
 
                     b.HasKey("Id");

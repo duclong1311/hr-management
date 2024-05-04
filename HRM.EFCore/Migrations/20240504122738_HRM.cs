@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class hrm : Migration
+    public partial class HRM : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -188,7 +188,6 @@ namespace HRM.EFCore.Migrations
                     TongSoNgayCongNgayLe = table.Column<int>(type: "int", nullable: false),
                     DiMuonVeSom = table.Column<float>(type: "real", nullable: false),
                     NgayNghiPhep = table.Column<int>(type: "int", nullable: false),
-                    UngLuong = table.Column<double>(type: "float", nullable: true),
                     NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -312,10 +311,12 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true),
-                    SoTienUng = table.Column<double>(type: "float", nullable: false),
-                    NgayUngLuong = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SoTienUng = table.Column<double>(type: "float", nullable: true),
+                    NgayUngLuong = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

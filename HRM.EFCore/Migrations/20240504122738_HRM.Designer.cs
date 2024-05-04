@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240502195733_hrm")]
-    partial class hrm
+    [Migration("20240504122738_HRM")]
+    partial class HRM
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,9 +64,6 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("TongTimeOT")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("UngLuong")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -544,16 +541,21 @@ namespace HRM.EFCore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("NgayUngLuong")
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayUngLuong")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("NhanSuId")
                         .HasColumnType("int");
 
-                    b.Property<double>("SoTienUng")
+                    b.Property<double?>("SoTienUng")
                         .HasColumnType("float");
 
                     b.HasKey("Id");

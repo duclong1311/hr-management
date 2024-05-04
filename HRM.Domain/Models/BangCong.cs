@@ -20,7 +20,6 @@ namespace HRM.Domain.Models
         public int TongSoNgayCongNgayLe { get; set; }
         public float DiMuonVeSom { get; set; }
         public int NgayNghiPhep { get; set; }
-        public double? UngLuong { get; set; }
         public NhanSu? NhanSu { get; set; }
     }
 }
