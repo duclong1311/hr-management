@@ -9,11 +9,10 @@ namespace HRM.Domain.Models
 {
     public class UngLuong : IEntity
     {
-        public string? MaNhanVien { get; set; }
-        public string? HoTen { get; set; }
         public double? SoTienUng { get; set; }
         public DateTime? NgayUngLuong{ get; set;}
         public string? GhiChu { get; set; }
+        public int NhanSuId {  get; set; }
         public NhanSu? NhanSu { get; set; }
     }
 }

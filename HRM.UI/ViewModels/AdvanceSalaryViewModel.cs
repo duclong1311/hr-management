@@ -25,6 +25,7 @@ namespace HRM.UI.ViewModels
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
         private IRepository<UngLuong> _ungLuongRepository;
+        private IRepository<NhanSu> _nhanSuRepository;
         private IUnitOfWork _unitOfWork;
         private readonly ChildContentStore _childContentStore;
         public ICommand AddCommand { get; set; }
@@ -46,8 +47,8 @@ namespace HRM.UI.ViewModels
         private ObservableCollection<NhanSu> _listCbbNhanVien { get; set; } = new ObservableCollection<NhanSu>();
         public ObservableCollection<NhanSu> ListCbbNhanVien { get { return _listCbbNhanVien; } set { _listCbbNhanVien = value; OnPropertyChanged(); } }
 
-        private string _selectedNhanVien;
-        public string SelectedNhanVien { get { return _selectedNhanVien; } set { _selectedNhanVien = value; OnPropertyChanged(); } }
+        private NhanSu _selectedNhanVien;
+        public NhanSu SelectedNhanVien { get { return _selectedNhanVien; } set { _selectedNhanVien = value; OnPropertyChanged(); } }
 
         private UngLuong _selectedItem;
         public UngLuong SelectedItem
@@ -58,8 +59,6 @@ namespace HRM.UI.ViewModels
                 _selectedItem = value;
                 if (_selectedItem != null)
                 {
-                    MaNhanVien = SelectedItem.MaNhanVien;
-                    HoTen = SelectedItem.HoTen;
                     SoTienUng = (double)SelectedItem.SoTienUng;
                     NgayUngLuong = (DateTime)SelectedItem.NgayUngLuong;
                     GhiChu = SelectedItem.GhiChu;
@@ -69,11 +68,8 @@ namespace HRM.UI.ViewModels
         }
         private void LoadComboboxData()
         {
-            ListCbbNhanVien = new ObservableCollection<NhanSu>
-            {
-                new NhanSu { MaNhanVien = "NV01", HoTen = "Nguyễn Văn A" },
-                new NhanSu { MaNhanVien = "NV02", HoTen = "Trần Thị B" },
-            };
+            ListCbbNhanVien = new ObservableCollection<NhanSu>(_nhanSuRepository.AsQueryable().ToList());
+            SelectedNhanVien = ListCbbNhanVien.FirstOrDefault();
         }
 
         public bool CanAddCommand()
@@ -103,11 +99,12 @@ namespace HRM.UI.ViewModels
 
         public void LoadData()
         {
-            List = new ObservableCollection<UngLuong>(_ungLuongRepository.AsQueryable().ToList());
+            List = new ObservableCollection<UngLuong>(_ungLuongRepository.AsQueryable().Include(x => x.NhanSu).ToList());
         }
 
-        public AdvanceSalaryViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<UngLuong> ungLuongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
+        public AdvanceSalaryViewModel(IRepository<NhanSu> nhanSuRepository, IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<UngLuong> ungLuongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
+            _nhanSuRepository = nhanSuRepository;
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             _ungLuongRepository = ungLuongRepository;
@@ -123,8 +120,7 @@ namespace HRM.UI.ViewModels
             {
                 var ungluong = new UngLuong()
                 {
-                    MaNhanVien = MaNhanVien,
-                    HoTen = HoTen,
+                    NhanSuId = SelectedNhanVien.Id,
                     SoTienUng = SoTienUng,
                     NgayUngLuong = NgayUngLuong,
                     GhiChu = GhiChu,
@@ -154,7 +150,7 @@ namespace HRM.UI.ViewModels
                 }
             });
 
-           
+
 
             DeleteCommand = new Commands.RelayCommand<object>((p) => CanDeleteCommand(),
             async (p) =>

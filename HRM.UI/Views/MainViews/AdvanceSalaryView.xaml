@@ -45,8 +45,6 @@
                     <StackPanel>
                         <Label Content="Mã nhân viên: "
                                Style="{StaticResource Label_Style}" />
-                        <Label Content="Họ và tên: "
-                               Style="{StaticResource Label_Style}" />
                         <Label Content="Số tiền ứng:  "
                                Style="{StaticResource Label_Style}" />
                     </StackPanel>
@@ -66,12 +64,9 @@
                       Grid.Row="1">
                     <StackPanel>
                         <ComboBox ItemsSource="{Binding ListCbbNhanVien}"
-                                  DisplayMemberPath="HoTen"
-                                  SelectedValuePath="MaNhanVien"
-                                  SelectedValue="{Binding SelectedNhanVien}" 
-                                  Style="{StaticResource ComboBox_Style}"/>
-                        <TextBox Text="{Binding HoTen}"
-                                 Style="{StaticResource TextBox_Style}" />
+                                  DisplayMemberPath="MaNhanVien"
+                                  SelectedItem="{Binding SelectedNhanVien}"
+                                  Style="{StaticResource ComboBox_Style}" />
                         <TextBox Text="{Binding SoTienUng, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}"
                                  Style="{StaticResource TextBox_Style}" />
 
@@ -129,11 +124,11 @@
                                 <GridViewColumn Header="Mã nhân viên"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="100"
-                                                DisplayMemberBinding="{Binding MaNhanVien}" />
+                                                DisplayMemberBinding="{Binding NhanSu.MaNhanVien}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Họ và tên"
                                                 Width="120"
-                                                DisplayMemberBinding="{Binding HoTen}" />
+                                                DisplayMemberBinding="{Binding NhanSu.HoTen}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Số tiền ứng"
                                                 Width="150"

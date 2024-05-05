@@ -48,7 +48,7 @@
                           Name="ListStaffView_Pick"
                           BorderBrush="Black"
                           Height="350"
-                          ItemsSource="{Binding BangCongDataList}"
+                          ItemsSource="{Binding ListLuongNhanVien}"
                           SelectedItem="{Binding SelectedItem}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -73,27 +73,43 @@
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
                                             Header="Số công thường"
-                                            DisplayMemberBinding="{Binding TongSoNgayCong}" />
+                                            DisplayMemberBinding="{Binding TienCongThuong}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
                                             Header="Số công CN"
-                                            DisplayMemberBinding="{Binding TongSoNgayCongCN}" />
+                                            DisplayMemberBinding="{Binding TienCongCN}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
                                             Header="Số công ngày lễ"
-                                            DisplayMemberBinding="{Binding TongSoNgayCongNgayLe}" />
+                                            DisplayMemberBinding="{Binding TienCongNgayLe}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
                                             Header="Số giờ tăng ca"
-                                            DisplayMemberBinding="{Binding TongTimeOT}" />
+                                            DisplayMemberBinding="{Binding TienTangCa}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="130"
                                             Header="Số ngày nghỉ phép"
-                                            DisplayMemberBinding="{Binding NgayNghiPhep}" />
+                                            DisplayMemberBinding="{Binding TienNgayNghiPhep}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="150"
                                             Header="Số giờ đi muộn về sớm"
-                                            DisplayMemberBinding="{Binding DiMuonVeSom}" />
+                                            DisplayMemberBinding="{Binding TienDiSomVeMuon}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            Header="Tiền bảo hiểm"
+                                            DisplayMemberBinding="{Binding TienBaoHiem}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            Header="Phụ cấp"
+                                            DisplayMemberBinding="{Binding PhuCap}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            Header="Ứng lương"
+                                            DisplayMemberBinding="{Binding UngLuong}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            Header="Thực nhận"
+                                            DisplayMemberBinding="{Binding ThucNhan}" />
 
                         </GridView>
                     </ListView.View>
