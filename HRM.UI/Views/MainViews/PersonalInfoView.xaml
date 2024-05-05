@@ -15,13 +15,25 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/PersonalInfoView_Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="Foreground"
+                        Value="Red" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="10 -10 0 0" />
+            </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="0,0,20,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="560" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -53,28 +65,39 @@
               Grid.Column="1">
             <StackPanel>
                 <Label Content="Mã nhân viên: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Họ và tên: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Sinh ngày: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Nguyên quán: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Dân tộc: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Số CCCD "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <!--<Label Content="Kết nạp Đoàn"
                        Style="{StaticResource Label_Style}" />-->
                 <Label Content="Kết nạp Đảng: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Sở thích: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="STK ngân hàng: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Mã số BHXH: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Mã số thuế: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
 
             </StackPanel>
@@ -93,13 +116,17 @@
                 <Label Content=" "
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tôn giáo: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
 
                 <Label Content="Cấp ngày: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Bộ phận: "
+                       Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
             </StackPanel>
         </Grid>
@@ -113,16 +140,23 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.RowSpan="2">
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding MaNhanVien}"
+                         Text="{Binding MaNhanVien, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_Manv" />
+                <TextBlock Text="{Binding ErrorMaNhanVien, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding HoTen}"
+                         Text="{Binding HoTen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_HoTen" />
+                <TextBlock Text="{Binding ErrorHoTen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                 <DatePicker Style="{StaticResource DatePicker_Style}"
                             SelectedDate="{Binding Path=NgaySinh, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                <TextBlock Text="{Binding ErrorNS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding NguyenQuan}"
+                         Text="{Binding NguyenQuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_NguyenQuan" />
+                <TextBlock Text="{Binding ErrorNguyenQuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ComboBox Style="{StaticResource Combobox_Style}"
                           ItemsSource="{Binding EthnicityData}"
@@ -130,8 +164,9 @@
                           x:Name="tb_DanToc" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding CCCD}"
+                         Text="{Binding CCCD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_SoCCCD" />
+                <TextBlock Text="{Binding ErrorCCCD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
                 <!--<TextBox Style="{StaticResource TextBox_Style}"
@@ -139,23 +174,28 @@
                          x:Name="tb_KetNapDoan" />-->
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding KetNapDang}"
+                         Text="{Binding KetNapDang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_KetNapDang" />
+                <TextBlock Text="{Binding ErrorKetNapDang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding SoThich}"
+                         Text="{Binding SoThich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_SoThich" />
+                <TextBlock Text="{Binding ErrorSoThich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding STK}" />
+                         Text="{Binding STK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding ErrorSTK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding MaSoBHXH}" />
+                         Text="{Binding MaSoBHXH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding ErrorMaSoBHXH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding MaSoThue}" />
-
-
+                         Text="{Binding MaSoThue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="{Binding ErrorMaSoThue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Grid>
 
@@ -196,19 +236,23 @@
                 <TextBox Style="{StaticResource TextBox_Style}"
                          Text="{Binding TonGiao}"
                          x:Name="tb_TonGiao" />
+                <TextBlock Text="{Binding ErrorTonGiao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DatePicker Style="{StaticResource DatePicker_Style}"
                             SelectedDate="{Binding Path=CapNgay, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" />
+                <TextBlock Text="{Binding ErrorCapNgay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox Style="{StaticResource TextBox_Style}"
-                         Text="{Binding NoiKetNapDang}"
+                         Text="{Binding NoiKetNapDang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          x:Name="tb_NoiKetNapDang" />
+                <TextBlock Text="{Binding ErrorNoiKetNapDang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ComboBox x:Name="cbb_BoPhan"
                           Style="{StaticResource Combobox_Style}"
                           ItemsSource="{Binding ListBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                           DisplayMemberPath="TenBoPhan"
                           SelectedItem="{Binding SeletedCboBoPhan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
             </StackPanel>
         </Grid>
 

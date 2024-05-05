@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240504122738_HRM")]
-    partial class HRM
+    [Migration("20240505034557_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -636,17 +636,21 @@ namespace HRM.EFCore.Migrations
                         .WithMany()
                         .HasForeignKey("ChucVuId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", "QuaTrinhCongTac")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhCongTacId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", "QuaTrinhDaoTao")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhDaoTaoId");
 
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
+
+                    b.Navigation("QuaTrinhCongTac");
+
+                    b.Navigation("QuaTrinhDaoTao");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>
