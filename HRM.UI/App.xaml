@@ -69,5 +69,8 @@
         <DataTemplate DataType="{x:Type vm:ListTrackingTableViewModel}">
             <view:ListTrackingTableView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ListRemunerativeViewModel}">
+            <view:ListRemunerativeView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

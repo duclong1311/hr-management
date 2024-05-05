@@ -17,6 +17,7 @@ namespace HRM.UI.Defines
         WorkProcess,
         // ---------------------- Khen thưởng, kỷ luật ----------------------
         Remunerative,
+        ListRemunerative,
         Discipline,
         // --------------------------------------------
         ListStaff,

@@ -130,11 +130,11 @@
                     </TreeViewItem.Header>
                 </TreeViewItem>
 
-                <!--<TreeViewItem IsExpanded="True"
+                <TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding RemunerativeCommand}"
+                                Command="{Binding ListRemunerativeCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
@@ -143,7 +143,7 @@
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>
-                </TreeViewItem>-->
+                </TreeViewItem>
 
                 <TreeViewItem IsExpanded="True"
                               Style="{StaticResource TreeViewItem_Style}">

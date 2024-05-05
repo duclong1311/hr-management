@@ -43,6 +43,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<TrackingViewModel>();
                 services.AddScoped<ListTrackingTableViewModel>();
                 services.AddScoped<PostionStaffViewModel>();
+                services.AddScoped<ListRemunerativeViewModel>();
                 // Lương
                 services.AddScoped<AdvanceSalaryViewModel>();
 
@@ -69,6 +70,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<CreateViewModel<TrackingViewModel>>(service => () => service.GetRequiredService<TrackingViewModel>());
                 services.AddScoped<CreateViewModel<ListTrackingTableViewModel>>(service => () => service.GetRequiredService<ListTrackingTableViewModel>());
                 services.AddScoped<CreateViewModel<PostionStaffViewModel>>(services => () => services.GetRequiredService<PostionStaffViewModel>());
+                services.AddScoped<CreateViewModel<ListRemunerativeViewModel>>(services => () => services.GetRequiredService<ListRemunerativeViewModel>());
                 // Lương
                 services.AddScoped<CreateViewModel<AdvanceSalaryViewModel>>(service => () => service.GetRequiredService<AdvanceSalaryViewModel>());
 
