@@ -786,10 +786,25 @@ namespace HRM.UI.ViewModels
 
         static bool ValidationHoTen(string input)
         {
-            //string pattern = @"^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$";
-            string pattern = @"^[\p{L} ]{2,50}$";
-            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
-            return Regex.IsMatch(input, pattern);
+            // Kiểm tra chuỗi input không được null và không chỉ gồm khoảng trắng
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            // Kiểm tra chuỗi input chỉ chứa các ký tự chữ cái và dấu cách
+            if (!Regex.IsMatch(input, @"^[a-zA-ZÀ-Ỹà-ỹ ]+$"))
+            {
+                return false;
+            }
+
+            // Kiểm tra xem chuỗi input có ít nhất một khoảng trắng để phân tách giữa họ và tên
+            if (!input.Contains(" "))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         static bool ValidationCCCD(string input)
