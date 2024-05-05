@@ -80,7 +80,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged(nameof(HoTen));
             }
         }
-        private DateTime _ngaySinh;
+        private DateTime _ngaySinh = DateTime.Now;
 
         public DateTime NgaySinh
         {
