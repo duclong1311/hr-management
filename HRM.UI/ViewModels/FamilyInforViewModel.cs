@@ -233,7 +233,7 @@ namespace HRM.UI.ViewModels
                         {
                             List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
                         }*/
-        }
+        }   
     }
 }
 

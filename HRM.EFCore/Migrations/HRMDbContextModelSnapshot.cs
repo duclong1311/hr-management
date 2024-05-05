@@ -627,17 +627,21 @@ namespace HRM.EFCore.Migrations
                         .WithMany()
                         .HasForeignKey("ChucVuId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", "QuaTrinhCongTac")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhCongTacId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", "QuaTrinhDaoTao")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhDaoTaoId");
 
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
+
+                    b.Navigation("QuaTrinhCongTac");
+
+                    b.Navigation("QuaTrinhDaoTao");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>

@@ -77,10 +77,10 @@ namespace HRM.UI.ViewModels
         }
         public void LoadData()
         {
-            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.BoPhan).ToList());
+            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.QuaTrinhDaoTao).Include(x => x.BoPhan).ToList()); ;
             if (!String.IsNullOrWhiteSpace(Filter))
             {
-                List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
+                List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter) || x.QuaTrinhDaoTao.NganhHoc.Contains(Filter)).ToList());
             }
         }
     }

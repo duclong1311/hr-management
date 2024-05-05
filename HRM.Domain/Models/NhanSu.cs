@@ -41,6 +41,8 @@ namespace HRM.Domain.Models
         public int? ChucVuId {  get; set; }
         public ChucVu? ChucVu { get; set; }
         public int? QuaTrinhDaoTaoId { get; set; }
+        public QuaTrinhDaoTao? QuaTrinhDaoTao { get; set; }
         public int? QuaTrinhCongTacId { get; set; }
+        public QuaTrinhCongTac? QuaTrinhCongTac { get; set; }
     }
 }

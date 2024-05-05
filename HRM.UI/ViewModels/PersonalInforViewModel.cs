@@ -1,25 +1,16 @@
 ﻿using HRM.Core.Repositories;
 using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
-using HRM.UI.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Runtime.CompilerServices;
 using HRM.UI.Stores;
 using HRM.UI.Factories;
 using System.IO;
 using HRM.UI.States.Users;
+using System.Text.RegularExpressions;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HRM.UI.ViewModels
 {
@@ -67,116 +58,225 @@ namespace HRM.UI.ViewModels
         private ChucVu _selectedCboChucVu;
         public ChucVu SeletedCboChucVu { get { return _selectedCboChucVu; } set { _selectedCboChucVu = value; OnPropertyChanged(); } }
 
+        public bool check;
+
         private string _hoTen;
         public string HoTen
         {
             get { return _hoTen; }
-            set { _hoTen = value; OnPropertyChanged(); }
+            set
+            {
+                _hoTen = value;
+                if (!ValidationHoTen(HoTen) && !HoTen.IsNullOrEmpty())
+                {
+                    ErrorHoTen = "Họ và tên chưa hợp lệ";
+                    check = false;
+                }
+                else
+                {
+                    ErrorHoTen = "";
+                    check = true;
+                }
+                OnPropertyChanged(nameof(HoTen));
+            }
         }
         private DateTime _ngaySinh;
 
         public DateTime NgaySinh
         {
             get { return _ngaySinh; }
-            set { _ngaySinh = value; OnPropertyChanged(); }
+            set { _ngaySinh = value; OnPropertyChanged(nameof(NgaySinh)); }
         }
         private string _nguyenQuan;
 
         public string NguyenQuan
         {
             get { return _nguyenQuan; }
-            set { _nguyenQuan = value; OnPropertyChanged(); }
+            set
+            {
+                _nguyenQuan = value;
+                if (!ValidationHoTen(NguyenQuan) && !NguyenQuan.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorNguyenQuan = "Nguyên quán chưa hợp lệ!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorNguyenQuan = "";
+                }
+                OnPropertyChanged(nameof(NguyenQuan));
+            }
         }
         private string _danToc;
 
         public string DanToc
         {
             get { return _danToc; }
-            set { _danToc = value; OnPropertyChanged(); }
+            set { _danToc = value; OnPropertyChanged(nameof(DanToc)); }
         }
         private string _cccd;
 
         public string CCCD
         {
             get { return _cccd; }
-            set { _cccd = value; OnPropertyChanged(); }
+            set
+            {
+                _cccd = value;
+                if (!ValidationCCCD(CCCD) && !CCCD.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorCCCD = "Số CCCD gồm 12 chữ số!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorCCCD = "";
+                }
+                OnPropertyChanged(nameof(CCCD));
+            }
         }
         private string _trinhDoVanHoa;
 
         public string TrinhDoVanHoa
         {
             get { return _trinhDoVanHoa; }
-            set { _trinhDoVanHoa = value; OnPropertyChanged(); }
+            set { _trinhDoVanHoa = value; OnPropertyChanged(nameof(TrinhDoVanHoa)); }
         }
         private string _ketNapDang;
 
         public string KetNapDang
         {
             get { return _ketNapDang; }
-            set { _ketNapDang = value; OnPropertyChanged(); }
+            set
+            {
+                _ketNapDang = value;
+                //if (KetNapDang.Equals("Đã kết nạp") == false)
+                //{
+                //    check = false;
+                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
+                //}
+                //else if (KetNapDang.Equals("Chưa kết nạp") == false)
+                //{
+                //    check = false;
+                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
+                //}
+                //else
+                //{
+                //    check = true;
+                //    ErrorKetNapDang = "";
+                //}
+                OnPropertyChanged(nameof(KetNapDang));
+            }
         }
         private string _khenThuong;
 
         public string KhenThuong
         {
             get { return _khenThuong; }
-            set { _khenThuong = value; OnPropertyChanged(); }
+            set { _khenThuong = value; OnPropertyChanged(nameof(KhenThuong)); }
         }
         private string _soThich;
 
         public string SoThich
         {
             get { return _soThich; }
-            set { _soThich = value; OnPropertyChanged(); }
+            set
+            {
+                _soThich = value;
+                if (!ValidationHoTen(SoThich) && !SoThich.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorSoThich = "Sở thích chưa hợp lệ!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorSoThich = "";
+                }
+                OnPropertyChanged(nameof(SoThich));
+            }
         }
         private bool _gioiTinh;
 
         public bool GioiTinh
         {
             get { return _gioiTinh; }
-            set { _gioiTinh = value; OnPropertyChanged(); }
+            set { _gioiTinh = value; OnPropertyChanged(nameof(GioiTinh)); }
         }
         private string _noiSinh;
 
         public string NoiSinh
         {
             get { return _noiSinh; }
-            set { _noiSinh = value; OnPropertyChanged(); }
+            set { _noiSinh = value; OnPropertyChanged(nameof(NoiSinh)); }
         }
         private string _tonGiao;
 
         public string TonGiao
         {
             get { return _tonGiao; }
-            set { _tonGiao = value; OnPropertyChanged(); }
+            set
+            {
+                _tonGiao = value;
+                OnPropertyChanged(nameof(TonGiao));
+            }
         }
         private DateTime _capNgay = DateTime.Now;
 
         public DateTime CapNgay
         {
             get { return _capNgay; }
-            set { _capNgay = value; OnPropertyChanged(); }
+            set { _capNgay = value; OnPropertyChanged(nameof(CapNgay)); }
         }
         private string _noiKetNapDoan;
 
         public string NoiKetNapDoan
         {
             get { return _noiKetNapDoan; }
-            set { _noiKetNapDoan = value; OnPropertyChanged(); }
+            set { _noiKetNapDoan = value; OnPropertyChanged(nameof(NoiKetNapDoan)); }
         }
         private string _noiKetNapDang;
 
         public string NoiKetNapDang
         {
             get { return _noiKetNapDang; }
-            set { _noiKetNapDang = value; OnPropertyChanged(); }
+            set
+            {
+                _noiKetNapDang = value;
+                if (!ValidationHoTen(NoiKetNapDang) && !NoiKetNapDang.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorNoiKetNapDang = "Nơi kết nạp đảng chưa hợp lệ chưa hợp lệ!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorNoiKetNapDang = "";
+                }
+                OnPropertyChanged(nameof(NoiKetNapDang));
+            }
         }
         private string _maNhanVien;
 
         public string MaNhanVien
         {
             get { return _maNhanVien; }
-            set { _maNhanVien = value; OnPropertyChanged(); }
+            set
+            {
+                _maNhanVien = value;
+                if (!IsAlphaNumeric(MaNhanVien) && !MaNhanVien.IsNullOrEmpty())
+                {
+                    //check = false;
+                    ErrorMaNhanVien = "Mã nhân viên chưa hợp lệ!";
+                }
+                else
+                {
+                    ErrorMaNhanVien = "";
+                    //check = true;
+                }
+                OnPropertyChanged(nameof(MaNhanVien));
+            }
         }
         private string _sTK;
         public string STK
@@ -185,7 +285,21 @@ namespace HRM.UI.ViewModels
             {
                 return _sTK;
             }
-            set { _sTK = value; OnPropertyChanged(); }
+            set
+            {
+                _sTK = value;
+                if (!ValidationSTK(STK) && !STK.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorSTK = "Số tài khoản chưa hợp lệ!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorSTK = "";
+                }
+                OnPropertyChanged(nameof(STK));
+            }
         }
 
         private string _maSoBHXH;
@@ -195,7 +309,21 @@ namespace HRM.UI.ViewModels
             {
                 return _maSoBHXH;
             }
-            set { _maSoBHXH = value; OnPropertyChanged(); }
+            set
+            {
+                _maSoBHXH = value;
+                if (!ValidationMaSoBHXH(MaSoBHXH) && !MaSoBHXH.IsNullOrEmpty())
+                {
+                    check = false;
+                    ErrorMaSoBHXH = "Mã số BHXH gồm 10 chữ số!";
+                }
+                else
+                {
+                    check = true;
+                    ErrorMaSoBHXH = "";
+                }
+                OnPropertyChanged(nameof(MaSoBHXH));
+            }
         }
 
         private string _maSoThue;
@@ -205,7 +333,21 @@ namespace HRM.UI.ViewModels
             {
                 return _maSoThue;
             }
-            set { _maSoThue = value; OnPropertyChanged(); }
+            set
+            {
+                _maSoThue = value;
+                if (!ValidationMaSoThue(MaSoThue) && !MaSoThue.IsNullOrEmpty())
+                {
+                    //check = false;
+                    ErrorMaSoThue = "Mã số thuế gồm 10 hoặc 13 chữ số!"; 
+                }
+                else
+                {
+                    //check = true;
+                    ErrorMaSoThue = "";
+                }
+                OnPropertyChanged(nameof(MaSoThue));
+            }
         }
 
         //Image
@@ -290,6 +432,50 @@ namespace HRM.UI.ViewModels
             }
         }
 
+
+
+        #region Validation
+        private string _errorMaNhanVien = "";
+        public string ErrorMaNhanVien { get { return _errorMaNhanVien; } set { _errorMaNhanVien = value; OnPropertyChanged(nameof(ErrorMaNhanVien)); } }
+
+        private string _errorHoTen = " ";
+        public string ErrorHoTen { get { return _errorHoTen; } set { _errorHoTen = value; OnPropertyChanged(nameof(ErrorHoTen)); } }
+
+        private string _errorNS;
+        public string ErrorNS { get { return _errorNS; } set { _errorNS = value; OnPropertyChanged(nameof(ErrorNS)); } }
+
+        private string _errorNguyenQuan;
+        public string ErrorNguyenQuan { get { return _errorNguyenQuan; } set { _errorNguyenQuan = value; OnPropertyChanged(nameof(ErrorNguyenQuan)); } }
+
+        private string _errorCCCD;
+        public string ErrorCCCD { get { return _errorCCCD; } set { _errorCCCD = value; OnPropertyChanged(nameof(ErrorCCCD)); } }
+
+        private string _errorKetNapDang;
+        public string ErrorKetNapDang { get { return _errorKetNapDang; } set { _errorKetNapDang = value; OnPropertyChanged(nameof(ErrorKetNapDang)); } }
+
+        private string _errorSoThich;
+        public string ErrorSoThich { get { return _errorSoThich; } set { _errorSoThich = value; OnPropertyChanged(nameof(ErrorSoThich)); } }
+
+        private string _errorSTK;
+        public string ErrorSTK { get { return _errorSTK; } set { _errorSTK = value; OnPropertyChanged(nameof(ErrorSTK)); } }
+
+        private string _errorMaSoBHXH;
+        public string ErrorMaSoBHXH { get { return _errorMaSoBHXH; } set { _errorMaSoBHXH = value; OnPropertyChanged(nameof(ErrorMaSoBHXH)); } }
+
+        private string _errorMaSoThue;
+        public string ErrorMaSoThue { get { return _errorMaSoThue; } set { _errorMaSoThue = value; OnPropertyChanged(nameof(ErrorMaSoThue)); } }
+
+        private string _errorTonGiao;
+        public string ErrorTonGiao { get { return _errorTonGiao; } set { _errorTonGiao = value; OnPropertyChanged(nameof(ErrorTonGiao)); } }
+
+        private string _errorCapNgay;
+        public string ErrorCapNgay { get { return _errorCapNgay; } set { _errorCapNgay = value; OnPropertyChanged(nameof(ErrorCapNgay)); } }
+
+        private string _errorNoiKetNapDang;
+        public string ErrorNoiKetNapDang { get { return _errorNoiKetNapDang; } set { _errorNoiKetNapDang = value; OnPropertyChanged(nameof(ErrorNoiKetNapDang)); } }
+        #endregion
+
+
         public PersonalInforViewModel(IUserStore userStore, IRepository<BoPhan> bophanRepository, IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IViewModelFactory viewModelFactory)
         {
             _userStore = userStore;
@@ -329,10 +515,153 @@ namespace HRM.UI.ViewModels
             // Thêm thông tin bản thân vào database
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-
+                if(check == false)
+                {
+                    return false;
+                }
                 return true;
             }, async (p) =>
             {
+                if (string.IsNullOrEmpty(MaNhanVien))
+                {
+                    ErrorMaNhanVien = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(HoTen))
+                {
+                    ErrorHoTen = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(NguyenQuan))
+                {
+                    ErrorNguyenQuan = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(CCCD))
+                {
+                    ErrorCCCD = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(KetNapDang))
+                {
+                    ErrorKetNapDang = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(SoThich))
+                {
+                    ErrorSoThich = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(STK))
+                {
+                    ErrorSTK = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(MaSoBHXH))
+                {
+                    ErrorMaSoBHXH = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(MaSoThue))
+                {
+                    ErrorMaSoThue = "Không được để trống mục này";
+                    return;
+                }
+                if (string.IsNullOrEmpty(NoiKetNapDang))
+                {
+                    ErrorNoiKetNapDang = "Không được để trống mục này";
+                    return;
+                }
+                if (_hosoRepository.AsQueryable().Any(x => x.MaNhanVien.Equals(MaNhanVien)))
+                {
+                    resetError();
+                    ErrorMaNhanVien = "Mã nhân viên đã tồn tại";
+                    return;
+                }
+
+                if (IsAlphaNumeric(MaNhanVien) == false)
+                {
+                    resetError();
+                    ErrorMaNhanVien = "Mã nhân viên không hợp lệ";
+                    return;
+                }
+
+                if (ValidationHoTen(HoTen) == false)
+                {
+                    resetError();
+                    ErrorHoTen = "Họ và tên không hợp lệ";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(NgaySinh.ToString()))
+                {
+                    resetError();
+                    ErrorNS = "Ngày tháng năm sinh không hợp lệ";
+                    return;
+                }
+
+                if (ValidationHoTen(NguyenQuan) == false)
+                {
+                    resetError();
+                    ErrorNguyenQuan = "Nguyên quán không hợp lệ";
+                    return;
+                }
+
+                if (ValidationCCCD(CCCD) == false)
+                {
+                    resetError();
+                    ErrorCCCD = "Số CCCD phải là 12 chữ số";
+                    return;
+                }
+
+                //if (KetNapDang.Contains("Đã kết nạp") == false)
+                //{
+                //    resetError();
+                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
+                //    return;
+                //}
+
+                //if (KetNapDang.Contains("Chưa kết nạp") == false)
+                //{
+                //    resetError();
+                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
+                //    return;
+                //}
+
+                //if (ValidationHoTen(SoThich))
+                //{
+                //    resetError();
+                //    ErrorSoThich = "Sở thích chưa hợp lệ";
+                //    return;
+                //}
+
+                //if (ValidationSTK(STK))
+                //{
+                //    resetError();
+                //    ErrorSTK = "Số tài khoản chưa hợp lệ!";
+                //    return;
+                //}
+
+                //if (ValidationMaSoBHXH(MaSoBHXH))
+                //{
+                //    resetError();
+                //    ErrorMaSoBHXH = "Mã số thuế gồm 10 hoặc 13 chữ số!";
+                //    return;
+                //}
+
+                //if (ValidationMaSoThue(MaSoThue))
+                //{
+                //    resetError();
+                //    ErrorMaSoThue = "Mã số BHXH gồm 10 chữ số!";
+                //    return;
+                //}
+
+                //if (ValidationHoTen(NoiKetNapDang))
+                //{
+                //    resetError();
+                //    ErrorNoiKetNapDang = "Nơi kết nạp đảng chưa hợp lệ chưa hợp lệ!";
+                //    return;
+                //}
                 var NhanSu = new NhanSu()
                 {
                     MaNhanVien = MaNhanVien,
@@ -375,6 +704,17 @@ namespace HRM.UI.ViewModels
             });
 
 
+        }
+
+        public void resetError()
+        {
+            ErrorHoTen = "";
+            ErrorMaNhanVien = "";
+            ErrorNguyenQuan = "";
+            ErrorNS = "";
+            ErrorCCCD = "";
+            ErrorKetNapDang = "";
+            ErrorSoThich = "";
         }
         public string CoppyLink = "";
         private void SaveImageToFolder(string filePath)
@@ -433,6 +773,57 @@ namespace HRM.UI.ViewModels
                 NoiKetNapDang = "";
             }
         }
+
+        static bool IsAlphaNumeric(string input)
+        {
+
+            // Mẫu regex để kiểm tra chỉ chứa chữ cái và chữ số
+            string pattern = @"^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,10}$";
+
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
+        static bool ValidationHoTen(string input)
+        {
+            //string pattern = @"^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$";
+            string pattern = @"^[\p{L} ]{2,50}$";
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
+        static bool ValidationCCCD(string input)
+        {
+            string pattern = @"^\d{12}$";
+
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
+        static bool ValidationMaSoBHXH(string input)
+        {
+            string pattern = @"^\d{10}$";
+
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
+        static bool ValidationMaSoThue(string input)
+        {
+            string pattern = @"^\d{10}|\d{13}$";
+
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
+        static bool ValidationSTK(string input)
+        {
+            string pattern = @"[0-9]{4,18}$";
+
+            // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
+            return Regex.IsMatch(input, pattern);
+        }
+
     }
 }
 
