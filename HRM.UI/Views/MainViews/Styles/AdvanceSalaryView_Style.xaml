@@ -8,6 +8,14 @@
                 Value="14" />
     </Style>
 
+    <Style TargetType="TextBlock"
+           x:Key="TextBlock_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="FontSize"
+                Value="14" />
+    </Style>
+
     <Style TargetType="TextBox"
            x:Key="TextBox_Style">
         <Setter Property="Margin"
@@ -30,15 +38,16 @@
                 Value="14" />
     </Style>
 
-    <Style TargetType="GridViewColumnHeader"
-           x:Key="Header_style">
+    <Style TargetType="ComboBox"
+           x:Key="ComboBox_Style">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="Height"
+                Value="28.62" />
         <Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Center" />
-
+        <Setter Property="Padding"
+                Value="5" />
     </Style>
 
     <Style TargetType="GridViewColumnHeader"
@@ -49,19 +58,27 @@
                 Value="Left" />
         <Setter Property="IsHitTestVisible"
                 Value="False" />
+        <Setter Property="Height"
+                Value="25" />
         <Setter Property="Padding"
                 Value="5,0,0,0" />
+        <Setter Property="FontWeight"
+                Value="SemiBold" />
     </Style>
 
-    <Style TargetType="ComboBox"
-           x:Key="ComboBox_Style">
+    <Style TargetType="DatePicker"
+           x:Key="DatePicker_Style">
         <Setter Property="Margin"
                 Value="5" />
         <Setter Property="Height"
                 Value="30" />
         <Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="Padding"
-                Value="5" />
+        <Setter Property="SelectedDateFormat"
+                Value="Short" />
+        <Setter Property="DisplayDateStart"
+                Value="01/01/1900" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

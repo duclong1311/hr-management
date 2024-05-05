@@ -122,7 +122,7 @@
         <Grid Grid.Row="3"
               Grid.ColumnSpan="4">
 
-            <ListView Margin="10"
+            <ListView Margin="-1120,854,1140,-834"
                       Name="ListStaffView_Pick"
                       Width="auto"
                       BorderBrush="Black"
