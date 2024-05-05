@@ -7,6 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="640"
+             Loaded="UserControl_Loaded"
              d:DesignWidth="820">
     <UserControl.Resources>
         <ResourceDictionary>
