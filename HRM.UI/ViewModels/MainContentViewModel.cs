@@ -33,6 +33,7 @@ namespace HRM.UI.ViewModels
         public ICommand AdvanceSalaryCommand { get; set; }
         public ICommand PositionStaffCommand { get; set; }
         public ICommand ListRemunerativeCommand { get; set; }
+        public ICommand SalaryCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -105,6 +106,10 @@ namespace HRM.UI.ViewModels
             AdvanceSalaryCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AdvanceSalary);
+            }); 
+            SalaryCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Salary);
             });
         }
 

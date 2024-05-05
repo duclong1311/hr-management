@@ -33,6 +33,7 @@ namespace HRM.UI.Defines
         Tracking,
         ListTracking,
         // ----------------------- Lương thưởng -----------------------
+        Salary,
         AdvanceSalary
     }
 }

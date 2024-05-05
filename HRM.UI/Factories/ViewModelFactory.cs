@@ -34,6 +34,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<AdvanceSalaryViewModel> _createAdvanceSalaryViewModel;
         private readonly CreateViewModel<PostionStaffViewModel> _createPositionStaffViewModel;
         private readonly CreateViewModel<ListRemunerativeViewModel> _createListRemunerativeViewModel;
+        private readonly CreateViewModel<SalaryViewModel> _createSalaryViewModel;
 
 
 
@@ -58,7 +59,8 @@ namespace HRM.UI.Factories
             CreateViewModel<AdvanceSalaryViewModel> createAdvanceSalaryViewModel,
             CreateViewModel<ListTrackingTableViewModel> createListTrackingTableViewModel,
             CreateViewModel<ListRemunerativeViewModel> createListRemunerativeViewModel,
-            CreateViewModel<PostionStaffViewModel> createPositionStaffViewModel)
+            CreateViewModel<PostionStaffViewModel> createPositionStaffViewModel,
+            CreateViewModel<SalaryViewModel> createSalaryViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
@@ -83,6 +85,7 @@ namespace HRM.UI.Factories
             _createPositionStaffViewModel = createPositionStaffViewModel;
             _createListTrackingTableViewModel = createListTrackingTableViewModel;
             _createListRemunerativeViewModel = createListRemunerativeViewModel;
+            _createSalaryViewModel = createSalaryViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -132,6 +135,8 @@ namespace HRM.UI.Factories
                     return _createPositionStaffViewModel();
                 case EViewTypes.ListRemunerative:
                     return _createListRemunerativeViewModel();
+                case EViewTypes.Salary:
+                    return _createSalaryViewModel();
                 default:
                     throw new ArgumentException();
             }

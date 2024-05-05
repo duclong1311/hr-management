@@ -72,5 +72,8 @@
         <DataTemplate DataType="{x:Type vm:ListRemunerativeViewModel}">
             <view:ListRemunerativeView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SalaryViewModel}">
+            <view:SalaryView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

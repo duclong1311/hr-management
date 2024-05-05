@@ -277,7 +277,7 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding SalaryReportCommand}"
+                                Command="{Binding SalaryCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
