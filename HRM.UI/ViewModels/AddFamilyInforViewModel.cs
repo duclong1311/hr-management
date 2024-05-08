@@ -39,8 +39,8 @@ namespace HRM.UI.ViewModels
         private IRepository<QuanHeGiaDinh> _quanHeGiaDinhRepository;
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ObservableCollection<string> TinhThanhData { get; set; }
-        public ObservableCollection<string> MoiQuanHeData { get; set; }
+        public List<string> TinhThanhData { get; set; }
+        public List<string> MoiQuanHeData { get; set; }
 
         private QuanHeGiaDinh _selectedItem;
         public QuanHeGiaDinh SelectedItem
@@ -131,12 +131,22 @@ namespace HRM.UI.ViewModels
 
         private void LoadComboBoxData()
         {
-            TinhThanhData = new ObservableCollection<string>();
-            TinhThanhData.Add("Hà Nội");
-            TinhThanhData.Add("Hồ Chí Minh");
-            TinhThanhData.Add("Đà Nẵng");
+            TinhThanhData = new List<string>();
+            string[] provinces = {
+            "An Giang", "Bà Rịa - Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh", "Bến Tre",
+            "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk",
+            "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam",
+            "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang",
+            "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định",
+            "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Quảng Bình", "Quảng Nam", "Quảng Ngãi",
+            "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên",
+            "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
+            "Vĩnh Phúc", "Yên Bái", "Phú Yên", "Cần Thơ", "Đà Nẵng", "Hải Phòng", "Hà Nội",
+            "TP Hồ Chí Minh" 
+            }; Array.Sort(provinces);
+            TinhThanhData.AddRange(provinces);
 
-            MoiQuanHeData = new ObservableCollection<string>();
+            MoiQuanHeData = new List<string>();
             MoiQuanHeData.Add("Cha");
             MoiQuanHeData.Add("Mẹ");
             MoiQuanHeData.Add("Anh trai");
@@ -144,8 +154,8 @@ namespace HRM.UI.ViewModels
             MoiQuanHeData.Add("Chị gái");
             MoiQuanHeData.Add("Em gái");
             MoiQuanHeData.Add("Con");
-
         }
+
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
