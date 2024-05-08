@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HRM.UI.ViewModels;
 
 namespace HRM.UI.Views
 {
@@ -23,6 +24,10 @@ namespace HRM.UI.Views
         public AddTrainingProcessView()
         {
             InitializeComponent();
+        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as AddTrainingProcessViewModel).LoadData();
         }
     }
 }

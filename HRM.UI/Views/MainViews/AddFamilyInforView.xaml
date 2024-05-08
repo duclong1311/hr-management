@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              mc:Ignorable="d"
              d:DesignHeight="640"
-             d:DesignWidth="820">
+             d:DesignWidth="820"
+             Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

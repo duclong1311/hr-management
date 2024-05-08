@@ -28,7 +28,7 @@ namespace HRM.UI.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as AddFamilyInforView).LoadData();
+            (this.DataContext as AddFamilyInforViewModel).LoadData();
         }
     }
 }

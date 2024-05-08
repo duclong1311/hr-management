@@ -169,7 +169,7 @@ namespace HRM.UI.ViewModels
             _userStore = userStore;
 
             LoadComboBoxData();
-            //LoadData();
+            LoadData();
 
             TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
             {
@@ -201,11 +201,11 @@ namespace HRM.UI.ViewModels
                 {
                     QuanHeGiaDinh = await _quanHeGiaDinhRepository.AddAsync(QuanHeGiaDinh);
                     await _unitOfWork.CommitAsync();
-                    //LoadData();
+                    LoadData();
                     if (QuanHeGiaDinh != null)
                     {
                         MessageBox.Show("Thêm thành công");
-                        //LoadData();
+                        LoadData();
                     }
                     else
                     {
@@ -232,7 +232,7 @@ namespace HRM.UI.ViewModels
                     var QuanHeGiaDinh = await _quanHeGiaDinhRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
                     await _quanHeGiaDinhRepository.DeleteAsync(QuanHeGiaDinh);
                     await _unitOfWork.CommitAsync();
-                    //LoadData();
+                    LoadData();
                 }
                 catch (Exception ex)
                 {
@@ -244,10 +244,6 @@ namespace HRM.UI.ViewModels
         public void LoadData()
         {
             List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
         }
     }
 }
