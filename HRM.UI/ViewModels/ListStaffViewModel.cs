@@ -118,6 +118,7 @@ namespace HRM.UI.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand ResetCommand { get; set; }
         public ICommand StaffViewCommand { get; set; }
+
         private IRepository<NhanSu> _repository;
         private IRepository<BoPhan> _boPhanRepository;
         private IRepository<ChucVu> _chucVuRepository;

@@ -34,6 +34,7 @@ namespace HRM.UI.ViewModels
         public ICommand PositionStaffCommand { get; set; }
         public ICommand ListRemunerativeCommand { get; set; }
         public ICommand SalaryCommand { get; set; }
+        public ICommand AddStaffViewCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -55,6 +56,10 @@ namespace HRM.UI.ViewModels
             StaffListCommand = new RelayCommand<object>(p => true, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListStaff);
+            });
+            AddStaffViewCommand = new RelayCommand<object>(p => true, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AddChildContent);
             });
             StaffCVCommand = new RelayCommand<object>(p => true, p =>
             {

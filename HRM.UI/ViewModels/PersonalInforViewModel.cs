@@ -614,54 +614,6 @@ namespace HRM.UI.ViewModels
                     return;
                 }
 
-                //if (KetNapDang.Contains("Đã kết nạp") == false)
-                //{
-                //    resetError();
-                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
-                //    return;
-                //}
-
-                //if (KetNapDang.Contains("Chưa kết nạp") == false)
-                //{
-                //    resetError();
-                //    ErrorKetNapDang = "'Đã kết nạp' hoặc 'Chưa kết nạp'";
-                //    return;
-                //}
-
-                //if (ValidationHoTen(SoThich))
-                //{
-                //    resetError();
-                //    ErrorSoThich = "Sở thích chưa hợp lệ";
-                //    return;
-                //}
-
-                //if (ValidationSTK(STK))
-                //{
-                //    resetError();
-                //    ErrorSTK = "Số tài khoản chưa hợp lệ!";
-                //    return;
-                //}
-
-                //if (ValidationMaSoBHXH(MaSoBHXH))
-                //{
-                //    resetError();
-                //    ErrorMaSoBHXH = "Mã số thuế gồm 10 hoặc 13 chữ số!";
-                //    return;
-                //}
-
-                //if (ValidationMaSoThue(MaSoThue))
-                //{
-                //    resetError();
-                //    ErrorMaSoThue = "Mã số BHXH gồm 10 chữ số!";
-                //    return;
-                //}
-
-                //if (ValidationHoTen(NoiKetNapDang))
-                //{
-                //    resetError();
-                //    ErrorNoiKetNapDang = "Nơi kết nạp đảng chưa hợp lệ chưa hợp lệ!";
-                //    return;
-                //}
                 var NhanSu = new NhanSu()
                 {
                     MaNhanVien = MaNhanVien,

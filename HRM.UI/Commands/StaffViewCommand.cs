@@ -27,7 +27,6 @@ namespace HRM.UI.Commands
         {
             await _authenticator.LoginNhanSu(_staffCVViewModel.SelectedItem.MaNhanVien);
             _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-
         }
     }
 }

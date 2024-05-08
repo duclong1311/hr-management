@@ -35,6 +35,10 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<PostionStaffViewModel> _createPositionStaffViewModel;
         private readonly CreateViewModel<ListRemunerativeViewModel> _createListRemunerativeViewModel;
         private readonly CreateViewModel<SalaryViewModel> _createSalaryViewModel;
+        private readonly CreateViewModel<AddChildContentViewModel> _createAddChildContentViewModel;
+        private readonly CreateViewModel<AddTrainingProcessViewModel> _createAddTrainingProcessViewModel;
+        private readonly CreateViewModel<AddWorkProcessViewModel> _createAddWorkProcessViewModel;
+        private readonly CreateViewModel<AddFamilyInforViewModel> _createAddFamilyInforViewModel;
 
 
 
@@ -60,6 +64,10 @@ namespace HRM.UI.Factories
             CreateViewModel<ListTrackingTableViewModel> createListTrackingTableViewModel,
             CreateViewModel<ListRemunerativeViewModel> createListRemunerativeViewModel,
             CreateViewModel<PostionStaffViewModel> createPositionStaffViewModel,
+            CreateViewModel<AddChildContentViewModel> createAddChildContentViewModel,
+            CreateViewModel<AddFamilyInforViewModel> createAddFamilyInforViewModel,
+            CreateViewModel<AddTrainingProcessViewModel> createAddTrainingProcessViewModel,
+            CreateViewModel<AddWorkProcessViewModel> createAddWorkProcessViewModel,
             CreateViewModel<SalaryViewModel> createSalaryViewModel)
 
         {
@@ -86,6 +94,10 @@ namespace HRM.UI.Factories
             _createListTrackingTableViewModel = createListTrackingTableViewModel;
             _createListRemunerativeViewModel = createListRemunerativeViewModel;
             _createSalaryViewModel = createSalaryViewModel;
+            _createAddChildContentViewModel = createAddChildContentViewModel;
+            _createAddFamilyInforViewModel = createAddFamilyInforViewModel;
+            _createAddTrainingProcessViewModel = createAddTrainingProcessViewModel;
+            _createAddWorkProcessViewModel = createAddWorkProcessViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -115,6 +127,8 @@ namespace HRM.UI.Factories
                     return _createDisciplineViewModel();
                 case EViewTypes.ChildContent:
                     return _createChildContentViewModel();
+                case EViewTypes.AddChildContent:
+                    return _createAddChildContentViewModel();
                 case EViewTypes.StaffCV:
                     return _createStaffCVViewModel();
                 case EViewTypes.Department:
@@ -135,6 +149,12 @@ namespace HRM.UI.Factories
                     return _createPositionStaffViewModel();
                 case EViewTypes.ListRemunerative:
                     return _createListRemunerativeViewModel();
+                case EViewTypes.AddFamilyInfor:
+                    return _createAddFamilyInforViewModel();
+                case EViewTypes.AddTrainingProcess:
+                    return _createAddTrainingProcessViewModel();
+                case EViewTypes.AddWorkProcess:
+                    return _createAddWorkProcessViewModel();
                 case EViewTypes.Salary:
                     return _createSalaryViewModel();
                 default:

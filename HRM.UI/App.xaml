@@ -42,6 +42,9 @@
         <DataTemplate DataType="{x:Type vm:ChildContentViewModel}">
             <view:ChildContentView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddChildContentViewModel}">
+            <view:AddChildContentView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:StaffCVViewModel}">
             <view:MiniListStaffView />
         </DataTemplate>
@@ -74,6 +77,15 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:SalaryViewModel}">
             <view:SalaryView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddFamilyInforViewModel}">
+            <view:AddFamilyInforView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddTrainingProcessViewModel}">
+            <view:AddTrainingProcessView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddWorkProcessViewModel}">
+            <view:AddWorkProcessView />
         </DataTemplate>
     </Application.Resources>
 </Application>

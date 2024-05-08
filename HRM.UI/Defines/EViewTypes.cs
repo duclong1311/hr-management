@@ -11,10 +11,15 @@ namespace HRM.UI.Defines
         Login,
         Register,
         MainContent,
+        //---------------------- Xem, sửa, xóa ----------------------
         PersonalInfor,
         FamilyInfor,
         TrainingProcess,
         WorkProcess,
+        //---------------------- Thêm ----------------------
+        AddFamilyInfor,
+        AddTrainingProcess,
+        AddWorkProcess,
         // ---------------------- Khen thưởng, kỷ luật ----------------------
         Remunerative,
         ListRemunerative,
@@ -28,6 +33,7 @@ namespace HRM.UI.Defines
         Contract,
         ListContract,
         ChildContent,
+        AddChildContent,
         PositionStaff,
         // ----------------------- Công cán -----------------------
         Tracking,

@@ -119,7 +119,7 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding AddCVCommand}"
+                                Command="{Binding AddStaffViewCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
@@ -139,7 +139,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Replace.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Khen thưởng, thi đua" />
+                                <TextBlock Text="Khen thưởng, kỷ luật" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>

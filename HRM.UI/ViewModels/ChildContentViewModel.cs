@@ -64,8 +64,7 @@ namespace HRM.UI.ViewModels
             {
                 _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
             });
-
-    }
+        }
         private void OnCurrenViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));

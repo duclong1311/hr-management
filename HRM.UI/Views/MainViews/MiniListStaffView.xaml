@@ -145,7 +145,7 @@
                             Command="{Binding }" />
                     <Button Content="Xem hồ sơ"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding StaffViewCommand }" />
+                            Command="{Binding StaffViewCommand}" />
                 </StackPanel>
             </Grid>
         </Grid>
