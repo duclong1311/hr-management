@@ -59,8 +59,7 @@
                                Style="{StaticResource Label_Style}" />
                         <Label Content="Ngày kết thúc: "
                                Style="{StaticResource Label_Style}" />
-                        <Label Content="Hệ số lương: "
-                               Style="{StaticResource Label_Style}" />
+                        
                     </StackPanel>
                 </Grid>
 
@@ -89,8 +88,7 @@
                             Mode=TwoWay, 
                             TargetNullValue={x:Static System:DateTime.Now}}"
                                     Style="{StaticResource DatePicker_Style}" />
-                        <TextBox Text="{Binding HeSoLuong}"
-                                 Style="{StaticResource TextBox_Style}" />
+                       
                     </StackPanel>
                 </Grid>
 

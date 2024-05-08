@@ -121,6 +121,7 @@ namespace HRM.UI.ViewModels
             _userStore = userStore;
 
             LoadComboBoxData();
+            LoadData();
 
             WorkProcessCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
@@ -152,6 +153,7 @@ namespace HRM.UI.ViewModels
                     if (QuaTrinhDaoTao != null)
                     {
                         MessageBox.Show("Thêm thành công");
+                        LoadData();
 
                     }
 
@@ -178,6 +180,7 @@ namespace HRM.UI.ViewModels
                     var quaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
                     await _quaTrinhDaoTaoRepository.DeleteAsync(quaTrinhDaoTao);
                     await _unitOfWork.CommitAsync();
+                    LoadData();
                 }
                 catch (Exception ex)
                 {
@@ -186,9 +189,9 @@ namespace HRM.UI.ViewModels
             }
             );
         }
-        //public void LoadData()
-        //{
-        //    List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        //}
+        public void LoadData()
+        {
+            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+        }
     }
 }

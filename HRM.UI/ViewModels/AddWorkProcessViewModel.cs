@@ -88,6 +88,8 @@ namespace HRM.UI.ViewModels
             _unitOfWork = unitOfWork;
             _userStore = userStore;
 
+            LoadData();
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -105,10 +107,11 @@ namespace HRM.UI.ViewModels
                 {
                     QuaTrinhCongTac = await _quaTrinhCongTacRepository.AddAsync(QuaTrinhCongTac);
                     await _unitOfWork.CommitAsync();
+                    LoadData();
                     if (QuaTrinhCongTac != null)
                     {
                         MessageBox.Show("Thêm thành công");
-
+                        LoadData();
                     }
                     else
                     {
@@ -135,6 +138,7 @@ namespace HRM.UI.ViewModels
                     var quaTrinhCongTac = await _quaTrinhCongTacRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
                     await _quaTrinhCongTacRepository.DeleteAsync(quaTrinhCongTac);
                     await _unitOfWork.CommitAsync();
+                    LoadData();
                 }
                 catch (Exception ex)
                 {
@@ -143,9 +147,9 @@ namespace HRM.UI.ViewModels
             }
             );
         }
-        //public void LoadData()
-        //{
-        //    List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        //}
+        public void LoadData()
+        {
+            List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
+        }
     }
 }
