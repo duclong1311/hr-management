@@ -62,13 +62,7 @@ namespace HRM.UI.ViewModels
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
             LoadData();
-
-            /*            StaffViewCommand = new RelayCommand<object>(p => true, async p =>
-                        {
-                            mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-                            await _authenticator.LoginNhanSu(SelectedItem.MaNhanVien);
-                        });*/
-            StaffViewCommand = new StaffViewCommand(authenticator,this, mainContentStore, viewModelFactory);
+            StaffViewCommand = new StaffViewCommand(authenticator, this, mainContentStore, viewModelFactory);
             //AddCVCommand = new RelayCommand<object>(p => true, p => 
             //{
             //    mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);

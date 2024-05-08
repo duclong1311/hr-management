@@ -24,7 +24,7 @@
                     Orientation="Horizontal">
             <Button Style="{StaticResource Button_Style}"
                     Content="Thông tin bản thân"
-                    Command="{Binding PersonInforCommand}" />
+                    Command="{Binding AddPersonInforCommand}" />
             <Button Style="{StaticResource Button_Style}"
                     Content="Quan hệ gia đình"
                     Command="{Binding AddFamilyInforCommand}" />

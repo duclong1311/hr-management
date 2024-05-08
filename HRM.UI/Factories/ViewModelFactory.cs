@@ -39,6 +39,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<AddTrainingProcessViewModel> _createAddTrainingProcessViewModel;
         private readonly CreateViewModel<AddWorkProcessViewModel> _createAddWorkProcessViewModel;
         private readonly CreateViewModel<AddFamilyInforViewModel> _createAddFamilyInforViewModel;
+        private readonly CreateViewModel<AddPersonalInforViewModel> _createAddPersonalInforViewModel;
 
 
 
@@ -68,7 +69,8 @@ namespace HRM.UI.Factories
             CreateViewModel<AddFamilyInforViewModel> createAddFamilyInforViewModel,
             CreateViewModel<AddTrainingProcessViewModel> createAddTrainingProcessViewModel,
             CreateViewModel<AddWorkProcessViewModel> createAddWorkProcessViewModel,
-            CreateViewModel<SalaryViewModel> createSalaryViewModel)
+            CreateViewModel<SalaryViewModel> createSalaryViewModel,
+            CreateViewModel<AddPersonalInforViewModel> createAddPersonalInforViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
@@ -98,6 +100,8 @@ namespace HRM.UI.Factories
             _createAddFamilyInforViewModel = createAddFamilyInforViewModel;
             _createAddTrainingProcessViewModel = createAddTrainingProcessViewModel;
             _createAddWorkProcessViewModel = createAddWorkProcessViewModel;
+            _createAddPersonalInforViewModel = createAddPersonalInforViewModel;
+            _createAddPersonalInforViewModel = createAddPersonalInforViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -155,6 +159,8 @@ namespace HRM.UI.Factories
                     return _createAddTrainingProcessViewModel();
                 case EViewTypes.AddWorkProcess:
                     return _createAddWorkProcessViewModel();
+                case EViewTypes.AddPersonal:
+                    return _createAddPersonalInforViewModel();
                 case EViewTypes.Salary:
                     return _createSalaryViewModel();
                 default:

@@ -13,10 +13,12 @@ using System.Text.RegularExpressions;
 using Microsoft.IdentityModel.Tokens;
 using HRM.UI.Commands;
 using HRM.UI.States.Authenticator;
+using RestSharp.Authenticators;
+using IAuthenticator = HRM.UI.States.Authenticator.IAuthenticator;
 
 namespace HRM.UI.ViewModels
 {
-    public class PersonalInforViewModel : BaseViewModel
+    public class AddPersonalInforViewModel : BaseViewModel
     {
         private IUnitOfWork _unitOfWork;
 
@@ -28,6 +30,8 @@ namespace HRM.UI.ViewModels
         public ICommand UploadImageCommand { get; set; }
         public ICommand SelectGenderCommand { get; set; }
         public ICommand FamilyInforCommand { get; set; }
+        public ICommand GetIDofStaffCommand { get; set; }
+
         public ObservableCollection<string> EthnicityData { get; set; }
 
         private ObservableCollection<BoPhan> _listBoPhan;
@@ -341,7 +345,7 @@ namespace HRM.UI.ViewModels
                 if (!ValidationMaSoThue(MaSoThue) && !MaSoThue.IsNullOrEmpty())
                 {
                     //check = false;
-                    ErrorMaSoThue = "Mã số thuế gồm 10 hoặc 13 chữ số!"; 
+                    ErrorMaSoThue = "Mã số thuế gồm 10 hoặc 13 chữ số!";
                 }
                 else
                 {
@@ -434,8 +438,6 @@ namespace HRM.UI.ViewModels
             }
         }
 
-
-
         #region Validation
         private string _errorMaNhanVien = "";
         public string ErrorMaNhanVien { get { return _errorMaNhanVien; } set { _errorMaNhanVien = value; OnPropertyChanged(nameof(ErrorMaNhanVien)); } }
@@ -477,14 +479,15 @@ namespace HRM.UI.ViewModels
         public string ErrorNoiKetNapDang { get { return _errorNoiKetNapDang; } set { _errorNoiKetNapDang = value; OnPropertyChanged(nameof(ErrorNoiKetNapDang)); } }
         #endregion
 
-
-        public PersonalInforViewModel(IAuthenticator authenticator, IViewModelFactory viewModelFactory, IUserStore userStore, IRepository<BoPhan> bophanRepository, IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, MainContentStore mainContentStore)
+        public AddPersonalInforViewModel(IAuthenticator authenticator, IViewModelFactory viewModelFactory, IUserStore userStore, IRepository<BoPhan> bophanRepository, IRepository<NhanSu> hosoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, MainContentStore mainContentStore)
         {
             _userStore = userStore;
             _hosoRepository = hosoRepository;
             _boPhanRepository = bophanRepository;
             _unitOfWork = unitOfWork;
             _viewModelFactory = viewModelFactory;
+
+            GetIDofStaffCommand = new GetIDofStaffCommand(authenticator, this, mainContentStore, viewModelFactory);
 
             LoadComboBoxData();
             LoadData();
@@ -518,7 +521,7 @@ namespace HRM.UI.ViewModels
             // Thêm thông tin bản thân vào database
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-                if(check == false)
+                if (check == false)
                 {
                     return false;
                 }
@@ -685,7 +688,7 @@ namespace HRM.UI.ViewModels
                 Directory.CreateDirectory(directoryPath);
 
             File.Copy(filePath, destinationPath, true);  // Lưu file với tên mới
-            //CoppyLink = @"D:\PersonInfo\" + newFileName;
+                                                         //CoppyLink = @"D:\PersonInfo\" + newFileName;
             CoppyLink = @"C:\Users\Admin\Desktop\DoAn\HRM\HRM.UI\ViewModels\PersonImage\" + newFileName;
 
         }
@@ -796,4 +799,5 @@ namespace HRM.UI.ViewModels
 
     }
 }
+
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using HRM.Domain.Models;
 using HRM.UI.Commands;
 using HRM.UI.Factories;
 using HRM.UI.States.Users;
@@ -18,10 +19,11 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
 
         private readonly IUserStore _userStore;
-        public ICommand PersonInforCommand { get; set; }
+        public ICommand AddPersonInforCommand { get; set; }
         public ICommand AddFamilyInforCommand { get; set; }
         public ICommand AddTrainingProcessCommand { get; set; }
         public ICommand AddWorkProcessCommand { get; set; }
+        public NhanSu CurrentNhanSu => _userStore.CurrentNhanSu;
         public BaseViewModel CurrentViewModel => _childContentStore.CurrentViewModel;
         private void OnCurrenViewModelChanged()
         {
@@ -34,9 +36,9 @@ namespace HRM.UI.ViewModels
             _viewModelFactory = viewModelFactory;
             childContentStore.CurrentViewModelChanged += OnCurrenViewModelChanged;
 
-            PersonInforCommand = new RelayCommand<object>(p => true, p =>
+            AddPersonInforCommand = new RelayCommand<object>(p => true, p =>
             {
-                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AddPersonal);
             });
 
             AddFamilyInforCommand = new RelayCommand<object>(p => true, p =>

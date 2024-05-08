@@ -17,6 +17,7 @@ namespace HRM.UI.Defines
         TrainingProcess,
         WorkProcess,
         //---------------------- Thêm ----------------------
+        AddPersonal,
         AddFamilyInfor,
         AddTrainingProcess,
         AddWorkProcess,
