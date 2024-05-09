@@ -36,6 +36,16 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<NhanSu> _listNhanSu = new ObservableCollection<NhanSu>();
+        public ObservableCollection<NhanSu> ListNhanSu { get => _listNhanSu; set { _listNhanSu = value; OnPropertyChanged(); } }
+
+        private NhanSu _selectedNhanSu;
+
+        public NhanSu SelectedNhanSu
+        {
+            get { return _selectedNhanSu; }
+            set { _selectedNhanSu = value; OnPropertyChanged(); }
+        }
         private string _maNhanVien { get; set; }
         public string MaNhanVien
         {
@@ -97,7 +107,13 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ListContractViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<HopDong> hopDongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
+        private IRepository<NhanSu> _nhanSuRepository;
+        private void LoadCombobox()
+        {
+            ListNhanSu = new ObservableCollection<NhanSu>(_nhanSuRepository.AsQueryable().ToList());
+            SelectedNhanSu = ListNhanSu.FirstOrDefault();
+        }
+        public ListContractViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<HopDong> hopDongRepository, IUnitOfWork unitOfWork, IRepository<NhanSu> nhanSuRepository, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
@@ -105,8 +121,9 @@ namespace HRM.UI.ViewModels
             _unitOfWork = unitOfWork;
             _childContentStore = childContentStore;
             _userStore = userStore;
-
-            
+            _nhanSuRepository = nhanSuRepository;
+            LoadCombobox();
+            Load();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -117,6 +134,8 @@ namespace HRM.UI.ViewModels
             {
                 var HopDong = new HopDong()
                 {
+                    NhanSuId = SelectedNhanSu.Id,
+                    MaNhanVien = SelectedNhanSu.MaNhanVien,
                     SoHopDong = SoHopDong,
                     LoaiHopDong = LoaiHopDong,
                     NgayBatDau = NgayBatDau,
@@ -139,7 +158,7 @@ namespace HRM.UI.ViewModels
                         NgayKetThuc = DateTime.Now;
                         LuongCoBan = 0;
                         HeSoLuong = 0;
-
+                        Load();
                     }
                     else
                     {
@@ -152,14 +171,10 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        //public void Load()
-        //{
-        //    List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        //    /*            if (!String.IsNullOrWhiteSpace(Filter))
-        //                {
-        //                    List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-        //                }*/
-        //}
+        public void Load()
+        {
+            List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().ToList());
+        }
     }
 }
 

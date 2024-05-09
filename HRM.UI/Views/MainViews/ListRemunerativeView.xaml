@@ -86,7 +86,6 @@
                                             Mode=TwoWay, 
                                             TargetNullValue={x:Static System:DateTime.Now}}"
                                 Style="{StaticResource DatePicker_Style}" />
-
                     <TextBox Text="{Binding SoQuyetDinh}"
                              Style="{StaticResource TextBox_Style}" />
                     <TextBox Text="{Binding NoiDung}"

@@ -60,8 +60,6 @@
                                Style="{StaticResource Label_Style}" />
                         <Label Content="Ngày kết thúc: "
                                Style="{StaticResource Label_Style}" />
-                        <Label Content="Hệ số lương: "
-                               Style="{StaticResource Label_Style}" />
                     </StackPanel>
                 </Grid>
 
@@ -69,11 +67,11 @@
                 <Grid Grid.Column="1"
                       Grid.Row="1">
                     <StackPanel>
-                        <ComboBox Style="{StaticResource ComboBox_Style}"
-                                  SelectedValue="{Binding MaNhanVien}"
+                        <ComboBox SelectedItem="{Binding SelectedNhanSu}"
+                                  ItemsSource="{Binding ListNhanSu}"
+                                  Style="{StaticResource ComboBox_Style}"
                                   DisplayMemberPath="MaNhanVien"
-                                  SelectedValuePath="MaNhanVien"
-                                  ItemsSource="{Binding NhanVienList}" />
+                                  SelectedValuePath="MaNhanVien" />
                         <TextBox Text="{Binding SoHopDong}"
                                  Style="{StaticResource TextBox_Style}" />
                         <TextBox Text="{Binding LoaiHopDong}"
@@ -94,8 +92,7 @@
                          Mode=TwoWay, 
                          TargetNullValue={x:Static System:DateTime.Now}}"
                                     Style="{StaticResource DatePicker_Style}" />
-                        <TextBox Text="{Binding HeSoLuong}"
-                                 Style="{StaticResource TextBox_Style}" />
+                        
                     </StackPanel>
                 </Grid>
 
@@ -136,6 +133,14 @@
                         </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
+                                <GridViewColumn Header="Mã nhân viên"
+                                            Width="100"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
+                                <GridViewColumn Header="Tên nhân viên"
+                                                Width="100"
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Số hợp đồng"
                                                 Width="120"
@@ -148,10 +153,6 @@
                                                 Header="Lương cơ bản"
                                                 Width="150"
                                                 DisplayMemberBinding="{Binding LuongCoBan}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Header="Hệ số lương"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding HeSoLuong}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Ngày bắt đầu"
                                                 Width="150"

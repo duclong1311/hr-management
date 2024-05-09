@@ -148,7 +148,17 @@ namespace HRM.UI.ViewModels
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
         private readonly ChildContentStore _childContentStore;
+        public void Load()
+        {
+            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().ToList());
+        }
+        //public void LoadHoTen(string maNhanVien)
+        //{
+        //    var nhanVien = _nhanSuRepository.AsQueryable()
+        //                                     .FirstOrDefault(x => x.MaNhanVien == maNhanVien);
 
+        //    HoTen = nhanVien.HoTen;
+        //}
 
         public ListRemunerativeViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<KhenThuongKyLuat> khenThuongKyLuatRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore, IRepository<NhanSu> nhanSuRepository)
         {
@@ -160,6 +170,7 @@ namespace HRM.UI.ViewModels
             _childContentStore = childContentStore;
             _userStore = userStore;
 
+            //LoadHoTen("TEV001");
             LoadComboBoxData();
             //CheckNullDateTimeValue();
             Load();
@@ -209,14 +220,7 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        public void Load()
-        {
-            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().ToList());
-            //List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().Include(x => x.NhanSu).ToList());
-        }
-        //public void LoadHoTen()
-        //{
-        //    HoTen = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().ToList());
-        //}
+
+
     }
 }
