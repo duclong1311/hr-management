@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class hr : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,8 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhuCapChucVu = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -311,12 +312,10 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SoTienUng = table.Column<double>(type: "float", nullable: true),
                     NgayUngLuong = table.Column<DateTime>(type: "datetime2", nullable: true),
                     GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true)
+                    NhanSuId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -325,7 +324,8 @@ namespace HRM.EFCore.Migrations
                         name: "FK_UngLuongs_NhanSus_NhanSuId",
                         column: x => x.NhanSuId,
                         principalTable: "NhanSus",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -343,14 +343,15 @@ namespace HRM.EFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "ChucVus",
-                columns: new[] { "Id", "TenChucVu" },
+                columns: new[] { "Id", "PhuCapChucVu", "TenChucVu" },
                 values: new object[,]
                 {
-                    { 1, "Nhân viên" },
-                    { 2, "Quản lý" },
-                    { 3, "Trưởng phòng" },
-                    { 4, "Trưởng bộ phận" },
-                    { 5, "Giám đốc" }
+                    { 1, 500000.0, "Nhân viên" },
+                    { 2, 1000000.0, "Quản lý" },
+                    { 3, 2000000.0, "Trưởng phòng" },
+                    { 4, 5000000.0, "Trưởng bộ phận" },
+                    { 5, 10000000.0, "Phó giám đốc" },
+                    { 6, 15000000.0, "Giám đốc" }
                 });
 
             migrationBuilder.InsertData(

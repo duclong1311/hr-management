@@ -136,7 +136,7 @@
                                 <GridViewColumn Header="Ngày ứng lương"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding NgayUngLuong, StringFormat='dd/MM/yyyy '}" />
+                                                DisplayMemberBinding="{Binding NgayUngLuong, StringFormat='dd/MM/yyyy'}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Ghi chú"
                                                 Width="150"

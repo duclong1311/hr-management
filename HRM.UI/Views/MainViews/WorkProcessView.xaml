@@ -159,6 +159,62 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <ListView Margin="10"
+                          x:Name="ListStaffView_Pick_Copy"
+                          BorderBrush="Black"
+                          ItemsSource="{Binding List}"
+                          SelectedItem="{Binding SelectedItem}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding ''}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Header="Từ ngày đến ngày"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding TuNgayDenNgay}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Header="Đơn vị công tác"
+                                            Width="300"
+                                            DisplayMemberBinding="{Binding NoiCongTac}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Header="Chức vụ"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding ChucVu}" />
+                            <GridViewColumn Header=" "
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Sửa"
+                                                Command="{Binding UpdateCommand}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header=" "
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Xóa"
+                                                Command="{Binding DeleteCommand}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
 
             <!--Button-->

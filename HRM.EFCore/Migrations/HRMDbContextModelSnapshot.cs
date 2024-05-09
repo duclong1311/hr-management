@@ -127,8 +127,10 @@ namespace HRM.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double?>("PhuCapChucVu")
+                        .HasColumnType("float");
+
                     b.Property<string>("TenChucVu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -139,26 +141,37 @@ namespace HRM.EFCore.Migrations
                         new
                         {
                             Id = 1,
+                            PhuCapChucVu = 500000.0,
                             TenChucVu = "Nhân viên"
                         },
                         new
                         {
                             Id = 2,
+                            PhuCapChucVu = 1000000.0,
                             TenChucVu = "Quản lý"
                         },
                         new
                         {
                             Id = 3,
+                            PhuCapChucVu = 2000000.0,
                             TenChucVu = "Trưởng phòng"
                         },
                         new
                         {
                             Id = 4,
+                            PhuCapChucVu = 5000000.0,
                             TenChucVu = "Trưởng bộ phận"
                         },
                         new
                         {
                             Id = 5,
+                            PhuCapChucVu = 10000000.0,
+                            TenChucVu = "Phó giám đốc"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PhuCapChucVu = 15000000.0,
                             TenChucVu = "Giám đốc"
                         });
                 });

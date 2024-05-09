@@ -7,13 +7,20 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/AdvanceSalaryView_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid Margin="20,0,20,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="330" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
@@ -28,23 +35,31 @@
                       Grid.ColumnSpan="5">
                     <TextBlock HorizontalAlignment="Center"
                                FontSize="24"
-                               Margin="0,20,0,20">CHỨC VỤ</TextBlock>
+                               Margin="0,20,0,20">BỔ NHIỆM</TextBlock>
                 </Grid>
 
                 <!--Label-->
                 <Grid Grid.Row="1"
                       Grid.Column="0">
                     <StackPanel>
-                        <Label Content="Mã nhân viên: " />
-                        <Label Content="Chức vụ: " />
-                        <Label Content="PhuCapChuVu:  " />
+                        <Label   Content="Mã nhân viên: "
+                                 Style="{StaticResource Label_Style}" />
+                        <Label Content="Chức vụ: "
+                               Style="{StaticResource Label_Style}" />
+                        <!--<Label Content="Phụ cấp chức vụ:  "
+                               Style="{StaticResource Label_Style}" />-->
+
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1"
                       Grid.Column="2">
                     <StackPanel>
-                        <Label Content="Ngày bắt đầu: " />
-                        <Label Content="Ngày kết thúc: " />
+                        <Label Content="Ngày bắt đầu: "
+                               Style="{StaticResource Label_Style}" />
+
+                        <Label Content="Ngày kết thúc: "
+                               Style="{StaticResource Label_Style}" />
+
                     </StackPanel>
                 </Grid>
 
@@ -52,41 +67,50 @@
                 <Grid Grid.Column="1"
                       Grid.Row="1">
                     <StackPanel>
-                        <ComboBox SelectedItem="{Binding SelectedNhanSu}" ItemsSource="{Binding ListNhanSu }" DisplayMemberPath="MaNhanVien" />
-                        <ComboBox SelectedItem="{Binding SelectedChucVu}" ItemsSource="{Binding ListChucVu }" DisplayMemberPath="TenChucVu"/>
-                        <TextBox x:Name="tb_DonViCongTac"
-                                 Text="{Binding PhuCapChucVu, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox SelectedItem="{Binding SelectedNhanSu}"
+                                  ItemsSource="{Binding ListNhanSu }"
+                                  Style="{StaticResource ComboBox_Style}"
+                                  DisplayMemberPath="MaNhanVien" />
+                        <ComboBox SelectedItem="{Binding SelectedChucVu}"
+                                  Style="{StaticResource ComboBox_Style}"
+                                  ItemsSource="{Binding ListChucVu }"
+                                  DisplayMemberPath="TenChucVu" />
+                        <!--<TextBox x:Name="tb_DonViCongTac"
+                                 Style="{StaticResource TextBox_Style}"
+                                 Text="{Binding PhuCapChucVu, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="True" />-->
                     </StackPanel>
                 </Grid>
 
                 <Grid Grid.Column="3"
                       Grid.Row="1">
                     <StackPanel>
-                        <DatePicker SelectedDate="{Binding NgayBatDau, UpdateSourceTrigger=PropertyChanged}" />
-                        <DatePicker SelectedDate="{Binding NgayKetThuc, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker SelectedDate="{Binding NgayBatDau, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource DatePicker_Style}" />
+                        <DatePicker SelectedDate="{Binding NgayKetThuc, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource DatePicker_Style}" />
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2"
+                      Grid.ColumnSpan="4">
+                    <StackPanel VerticalAlignment="Center"
+                                Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Button Command="{Binding AddCommand}"
+                                Style="{StaticResource Button_Style}"
+                                Height="35"
+                                Content="Thêm" />
+                        <Button Command="{Binding UpdateCommand}"
+                                Style="{StaticResource Button_Style}"
+                                Content="Sửa" />
+                        <Button Command="{Binding DeleteCommand}"
+                                Style="{StaticResource Button_Style}"
+                                Content="Xóa" />
                     </StackPanel>
                 </Grid>
 
-                <StackPanel VerticalAlignment="Center"
-                            Grid.Row="2"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <Button Command="{Binding AddCommand}"
-                            Width="100px"
-                            Height="50"
-                            Margin="5,5,5,5"
-                            Content="Thêm" />
-                    <Button Command="{Binding UpdateCommand}"
-                            Width="100px"
-                            Height="50"
-                            Margin="5,5,5,5"
-                            Content="Sửa" />
-                    <Button Command="{Binding DeleteCommand}"
-                            Width="100px"
-                            Height="50"
-                            Margin="5,5,5,5"
-                            Content="Xóa" />
-                </StackPanel>
+
                 <Grid Grid.Row="3"
                       Grid.ColumnSpan="4">
                     <ListView Margin="10"
@@ -108,22 +132,28 @@
                             <GridView>
                                 <GridViewColumn Header="Mã nhân viên"
                                                 Width="100"
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
                                 <GridViewColumn Header="Tên nhân viên"
                                                 Width="100"
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                                 <GridViewColumn Header="Chức vụ"
                                                 Width="120"
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
                                 <GridViewColumn Header="Phụ cấp chức vụ"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding PhuCapChucVu}" />
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                DisplayMemberBinding="{Binding PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                                 <GridViewColumn Header="Ngày bắt đầu"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding NgayBatDau}" />
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                DisplayMemberBinding="{Binding NgayBatDau , StringFormat='dd/MM/yyyy'}" />
                                 <GridViewColumn Header="Ngày kết thúc"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding NgayKetThuc}" />
+                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                DisplayMemberBinding="{Binding NgayKetThuc , StringFormat='dd/MM/yyyy'}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

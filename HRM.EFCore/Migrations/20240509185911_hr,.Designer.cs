@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240505081617_upatev1")]
-    partial class upatev1
+    [Migration("20240509185911_hr,")]
+    partial class hr
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,8 +130,10 @@ namespace HRM.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double?>("PhuCapChucVu")
+                        .HasColumnType("float");
+
                     b.Property<string>("TenChucVu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -142,26 +144,37 @@ namespace HRM.EFCore.Migrations
                         new
                         {
                             Id = 1,
+                            PhuCapChucVu = 500000.0,
                             TenChucVu = "Nhân viên"
                         },
                         new
                         {
                             Id = 2,
+                            PhuCapChucVu = 1000000.0,
                             TenChucVu = "Quản lý"
                         },
                         new
                         {
                             Id = 3,
+                            PhuCapChucVu = 2000000.0,
                             TenChucVu = "Trưởng phòng"
                         },
                         new
                         {
                             Id = 4,
+                            PhuCapChucVu = 5000000.0,
                             TenChucVu = "Trưởng bộ phận"
                         },
                         new
                         {
                             Id = 5,
+                            PhuCapChucVu = 10000000.0,
+                            TenChucVu = "Phó giám đốc"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PhuCapChucVu = 15000000.0,
                             TenChucVu = "Giám đốc"
                         });
                 });
@@ -630,17 +643,21 @@ namespace HRM.EFCore.Migrations
                         .WithMany()
                         .HasForeignKey("ChucVuId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhCongTac", "QuaTrinhCongTac")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhCongTacId");
 
-                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", null)
+                    b.HasOne("HRM.Domain.Models.QuaTrinhDaoTao", "QuaTrinhDaoTao")
                         .WithOne("NhanSu")
                         .HasForeignKey("HRM.Domain.Models.NhanSu", "QuaTrinhDaoTaoId");
 
                     b.Navigation("BoPhan");
 
                     b.Navigation("ChucVu");
+
+                    b.Navigation("QuaTrinhCongTac");
+
+                    b.Navigation("QuaTrinhDaoTao");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.NhanSuChucVu", b =>

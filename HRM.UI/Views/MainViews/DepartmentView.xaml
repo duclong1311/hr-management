@@ -12,8 +12,42 @@
             <Setter Property="Margin"
                     Value="0 0 10 0" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="Width"
+                    Value="100" />
+            <Setter Property="FontSize"
+                    Value="14" />
+        </Style>
+
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="IsHitTestVisible"
+                    Value="False" />
+            <Setter Property="Height"
+                    Value="25" />
+            <Setter Property="Padding"
+                    Value="5,0,0,0" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+        </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20,0,20,0">
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
@@ -37,20 +71,18 @@
         </Grid>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Height="35">
             <Button Command="{Binding AddCommand}"
                     Width="100px"
-                    Height="50"
                     Margin="5,5,5,5"
                     Content="Thêm"/>
             <Button Command="{Binding UpdateCommand}"
                     Width="100px"
-                    Height="50"
                     Margin="5,5,5,5"
                     Content="Sửa"/>
             <Button Command="{Binding DeleteCommand}"
                     Width="100px"
-                    Height="50"
                     Margin="5,5,5,5"
                     Content="Xóa"/>
         </StackPanel>
@@ -63,11 +95,18 @@
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
                                 Value="Stretch" />
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Left" />
+                        <Setter Property="Padding"
+                                Value="5,0,0,0" />
+                        <Setter Property="FontSize"
+                                Value="14" />
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id"
+                                        Width="50"
                                         DisplayMemberBinding="{Binding Id}" />
                         <GridViewColumn Width="300" Header="Tên bộ phận" DisplayMemberBinding="{Binding TenBoPhan}" />
                     </GridView>

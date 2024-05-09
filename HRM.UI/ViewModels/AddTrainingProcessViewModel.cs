@@ -147,11 +147,11 @@ namespace HRM.UI.ViewModels
                 if (string.IsNullOrEmpty(NganhHoc))
                     return false;
 
-                if (_userStore.CurrentNhanSu?.MaNhanVien == null)
-                {
-                    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return false;
-                }
+                //if (_userStore.CurrentNhanSu?.MaNhanVien == null)
+                //{
+                //    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return false;
+                //}
 
                 return true;
             }, async (p) =>

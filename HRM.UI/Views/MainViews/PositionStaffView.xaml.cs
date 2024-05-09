@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HRM.Core.Repositories;
+using HRM.Domain.Models;
+using HRM.UI.ViewModels;
 
 namespace HRM.UI.Views
 {

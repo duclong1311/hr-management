@@ -110,7 +110,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/Product.png"
                                        Style="{StaticResource Image_Style}" />
-                                <TextBlock Text="Chức vụ nhân viên" />
+                                <TextBlock Text="Bổ nhiệm" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>

@@ -17,23 +17,33 @@ namespace HRM.Domain.Configurations
             builder.HasData(new ChucVu()
             {
                 Id = 1,
-                TenChucVu = "Nhân viên"
+                TenChucVu = "Nhân viên",
+                PhuCapChucVu = 500000
             }, new ChucVu()
             {
                 Id = 2,
-                TenChucVu = "Quản lý"
+                TenChucVu = "Quản lý",
+                PhuCapChucVu = 1000000
             }, new ChucVu()
             {
                 Id = 3,
-                TenChucVu = "Trưởng phòng"
+                TenChucVu = "Trưởng phòng",
+                PhuCapChucVu = 2000000
             }, new ChucVu()
             {
                 Id = 4,
-                TenChucVu = "Trưởng bộ phận"
+                TenChucVu = "Trưởng bộ phận",
+                PhuCapChucVu = 5000000
             }, new ChucVu()
             {
                 Id = 5,
-                TenChucVu = "Giám đốc"
+                TenChucVu = "Phó giám đốc",
+                PhuCapChucVu = 10000000
+            },new ChucVu()
+            {
+                Id = 6,
+                TenChucVu = "Giám đốc",
+                PhuCapChucVu = 15000000
             });
         }
     }

@@ -12,8 +12,42 @@
             <Setter Property="Margin"
                     Value="0 0 10 0" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="5" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="Padding"
+                    Value="5" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="Width"
+                    Value="100" />
+            <Setter Property="FontSize"
+                    Value="14" />
+        </Style>
+
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="IsHitTestVisible"
+                    Value="False" />
+            <Setter Property="Height"
+                    Value="25" />
+            <Setter Property="Padding"
+                    Value="5,0,0,0" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+        </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20,0,20,0">
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
@@ -26,33 +60,40 @@
               Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
             <GroupBox Grid.Column="0"
                       Header="Chức vụ">
-
                 <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
             </GroupBox>
+
+            <GroupBox Grid.Column="1"
+                      Header="Phụ cấp chức vụ">
+                <TextBox Text="{Binding PhuCapChucVu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay
+                    ,StringFormat={}{0:N0}, ConverterCulture='vi-VN'}"></TextBox>
+            </GroupBox>
+
         </Grid>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Height="40">
             <Button Command="{Binding AddCommand}"
+                    FontSize="14"
                     Width="100px"
-                    Height="50"
-                    Margin="5,5,5,5"
-                    Content="Thêm" />
+                    Margin="5"
+                    Content="Thêm chức vụ" />
             <Button Command="{Binding UpdateCommand}"
+                    FontSize="14"
                     Width="100px"
-                    Height="50"
-                    Margin="5,5,5,5"
-                    Content="Sửa" />
+                    Margin="5"
+                    Content="Sửa chức vụ" />
             <Button Command="{Binding DeleteCommand}"
+                    FontSize="14"
                     Width="100px"
-                    Height="50"
-                    Margin="5,5,5,5"
-                    Content="Xóa" />
+                    Margin="5"
+                    Content="Xóa chức vụ" />
         </StackPanel>
         <ScrollViewer Grid.Row="2"
                       VerticalScrollBarVisibility="Auto">
@@ -62,16 +103,21 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
+                                Value="Left" />
+                        <Setter Property="Padding"
+                                Value="5,0,0,0" />
+                        <Setter Property="FontSize"
+                                Value="14" />
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id"
-                                        DisplayMemberBinding="{Binding Id}" />
                         <GridViewColumn Width="300"
                                         Header="Tên chức vụ"
                                         DisplayMemberBinding="{Binding TenChucVu}" />
+                        <GridViewColumn Width="300"
+                                        Header="Phụ cấp chức vụ"
+                                        DisplayMemberBinding="{Binding PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                     </GridView>
                 </ListView.View>
             </ListView>
