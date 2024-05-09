@@ -112,6 +112,20 @@ namespace HRM.UI.ViewModels
         private readonly ChildContentStore _childContentStore;
         private readonly IUserStore _userStore;
 
+        public void LoadData()
+        {
+            if (_userStore.CurrentNhanSu == null || string.IsNullOrEmpty(_userStore.CurrentNhanSu.MaNhanVien))
+            {
+                MessageBox.Show("Không có mã nhân viên để truy vấn quá trình đào tạo.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository
+                .AsQueryable()
+                .Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien)
+                .ToList());
+        }
+
         public AddTrainingProcessViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhDaoTao> quaTrinhDaoTaoRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
@@ -122,7 +136,6 @@ namespace HRM.UI.ViewModels
             _userStore = userStore;
 
             LoadComboBoxData();
-            LoadData();
 
             WorkProcessCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
@@ -211,9 +224,6 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        public void LoadData()
-        {
-            List = new ObservableCollection<QuaTrinhDaoTao>(_quaTrinhDaoTaoRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        }
+
     }
 }

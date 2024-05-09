@@ -159,6 +159,20 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
+
+        public void LoadData()
+        {
+            if (_userStore.CurrentNhanSu == null || string.IsNullOrEmpty(_userStore.CurrentNhanSu.MaNhanVien))
+            {
+                MessageBox.Show("Không có mã nhân viên để truy vấn thông tin gia đình.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
+
+            List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository
+                .AsQueryable()
+                .Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien)
+                .ToList());
+        }
         public AddFamilyInforViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuanHeGiaDinh> quanHeGiaDinhRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
@@ -169,7 +183,6 @@ namespace HRM.UI.ViewModels
             _userStore = userStore;
 
             LoadComboBoxData();
-            LoadData();
 
             TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
             {
@@ -181,11 +194,11 @@ namespace HRM.UI.ViewModels
                 if (string.IsNullOrEmpty(HoVaTen))
                     return false;
 
-                if (_userStore.CurrentNhanSu?.MaNhanVien == null) 
-                {
-                    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return false;
-                }
+                //if (_userStore.CurrentNhanSu?.MaNhanVien == null) 
+                //{
+                //    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    return false;
+                //}
 
                 return true;
             }, async (p) =>
@@ -262,9 +275,6 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        public void LoadData()
-        {
-            List = new ObservableCollection<QuanHeGiaDinh>(_quanHeGiaDinhRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        }
+
     }
 }

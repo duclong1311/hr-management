@@ -79,6 +79,19 @@ namespace HRM.UI.ViewModels
             }
         }
 
+        public void LoadData()
+        {
+            if (_userStore.CurrentNhanSu == null || string.IsNullOrEmpty(_userStore.CurrentNhanSu.MaNhanVien))
+            {
+                MessageBox.Show("Không có mã nhân viên để truy vấn quá trình công tác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository
+                .AsQueryable()
+                .Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien)
+                .ToList());
+        }
+
         public AddWorkProcessViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<QuaTrinhCongTac> quaTrinhCongTacRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
@@ -87,8 +100,6 @@ namespace HRM.UI.ViewModels
             _childContentStore = childContentStore;
             _unitOfWork = unitOfWork;
             _userStore = userStore;
-
-            LoadData();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -170,9 +181,6 @@ namespace HRM.UI.ViewModels
                 }
             });
         }
-        public void LoadData()
-        {
-            List = new ObservableCollection<QuaTrinhCongTac>(_quaTrinhCongTacRepository.AsQueryable().Where(x => x.MaNhanVien == _userStore.CurrentNhanSu.MaNhanVien).ToList());
-        }
+
     }
 }
