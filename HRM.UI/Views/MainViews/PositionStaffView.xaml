@@ -75,10 +75,6 @@
                                   Style="{StaticResource ComboBox_Style}"
                                   ItemsSource="{Binding ListChucVu }"
                                   DisplayMemberPath="TenChucVu" />
-                        <!--<TextBox x:Name="tb_DonViCongTac"
-                                 Style="{StaticResource TextBox_Style}"
-                                 Text="{Binding PhuCapChucVu, UpdateSourceTrigger=PropertyChanged}"
-                                 IsReadOnly="True" />-->
                     </StackPanel>
                 </Grid>
 
@@ -145,7 +141,7 @@
                                 <GridViewColumn Header="Phụ cấp chức vụ"
                                                 Width="150"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                                                DisplayMemberBinding="{Binding ChucVu.PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                                 <GridViewColumn Header="Ngày bắt đầu"
                                                 Width="150"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"

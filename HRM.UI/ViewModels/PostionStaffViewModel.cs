@@ -71,7 +71,6 @@ namespace HRM.UI.ViewModels
         private IRepository<ChucVu> _chucVuRepository;
         private IRepository<NhanSu> _nhanSuRepository;
         private IRepository<NhanSuChucVu> _nhanSuChucVuRepository;
-        private IRepository<ChucVu> _ChucVuRepository;
         private IUnitOfWork _unitOfWork;
         private void LoadCombobox()
         {

@@ -41,7 +41,7 @@
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <StackPanel>
-                    <Label Content="Họ tên nhân viên: "
+                    <Label Content="Mã nhân viên: "
                            Style="{StaticResource Label_Style}" />
                     <Label Content="Cấp khen thưởng, kỷ luật: "
                            Style="{StaticResource Label_Style}" />
@@ -66,11 +66,10 @@
             <Grid Grid.Column="1"
                   Grid.Row="1">
                 <StackPanel>
-                    <ComboBox ItemsSource="{Binding ListCbbNhanVien}"
-                              DisplayMemberPath="HoTen"
-                              SelectedValuePath="MaNhanVien"
-                              SelectedValue="{Binding SelectedNhanVien}"
-                              Style="{StaticResource ComboBox_Style}" />
+                    <ComboBox SelectedItem="{Binding SelectedNhanSu}"
+                              ItemsSource="{Binding ListNhanSu }"
+                              Style="{StaticResource ComboBox_Style}"
+                              DisplayMemberPath="MaNhanVien" />
                     <ComboBox Style="{StaticResource ComboBox_Style}"
                               SelectedItem="{Binding CapKhenThuongKyLuat}"
                               ItemsSource="{Binding CapKhenThuongData}" />
@@ -133,6 +132,14 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            Width="100"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
+                            <GridViewColumn Header="Tên nhân viên"
+                                            Width="100"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                             <GridViewColumn Header="Cấp khen thưởng"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="150"

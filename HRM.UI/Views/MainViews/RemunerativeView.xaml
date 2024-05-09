@@ -149,6 +149,46 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <ListView  Margin="10"
+                           Width="auto"
+                           BorderBrush="Black"
+                           SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                           ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Cấp khen thưởng"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding CapKhenThuongKyLuat}" />
+                            <GridViewColumn Header="Hình thức khen thưởng, kỷ luật"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="200"
+                                            DisplayMemberBinding="{Binding TenHinhThuc}" />
+                            <GridViewColumn Header="Nội dung"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding NoiDung}" />
+                            <GridViewColumn Header="Số quyết định"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding SoQuyetDinh}" />
+                            <GridViewColumn Header="Thời gian ban hành"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="140"
+                                            DisplayMemberBinding="{Binding NgayQuyetDinh, StringFormat=\{0:d\}}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
 
             </Grid>
 

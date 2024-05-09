@@ -10,6 +10,7 @@ namespace HRM.Domain.Models
     public class KhenThuongKyLuat : IEntity
     {
         public string? MaNhanVien { get; set; }
+        public int? NhanSuId { get; set; }
         public string? CapKhenThuongKyLuat { get; set; }
         public string? TenHinhThuc { get; set; }
         public DateTime? NgayQuyetDinh { get; set; }
