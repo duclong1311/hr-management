@@ -13,6 +13,7 @@ using HRM.UI.Stores;
 using System.Windows.Input;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
+using HRM.UI.Commands;
 
 namespace HRM.UI.ViewModels
 {
@@ -130,7 +131,15 @@ namespace HRM.UI.ViewModels
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-                // can excute?
+                if (string.IsNullOrEmpty(NganhHoc))
+                    return false;
+
+                if (_userStore.CurrentNhanSu?.MaNhanVien == null)
+                {
+                    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
                 return true;
             }, async (p) =>
             {
@@ -152,42 +161,55 @@ namespace HRM.UI.ViewModels
 
                     if (QuaTrinhDaoTao != null)
                     {
-                        MessageBox.Show("Thêm thành công");
+                        MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         LoadData();
-
                     }
-
                     else
-                        MessageBox.Show("Lỗi hệ thống");
+                    {
+                        MessageBox.Show("Lỗi hệ thống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
-
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
 
-            DeleteCommand = new Commands.RelayCommand<object>((p) =>
+            DeleteCommand = new RelayCommand<object>((p) =>
             {
                 if (SelectedItem == null)
                     return false;
                 return true;
             }, async (p) =>
             {
-                await _unitOfWork.BeginTransactionAsync();
-                try
+                if (SelectedItem != null)
                 {
-                    var quaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
-                    await _quaTrinhDaoTaoRepository.DeleteAsync(quaTrinhDaoTao);
-                    await _unitOfWork.CommitAsync();
-                    LoadData();
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var quaTrinhDaoTao = await _quaTrinhDaoTaoRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (quaTrinhDaoTao != null)
+                            {
+                                await _quaTrinhDaoTaoRepository.DeleteAsync(quaTrinhDaoTao);
+                                await _unitOfWork.CommitAsync();
+                                LoadData();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
-                    await _unitOfWork.RollbackAsync();
-                }
-            }
-            );
+            });
         }
         public void LoadData()
         {

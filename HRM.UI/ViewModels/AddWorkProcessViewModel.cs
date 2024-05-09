@@ -92,6 +92,15 @@ namespace HRM.UI.ViewModels
 
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(NoiCongTac))
+                    return false;
+
+                if (_userStore.CurrentNhanSu?.MaNhanVien == null)
+                {
+                    MessageBox.Show("Chưa nhập mã nhân viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
                 return true;
             }, async (p) =>
             {
@@ -110,18 +119,19 @@ namespace HRM.UI.ViewModels
                     LoadData();
                     if (QuaTrinhCongTac != null)
                     {
-                        MessageBox.Show("Thêm thành công");
+                        MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         LoadData();
                     }
                     else
                     {
-                        MessageBox.Show("Lỗi hệ thống");
+                        MessageBox.Show("Lỗi hệ thống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 }
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
 
@@ -132,20 +142,33 @@ namespace HRM.UI.ViewModels
                 return true;
             }, async (p) =>
             {
-                await _unitOfWork.BeginTransactionAsync();
-                try
+                if (SelectedItem != null)
                 {
-                    var quaTrinhCongTac = await _quaTrinhCongTacRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
-                    await _quaTrinhCongTacRepository.DeleteAsync(quaTrinhCongTac);
-                    await _unitOfWork.CommitAsync();
-                    LoadData();
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var quaTrinhCongTac = await _quaTrinhCongTacRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (quaTrinhCongTac != null)
+                            {
+                                await _quaTrinhCongTacRepository.DeleteAsync(quaTrinhCongTac);
+                                await _unitOfWork.CommitAsync();
+                                LoadData();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
-                    await _unitOfWork.RollbackAsync();
-                }
-            }
-            );
+            });
         }
         public void LoadData()
         {
