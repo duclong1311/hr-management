@@ -40,6 +40,7 @@ namespace HRM.UI.Factories
         private readonly CreateViewModel<AddWorkProcessViewModel> _createAddWorkProcessViewModel;
         private readonly CreateViewModel<AddFamilyInforViewModel> _createAddFamilyInforViewModel;
         private readonly CreateViewModel<AddPersonalInforViewModel> _createAddPersonalInforViewModel;
+        private readonly CreateViewModel<ImportTrackingViewModel> _createImportTrackingViewModel;
 
 
 
@@ -70,7 +71,8 @@ namespace HRM.UI.Factories
             CreateViewModel<AddTrainingProcessViewModel> createAddTrainingProcessViewModel,
             CreateViewModel<AddWorkProcessViewModel> createAddWorkProcessViewModel,
             CreateViewModel<SalaryViewModel> createSalaryViewModel,
-            CreateViewModel<AddPersonalInforViewModel> createAddPersonalInforViewModel)
+            CreateViewModel<AddPersonalInforViewModel> createAddPersonalInforViewModel,
+            CreateViewModel<ImportTrackingViewModel> createImportTrackingViewModel)
 
         {
             _createLoginViewModel = createLoginViewModel;
@@ -102,6 +104,7 @@ namespace HRM.UI.Factories
             _createAddWorkProcessViewModel = createAddWorkProcessViewModel;
             _createAddPersonalInforViewModel = createAddPersonalInforViewModel;
             _createAddPersonalInforViewModel = createAddPersonalInforViewModel;
+            _createImportTrackingViewModel = createImportTrackingViewModel;
         }
         public BaseViewModel CreateViewModel(EViewTypes viewType)
         {
@@ -163,6 +166,8 @@ namespace HRM.UI.Factories
                     return _createAddPersonalInforViewModel();
                 case EViewTypes.Salary:
                     return _createSalaryViewModel();
+                case EViewTypes.ImportTracking:
+                    return _createImportTrackingViewModel();
                 default:
                     throw new ArgumentException();
             }

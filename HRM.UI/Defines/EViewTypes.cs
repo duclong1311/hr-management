@@ -38,6 +38,7 @@ namespace HRM.UI.Defines
         PositionStaff,
         // ----------------------- Công cán -----------------------
         Tracking,
+        ImportTracking,
         ListTracking,
         // ----------------------- Lương thưởng -----------------------
         Salary,

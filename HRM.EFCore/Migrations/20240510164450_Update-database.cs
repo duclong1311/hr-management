@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class hr : Migration
+    public partial class Updatedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,12 +183,12 @@ namespace HRM.EFCore.Migrations
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Thang = table.Column<int>(type: "int", nullable: true),
                     Nam = table.Column<int>(type: "int", nullable: true),
-                    TongTimeOT = table.Column<double>(type: "float", nullable: false),
-                    TongSoNgayCong = table.Column<int>(type: "int", nullable: false),
-                    TongSoNgayCongCN = table.Column<int>(type: "int", nullable: false),
-                    TongSoNgayCongNgayLe = table.Column<int>(type: "int", nullable: false),
-                    DiMuonVeSom = table.Column<float>(type: "real", nullable: false),
-                    NgayNghiPhep = table.Column<int>(type: "int", nullable: false),
+                    TongTimeOT = table.Column<double>(type: "float", nullable: true),
+                    TongSoNgayCong = table.Column<int>(type: "int", nullable: true),
+                    TongSoNgayCongCN = table.Column<int>(type: "int", nullable: true),
+                    TongSoNgayCongNgayLe = table.Column<int>(type: "int", nullable: true),
+                    DiMuonVeSom = table.Column<float>(type: "real", nullable: true),
+                    NgayNghiPhep = table.Column<int>(type: "int", nullable: true),
                     NhanSuId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -207,14 +207,14 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     SoHopDong = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayBatDau = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LoaiHopDong = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LuongCoBan = table.Column<double>(type: "float", nullable: true),
-                    HeSoLuong = table.Column<float>(type: "real", nullable: true),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true)
+                    HeSoLuong = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,12 +233,12 @@ namespace HRM.EFCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NhanSuId = table.Column<int>(type: "int", nullable: true),
                     CapKhenThuongKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenHinhThuc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayQuyetDinh = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SoQuyetDinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NhanSuId = table.Column<int>(type: "int", nullable: true)
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -221,12 +221,26 @@
                               Style="{StaticResource TreeViewItem_Style}">
                     <TreeViewItem.Header>
                         <Button Background="Transparent"
-                                Command="{Binding TrackingCommand}"
+                                Command="{Binding ImportTrackingCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="./Images/PriceInformation.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Nhập công" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding TrackingCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/PriceInformation.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Tính công" />
                             </StackPanel>
                         </Button>
                     </TreeViewItem.Header>

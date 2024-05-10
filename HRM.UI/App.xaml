@@ -14,7 +14,6 @@
         <DataTemplate DataType="{x:Type vm:MainContentViewModel}">
             <view:MainContentView />
         </DataTemplate>
-        <!--Child content-->
         <DataTemplate DataType="{x:Type vm:PersonalInforViewModel}">
             <view:PersonalInfoView />
         </DataTemplate>
@@ -89,6 +88,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AddWorkProcessViewModel}">
             <view:AddWorkProcessView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ImportTrackingViewModel}">
+            <view:ImportTrackingView />
         </DataTemplate>
     </Application.Resources>
 </Application>

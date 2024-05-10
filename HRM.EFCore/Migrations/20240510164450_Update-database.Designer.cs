@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240509185911_hr,")]
-    partial class hr
+    [Migration("20240510164450_Update-database")]
+    partial class Updatedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace HRM.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<float>("DiMuonVeSom")
+                    b.Property<float?>("DiMuonVeSom")
                         .HasColumnType("real");
 
                     b.Property<string>("HoTen")
@@ -45,7 +45,7 @@ namespace HRM.EFCore.Migrations
                     b.Property<int?>("Nam")
                         .HasColumnType("int");
 
-                    b.Property<int>("NgayNghiPhep")
+                    b.Property<int?>("NgayNghiPhep")
                         .HasColumnType("int");
 
                     b.Property<int?>("NhanSuId")
@@ -54,16 +54,16 @@ namespace HRM.EFCore.Migrations
                     b.Property<int?>("Thang")
                         .HasColumnType("int");
 
-                    b.Property<int>("TongSoNgayCong")
+                    b.Property<int?>("TongSoNgayCong")
                         .HasColumnType("int");
 
-                    b.Property<int>("TongSoNgayCongCN")
+                    b.Property<int?>("TongSoNgayCongCN")
                         .HasColumnType("int");
 
-                    b.Property<int>("TongSoNgayCongNgayLe")
+                    b.Property<int?>("TongSoNgayCongNgayLe")
                         .HasColumnType("int");
 
-                    b.Property<double>("TongTimeOT")
+                    b.Property<double?>("TongTimeOT")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -197,7 +197,6 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("MaNhanVien")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("NgayBatDau")
