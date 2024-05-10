@@ -69,7 +69,7 @@
                           Name="ListStaffView_Pick"
                           BorderBrush="Black"
                           Height="350"
-                          ItemsSource="{Binding BangCongDataList}"
+                          ItemsSource="{Binding BangCongNhanSuDataList}"
                           SelectedItem="{Binding SelectedItem}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -93,17 +93,16 @@
                                             DisplayMemberBinding="{Binding HoTen}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
-                                            Header="Ngày chấm công"
-                                            DisplayMemberBinding="{Binding TongSoNgayCong}" />
+                                            Header="Ngày chấm công"
+                                            DisplayMemberBinding="{Binding Ngay, StringFormat={}{0:dd/MM/yyyy}}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
-                                            Header="Giờ vào"
-                                            DisplayMemberBinding="{Binding TongSoNgayCongCN}" />
+                                            Header="Giờ vào"
+                                            DisplayMemberBinding="{Binding GioVao, StringFormat={}{0:HH:mm}}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="120"
-                                            Header="Giờ ra"
-                                            DisplayMemberBinding="{Binding TongSoNgayCongNgayLe}" />
-
+                                            Header="Giờ ra"
+                                            DisplayMemberBinding="{Binding GioRa, StringFormat={}{0:HH:mm}}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

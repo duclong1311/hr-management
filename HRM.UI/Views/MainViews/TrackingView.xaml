@@ -25,7 +25,7 @@
               Grid.ColumnSpan="5">
             <TextBlock HorizontalAlignment="Center"
                        FontSize="24"
-                       Margin="0,20,0,20">NHẬP CÔNG</TextBlock>
+                       Margin="0,20,0,20">TÍNH CÔNG</TextBlock>
         </Grid>
         <Grid Grid.Row="1"
               Margin="10">

@@ -11,10 +11,10 @@ namespace HRM.Domain.Models
     {
         public string? MaNhanVien { get; set; }
         public string? HoTen { get; set; }
-        public string? Ngay { get; set; }
+        public DateTime? Ngay { get; set; }
         public int Thang { get; set; }
         public int Nam { get; set; }
-        public string? GioVao { get; set; }
-        public string? GioRa { get; set; }
+        public DateTime? GioVao { get; set; }
+        public DateTime? GioRa { get; set; }
     }
 }

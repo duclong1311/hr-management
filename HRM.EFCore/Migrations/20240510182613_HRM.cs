@@ -8,11 +8,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Updatedatabase : Migration
+    public partial class HRM : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BangCongNhanSus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ngay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Thang = table.Column<int>(type: "int", nullable: false),
+                    Nam = table.Column<int>(type: "int", nullable: false),
+                    GioVao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GioRa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BangCongNhanSus", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "BoPhans",
                 columns: table => new
@@ -422,6 +441,9 @@ namespace HRM.EFCore.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BangCongNhanSus");
+
             migrationBuilder.DropTable(
                 name: "BangCongs");
 

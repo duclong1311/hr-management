@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240510164450_Update-database")]
-    partial class Updatedatabase
+    [Migration("20240510182613_HRM")]
+    partial class HRM
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,40 @@ namespace HRM.EFCore.Migrations
                     b.HasIndex("NhanSuId");
 
                     b.ToTable("BangCongs");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.BangCongNhanSu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("GioRa")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("GioVao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Nam")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Ngay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Thang")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BangCongNhanSus");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.BoPhan", b =>
