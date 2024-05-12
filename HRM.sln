@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM.Core", "HRM.Core\HRM.Core.csproj", "{9638F495-4DD6-49B7-B102-25D53C9A5CBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRM.Core", "HRM.Core\HRM.Core.csproj", "{9638F495-4DD6-49B7-B102-25D53C9A5CBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM.DbMigrator", "HRM.DbMigrator\HRM.DbMigrator.csproj", "{1D0DEC22-59DC-4B1D-9325-5B57D3CE0C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRM.DbMigrator", "HRM.DbMigrator\HRM.DbMigrator.csproj", "{1D0DEC22-59DC-4B1D-9325-5B57D3CE0C9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM.Domain", "HRM.Domain\HRM.Domain.csproj", "{6BC5D615-A3D7-4872-AB97-B4A05BB85EEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRM.Domain", "HRM.Domain\HRM.Domain.csproj", "{6BC5D615-A3D7-4872-AB97-B4A05BB85EEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM.EFCore", "HRM.EFCore\HRM.EFCore.csproj", "{D9AC520F-4ACA-47EB-9F36-1AE9DC5DB891}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRM.EFCore", "HRM.EFCore\HRM.EFCore.csproj", "{D9AC520F-4ACA-47EB-9F36-1AE9DC5DB891}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM.UI", "HRM.UI\HRM.UI.csproj", "{CF1143C7-4625-44F0-A351-C199EB2DF3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRM.UI", "HRM.UI\HRM.UI.csproj", "{CF1143C7-4625-44F0-A351-C199EB2DF3AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Other", "Other\Other.csproj", "{8C955141-64AA-488D-883D-C3B92B45D0E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CF1143C7-4625-44F0-A351-C199EB2DF3AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF1143C7-4625-44F0-A351-C199EB2DF3AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF1143C7-4625-44F0-A351-C199EB2DF3AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C955141-64AA-488D-883D-C3B92B45D0E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C955141-64AA-488D-883D-C3B92B45D0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C955141-64AA-488D-883D-C3B92B45D0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C955141-64AA-488D-883D-C3B92B45D0E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

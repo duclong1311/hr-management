@@ -16,8 +16,8 @@ namespace HRM.UI.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         #region Privates
-        private string _email = "";
-        private string _password;
+        private string _email = "1";
+        private string _password = "111111";
         private string _errorMessage;
         #endregion
 

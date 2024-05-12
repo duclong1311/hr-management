@@ -20,6 +20,7 @@ using HRM.UI.States.Users;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Microsoft.EntityFrameworkCore;
 using HRM.UI.Commands;
+using Microsoft.VisualBasic.Logging;
 
 namespace HRM.UI.ViewModels
 {
@@ -41,7 +42,6 @@ namespace HRM.UI.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand ImportDataCommand { get; set; }
         public ICommand ClearDataCommand { get; set; }
-        public ICommand CaculationCommand { get; set; }
         public ICommand AddBangCongCommand { get; set; }
 
         private ObservableCollection<BangCongNhanSu> _list = new ObservableCollection<BangCongNhanSu>();
@@ -190,9 +190,137 @@ namespace HRM.UI.ViewModels
                     }
 
                     BangCongNhanSuDataList.Add(dataModel);
+
+                }
+                // Tinh cong cho nhan vien
+                if (BangCongNhanSuDataList.Count == 0) return;
+
+                HashSet<string> UserCodes = new HashSet<string>();
+                foreach (var item in BangCongNhanSuDataList)
+                {
+                    UserCodes.Add(item.MaNhanVien);
+                }
+                // MessageBox.Show(UserCodes.Count.ToString());
+
+                foreach (var item in UserCodes)
+                {
+                    DateTime? Current = BangCongNhanSuDataList[0].Ngay;
+                    int Month = 0, Year = 0;
+                    if (Current != null)
+                    {
+                        Month = Current.Value.Month;
+                        Year = Current.Value.Year;
+                    }
+                    int Days = DateTime.DaysInMonth(Year, Month);
+                    int CongThuong = 0, CongCN = 0;
+                    double SoGioTangCa = 0.0, SoGioDiMuonVeSom = 0.0;
+                    foreach (var item1 in BangCongNhanSuDataList)
+                    {
+                        if (item == item1.MaNhanVien)
+                        {
+                            // Ngay lam viec
+                            DateTime Current1 = new DateTime(Year, Month, item1.Ngay.Value.Day);
+                            DayOfWeek dayOfWeek = Current1.DayOfWeek;
+                            if (dayOfWeek == DayOfWeek.Monday ||
+                                dayOfWeek == DayOfWeek.Tuesday ||
+                                dayOfWeek == DayOfWeek.Wednesday ||
+                                dayOfWeek == DayOfWeek.Thursday ||
+                                dayOfWeek == DayOfWeek.Friday ||
+                                dayOfWeek == DayOfWeek.Saturday) ++CongThuong;
+                            if (dayOfWeek == DayOfWeek.Sunday) ++CongCN;
+
+                            // Gio vao
+                            DateTime Current2 = new DateTime(Year, Month, item1.Ngay.Value.Day, item1.GioVao.Value.Hour, item1.GioVao.Value.Minute, 0);
+                            // So gio di muon
+                            SoGioDiMuonVeSom += CalculateHoursFromEight(Current2);
+
+                            // Gio ra
+                            DateTime Current3 = new DateTime(Year, Month, item1.Ngay.Value.Day, item1.GioRa.Value.Hour, item1.GioRa.Value.Minute, 0);
+                            // So gio ve som
+                            if (item1.GioRa.Value.Hour < 17) SoGioDiMuonVeSom += CalculateHoursFromFivePM(Current3);
+                            // So gio tang ca
+                            if (item1.GioRa.Value.Hour > 17) SoGioTangCa += CalculateHoursFromNineteenToMidnightToday(Current3);
+                        }
+                    }
+                    BangCong bangCong = new BangCong();
+                    bangCong.MaNhanVien = item;
+                    bangCong.HoTen = BangCongNhanSuDataList.FirstOrDefault(t => t.MaNhanVien == item).HoTen;
+                    bangCong.TongSoNgayCong = CongThuong;
+                    bangCong.TongSoNgayCongCN = CongCN;
+                    bangCong.TongSoNgayCongNgayLe = 0;
+                    bangCong.DiMuonVeSom = (float)SoGioDiMuonVeSom;
+                    bangCong.TongTimeOT = SoGioTangCa;
+                    bangCong.NgayNghiPhep = Days - CongThuong - CongCN;
+
+                    BangCongDataList.Add(bangCong);
                 }
             }
         }
+        //
+        // 2. Làm tròn giờ
+        DateTime RoundToNearestHalfHour(DateTime dt)
+        {
+            int hour = dt.Hour;
+            int minutes = dt.Minute;
+            if (hour == 23 && minutes >= 45)
+                return new DateTime(dt.Year, dt.Month, dt.Day + 1, 0, 0, 0);
+            if (minutes < 15)
+                return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, 0, 0);
+            else if (minutes >= 15 && minutes < 45)
+                return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, 30, 0);
+            else
+                return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour + 1, 0, 0);
+        }
+        // 3. Tính số giờ đi muộn
+        double CalculateHoursFromEight(DateTime dt)
+        {
+            DateTime roundedTime = RoundToNearestHalfHour(dt);
+            if (roundedTime.Hour >= 8 && roundedTime.Hour < 12)
+            {
+                double hoursFromEight = roundedTime.Hour - 8;
+                if (roundedTime.Minute == 30)
+                    return hoursFromEight + 0.5;
+                else
+                    return hoursFromEight;
+            }
+            else
+                return 0;
+        }
+        // 4. Tính số giờ về sớm
+        double CalculateHoursFromFivePM(DateTime dt)
+        {
+            DateTime roundedTime = RoundToNearestHalfHour(dt);
+
+            if (roundedTime.Hour >= 13 && roundedTime.Hour < 17)
+            {
+                double hoursFromFivePM = 17 - roundedTime.Hour;
+                if (roundedTime.Minute == 30)
+                    hoursFromFivePM -= 0.5;
+                return hoursFromFivePM;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        double CalculateHoursFromNineteenToMidnightToday(DateTime dt)
+        {
+            DateTime roundedTime = RoundToNearestHalfHour(dt);
+
+            if (roundedTime.Hour >= 17 && roundedTime.Hour < 24)
+            {
+                double hoursFromNineteen = roundedTime.Hour - 17;
+                if (roundedTime.Minute == 30)
+                    hoursFromNineteen -= 0.5;
+
+                return hoursFromNineteen;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        //
         public void CalculationTrackingData()
         {
             ListData = new ObservableCollection<BangCongNhanSu>(_bangCongNhanSuRepository.AsQueryable().Where(x => x.Thang == Thang && x.Nam == Nam).ToList());
@@ -332,22 +460,19 @@ namespace HRM.UI.ViewModels
                     }
                 });
 
-            ClearDataCommand = new Commands.RelayCommand<object>(p => CanClearData(), 
+            ClearDataCommand = new Commands.RelayCommand<object>(p => true,
             p =>
             {
                 MessageBoxResult result = MessageBox.Show("Xóa dữ liệu để nhập bảng công mới?", "Xác nhận xóa dữ liệu", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.OK)
                 {
-                     BangCongNhanSuDataList.Clear();
+                    BangCongNhanSuDataList.Clear();
                 }
-            });
 
-            CaculationCommand = new Commands.RelayCommand<object>(p => CanCalculationData(),
-                p =>
-                {
-                    CalculationTrackingData();
-                });
+            }) ;
+
+            
         }
     }
 }
