@@ -19,6 +19,7 @@ using DocumentFormat.OpenXml.Bibliography;
 using HRM.UI.States.Users;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using Microsoft.EntityFrameworkCore;
+using HRM.UI.Commands;
 
 namespace HRM.UI.ViewModels
 {
@@ -35,8 +36,13 @@ namespace HRM.UI.ViewModels
         private readonly ChildContentStore _childContentStore;
 
         private IRepository<BangCongNhanSu> _bangCongNhanSuRepository;
+
+        private IRepository<BangCong> _bangCongRepository;
         public ICommand AddCommand { get; set; }
         public ICommand ImportDataCommand { get; set; }
+        public ICommand ClearDataCommand { get; set; }
+        public ICommand CaculationCommand { get; set; }
+        public ICommand AddBangCongCommand { get; set; }
 
         private ObservableCollection<BangCongNhanSu> _list = new ObservableCollection<BangCongNhanSu>();
         public ObservableCollection<BangCongNhanSu> List
@@ -58,6 +64,28 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<BangCongNhanSu> _listData = new ObservableCollection<BangCongNhanSu>();
+        public ObservableCollection<BangCongNhanSu> ListData
+        {
+            get => _listData;
+            set
+            {
+                _listData = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<BangCong> _bangCongDataList = new ObservableCollection<BangCong>();
+        public ObservableCollection<BangCong> BangCongDataList
+        {
+            get { return _bangCongDataList; }
+            set
+            {
+                _bangCongDataList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #region
         private string _maNhanVien { get; set; }
         public string MaNhanVien { get { return _maNhanVien; } set { _maNhanVien = value; OnPropertyChanged(); } }
         private string _hoTen { get; set; }
@@ -66,6 +94,20 @@ namespace HRM.UI.ViewModels
         public int Nam { get { return _nam; } set { _nam = value; OnPropertyChanged(); } }
         private int _thang { get; set; }
         public int Thang { get { return _thang; } set { _thang = value; OnPropertyChanged(); } }
+        private int _tongSoNgayCong { get; set; }
+        public int TongSoNgayCong { get { return _tongSoNgayCong; } set { _tongSoNgayCong = value; OnPropertyChanged(); } }
+        private int _tongSoNgayCongCN { get; set; }
+        public int TongSoNgayCongCN { get { return _tongSoNgayCongCN; } set { _tongSoNgayCongCN = value; OnPropertyChanged(); } }
+        private int _tongSoNgayCongNgayLe { get; set; }
+        public int TongSoNgayCongNgayLe { get { return _tongSoNgayCongNgayLe; } set { _tongSoNgayCongNgayLe = value; OnPropertyChanged(); } }
+        private float _diMuonVeSom { get; set; }
+        public float DiMuonVeSom { get { return _diMuonVeSom; } set { _diMuonVeSom = value; OnPropertyChanged(); } }
+        private double _tongTimeOT { get; set; }
+        public double TongTimeOT { get { return _tongTimeOT; } set { _tongTimeOT = value; OnPropertyChanged(); } }
+        private int _nNgayNghiPhep { get; set; }
+        public int NgayNghiPhep { get { return _nNgayNghiPhep; } set { _nNgayNghiPhep = value; OnPropertyChanged(); } }
+        #endregion
+
         public ObservableCollection<int> ThangTrongNam { get; set; }
         public ObservableCollection<int> NamTuTruocDenGio { get; set; }
         private void LoadComboBoxData()
@@ -151,14 +193,65 @@ namespace HRM.UI.ViewModels
                 }
             }
         }
+        public void CalculationTrackingData()
+        {
+            ListData = new ObservableCollection<BangCongNhanSu>(_bangCongNhanSuRepository.AsQueryable().Where(x => x.Thang == Thang && x.Nam == Nam).ToList());
+
+            Dictionary<string, int> employeeCount = new Dictionary<string, int>();
+
+            foreach (var bangCong in ListData)
+            {
+                string maNhanVien = bangCong.MaNhanVien;
+
+                if (employeeCount.ContainsKey(maNhanVien))
+                {
+                    employeeCount[maNhanVien]++;
+                }
+                else
+                {
+                    employeeCount[maNhanVien] = 1;
+                }
+            }
+
+            foreach (var kvp in employeeCount)
+            {
+                Console.WriteLine($"Mã nhân viên {kvp.Key} xuất hiện {kvp.Value} lần");
+            }
+
+            BangCong dataModel = new BangCong();
+        }
         public bool CanImportExcelData()
         {
+            if (BangCongNhanSuDataList.Count != 0)
+                return false;
             return true;
         }
         public bool CanSaveData()
         {
             if (Thang == 0 || Nam == 0 || BangCongNhanSuDataList.Count == 0)
                 return false;
+            return true;
+        }
+        public bool CanSaveData2()
+        {
+            if (Thang == 0 || Nam == 0 || BangCongDataList.Count == 0)
+                return false;
+            return true;
+        }
+        public bool CanClearData()
+        {
+            if (Thang == 0 || Nam == 0 || BangCongNhanSuDataList.Count == 0)
+                return false;
+            return true;
+        }
+        public bool CanCalculationData()
+        {
+            if (Thang == 0 || Nam == 0 || BangCongNhanSuDataList.Count == 0)
+                return false;
+            return true;
+        }
+        public bool CanAddBangCongData()
+        {
             return true;
         }
 
@@ -197,7 +290,6 @@ namespace HRM.UI.ViewModels
 
                         await _unitOfWork.CommitAsync();
                         MessageBox.Show("Thêm thành công");
-                        BangCongNhanSuDataList.Clear();
                     }
                     catch (Exception ex)
                     {
@@ -206,6 +298,56 @@ namespace HRM.UI.ViewModels
                     }
                 });
 
+            AddBangCongCommand = new Commands.RelayCommand<object>((p) => CanSaveData2(),
+                async (p) =>
+                {
+                    await _unitOfWork.BeginTransactionAsync();
+
+                    try
+                    {
+                        bool exists = await _bangCongRepository.AsQueryable().AnyAsync(bc => bc.Thang == Thang && bc.Nam == Nam);
+
+                        if (exists)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show("Bảng công cho tháng " + Thang + ", năm " + Nam + " đã tồn tại.");
+                            return;
+                        }
+
+                        foreach (var bangCong in BangCongDataList)
+                        {
+                            bangCong.Thang = Thang;
+                            bangCong.Nam = Nam;
+                            await _bangCongRepository.AddAsync(bangCong);
+
+                        }
+
+                        await _unitOfWork.CommitAsync();
+                        MessageBox.Show("Thêm thành công");
+                    }
+                    catch (Exception ex)
+                    {
+                        await _unitOfWork.RollbackAsync();
+                        MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+                    }
+                });
+
+            ClearDataCommand = new Commands.RelayCommand<object>(p => CanClearData(), 
+            p =>
+            {
+                MessageBoxResult result = MessageBox.Show("Xóa dữ liệu để nhập bảng công mới?", "Xác nhận xóa dữ liệu", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.OK)
+                {
+                     BangCongNhanSuDataList.Clear();
+                }
+            });
+
+            CaculationCommand = new Commands.RelayCommand<object>(p => CanCalculationData(),
+                p =>
+                {
+                    CalculationTrackingData();
+                });
         }
     }
 }

@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition  Height="430" />
+            <RowDefinition  Height="1*" />
             <RowDefinition  Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
@@ -43,32 +43,15 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
-            <StackPanel>
-                <!--<DataGrid ItemsSource="{Binding BangCongDataList}"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã nhân viên"
-                                                Binding="{Binding MaNhanVien}" />
-                            <DataGridTextColumn Header="Họ và tên"
-                                                Binding="{Binding HoTen}" />
-                            <DataGridTextColumn Header="Số công thường"
-                                                Binding="{Binding TongSoNgayCong}" />
-                            <DataGridTextColumn Header="Số công CN"
-                                                Binding="{Binding TongSoNgayCongCN}" />
-                            <DataGridTextColumn Header="Số công ngày lễ"
-                                                Binding="{Binding TongSoNgayCongNgayLe}" />
-                            <DataGridTextColumn Header="Số giờ tăng ca"
-                                                Binding="{Binding TongTimeOT}" />
-                            <DataGridTextColumn Header="Số ngày nghỉ phép"
-                                                Binding="{Binding NgayNghiPhep}" />
-                            <DataGridTextColumn Header="Số giờ đi muộn về sớm"
-                                                Binding="{Binding DiMuonVeSom}" />
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                <ListView Margin="10"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <ListView Margin="20,10,20,0"
                           Name="ListStaffView_Pick"
                           BorderBrush="Black"
-                          Height="350"
+                          Height="auto"
                           ItemsSource="{Binding BangCongNhanSuDataList}"
                           SelectedItem="{Binding SelectedItem}">
                     <ListView.ItemContainerStyle>
@@ -106,20 +89,94 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ListView Margin="20,10,20,0"
+                          BorderBrush="Black"
+                          Height="auto"
+                          ItemsSource="{Binding BangCongDataList}"
+                          SelectedItem="{Binding BangCongSelectedItem}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding BangCong.MaNhanVien}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Header="Họ và tên"
+                                            Width="150"
+                                            DisplayMemberBinding="{Binding BangCong.HoTen}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Số ngày công"
+                                            DisplayMemberBinding="{Binding BangCong.TongSoNgayCong}"/>
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Số ngày công chủ nhật"
+                                            DisplayMemberBinding="{Binding BangCong.TongSoNgayCongCN}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Số giờ làm thêm"
+                                            DisplayMemberBinding="{Binding BangCong.TongTimeOT}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Số giờ đi muộn về sớm"
+                                            DisplayMemberBinding="{Binding BangCong.DiMuonVeSom}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Số ngày nghỉ"
+                                            DisplayMemberBinding="{Binding BangCong.NgayNghiPhep}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
         </Grid>
         <Grid Grid.Row="3">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Height="50"
-                        Content="Nhập từ File"
-                        Style="{StaticResource Button_Style}"
-                        Command="{Binding ImportDataCommand}" />
-                <Button Height="50"
-                        Content="Lưu lại"
-                        Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="10,0,10,0">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button Height="50"
+                            Content="Nhập từ File"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding ImportDataCommand}" />
+                    <Button Height="50"
+                            Content="Clear Data"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding ClearDataCommand}" />
+                    <Button Height="50"
+                            Content="Lưu lại"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding AddCommand}" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10,0,10,0"
+                  Grid.Column="1">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button Height="50"
+                            Content="Tính công"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding CaculationCommand}" />
+                    <Button Height="50"
+                            Content="Lưu lại"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding AddBangCongCommand}" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

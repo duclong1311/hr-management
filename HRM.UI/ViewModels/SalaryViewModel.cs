@@ -36,6 +36,7 @@ namespace HRM.UI.ViewModels
         public int Thang { get { return _thang; } set { _thang = value; OnPropertyChanged(); } }
         public ObservableCollection<int> ThangTrongNam { get; set; }
         public ObservableCollection<int> NamTuTruocDenGio { get; set; }
+
         private ObservableCollection<BangCong> _listBangCong;
         public ObservableCollection<BangCong> ListBangCong
         {
@@ -100,6 +101,7 @@ namespace HRM.UI.ViewModels
             for (int i = 0; i < ListBangCong.Count; i++)
             {
                 double? luongcoban = _repositoryHopDong.AsQueryable().OrderByDescending(x => x.NgayBatDau).FirstOrDefault(x => x.MaNhanVien == ListBangCong[i].MaNhanVien).LuongCoBan;
+
                 int ngaycongthucte;
                 if (Thang == 1 || Thang == 3 || Thang == 5 || Thang == 7 || Thang == 8 || Thang == 10 || Thang == 12)
                 {
@@ -113,8 +115,11 @@ namespace HRM.UI.ViewModels
                 {
                     ngaycongthucte = 26;
                 }
+
                 double luongngay = (double)(luongcoban / ngaycongthucte);
+
                 double luonggio = (double)(luongngay / 8);
+
                 double phucap = _repositoryNhanSuChucVu.AsQueryable().Include(x => x.NhanSu).Where(x => x.NhanSu.MaNhanVien == ListBangCong[i].MaNhanVien).OrderByDescending(x => x.PhuCapChucVu).FirstOrDefault().PhuCapChucVu;
 
                 double? ungluong = null;

@@ -16,5 +16,7 @@ namespace HRM.Domain.Models
         public int Nam { get; set; }
         public DateTime? GioVao { get; set; }
         public DateTime? GioRa { get; set; }
+        public int? BangCongId { get; set; }
+        public BangCong BangCongs {  get; set; }
     }
 }

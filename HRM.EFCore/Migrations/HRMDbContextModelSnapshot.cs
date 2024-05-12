@@ -78,6 +78,9 @@ namespace HRM.EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BangCongId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("GioRa")
                         .HasColumnType("datetime2");
 
@@ -100,6 +103,8 @@ namespace HRM.EFCore.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BangCongId");
 
                     b.ToTable("BangCongNhanSus");
                 });
@@ -643,6 +648,15 @@ namespace HRM.EFCore.Migrations
                         .HasForeignKey("NhanSuId");
 
                     b.Navigation("NhanSu");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.BangCongNhanSu", b =>
+                {
+                    b.HasOne("HRM.Domain.Models.BangCong", "BangCongs")
+                        .WithMany()
+                        .HasForeignKey("BangCongId");
+
+                    b.Navigation("BangCongs");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.HopDong", b =>

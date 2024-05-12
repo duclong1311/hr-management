@@ -14,25 +14,6 @@ namespace HRM.EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BangCongNhanSus",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ngay = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Thang = table.Column<int>(type: "int", nullable: false),
-                    Nam = table.Column<int>(type: "int", nullable: false),
-                    GioVao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GioRa = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BangCongNhanSus", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BoPhans",
                 columns: table => new
                 {
@@ -347,6 +328,31 @@ namespace HRM.EFCore.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BangCongNhanSus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ngay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Thang = table.Column<int>(type: "int", nullable: false),
+                    Nam = table.Column<int>(type: "int", nullable: false),
+                    GioVao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GioRa = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BangCongId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BangCongNhanSus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BangCongNhanSus_BangCongs_BangCongId",
+                        column: x => x.BangCongId,
+                        principalTable: "BangCongs",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "BoPhans",
                 columns: new[] { "Id", "TenBoPhan" },
@@ -377,6 +383,11 @@ namespace HRM.EFCore.Migrations
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password" },
                 values: new object[] { 1, "1", "admin", "??_?y??w+???l\0?_?n5?rY?????	?*" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BangCongNhanSus_BangCongId",
+                table: "BangCongNhanSus",
+                column: "BangCongId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BangCongs_NhanSuId",
@@ -445,9 +456,6 @@ namespace HRM.EFCore.Migrations
                 name: "BangCongNhanSus");
 
             migrationBuilder.DropTable(
-                name: "BangCongs");
-
-            migrationBuilder.DropTable(
                 name: "HopDongs");
 
             migrationBuilder.DropTable(
@@ -470,6 +478,9 @@ namespace HRM.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "BangCongs");
 
             migrationBuilder.DropTable(
                 name: "NhanSus");
