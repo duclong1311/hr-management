@@ -321,33 +321,6 @@ namespace HRM.UI.ViewModels
             }
         }
         //
-        public void CalculationTrackingData()
-        {
-            ListData = new ObservableCollection<BangCongNhanSu>(_bangCongNhanSuRepository.AsQueryable().Where(x => x.Thang == Thang && x.Nam == Nam).ToList());
-
-            Dictionary<string, int> employeeCount = new Dictionary<string, int>();
-
-            foreach (var bangCong in ListData)
-            {
-                string maNhanVien = bangCong.MaNhanVien;
-
-                if (employeeCount.ContainsKey(maNhanVien))
-                {
-                    employeeCount[maNhanVien]++;
-                }
-                else
-                {
-                    employeeCount[maNhanVien] = 1;
-                }
-            }
-
-            foreach (var kvp in employeeCount)
-            {
-                Console.WriteLine($"Mã nhân viên {kvp.Key} xuất hiện {kvp.Value} lần");
-            }
-
-            BangCong dataModel = new BangCong();
-        }
         public bool CanImportExcelData()
         {
             if (BangCongNhanSuDataList.Count != 0)
@@ -383,9 +356,10 @@ namespace HRM.UI.ViewModels
             return true;
         }
 
-        public ImportTrackingViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<BangCongNhanSu> BangCongNhanSuRepository, IUnitOfWork unitOfWork)
+        public ImportTrackingViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<BangCongNhanSu> BangCongNhanSuRepository, IUnitOfWork unitOfWork, IRepository<BangCong> BangCongRepository)
         {
             _bangCongNhanSuRepository = BangCongNhanSuRepository;
+            _bangCongRepository = BangCongRepository;
             _unitOfWork = unitOfWork;
             LoadComboBoxData();
 
@@ -433,6 +407,22 @@ namespace HRM.UI.ViewModels
 
                     try
                     {
+                        if (Thang == null || Nam == null)
+                        {
+                            MessageBox.Show("Thang hoặc Nam không được khởi tạo.");
+                            return;
+                        }
+                        if (BangCongDataList == null)
+                        {
+                            MessageBox.Show("Danh sách bảng công không được khởi tạo.");
+                            return;
+                        }
+                        if (_unitOfWork == null || _bangCongRepository == null)
+                        {
+                            MessageBox.Show("Đối tượng UnitOfWork hoặc BangCongRepository không được khởi tạo.");
+                            return;
+                        }
+
                         bool exists = await _bangCongRepository.AsQueryable().AnyAsync(bc => bc.Thang == Thang && bc.Nam == Nam);
 
                         if (exists)
@@ -468,6 +458,7 @@ namespace HRM.UI.ViewModels
                 if (result == MessageBoxResult.OK)
                 {
                     BangCongNhanSuDataList.Clear();
+                    BangCongDataList.Clear();
                 }
 
             }) ;

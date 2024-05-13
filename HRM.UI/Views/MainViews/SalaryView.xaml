@@ -58,6 +58,7 @@
                                     Value="5,0,0,0" />
                             <Setter Property="FontSize"
                                     Value="14" />
+                            
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.View>
@@ -68,49 +69,90 @@
                                             DisplayMemberBinding="{Binding MaNhanVien}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Header="Họ và tên"
-                                            Width="150"
+                                            Width="auto"
                                             DisplayMemberBinding="{Binding HoTen}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
-                                            Header="Số công thường"
-                                            DisplayMemberBinding="{Binding TienCongThuong}" />
+                                            Width="auto"
+                                            Header="Chức vụ"
+                                            DisplayMemberBinding="{Binding ChucVu}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
-                                            Header="Số công CN"
-                                            DisplayMemberBinding="{Binding TienCongCN}" />
+                                            Width="100"
+                                            Header="Lương cơ bản"
+                                            DisplayMemberBinding="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
-                                            Header="Số công ngày lễ"
-                                            DisplayMemberBinding="{Binding TienCongNgayLe}" />
+                                            Width="100"
+                                            Header="Ngày công &#x0a;  thực tế"
+                                            DisplayMemberBinding="{Binding TongSoNgayCong}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
-                                            Header="Số giờ tăng ca"
-                                            DisplayMemberBinding="{Binding TienTangCa}" />
+                                            Width="100"
+                                            Header="Lương thực tế"
+                                            DisplayMemberBinding="{Binding TienCongThuong, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <!--Tăng ca-->
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="130"
-                                            Header="Số ngày nghỉ phép"
-                                            DisplayMemberBinding="{Binding TienNgayNghiPhep}" />
+                                            Width="100"
+                                            Header="Ngày công &#x0a; chủ nhật"
+                                            DisplayMemberBinding="{Binding NgayCongChuNhat}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="150"
-                                            Header="Số giờ đi muộn về sớm"
-                                            DisplayMemberBinding="{Binding TienDiSomVeMuon}" />
+                                            Width="80"
+                                            Header="Thành tiền"
+                                            DisplayMemberBinding="{Binding TienCongCN, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="150"
-                                            Header="Tiền bảo hiểm"
-                                            DisplayMemberBinding="{Binding TienBaoHiem}" />
+                                            Width="100"
+                                            Header="Số giờ &#x0a;tăng ca"
+                                            DisplayMemberBinding="{Binding SoGioOT}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="150"
-                                            Header="Phụ cấp"
-                                            DisplayMemberBinding="{Binding PhuCap}" />
+                                            Width="80"
+                                            Header="Thành tiền"
+                                            DisplayMemberBinding="{Binding TienTangCa, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <!--Phụ cấp-->
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="150"
+                                            Width="80"
+                                            Header="Phụ cấp &#x0a; ăn trưa"
+                                            DisplayMemberBinding="{Binding PhuCapAnTrua, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="Phụ cấp &#x0a; đi lại"
+                                            DisplayMemberBinding="{Binding PhuCapDiLai, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="Phụ cấp &#x0a; chức vụ"
+                                            DisplayMemberBinding="{Binding PhuCap, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <!--Tổng lương-->
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            Header="TỔNG LƯƠNG"
+                                            DisplayMemberBinding="{Binding TongLuong, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <!--Khoản trừ-->
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="BHXH &#x0a; (8%)"
+                                            DisplayMemberBinding="{Binding BaoHiemXaHoi, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="BHYT &#x0a;(1,5%)"
+                                            DisplayMemberBinding="{Binding BaoHiemYTe, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="Đi muộn &#x0a; về sớm"
+                                            DisplayMemberBinding="{Binding SoGioDiMuonVeSom}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
+                                            Header="Thành tiền"
+                                            DisplayMemberBinding="{Binding TienDiSomVeMuon, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="80"
                                             Header="Ứng lương"
-                                            DisplayMemberBinding="{Binding UngLuong}" />
+                                            DisplayMemberBinding="{Binding UngLuong, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="150"
+                                            Width="120"
+                                            Header="TỔNG KHẤU TRỪ"
+                                            DisplayMemberBinding="{Binding TongKhauTru, StringFormat={}{0:N0}}">
+                            </GridViewColumn>
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
                                             Header="Thực nhận"
-                                            DisplayMemberBinding="{Binding ThucNhan}" />
-
+                                            DisplayMemberBinding="{Binding ThucNhan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -124,9 +166,9 @@
                         Style="{StaticResource Button_Style}"
                         Command="{Binding CalculateCommand}" />
                 <Button Height="50"
-                        Content="Lưu lại"
+                        Content="Xuất PDF"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding ExportPDFCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

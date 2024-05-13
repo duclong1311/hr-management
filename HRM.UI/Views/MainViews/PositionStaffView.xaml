@@ -20,8 +20,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="330" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="650" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -96,13 +96,13 @@
                         <Button Command="{Binding AddCommand}"
                                 Style="{StaticResource Button_Style}"
                                 Height="35"
-                                Content="Thêm" />
+                                Content="Thêm chức vụ" />
                         <Button Command="{Binding UpdateCommand}"
                                 Style="{StaticResource Button_Style}"
-                                Content="Sửa" />
+                                Content="Sửa chức vụ" />
                         <Button Command="{Binding DeleteCommand}"
                                 Style="{StaticResource Button_Style}"
-                                Content="Xóa" />
+                                Content="Xóa chức vụ" />
                     </StackPanel>
                 </Grid>
 
@@ -131,7 +131,7 @@
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
                                 <GridViewColumn Header="Tên nhân viên"
-                                                Width="100"
+                                                Width="auto"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                                 <GridViewColumn Header="Chức vụ"

@@ -20,7 +20,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="80" />
                 <RowDefinition />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
@@ -35,7 +35,7 @@
                   Grid.ColumnSpan="5">
                 <TextBlock HorizontalAlignment="Center"
                            FontSize="24"
-                           Margin="0,20,0,20">THI ĐUA KHEN THƯỞNG</TextBlock>
+                           Margin="0,20,0,20">KHEN THƯỞNG - KỶ LUẬT</TextBlock>
             </Grid>
             <!--Label-->
             <Grid Grid.Row="1"
@@ -100,13 +100,16 @@
                             HorizontalAlignment="Center">
                     <Button Content="Thêm thông tin"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding AddCommand}" />
+                            Command="{Binding AddCommand}" 
+                            Height="45"/>
                     <Button Content="Sửa thông tin"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding }"
+                            Height="45" />
                     <Button Content="Xóa thông tin"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding }"
+                            Height="45" />
                 </StackPanel>
             </Grid>
 
@@ -166,7 +169,7 @@
             </Grid>
 
             <!--Button-->
-            <Grid Grid.Row="4"
+            <!--<Grid Grid.Row="4"
                   Grid.ColumnSpan="4">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
@@ -177,7 +180,7 @@
                             Style="{StaticResource Button_Style}"
                             Command="{Binding }" />
                 </StackPanel>
-            </Grid>
+            </Grid>-->
         </Grid>
     </Grid>
 </UserControl>

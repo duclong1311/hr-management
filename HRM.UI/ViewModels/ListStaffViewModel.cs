@@ -232,29 +232,29 @@ namespace HRM.UI.ViewModels
                 }
             });
 
-            DeleteCommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem == null)
-                    return false;
-                return true;
-            }, async (p) =>
-            {
-                await _unitOfWork.BeginTransactionAsync();
-                try
-                {
-                    var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
-                    await _repository.DeleteAsync(NhanSu);
-                    await _unitOfWork.CommitAsync();
-                    LoadData();
+            //DeleteCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (SelectedItem == null)
+            //        return false;
+            //    return true;
+            //}, async (p) =>
+            //{
+            //    await _unitOfWork.BeginTransactionAsync();
+            //    try
+            //    {
+            //        var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+            //        await _repository.DeleteAsync(NhanSu);
+            //        await _unitOfWork.CommitAsync();
+            //        LoadData();
 
 
-                }
-                catch (Exception ex)
-                {
-                    await _unitOfWork.RollbackAsync();
-                }
-            }
-            );
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        await _unitOfWork.RollbackAsync();
+            //    }
+            //}
+            //);
         }
         private void LoadCombobox()
         {

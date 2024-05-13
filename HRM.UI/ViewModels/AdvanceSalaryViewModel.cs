@@ -88,6 +88,8 @@ namespace HRM.UI.ViewModels
         }
         public bool CanUpdateCommand()
         {
+            if (SelectedItem == null)
+                return false;
             return true;
         }
 

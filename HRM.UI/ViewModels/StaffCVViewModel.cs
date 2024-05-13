@@ -1,4 +1,5 @@
 ﻿using HRM.Core.Repositories;
+using HRM.Core.UnitOfWorks;
 using HRM.Domain.Models;
 using HRM.UI.Commands;
 using HRM.UI.Factories;
@@ -53,7 +54,9 @@ namespace HRM.UI.ViewModels
         private readonly IViewModelFactory _viewModelFactory;
         private readonly MainContentStore _mainContentStore;
         private readonly IAuthenticator _authenticator;
+        private IUnitOfWork _unitOfWork;
         public ICommand StaffViewCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         //public ICommand AddCVCommand { get; set; }
         public StaffCVViewModel(IAuthenticator authenticator, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<NhanSu> repository)
         {
@@ -61,17 +64,43 @@ namespace HRM.UI.ViewModels
             _repository = repository;
             _viewModelFactory = viewModelFactory;
             _mainContentStore = mainContentStore;
-            LoadData();
-            StaffViewCommand = new StaffViewCommand(authenticator, this, mainContentStore, viewModelFactory);
-            //AddCVCommand = new RelayCommand<object>(p => true, p => 
-            //{
-            //    mainContentStore.CurrentViewModel = viewModelFactory.CreateViewModel(Defines.EViewTypes.ChildContent);
-            //});
 
+            LoadData();
+
+            StaffViewCommand = new StaffViewCommand(authenticator, this, mainContentStore, viewModelFactory);
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+
+                return true;
+
+            }, async (p) =>
+            {
+                if (!_repository.AsQueryable().Any(x => x.Id == SelectedItem.Id))
+                    return;
+
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var NhanSu = await _repository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    await _repository.UpdateAsync(NhanSu);
+                    await _unitOfWork.CommitAsync();
+                    LoadData();
+
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            });
         }
+
         public void LoadData()
         {
-            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.QuaTrinhDaoTao).Include(x => x.BoPhan).ToList()); ;
+            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Include(x => x.QuaTrinhDaoTao).Include(x => x.BoPhan).ToList()); 
+
             if (!String.IsNullOrWhiteSpace(Filter))
             {
                 List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter) || x.QuaTrinhDaoTao.NganhHoc.Contains(Filter)).ToList());

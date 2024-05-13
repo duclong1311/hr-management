@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240511102139_HRM")]
+    [Migration("20240513114005_HRM")]
     partial class HRM
     {
         /// <inheritdoc />

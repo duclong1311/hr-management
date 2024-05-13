@@ -21,8 +21,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="330" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="630" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -141,7 +141,7 @@
                                                 Header="Ghi chú"
                                                 Width="150"
                                                 DisplayMemberBinding="{Binding GhiChu}" />
-                                <GridViewColumn Header=" "
+                                <!--<GridViewColumn Header=" "
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="60">
                                     <GridViewColumn.CellTemplate>
@@ -160,27 +160,27 @@
                                                     Command="{Binding DeleteCommand}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                </GridViewColumn>-->
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>
 
                 <!--Button-->
-                <Grid Grid.Row="4"
+                <Grid Grid.Row="2"
                       Grid.ColumnSpan="4">
                     <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right">
-                        <Button Content="Sửa quá trình"
+                                HorizontalAlignment="Center">
+                        <Button Content="Sửa khoản"
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding UpadateCommand}" />
-                        <Button Content="Xóa quá trình"
+                        <Button Content="Xóa khoản"
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding DeleteCommand}" />
-                        <Button Content="Hủy bỏ"
+                        <!--<Button Content="Hủy bỏ"
                                 Style="{StaticResource Button_Style}"
-                                Command="{Binding CancleCommand}" />
-                        <Button Content="Lưu lại"
+                                Command="{Binding CancleCommand}" />-->
+                        <Button Content="Thêm khoản"
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding AddCommand}" />
                     </StackPanel>

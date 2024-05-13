@@ -36,6 +36,8 @@
                 Value="100" />
         <Setter Property="FontSize"
                 Value="14" />
+        <Setter Property="Height"
+                Value="45" />
     </Style>
 
     <Style TargetType="ComboBox"

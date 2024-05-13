@@ -21,8 +21,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="330" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="600" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
                                  Style="{StaticResource TextBox_Style}" />
                         <TextBox Text="{Binding LoaiHopDong}"
                                  Style="{StaticResource TextBox_Style}" />
-                        <TextBox Text="{Binding LuongCoBan}"
+                        <TextBox Text="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}"
                                  Style="{StaticResource TextBox_Style}" />
                     </StackPanel>
                 </Grid>
@@ -97,7 +97,7 @@
                 </Grid>
 
                 <!--Button-->
-                <Grid Grid.Row="2"
+                <!--<Grid Grid.Row="4"
                       Grid.ColumnSpan="4">
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
@@ -111,7 +111,7 @@
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding DeleteCommand}" />
                     </StackPanel>
-                </Grid>
+                </Grid>-->
 
                 <!--Table-->
                 <Grid Grid.Row="3"
@@ -138,22 +138,22 @@
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
                                 <GridViewColumn Header="Tên nhân viên"
-                                                Width="100"
+                                                Width="auto"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Số hợp đồng"
-                                                Width="120"
+                                                Width="150"
                                                 DisplayMemberBinding="{Binding SoHopDong}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Loại hợp đồng"
-                                                Width="150"
+                                                Width="auto"
                                                 DisplayMemberBinding="{Binding LoaiHopDong}" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Header="Lương cơ bản"
                                                 Width="150"
-                                                DisplayMemberBinding="{Binding LuongCoBan}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                DisplayMemberBinding="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style }"
                                                 Header="Ngày bắt đầu"
                                                 Width="150"
                                                 DisplayMemberBinding="{Binding NgayBatDau , StringFormat=\{0:d\}}" />
@@ -161,9 +161,9 @@
                                                 Header="Ngày kết thúc"
                                                 Width="150"
                                                 DisplayMemberBinding="{Binding NgayKetThuc , StringFormat=\{0:d\}}" />
-                                <GridViewColumn Header=" "
+                                <!--<GridViewColumn Header=" "
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="60">
+                                                Width="auto">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="Sửa"
@@ -180,23 +180,32 @@
                                                     Command="{Binding DeleteCommand}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                </GridViewColumn>-->
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>
 
                 <!--Button-->
-                <Grid Grid.Row="4"
+                <Grid Grid.Row="2"
                       Grid.ColumnSpan="4">
                     <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Right">
-                        <Button Content="Hủy bỏ"
+                                HorizontalAlignment="Center">
+                        <!--<Button Content="Thêm hợp đồng"
                                 Style="{StaticResource Button_Style}"
-                                Command="{Binding }" />
-                        <Button Content="Lưu lại"
+                                Command="{Binding AddCommand}" />-->
+                        <!--<Button Content="Hủy bỏ"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding }" />-->
+                        <Button Content="Thêm hợp đồng"
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding AddCommand}" />
+                        <Button Content="Sửa hợp đồng"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding UpdateCommand}" />
+                        <Button Content="Xóa hợp đồng"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding DeleteCommand}" />
                     </StackPanel>
                 </Grid>
             </Grid>
