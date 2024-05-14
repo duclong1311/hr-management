@@ -23,7 +23,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="60" />
                 <RowDefinition Height="450"/>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -43,8 +43,6 @@
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <StackPanel>
-                    <Label Content="Mã nhân viên: "
-                           Style="{StaticResource Label_Style}" />
                     <Label Content="Từ tháng năm đến tháng năm: "
                            Style="{StaticResource Label_Style}" />
                     <Label Content="Đơn vị công tác:  "
@@ -63,8 +61,6 @@
             <Grid Grid.Column="1"
                   Grid.Row="1">
                 <StackPanel>
-                    <ComboBox ItemsSource="{Binding }"
-                              Style="{StaticResource ComboBox_Style}" />
                     <TextBox x:Name="tb_TuThangNamDenThangNam"
                              Text="{Binding TuNgayDenNgay}"
                              Style="{StaticResource TextBox_Style}" />
@@ -120,10 +116,6 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã nhân viên"
-                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding }" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Header="Từ ngày đến ngày"
                                             Width="150"
@@ -192,7 +184,7 @@
                                             Header="Chức vụ"
                                             Width="150"
                                             DisplayMemberBinding="{Binding ChucVu}" />
-                            <GridViewColumn Header=" "
+                            <!--<GridViewColumn Header=" "
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="60">
                                 <GridViewColumn.CellTemplate>
@@ -211,7 +203,7 @@
                                                 Command="{Binding DeleteCommand}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            </GridViewColumn>-->
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -222,12 +214,18 @@
                   Grid.ColumnSpan="4">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
-                    <Button Content="Lưu lại"
+                    <Button Content="Thêm quá trình"
                             Style="{StaticResource Button_Style}"
                             Command="{Binding AddCommand}" />
-                    <Button Content="Xác nhận"
+                    <Button Content="Sửa quá trình"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding UpdateCommand}" />
+                    <Button Content="Xóa quá trình"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding DeleteCommand}" />
+                    <Button Content="Trang tiếp"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding ContractCommand}" />
                 </StackPanel>
             </Grid>
         </Grid>

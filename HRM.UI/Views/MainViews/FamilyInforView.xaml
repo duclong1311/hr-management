@@ -37,7 +37,7 @@
               Grid.ColumnSpan="5">
             <TextBlock HorizontalAlignment="Center"
                        FontSize="24"
-                       Margin="0,20,0,20">QUAN HỆ GIA ĐÌNH</TextBlock>
+                       Margin="0,20,0,20">THÔNG TIN GIA ĐÌNH</TextBlock>
         </Grid>
         <!--Label-->
         <Grid Grid.Row="1"
@@ -102,7 +102,7 @@
         </Grid>
 
         <!--Button-->
-        <Grid Grid.Row="2"
+        <!--<Grid Grid.Row="2"
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
@@ -116,7 +116,7 @@
                         Style="{StaticResource Button_Style}"
                         Command="{Binding DeleteCommand}" />
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
         <!--Table-->
         <Grid Grid.Row="3"
@@ -172,7 +172,7 @@
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="160"
                                         DisplayMemberBinding="{Binding QueQuan}" />
-                        <GridViewColumn Header=" "
+                        <!--<GridViewColumn Header=" "
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="60">
                             <GridViewColumn.CellTemplate>
@@ -193,7 +193,7 @@
                                             Width="45" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -204,9 +204,15 @@
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Content="Lưu lại"
+                <Button Content="Thêm thông tin"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding AddCommand}" />
+                <Button Content="Sửa thông tin"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding UpdateCommand}" />
+                <Button Content="Xóa thông tin"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding DeleteCommand}" />
                 <Button Content="Trang tiếp"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding TrainingProcessCommand}" />

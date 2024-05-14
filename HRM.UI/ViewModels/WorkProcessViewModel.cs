@@ -41,6 +41,7 @@ namespace HRM.UI.ViewModels
 
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ContractCommand { get; set; }
 
         private string _tuNgayDenNgay;
         public string TuNgayDenNgay
@@ -88,6 +89,11 @@ namespace HRM.UI.ViewModels
             _unitOfWork = unitOfWork;
             _userStore = userStore;
             LoadData();
+
+            ContractCommand = new Commands.RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
+            });
 
             AddCommand = new RelayCommand<object>((p) =>
             {

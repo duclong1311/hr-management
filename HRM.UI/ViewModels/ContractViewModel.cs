@@ -12,6 +12,7 @@ using HRM.Domain.Models;
 using HRM.UI.Factories;
 using HRM.UI.States.Users;
 using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
@@ -24,6 +25,8 @@ namespace HRM.UI.ViewModels
         private readonly ChildContentStore _childContentStore;
         private IRepository<HopDong> _hopDongRepository;
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         private ObservableCollection<HopDong> _list = new ObservableCollection<HopDong>();
         public ObservableCollection<HopDong> List
@@ -106,6 +109,7 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ICommand RemunativeCommand { get; set; }
         public ContractViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<HopDong> hopDongRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
             _viewModelFactory = viewModelFactory;
@@ -116,6 +120,11 @@ namespace HRM.UI.ViewModels
             _userStore = userStore;
 
             Load();
+
+            RemunativeCommand = new Commands.RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Remunerative);
+            });
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -161,6 +170,41 @@ namespace HRM.UI.ViewModels
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
+                }
+            });
+
+            DeleteCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                if (SelectedItem != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var hopdong = await _hopDongRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (hopdong != null)
+                            {
+                                await _hopDongRepository.DeleteAsync(hopdong);
+                                await _unitOfWork.CommitAsync();
+                                Load();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
             });
         }

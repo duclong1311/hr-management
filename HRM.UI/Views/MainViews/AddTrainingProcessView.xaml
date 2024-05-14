@@ -144,7 +144,7 @@
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="150"
                                         DisplayMemberBinding="{Binding VanBangChungChi}" />
-                        <GridViewColumn Header=" "
+                        <!--<GridViewColumn Header=" "
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                         Width="60">
                             <GridViewColumn.CellTemplate>
@@ -163,7 +163,7 @@
                                             Command="{Binding DeleteCommand}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -173,10 +173,16 @@
         <Grid Grid.Row="4"
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Content="Lưu lại"
+                        HorizontalAlignment="Center">
+                <Button Content="Thêm quá trình"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding AddCommand}" />
+                <Button Content="Sửa quá trình"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding }" />
+                <Button Content="Xóa quá trình"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding DeleteCommand}" />
                 <Button Content="Trang tiếp"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding WorkProcessCommand}" />

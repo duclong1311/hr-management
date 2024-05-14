@@ -186,7 +186,7 @@ namespace HRM.UI.ViewModels
 
             TrainingProcessCommand = new RelayCommand<object>(p => true, p =>
             {
-                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.TrainingProcess);
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AddTrainingProcess);
             });
 
             AddCommand = new RelayCommand<object>((p) =>

@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ViewModels\Font\times.ttf" />
+    <None Remove="ViewModels\Font\timesbd.ttf" />
+    <None Remove="ViewModels\Font\timesbi.ttf" />
+    <None Remove="ViewModels\Font\timesi.ttf" />
     <None Remove="Views\Images\++_logo_red %282%29.png" />
     <None Remove="Views\Images\++_logo_red %284%29.png" />
     <None Remove="Views\Images\back_groud.png" />
@@ -33,9 +37,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ViewModels\Font\timesi.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
     <PackageReference Include="EPPlus" Version="7.1.1" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.19" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
@@ -55,6 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ViewModels\Font\times.ttf" />
+    <Resource Include="ViewModels\Font\timesbd.ttf" />
+    <Resource Include="ViewModels\Font\timesbi.ttf" />
     <Resource Include="Views\Images\++_logo_red (2).png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

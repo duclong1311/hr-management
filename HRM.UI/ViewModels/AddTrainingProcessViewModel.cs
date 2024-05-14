@@ -139,7 +139,7 @@ namespace HRM.UI.ViewModels
 
             WorkProcessCommand = new Commands.RelayCommand<object>(p => true, p =>
             {
-                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.WorkProcess);
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AddWorkProcess);
             });
 
             AddCommand = new Commands.RelayCommand<object>((p) =>

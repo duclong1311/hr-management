@@ -22,7 +22,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="60" />
-                <RowDefinition />
+                <RowDefinition Height="330"/>
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -89,7 +89,7 @@
             </Grid>
 
             <!--Button-->
-            <Grid Grid.Row="2"
+            <!--<Grid Grid.Row="2"
                   Grid.ColumnSpan="4">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center">
@@ -103,11 +103,12 @@
                             Style="{StaticResource Button_Style}"
                             Command="{Binding }" />
                 </StackPanel>
-            </Grid>
+            </Grid>-->
 
             <!--Table-->
             <Grid Grid.Row="3"
-                  Grid.ColumnSpan="4">
+                  Grid.ColumnSpan="4"
+                  Margin="20,0,20,0">
 
                 <ListView  Margin="10"
                            Width="auto"
@@ -196,13 +197,20 @@
             <Grid Grid.Row="4"
                   Grid.ColumnSpan="4">
                 <StackPanel Orientation="Horizontal"
+                            Margin="20,0,20,0"
                             HorizontalAlignment="Right">
-                    <Button Content="Hủy bỏ"
+                    <!--<Button Content="Thêm thông tin"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding AddCommand}" />-->
+                    <Button Content="Sửa thông tin"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding UpdateCommand}" />
+                    <Button Content="Xóa thông tin"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding DeleteCommand}" />
                     <Button Content="Xác nhận"
                             Style="{StaticResource Button_Style}"
-                            Command="{Binding }" />
+                            Command="{Binding ConfirmCommand}" />
                 </StackPanel>
             </Grid>
         </Grid>

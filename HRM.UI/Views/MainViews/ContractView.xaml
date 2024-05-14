@@ -24,7 +24,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="60" />
                     <RowDefinition Height="330" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="80" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -93,7 +93,7 @@
                 </Grid>
 
                 <!--Button-->
-                <Grid Grid.Row="2"
+                <!--<Grid Grid.Row="2"
                       Grid.ColumnSpan="4">
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
@@ -107,7 +107,7 @@
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding DeleteCommand}" />
                     </StackPanel>
-                </Grid>
+                </Grid>-->
 
                 <!--Table-->
                 <Grid Grid.Row="3"
@@ -153,7 +153,7 @@
                                                 Header="Ngày kết thúc"
                                                 Width="150"
                                                 DisplayMemberBinding="{Binding NgayKetThuc , StringFormat=\{0:d\}}" />
-                                <GridViewColumn Header=" "
+                                <!--<GridViewColumn Header=" "
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 Width="60">
                                     <GridViewColumn.CellTemplate>
@@ -172,7 +172,7 @@
                                                     Command="{Binding DeleteCommand}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                </GridViewColumn>-->
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -183,12 +183,18 @@
                       Grid.ColumnSpan="4">
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right">
-                        <Button Content="Hủy bỏ"
+                        <!--<Button Content="Thêm hợp đồng"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding AddCommand}" />-->
+                        <Button Content="Sửa hợp đồng"
                                 Style="{StaticResource Button_Style}"
                                 Command="{Binding }" />
-                        <Button Content="Lưu lại"
+                        <Button Content="Xóa hợp đồng"
                                 Style="{StaticResource Button_Style}"
-                                Command="{Binding AddCommand}" />
+                                Command="{Binding DeleteCommand}" />
+                        <Button Content="Trang tiếp"
+                                Style="{StaticResource Button_Style}"
+                                Command="{Binding RemunativeCommand}" />
                     </StackPanel>
                 </Grid>
             </Grid>

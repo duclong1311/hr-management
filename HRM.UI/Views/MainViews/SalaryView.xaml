@@ -49,7 +49,9 @@
                           BorderBrush="Black"
                           Height="350"
                           ItemsSource="{Binding ListLuongNhanVien}"
-                          SelectedItem="{Binding SelectedItem}">
+                          SelectedItem="{Binding SelectedItem}"
+                          FontFamily="TimeNewRoman">
+
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment"
@@ -58,7 +60,7 @@
                                     Value="5,0,0,0" />
                             <Setter Property="FontSize"
                                     Value="14" />
-                            
+
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.View>
@@ -109,7 +111,7 @@
                                             Width="80"
                                             Header="Phụ cấp &#x0a; ăn trưa"
                                             DisplayMemberBinding="{Binding PhuCapAnTrua, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
-                            
+
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Width="80"
                                             Header="Phụ cấp &#x0a; đi lại"
@@ -169,6 +171,10 @@
                         Content="Xuất PDF"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding ExportPDFCommand}" />
+                <Button Height="50"
+                        Content="Xuất Excel"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding ExportExcelCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -12,6 +12,7 @@ using System.Windows;
 using HRM.UI.States.Users;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
@@ -125,7 +126,9 @@ namespace HRM.UI.ViewModels
         private readonly MainContentStore _mainContentStore;
         private readonly IUserStore _userStore;
         private readonly ChildContentStore _childContentStore;
-
+        public ICommand ConfirmCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         public RemunerativeViewModel(IUserStore userStore, IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<KhenThuongKyLuat> khenThuongKyLuatRepository, IUnitOfWork unitOfWork, ChildContentStore childContentStore)
         {
@@ -139,6 +142,11 @@ namespace HRM.UI.ViewModels
             LoadComboBoxData(); 
             //CheckNullDateTimeValue();
             Load();
+
+            ConfirmCommand = new Commands.RelayCommand<object>(p => true, p =>
+            {
+                _childContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.StaffCV);
+            });
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
@@ -181,6 +189,41 @@ namespace HRM.UI.ViewModels
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
+                }
+            });
+
+            DeleteCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                if (SelectedItem != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var khenthuongkyluat = await _khenThuongKyLuatRespository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (khenthuongkyluat != null)
+                            {
+                                await _khenThuongKyLuatRespository.DeleteAsync(khenthuongkyluat);
+                                await _unitOfWork.CommitAsync();
+                                Load();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
             });
         }
