@@ -139,7 +139,7 @@
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
                             <GridViewColumn Header="Tên nhân viên"
-                                            Width="100"
+                                            Width="200"
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                             <GridViewColumn Header="Cấp khen thưởng"

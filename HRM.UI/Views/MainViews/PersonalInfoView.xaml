@@ -125,7 +125,7 @@
                        Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
 
-                <Label Content="Cấp ngày: "
+                <Label Content="Ngày cấp CCCD: "
                        Margin="0 10 0 5"
                        Style="{StaticResource Label_Style}" />
                 <Label Content="Tại:  "
@@ -290,7 +290,7 @@
                 <Button Content="Lưu lại"
                         Height="35"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding UpdateCommand}" />
                 <Button Content="Trang tiếp"
                         Height="35"
                         Style="{StaticResource Button_Style}"

@@ -134,7 +134,7 @@
                                         DisplayMemberBinding="{Binding NoiDaoTao}" />
                         <GridViewColumn Header="Ngành học"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                        Width="140"
+                                        Width="auto"
                                         DisplayMemberBinding="{Binding NganhHoc}" />
                         <GridViewColumn Header="Hình thức đào tạo"
                                         HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
@@ -173,7 +173,7 @@
         <Grid Grid.Row="4"
               Grid.ColumnSpan="4">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Right">
                 <Button Content="Thêm quá trình"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding AddCommand}" />

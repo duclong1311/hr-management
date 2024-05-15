@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using Microsoft.IdentityModel.Tokens;
 using HRM.UI.Commands;
 using HRM.UI.States.Authenticator;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HRM.UI.ViewModels
 {
@@ -23,6 +25,7 @@ namespace HRM.UI.ViewModels
         private IRepository<NhanSu> _hosoRepository;
         private IRepository<BoPhan> _boPhanRepository;
         private IUserStore _userStore;
+        public ICommand UpdateCommand { get; set; }
         private readonly IViewModelFactory _viewModelFactory;
         public ICommand AddCommand { get; set; }
         public ICommand UploadImageCommand { get; set; }
@@ -658,6 +661,56 @@ namespace HRM.UI.ViewModels
                 }
             });
 
+            UpdateCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                try
+                {
+                    var NhanSu = await _hosoRepository.AsQueryable().FirstOrDefaultAsync(x => x.MaNhanVien == MaNhanVien);
+
+                    if (NhanSu != null)
+                    {
+                        if (NhanSu.MaNhanVien != MaNhanVien)
+                        {
+                            MessageBox.Show("Không được phép sửa mã nhân viên.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            await _unitOfWork.RollbackAsync();
+                            return;
+                        }
+                        // Cập nhật các thuộc tính từ SelectedItem
+                        NhanSu.Anh = CoppyLink.ToString();
+                        NhanSu.HoTen = HoTen;
+                        NhanSu.GioiTinh = GioiTinh;
+                        NhanSu.NgaySinh = NgaySinh;
+                        NhanSu.NguyenQuan = NguyenQuan;
+                        NhanSu.DanToc = DanToc;
+                        NhanSu.CCCD = CCCD;
+                        NhanSu.CapNgay = CapNgay;
+                        NhanSu.TonGiao = TonGiao;
+                        NhanSu.KetNapDang = KetNapDang;
+                        NhanSu.NoiketNapDang = NoiKetNapDang;
+                        NhanSu.SoThich = SoThich;
+                        NhanSu.STK = STK;
+                        NhanSu.MaSoBHXH = MaSoBHXH;
+                        NhanSu.MaSoThue = MaSoThue;
+                        NhanSu.BoPhanId = SeletedCboBoPhan.Id;
+
+                        await _hosoRepository.UpdateAsync(NhanSu);
+                        await _unitOfWork.CommitAsync();
+                        LoadData();
+
+                        MessageBox.Show("Dữ liệu đã được cập nhật thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
 
         }
 
@@ -739,6 +792,7 @@ namespace HRM.UI.ViewModels
             }
         }
 
+        #region
         static bool IsAlphaNumeric(string input)
         {
 
@@ -803,6 +857,7 @@ namespace HRM.UI.ViewModels
             // Kiểm tra xem chuỗi đầu vào có khớp với mẫu regex không
             return Regex.IsMatch(input, pattern);
         }
+        #endregion
 
     }
 }

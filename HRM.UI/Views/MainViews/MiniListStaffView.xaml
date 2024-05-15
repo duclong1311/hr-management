@@ -98,7 +98,7 @@
                                             DisplayMemberBinding="{Binding GioiTinh, Converter={StaticResource GenderConverter}}" />
                             <GridViewColumn Header="Nguyên quán"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
-                                            Width="auto"
+                                            Width="200"
                                             DisplayMemberBinding="{Binding NguyenQuan}" />
                             <GridViewColumn Header="Dân tộc"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"

@@ -22,7 +22,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="80" />
-                    <RowDefinition Height="600" />
+                    <RowDefinition Height="380" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -138,7 +138,7 @@
                                             HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
                                 <GridViewColumn Header="Tên nhân viên"
-                                                Width="auto"
+                                                Width="200"
                                                 HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                                 DisplayMemberBinding="{Binding NhanSu.HoTen }" />
                                 <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"

@@ -263,8 +263,8 @@ namespace HRM.UI.ViewModels
             string voucherMaker = "Người lập biểu";
             string Manager = "Giám đốc";
 
-            string fontPath = "C:\\Users\\Admin\\Desktop\\DoAn\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
-            //string fontPath = "\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
+            //string fontPath = "C:\\Users\\Admin\\Desktop\\DoAn\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
+            string fontPath = "C:\\Users\\Admin\\Documents\\GitHub\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
 
             // Đăng ký font Unicode tiếng Việt cho iTextSharp
             FontFactory.Register(fontPath, "MyVietnameseFont");

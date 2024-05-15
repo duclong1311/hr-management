@@ -22,7 +22,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="480"/>
                 <RowDefinition Height="80" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -168,10 +168,6 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã nhân viên"
-                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding ''}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
                                             Header="Từ ngày đến ngày"
                                             Width="150"
