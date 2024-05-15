@@ -13,6 +13,7 @@ using HRM.UI.Stores;
 using System.Windows.Input;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
+using HRM.UI.Commands;
 
 namespace HRM.UI.ViewModels
 {
@@ -36,6 +37,8 @@ namespace HRM.UI.ViewModels
 
         private IRepository<KhenThuongKyLuat> _khenThuongKyLuatRespository;
         public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
         public ObservableCollection<string> CapKhenThuongData { get; set; }
 
         private string _capKhenThuong;
@@ -217,6 +220,84 @@ namespace HRM.UI.ViewModels
                 catch (Exception ex)
                 {
                     await _unitOfWork.RollbackAsync();
+                }
+            });
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                if (SelectedItem != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var khenThuongKyLuat = await _khenThuongKyLuatRespository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (khenThuongKyLuat != null)
+                            {
+                                await _khenThuongKyLuatRespository.DeleteAsync(khenThuongKyLuat);
+                                await _unitOfWork.CommitAsync();
+                                Load();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            });
+
+            UpdateCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                try
+                {
+                    var khenThuongKyLuat = await _khenThuongKyLuatRespository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                    if (khenThuongKyLuat != null)
+                    {
+
+                        if (khenThuongKyLuat.MaNhanVien != SelectedNhanSu.MaNhanVien)
+                        {
+                            MessageBox.Show("Không được phép sửa mã nhân viên.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            await _unitOfWork.RollbackAsync();
+                            return;
+                        }
+                        // Cập nhật các thuộc tính từ SelectedItem
+                        khenThuongKyLuat.CapKhenThuongKyLuat = CapKhenThuongKyLuat;
+                        khenThuongKyLuat.TenHinhThuc = TenHinhThuc;
+                        khenThuongKyLuat.NoiDung = NoiDung;
+                        khenThuongKyLuat.NgayQuyetDinh = NgayQuyetDinh;
+                        khenThuongKyLuat.SoQuyetDinh = SoQuyetDinh;
+
+                        await _khenThuongKyLuatRespository.UpdateAsync(khenThuongKyLuat);
+                        await _unitOfWork.CommitAsync();
+                        Load();
+
+                        MessageBox.Show("Dữ liệu đã được cập nhật thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

@@ -20,9 +20,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="650" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -99,9 +99,11 @@
                                 Content="Thêm chức vụ" />
                         <Button Command="{Binding UpdateCommand}"
                                 Style="{StaticResource Button_Style}"
+                                Height="35"
                                 Content="Sửa chức vụ" />
                         <Button Command="{Binding DeleteCommand}"
                                 Style="{StaticResource Button_Style}"
+                                Height="35"
                                 Content="Xóa chức vụ" />
                     </StackPanel>
                 </Grid>

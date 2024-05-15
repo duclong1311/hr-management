@@ -41,6 +41,7 @@ namespace HRM.UI.ViewModels
 
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         private string _tuNgayDenNgay;
         public string TuNgayDenNgay
@@ -178,6 +179,40 @@ namespace HRM.UI.ViewModels
                             MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
+                }
+            });
+
+            UpdateCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                try
+                {
+                    var QuaTrinhCongTac = await _quaTrinhCongTacRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                    if (QuaTrinhCongTac != null)
+                    {
+                        // Cập nhật các thuộc tính từ SelectedItem
+                        QuaTrinhCongTac.ChucVu = ChucVu;
+                        QuaTrinhCongTac.TuNgayDenNgay = TuNgayDenNgay;
+                        QuaTrinhCongTac.NoiCongTac = NoiCongTac;
+
+                        await _quaTrinhCongTacRepository.UpdateAsync(QuaTrinhCongTac);
+                        await _unitOfWork.CommitAsync();
+                        LoadData();
+
+                        MessageBox.Show("Dữ liệu đã được cập nhật thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

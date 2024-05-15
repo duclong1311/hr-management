@@ -205,13 +205,13 @@
                         HorizontalAlignment="Right">
                 <Button Content="Thêm thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding AddCommand}" />
                 <Button Content="Sửa thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding }" />
+                        Command="{Binding UpdateCommand}" />
                 <Button Content="Xóa thông tin"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding AddCommand}" />
+                        Command="{Binding DeleteCommand}" />
                 <Button Content="Trang tiếp"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding TrainingProcessCommand}" />

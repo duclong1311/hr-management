@@ -165,9 +165,15 @@
                   Grid.ColumnSpan="4">
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
-                    <Button Content="Lưu lại"
+                    <Button Content="Thêm quá trình"
                             Style="{StaticResource Button_Style}"
                             Command="{Binding AddCommand}" />
+                    <Button Content="Sửa quá trình"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding DeleteCommand}" />
+                    <Button Content="Xóa quá trình"
+                            Style="{StaticResource Button_Style}"
+                            Command="{Binding UpdateCommand}" />
                     <Button Content="Xác nhận"
                             Style="{StaticResource Button_Style}"
                             Command="{Binding }" />

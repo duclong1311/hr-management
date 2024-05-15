@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             xmlns:vm="clr-namespace:HRM.UI.ViewModels.Converter"
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="880"
@@ -13,6 +14,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MiniListStaffView_Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <vm:GenderConverter x:Key="GenderConverter" />
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="10,0,10,0">
@@ -91,7 +95,7 @@
                             <GridViewColumn Header="Giới tính"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="100"
-                                            DisplayMemberBinding="{Binding GioiTinh}" />
+                                            DisplayMemberBinding="{Binding GioiTinh, Converter={StaticResource GenderConverter}}" />
                             <GridViewColumn Header="Nguyên quán"
                                             HeaderContainerStyle="{StaticResource GridViewColumnHeader_Style}"
                                             Width="auto"

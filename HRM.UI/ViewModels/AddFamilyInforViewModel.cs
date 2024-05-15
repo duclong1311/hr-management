@@ -22,6 +22,7 @@ namespace HRM.UI.ViewModels
     {
         private readonly ChildContentStore _childContentStore;
         public ICommand TrainingProcessCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         private ObservableCollection<QuanHeGiaDinh> _list = new ObservableCollection<QuanHeGiaDinh>();
         public ObservableCollection<QuanHeGiaDinh> List
@@ -272,6 +273,45 @@ namespace HRM.UI.ViewModels
                             MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
+                }
+            });
+
+            UpdateCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                try
+                {
+                    var QuanHeGiaDinh = await _quanHeGiaDinhRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                    if (QuanHeGiaDinh != null)
+                    {
+                        // Cập nhật các thuộc tính từ SelectedItem
+                        QuanHeGiaDinh.MoiQuanHe = MoiQuanHe;
+                        QuanHeGiaDinh.HoVaTen = HoVaTen;
+                        QuanHeGiaDinh.NamSinh = NamSinh;
+                        QuanHeGiaDinh.NoiO = NoiO;
+                        QuanHeGiaDinh.NgheNghiep = NgheNghiep;
+                        QuanHeGiaDinh.QueQuan = TinhThanh;
+                        QuanHeGiaDinh.DonViCongTac = DonViCongTac;
+                        QuanHeGiaDinh.ChucVu = ChucVu;
+
+                        await _quanHeGiaDinhRepository.UpdateAsync(QuanHeGiaDinh);
+                        await _unitOfWork.CommitAsync();
+                        LoadData();
+
+                        MessageBox.Show("Dữ liệu đã được cập nhật thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }

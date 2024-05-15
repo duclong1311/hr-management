@@ -689,6 +689,15 @@ namespace HRM.UI.ViewModels
             CoppyLink = @"C:\Users\Admin\Desktop\DoAn\HRM\HRM.UI\ViewModels\PersonImage\" + newFileName;
 
         }
+        public string getGioiTinh(bool? gioitinh)
+        {
+            string GioiTinh = "";
+            if (gioitinh == true)
+                GioiTinh = "Nam";
+            else
+                GioiTinh = "Nu";
+            return GioiTinh;
+        }       
         public void LoadData()
         {
             if (_userStore.CurrentNhanSu != null)
@@ -698,6 +707,7 @@ namespace HRM.UI.ViewModels
                 ImageSource = NhanSu.Anh;
                 HoTen = NhanSu.HoTen;
                 NgaySinh = (DateTime)NhanSu.NgaySinh;
+                //GioiTinh = getGioiTinh(NhanSu.GioiTinh);
                 NguyenQuan = NhanSu.NguyenQuan;
                 DanToc = NhanSu.DanToc;
                 CCCD = NhanSu.CCCD;

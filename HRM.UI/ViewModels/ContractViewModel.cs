@@ -207,6 +207,43 @@ namespace HRM.UI.ViewModels
                     }
                 }
             });
+
+            UpdateCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                try
+                {
+                    var HopDong = await _hopDongRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                    if (HopDong != null)
+                    {
+                        // Cập nhật các thuộc tính từ SelectedItem
+                        HopDong.SoHopDong = SoHopDong;
+                        HopDong.LoaiHopDong = LoaiHopDong;
+                        HopDong.NgayBatDau = NgayBatDau;
+                        HopDong.NgayKetThuc = NgayKetThuc;
+                        HopDong.NgayKetThuc = NgayKetThuc;
+                        HopDong.LuongCoBan = LuongCoBan;
+
+                        await _hopDongRepository.UpdateAsync(HopDong);
+                        await _unitOfWork.CommitAsync();
+                        Load();
+
+                        MessageBox.Show("Dữ liệu đã được cập nhật thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
         }
         public void Load()
         {

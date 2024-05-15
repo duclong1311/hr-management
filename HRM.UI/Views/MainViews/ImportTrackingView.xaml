@@ -121,7 +121,7 @@
                                             Header="Số ngày công"
                                             DisplayMemberBinding="{Binding TongSoNgayCong}"/>
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
+                                            Width="150"
                                             Header="Số ngày công chủ nhật"
                                             DisplayMemberBinding="{Binding TongSoNgayCongCN}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
@@ -129,7 +129,7 @@
                                             Header="Số giờ làm thêm"
                                             DisplayMemberBinding="{Binding TongTimeOT}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            Width="120"
+                                            Width="150"
                                             Header="Số giờ đi muộn về sớm"
                                             DisplayMemberBinding="{Binding DiMuonVeSom}" />
                             <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"

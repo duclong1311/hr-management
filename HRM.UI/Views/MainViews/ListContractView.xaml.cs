@@ -27,7 +27,7 @@ namespace HRM.UI.Views
         {
             InitializeComponent();
 
-            Dispatcher.BeginInvoke(new Action(LoadNhanVienComboBox));
+            //Dispatcher.BeginInvoke(new Action(LoadNhanVienComboBox));
         }
         private void LoadNhanVienComboBox()
         {
