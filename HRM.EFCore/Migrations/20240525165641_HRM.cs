@@ -41,6 +41,20 @@ namespace HRM.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DanhMucKhenThuongKyLuats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CapKhenThuongKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HinhThucKhenThuongKyLuat = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DanhMucKhenThuongKyLuats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "KyLuats",
                 columns: table => new
                 {
@@ -380,6 +394,26 @@ namespace HRM.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "DanhMucKhenThuongKyLuats",
+                columns: new[] { "Id", "CapKhenThuongKyLuat", "HinhThucKhenThuongKyLuat" },
+                values: new object[,]
+                {
+                    { 1, "Cá nhân", "Thưởng tiền mặt" },
+                    { 2, "Đội nhóm", "Thưởng tiền mặt" },
+                    { 3, "Bộ phận", "Thưởng tiền mặt" },
+                    { 4, "Cá nhân", "Trao giấy khen, bằng khen" },
+                    { 5, "Đội nhóm", "Trao giấy khen, bằng khen" },
+                    { 6, "Bộ phận", "Trao giấy khen, bằng khen" },
+                    { 7, "Cá nhân", "Khiển trách bằng lời nói" },
+                    { 8, "Đội nhóm", "Khiển trách bằng lời nói" },
+                    { 9, "Bộ phận", "Khiển trách bằng lời nói" },
+                    { 10, "Cá nhân", "Khiển trách bằng văn bản" },
+                    { 11, "Đội nhóm", "Khiển trách bằng văn bản" },
+                    { 12, "Bộ phận", "Khiển trách bằng văn bản" },
+                    { 13, "Cá nhân", "Sa thải" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name", "Password" },
                 values: new object[] { 1, "1", "admin", "??_?y??w+???l\0?_?n5?rY?????	?*" });
@@ -454,6 +488,9 @@ namespace HRM.EFCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BangCongNhanSus");
+
+            migrationBuilder.DropTable(
+                name: "DanhMucKhenThuongKyLuats");
 
             migrationBuilder.DropTable(
                 name: "HopDongs");

@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="HRM.UI.Views.ListContractView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
@@ -92,7 +92,7 @@
                          Mode=TwoWay, 
                          TargetNullValue={x:Static System:DateTime.Now}}"
                                     Style="{StaticResource DatePicker_Style}" />
-                        
+
                     </StackPanel>
                 </Grid>
 
@@ -116,74 +116,85 @@
                 <!--Table-->
                 <Grid Grid.Row="3"
                       Grid.ColumnSpan="4">
-                    <ListView Margin="10"
-                              Name="ListStaffView_Pick"
-                              BorderBrush="Black"
-                              ItemsSource="{Binding List}"
-                              SelectedItem="{Binding SelectedItem}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Left" />
-                                <Setter Property="Padding"
-                                        Value="5,0,0,0" />
-                                <Setter Property="FontSize"
-                                        Value="14" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã nhân viên"
-                                            Width="100"
-                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                            DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
-                                <GridViewColumn Header="Tên nhân viên"
-                                                Width="200"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding NhanSu.HoTen }" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Header="Số hợp đồng"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding SoHopDong}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Header="Loại hợp đồng"
-                                                Width="auto"
-                                                DisplayMemberBinding="{Binding LoaiHopDong}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Header="Lương cơ bản"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style }"
-                                                Header="Ngày bắt đầu"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding NgayBatDau , StringFormat=\{0:d\}}" />
-                                <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Header="Ngày kết thúc"
-                                                Width="150"
-                                                DisplayMemberBinding="{Binding NgayKetThuc , StringFormat=\{0:d\}}" />
-                                <!--<GridViewColumn Header=" "
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="auto">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Sửa"
-                                                    Command="{Binding UpdateCommand}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header=" "
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                Width="60">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Xóa"
-                                                    Command="{Binding DeleteCommand}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>-->
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <StackPanel>
+                        <TextBox Width="200"
+                                 Margin="10"
+                                 Style="{StaticResource TextBox_Style}"
+                                 HorizontalAlignment="Right"
+                                 Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+
+
+                        <ListView Margin="10"
+                                  Height="300"
+                                  Name="ListStaffView_Pick"
+                                  BorderBrush="Black"
+                                  ItemsSource="{Binding List}"
+                                  SelectedItem="{Binding SelectedItem}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Left" />
+                                    <Setter Property="Padding"
+                                            Value="5,0,0,0" />
+                                    <Setter Property="FontSize"
+                                            Value="14" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã nhân viên"
+                                                    Width="100"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
+                                    <GridViewColumn Header="Tên nhân viên"
+                                                    Width="200"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NhanSu.HoTen }" />
+                                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    Header="Số hợp đồng"
+                                                    Width="150"
+                                                    DisplayMemberBinding="{Binding SoHopDong}" />
+                                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    Header="Loại hợp đồng"
+                                                    Width="auto"
+                                                    DisplayMemberBinding="{Binding LoaiHopDong}" />
+                                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    Header="Lương cơ bản"
+                                                    Width="150"
+                                                    DisplayMemberBinding="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style }"
+                                                    Header="Ngày bắt đầu"
+                                                    Width="150"
+                                                    DisplayMemberBinding="{Binding NgayBatDau , StringFormat=\{0:d\}}" />
+                                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    Header="Ngày kết thúc"
+                                                    Width="150"
+                                                    DisplayMemberBinding="{Binding NgayKetThuc , StringFormat=\{0:d\}}" />
+                                    <!--<GridViewColumn Header=" "
+                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                            Width="auto">
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Sửa"
+                                Command="{Binding UpdateCommand}" />
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn Header=" "
+                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                            Width="60">
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Xóa"
+                                Command="{Binding DeleteCommand}" />
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>-->
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
                 </Grid>
 
                 <!--Button-->

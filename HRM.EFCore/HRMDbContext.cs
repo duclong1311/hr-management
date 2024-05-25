@@ -16,6 +16,7 @@ namespace HRM.EFCore
         public DbSet<ChucVu> ChucVus { get; set; }
         public DbSet<HopDong> HopDongs { get; set; }
         public DbSet<KhenThuongKyLuat> KhenThuongs { get; set; }
+        public DbSet<DanhMucKhenThuongKyLuat> DanhMucKhenThuongKyLuats { get; set; }
         public DbSet<KyLuat> KyLuats { get; set; }
         public DbSet<NhanSu> NhanSus { get; set; }
         public DbSet<QuanHeGiaDinh> QuanHeGiaDinhs { get; set; }
@@ -35,6 +36,7 @@ namespace HRM.EFCore
             modelBuilder.ApplyConfiguration(new HopDongConfiguration());
             modelBuilder.ApplyConfiguration(new KhenThuongConfiguration());
             modelBuilder.ApplyConfiguration(new KyLuatConfiguration());
+            modelBuilder.ApplyConfiguration(new DanhMucKhenThuongKyLuatConfiguration());
             modelBuilder.ApplyConfiguration(new NhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new QuanHeGiaDinhConfiguration());
             modelBuilder.ApplyConfiguration(new QuaTrinhCongTacConfiguration());

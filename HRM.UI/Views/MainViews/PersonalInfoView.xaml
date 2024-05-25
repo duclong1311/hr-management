@@ -294,7 +294,7 @@
                 <Button Content="Trang tiếp"
                         Height="35"
                         Style="{StaticResource Button_Style}"
-                        Command="{Binding GetIDofStaffCommand }" />
+                        Command="{Binding FamilyInforCommand }" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -215,6 +215,105 @@ namespace HRM.EFCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HRM.Domain.Models.DanhMucKhenThuongKyLuat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CapKhenThuongKyLuat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HinhThucKhenThuongKyLuat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DanhMucKhenThuongKyLuats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CapKhenThuongKyLuat = "Cá nhân",
+                            HinhThucKhenThuongKyLuat = "Thưởng tiền mặt"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CapKhenThuongKyLuat = "Đội nhóm",
+                            HinhThucKhenThuongKyLuat = "Thưởng tiền mặt"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CapKhenThuongKyLuat = "Bộ phận",
+                            HinhThucKhenThuongKyLuat = "Thưởng tiền mặt"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CapKhenThuongKyLuat = "Cá nhân",
+                            HinhThucKhenThuongKyLuat = "Trao giấy khen, bằng khen"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CapKhenThuongKyLuat = "Đội nhóm",
+                            HinhThucKhenThuongKyLuat = "Trao giấy khen, bằng khen"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CapKhenThuongKyLuat = "Bộ phận",
+                            HinhThucKhenThuongKyLuat = "Trao giấy khen, bằng khen"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CapKhenThuongKyLuat = "Cá nhân",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng lời nói"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CapKhenThuongKyLuat = "Đội nhóm",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng lời nói"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CapKhenThuongKyLuat = "Bộ phận",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng lời nói"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CapKhenThuongKyLuat = "Cá nhân",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng văn bản"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CapKhenThuongKyLuat = "Đội nhóm",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng văn bản"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CapKhenThuongKyLuat = "Bộ phận",
+                            HinhThucKhenThuongKyLuat = "Khiển trách bằng văn bản"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CapKhenThuongKyLuat = "Cá nhân",
+                            HinhThucKhenThuongKyLuat = "Sa thải"
+                        });
+                });
+
             modelBuilder.Entity("HRM.Domain.Models.HopDong", b =>
                 {
                     b.Property<int>("Id")

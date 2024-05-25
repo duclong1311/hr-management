@@ -40,6 +40,7 @@ namespace HRM.UI.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ObservableCollection<string> CapKhenThuongData { get; set; }
+        public ObservableCollection<string> TenHinhThucData { get; set; }
 
         private string _capKhenThuong;
         public string CapKhenThuongKyLuat
@@ -105,7 +106,17 @@ namespace HRM.UI.ViewModels
         }
         private string _maNhanVien { get; set; }
         public string MaNhanVien { get { return _maNhanVien; } set { _maNhanVien = value; OnPropertyChanged(); } }
-        
+        private string _filter;
+        public string Filter
+        {
+            get => _filter;
+            set
+            {
+                _filter = value;
+                OnPropertyChanged();
+                Load();
+            }
+        }
 
         private NhanSu _selectedNhanSu;
 
@@ -144,6 +155,13 @@ namespace HRM.UI.ViewModels
             CapKhenThuongData.Add("Bộ phận");
             CapKhenThuongData.Add("Công ty");
 
+            TenHinhThucData = new ObservableCollection<string>();
+            TenHinhThucData.Add("Thưởng tiền mặt");
+            TenHinhThucData.Add("Trao giấy khen, bằng khen");
+            TenHinhThucData.Add("Khiển trách bằng lời nói");
+            TenHinhThucData.Add("Khiển trách bằng văn bản");
+            TenHinhThucData.Add("Sa thải");
+
             ListNhanSu = new ObservableCollection<NhanSu>(_nhanSuRepository.AsQueryable().ToList());
             SelectedNhanSu = ListNhanSu.FirstOrDefault();
         }
@@ -153,7 +171,16 @@ namespace HRM.UI.ViewModels
         private readonly ChildContentStore _childContentStore;
         public void Load()
         {
-            List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().ToList());
+            if (string.IsNullOrWhiteSpace(Filter))
+            {
+                List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable().ToList());
+            }
+            else
+            {
+                List = new ObservableCollection<KhenThuongKyLuat>(_khenThuongKyLuatRespository.AsQueryable()
+                    .Where(x => x.NhanSu.MaNhanVien.Contains(Filter) || x.NhanSu.HoTen.Contains(Filter))
+                    .ToList());
+            }
         }
         //public void LoadHoTen(string maNhanVien)
         //{
@@ -180,8 +207,6 @@ namespace HRM.UI.ViewModels
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(TenHinhThuc))
-                    return false;
                 return true;
             }, async (p) =>
             {
@@ -223,7 +248,7 @@ namespace HRM.UI.ViewModels
                 }
             });
 
-            DeleteCommand = new RelayCommand<object>((p) =>
+            DeleteCommand = new Commands.RelayCommand<object>((p) =>
             {
                 if (SelectedItem == null)
                     return false;
@@ -258,7 +283,7 @@ namespace HRM.UI.ViewModels
                 }
             });
 
-            UpdateCommand = new RelayCommand<object>((p) =>
+            UpdateCommand = new Commands.RelayCommand<object>((p) =>
             {
                 if (SelectedItem == null)
                     return false;

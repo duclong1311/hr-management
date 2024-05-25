@@ -91,6 +91,18 @@ namespace HRM.UI.ViewModels
             get { return _heSoLuong; }
             set { _heSoLuong = value; OnPropertyChanged(); }
         }
+
+        private string _filter;
+        public string Filter
+        {
+            get => _filter;
+            set
+            {
+                _filter = value;
+                OnPropertyChanged();
+                Load();
+            }
+        }
         private HopDong _selectedItem;
         public HopDong SelectedItem
         {
@@ -130,7 +142,7 @@ namespace HRM.UI.ViewModels
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(LoaiHopDong))
+                if (SelectedNhanSu == null)
                     return false;
                 return true;
             }, async (p) =>
@@ -254,7 +266,16 @@ namespace HRM.UI.ViewModels
         }
         public void Load()
         {
-            List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().ToList());
+            if (string.IsNullOrWhiteSpace(Filter))
+            {
+                List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable().ToList());
+            }
+            else
+            {
+                List = new ObservableCollection<HopDong>(_hopDongRepository.AsQueryable()
+                    .Where(x => x.NhanSu.MaNhanVien.Contains(Filter) || x.NhanSu.HoTen.Contains(Filter))
+                    .ToList());
+            }
         }
     }
 }

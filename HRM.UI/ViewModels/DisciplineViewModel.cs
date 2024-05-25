@@ -12,13 +12,14 @@ using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using HRM.UI.Factories;
 using HRM.UI.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRM.UI.ViewModels
 {
     public class DisciplineViewModel : BaseViewModel
     {
-        private ObservableCollection<KyLuat> _list = new ObservableCollection<KyLuat>();
-        public ObservableCollection<KyLuat> List
+        private ObservableCollection<DanhMucKhenThuongKyLuat> _list = new ObservableCollection<DanhMucKhenThuongKyLuat>();
+        public ObservableCollection<DanhMucKhenThuongKyLuat> List
         {
             get => _list;
             set
@@ -27,103 +28,63 @@ namespace HRM.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        private DanhMucKhenThuongKyLuat _selectedItem;
+        public DanhMucKhenThuongKyLuat SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                {
+                    HinhThuc = _selectedItem.HinhThucKhenThuongKyLuat;
+                    Cap = _selectedItem.CapKhenThuongKyLuat;
+                }
+                OnPropertyChanged();
+            }
+        }
+        private string _hinhThuc { get; set; }
+        private string _cap { get; set; }
+        public string HinhThuc { get => _hinhThuc; set { _hinhThuc = value; OnPropertyChanged(); } }
+        public string Cap { get => _cap; set { _cap = value; OnPropertyChanged(); } }
+
         private IUnitOfWork _unitOfWork;
-        private IRepository<KyLuat> _kyLuatRespository;
+        private IRepository<DanhMucKhenThuongKyLuat> _danhMucKhenThuongKyLuatRespository;
         public ICommand AddCommand { get; set; }
-        public ObservableCollection<string> CapKyLuatData { get; set; }
-
-        private string _capKyLuat;
-        public string CapKyLuat
+        public ICommand UpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public DisciplineViewModel(IRepository<DanhMucKhenThuongKyLuat> DanhMucKhenThuongKyLuatRepository, IUnitOfWork unitOfWork)
         {
-            get { return _capKyLuat; }
-            set
-            {
-                _capKyLuat = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _thamQuyenKyLuat;
-        public string ThamQuyenKyLuat
-        {
-            get { return _thamQuyenKyLuat; }
-            set
-            {
-                _thamQuyenKyLuat = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private DateOnly _thoiGianBanHanh;
-        public DateOnly ThoiGianBanHanh
-        {
-            get { return _thoiGianBanHanh; }
-            set
-            {
-                _thoiGianBanHanh = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _noiDung;
-        public string NoiDung
-        {
-            get { return _noiDung; }
-            set
-            {
-                _noiDung = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _soQuyetDinh;
-        public string SoQuyetDinh
-        {
-            get { return _soQuyetDinh; }
-            set
-            {
-                _soQuyetDinh = value;
-                OnPropertyChanged();
-            }
-        }
-        private void LoadComboBoxData()
-        {
-            CapKyLuatData = new ObservableCollection<string>();
-            CapKyLuatData.Add("Cấp 1");
-            CapKyLuatData.Add("Cấp 2");
-            CapKyLuatData.Add("Cấp 2");
-        }
-        private readonly IViewModelFactory _viewModelFactory;
-        private readonly MainContentStore _mainContentStore;
-        public DisciplineViewModel(IViewModelFactory viewModelFactory, MainContentStore mainContentStore, IRepository<KyLuat> KyLuatRepository, IUnitOfWork unitOfWork)
-        {
-            _viewModelFactory = viewModelFactory;
-            _mainContentStore = mainContentStore;
-            _kyLuatRespository = KyLuatRepository;
+            _danhMucKhenThuongKyLuatRespository = DanhMucKhenThuongKyLuatRepository;
             _unitOfWork = unitOfWork;
-            LoadComboBoxData();
             LoadData();
 
             AddCommand = new Commands.RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(HinhThuc))
+                    return false;
+                if (_danhMucKhenThuongKyLuatRespository
+                .AsQueryable()
+                .Any(x => x.HinhThucKhenThuongKyLuat == HinhThuc) && _danhMucKhenThuongKyLuatRespository
+                .AsQueryable()
+                .Any(x => x.CapKhenThuongKyLuat == Cap))
+                    return false;
                 return true;
             }, async (p) =>
             {
-                var KyLuat = new KyLuat()
+                var danhMucKhenThuongKyLuat = new DanhMucKhenThuongKyLuat()
                 {
-                    CapKyLuat = CapKyLuat,
-                    ThamQuyen = ThamQuyenKyLuat,
-                    ThoiGianBanHanh = ThoiGianBanHanh,
-                    NoiDung = NoiDung,
-                    SoQuyetDinh = SoQuyetDinh,
+                    CapKhenThuongKyLuat = Cap,
+                    HinhThucKhenThuongKyLuat = HinhThuc
                 };
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    KyLuat = await _kyLuatRespository.AddAsync(KyLuat);
+                    danhMucKhenThuongKyLuat = await _danhMucKhenThuongKyLuatRespository
+                    .AddAsync(danhMucKhenThuongKyLuat);
                     await _unitOfWork.CommitAsync();
                     LoadData();
-                    if (KyLuat != null)
+                    if (danhMucKhenThuongKyLuat != null)
                     {
                         MessageBox.Show("Thêm thành công");
                         LoadData();
@@ -139,14 +100,75 @@ namespace HRM.UI.ViewModels
                     await _unitOfWork.RollbackAsync();
                 }
             });
+
+            UpdateCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                if (!_danhMucKhenThuongKyLuatRespository
+                .AsQueryable()
+                .Any(x => x.Id == SelectedItem.Id))
+                    return false;
+                return true;
+
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    var unit = await _danhMucKhenThuongKyLuatRespository
+                    .AsQueryable()
+                    .FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+                    unit.CapKhenThuongKyLuat = Cap;
+                    unit.HinhThucKhenThuongKyLuat = HinhThuc;
+                    await _danhMucKhenThuongKyLuatRespository.UpdateAsync(unit);
+                    await _unitOfWork.CommitAsync();
+
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                }
+            });
+
+            DeleteCommand = new Commands.RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, async (p) =>
+            {
+                if (SelectedItem != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        await _unitOfWork.BeginTransactionAsync();
+
+                        try
+                        {
+                            var danhmuckhenThuongKyLuat = await _danhMucKhenThuongKyLuatRespository.AsQueryable().FirstOrDefaultAsync(x => x.Id == SelectedItem.Id);
+
+                            if (danhmuckhenThuongKyLuat != null)
+                            {
+                                await _danhMucKhenThuongKyLuatRespository.DeleteAsync(danhmuckhenThuongKyLuat);
+                                await _unitOfWork.CommitAsync();
+                                LoadData();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _unitOfWork.RollbackAsync();
+                            MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            });
         }
         private void LoadData()
         {
-            List = new ObservableCollection<KyLuat>(_kyLuatRespository.AsQueryable().ToList());
-            /*            if (!String.IsNullOrWhiteSpace(Filter))
-                        {
-                            List = new ObservableCollection<NhanSu>(_repository.AsQueryable().Where(x => x.MaNhanVien.Contains(Filter) || x.HoTen.Contains(Filter)).ToList());
-                        }*/
+            List = new ObservableCollection<DanhMucKhenThuongKyLuat>(_danhMucKhenThuongKyLuatRespository.AsQueryable().ToList());
         }
     }
 }
