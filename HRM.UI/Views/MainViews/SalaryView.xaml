@@ -155,6 +155,10 @@
                                             Width="100"
                                             Header="Thực nhận"
                                             DisplayMemberBinding="{Binding ThucNhan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Thuế TNCN"
+                                            DisplayMemberBinding="{Binding ThueTNCN, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

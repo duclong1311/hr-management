@@ -59,9 +59,10 @@ namespace HRM.UI.ViewModels
             public double TienNgayNghiPhep { get; set; }
             public double TienDiSomVeMuon { get; set; }
             public double TienBaoHiem { get; set; }
-            public double UngLuong {  get; set; }
+            public double UngLuong { get; set; }
             public double TongKhauTru { get; set; }//
             public double ThucNhan { get; set; }
+            public double ThueTNCN { get; set; }
 
             //StringFormat={}{0:N0}, ConverterCulture='vi-VN'
         }
@@ -137,7 +138,72 @@ namespace HRM.UI.ViewModels
                     break;
             }
 
-            return TenChucVu; 
+            return TenChucVu;
+        }
+        private double TinhThueTNCN(double LuongThucNhan)
+        {
+            // 1. Xác định thu nhập chịu thuế
+            double ThuNhapChiuThue = LuongThucNhan;
+
+            // 2. Áp dụng mức thuế suất
+            double Thue = 0;
+            if (ThuNhapChiuThue <= 0)
+            {
+                Thue = 0;
+            }
+            else if (ThuNhapChiuThue <= 5000000)
+            {
+                Thue = ThuNhapChiuThue * 5 / 100;
+            }
+            else if (ThuNhapChiuThue <= 10000000)
+            {
+                Thue = 250000 + (ThuNhapChiuThue - 5000000) * 10 / 100;
+            }
+            else if (ThuNhapChiuThue <= 18000000)
+            {
+                Thue = 750000 + (ThuNhapChiuThue - 10000000) * 15 / 100;
+            }
+            else if (ThuNhapChiuThue <= 32000000)
+            {
+                Thue = 1950000 + (ThuNhapChiuThue - 18000000) * 20 / 100;
+            }
+            else if (ThuNhapChiuThue <= 52000000)
+            {
+                Thue = 4750000 + (ThuNhapChiuThue - 32000000) * 25 / 100;
+            }
+            else if (ThuNhapChiuThue <= 80000000)
+            {
+                Thue = 9750000 + (ThuNhapChiuThue - 52000000) * 30 / 100;
+            }
+            else if (ThuNhapChiuThue >= 80000000)
+            {
+                Thue = 18150000 + (ThuNhapChiuThue - 80000000) * 35 / 100;
+            }
+
+            // 3. Trả về số thuế TNCN
+            return Thue;
+        }
+
+        private double TinhGiamTruGiaCanh(string MoiQuanHe)
+        {
+            double GiamTruGiaCanh = 11000000;
+
+            switch (MoiQuanHe)
+            {
+                case "Vợ":
+                    GiamTruGiaCanh += 4400000;
+                    break;
+                case "Chồng":
+                    GiamTruGiaCanh += 4400000;
+                    break;
+                case "Con":
+                    GiamTruGiaCanh += 4400000;
+                    break;
+                default:
+                    break;
+            }
+
+            return GiamTruGiaCanh;
         }
 
         private void TinhLuong()
@@ -152,10 +218,24 @@ namespace HRM.UI.ViewModels
 
             for (int i = 0; i < ListBangCong.Count; i++)
             {
+                var maNhanVien = ListBangCong[i].MaNhanVien;
 
                 var hopDong = _repositoryHopDong.AsQueryable()
                         .OrderByDescending(x => x.NgayBatDau)
-                        .FirstOrDefault(x => x.MaNhanVien == ListBangCong[i].MaNhanVien);
+                        .FirstOrDefault(x => x.MaNhanVien == maNhanVien);
+
+                var danhSachQuanHeGiaDinh = _repositoryQuanHeGiaDinh.AsQueryable()
+                         .Where(x => x.MaNhanVien == maNhanVien)
+                         .Select(x => x.MoiQuanHe)
+                         .ToList();
+
+                double GiamTruGiaCanh = 0;
+
+                foreach (var quanHe in danhSachQuanHeGiaDinh)
+                {
+                     GiamTruGiaCanh = TinhGiamTruGiaCanh(quanHe);
+                }
+                
 
                 if (hopDong == null)
                 {
@@ -189,8 +269,6 @@ namespace HRM.UI.ViewModels
                     .Where(x => x.NhanSu.MaNhanVien == ListBangCong[i].MaNhanVien)
                     .OrderByDescending(x => x.PhuCapChucVu)
                     .FirstOrDefault().PhuCapChucVu;
-                
-                
 
                 double? ungluong = null;
 
@@ -241,11 +319,12 @@ namespace HRM.UI.ViewModels
                     + luongNhanVien.TienDiSomVeMuon + luongNhanVien.UngLuong);
 
                 luongNhanVien.TongLuong = (double)(luongNhanVien.TienCongThuong + luongNhanVien.TienCongCN
-                    + luongNhanVien.TienTangCa + luongNhanVien.PhuCapAnTrua + luongNhanVien.PhuCapDiLai 
+                    + luongNhanVien.TienTangCa + luongNhanVien.PhuCapAnTrua + luongNhanVien.PhuCapDiLai
                     + luongNhanVien.PhuCap);
 
                 luongNhanVien.ThucNhan = (double)(luongNhanVien.TongLuong - luongNhanVien.TongKhauTru);
 
+                luongNhanVien.ThueTNCN = TinhThueTNCN((luongNhanVien.ThucNhan - GiamTruGiaCanh));
                 //luongNhanVien.ThucNhan = (double)(luongNhanVien.TienCongThuong + luongNhanVien.TienCongCN + luongNhanVien.TienCongNgayLe - luongNhanVien.UngLuong
                 //    + luongNhanVien.TienTangCa - luongNhanVien.TienDiSomVeMuon + luongNhanVien.TienNgayNghiPhep - luongNhanVien.TienBaoHiem - luongNhanVien.TienBaoHiem);
                 ListLuongNhanVien.Add(luongNhanVien);
@@ -335,7 +414,7 @@ namespace HRM.UI.ViewModels
                 // Thêm bảng vào tài liệu
                 document.Add(table_title);
 
-                document.Add(new Paragraph("\n")); 
+                document.Add(new Paragraph("\n"));
 
                 // Thêm dòng chữ "Bảng lương tháng... năm..."
                 var header = new Paragraph(monthYearString, headerFont);
@@ -408,8 +487,6 @@ namespace HRM.UI.ViewModels
                     PdfPCell thucNhanCell = CreateCell(formattedThucNhan, bodyFont);
                     thucNhanCell.BackgroundColor = new BaseColor(255, 255, 153); // Màu vàng
                     table.AddCell(thucNhanCell);
-
-                    
                 }
 
                 // Tự động điều chỉnh kích thước cột theo nội dung
@@ -508,7 +585,7 @@ namespace HRM.UI.ViewModels
                     return;
                 }
                 worksheet = package.Workbook.Worksheets.Add("Bảng Lương");
-               
+
                 // Thông tin tháng và năm
                 string monthYearString = $"BẢNG LƯƠNG THÁNG {Thang} NĂM {Nam}";
 
@@ -575,34 +652,24 @@ namespace HRM.UI.ViewModels
             //OpenExcel(filePath);
         }
 
-        //private void OpenExcel(string filePath)
-        //{
-        //    try
-        //    {
-        //        Process.Start(filePath);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Không thể mở file Excel: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
-
         private readonly IRepository<BangCong> _repositoryBangCong;
         private readonly IRepository<HopDong> _repositoryHopDong;
         private readonly IRepository<NhanSuChucVu> _repositoryNhanSuChucVu;
         private readonly IRepository<ChucVu> _repositoryChucVu;
         private readonly IRepository<UngLuong> _repositoryUngLuong;
+        private readonly IRepository<QuanHeGiaDinh> _repositoryQuanHeGiaDinh;
         private readonly IUnitOfWork _unitOfWork;
         public ICommand CalculateCommand { get; set; }
         public ICommand ExportPDFCommand { get; set; }
         public ICommand ExportExcelCommand { get; set; }
-        public SalaryViewModel(IRepository<UngLuong> repositoryUngLuong, IRepository<ChucVu> repositoryChucVu, IRepository<NhanSuChucVu> repositoryNhanSuChucVu, IRepository<HopDong> repositoryHopDong, IRepository<BangCong> repositoryBangCong, IUnitOfWork unitOfWork)
+        public SalaryViewModel(IRepository<UngLuong> repositoryUngLuong, IRepository<ChucVu> repositoryChucVu, IRepository<NhanSuChucVu> repositoryNhanSuChucVu, IRepository<HopDong> repositoryHopDong, IRepository<BangCong> repositoryBangCong, IRepository<QuanHeGiaDinh> repositoryQuanHeGiaDinh, IUnitOfWork unitOfWork)
         {
             _repositoryHopDong = repositoryHopDong;
             _repositoryBangCong = repositoryBangCong;
             _repositoryNhanSuChucVu = repositoryNhanSuChucVu;
             _repositoryChucVu = repositoryChucVu;
             _repositoryUngLuong = repositoryUngLuong;
+            _repositoryQuanHeGiaDinh = repositoryQuanHeGiaDinh;
             _unitOfWork = unitOfWork;
             LoadComboBoxData();
 
@@ -614,7 +681,7 @@ namespace HRM.UI.ViewModels
                     return true;
             }, async (p) =>
             {
-               
+
                 try
                 {
                     ListLuongNhanVien.Clear();

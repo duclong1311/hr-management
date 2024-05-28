@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="HRM.UI.Views.TaxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HRM.UI.Views.MainViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="640" d:DesignWidth="820">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/PersonalInfoView_Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="20,0,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition  Height="430" />
+            <RowDefinition  Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="5">
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="24"
+                       Margin="0,20,0,20">THUẾ THU NHẬP CÁ NHÂN</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1"
+              Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5">Tháng</Label>
+                <ComboBox Width="100"
+                          Margin="5"
+                          ItemsSource="{Binding ThangTrongNam}"
+                          SelectedItem="{Binding Thang}"></ComboBox>
+                <Label Margin="5">Năm</Label>
+                <ComboBox Width="100"
+                          Margin="5"
+                          ItemsSource="{Binding NamTuTruocDenGio}"
+                          SelectedItem="{Binding Nam}"></ComboBox>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel>
+                <ListView Margin="10"
+                          Name="ListStaffView_Pick"
+                          BorderBrush="Black"
+                          Height="350"
+                          ItemsSource="{Binding ListLuongNhanVien}"
+                          SelectedItem="{Binding SelectedItem}"
+                          FontFamily="TimeNewRoman">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="Padding"
+                                    Value="5,0,0,0" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhân viên"
+                                            HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="100"
+                                            DisplayMemberBinding="{Binding MaNhanVien}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Header="Họ và tên"
+                                            Width="120"
+                                            DisplayMemberBinding="{Binding HoTen}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Tổng lương"
+                                            DisplayMemberBinding="{Binding TongLuong, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Tổng khấu trừ"
+                                            DisplayMemberBinding="{Binding TongKhauTru, StringFormat={}{0:N0}}">
+                            </GridViewColumn>
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="120"
+                                            Header="Giảm trừ gia cảnh"
+                                            DisplayMemberBinding="{Binding GiamTruGiaCanh, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}">
+                            </GridViewColumn>
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="50"
+                                            Header="Bậc"
+                                            DisplayMemberBinding="{Binding Bac, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}">
+                            </GridViewColumn>
+                            <GridViewColumn HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                            Width="150"
+                                            Header="Tiền thuế TNCN"
+                                            DisplayMemberBinding="{Binding Bac, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}">
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Height="50"
+                        Content="Tính thuế TNCN"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding CalculateCommand}" />
+                <Button Height="50"
+                        Content="Xuất PDF"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding ExportPDFCommand}" />
+                <Button Height="50"
+                        Content="Xuất Excel"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding ExportExcelCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
