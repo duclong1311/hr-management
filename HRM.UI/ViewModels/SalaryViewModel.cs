@@ -29,6 +29,7 @@ using System.Globalization;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using OfficeOpenXml.Style;
 using OfficeOpenXml;
+using System.IO.Packaging;
 
 namespace HRM.UI.ViewModels
 {
@@ -255,16 +256,34 @@ namespace HRM.UI.ViewModels
         {
 
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            //string filePath = Path.Combine(desktopPath, "ListViewOutput.pdf");
+
             string filePath = Path.Combine(desktopPath, $"Salary_Report_{Thang}_{Nam}.pdf");
 
+            if (File.Exists(filePath))
+            {
+                // Nếu tệp đã tồn tại, hiển thị thông báo và kết thúc hàm
+                MessageBox.Show($"Bảng lương đã tồn tại tại đường dẫn \"{filePath}\". Vui lòng xóa hoặc đổi tên trước khi xuất lại.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             // Thông tin tháng và năm
             string monthYearString = $"BẢNG LƯƠNG THÁNG {Thang} NĂM {Nam}";
-            string voucherMaker = "Người lập biểu";
-            string Manager = "Giám đốc";
 
-            //string fontPath = "C:\\Users\\Admin\\Desktop\\DoAn\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
-            string fontPath = "C:\\Users\\Admin\\Documents\\GitHub\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
+            string companyName = "CÔNG TY TNHH TOP ENGINEERING VINA";
+            string companyAddress = "Địa chỉ: Lô C1, Khu công nghiệp Bá Thiện II, Xã Thiện Kế, Huyện Bình Xuyên, Tỉnh Vĩnh Phúc, Việt Nam";
+            string companyTaxCode = "Mã số thuế: 2500641492";
+
+            string bieuNgu1 = "CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM";
+            string bieuNgu2 = "Độc lập - Tự do - Hạnh phúc";
+            string pattern = "--------------";
+
+            string voucherMaker = "Người lập biểu";
+            string Manager = "GIÁM ĐỐC";
+            string datetime = $"Hà nội, ngày {DateTime.Now.Day} tháng {DateTime.Now.Month} năm {DateTime.Now.Year}";
+            string sign_manager = "(Ký, ghi rõ họ tên và đóng dấu)";
+            string sign_maker = "(Ký, ghi rõ họ tên)";
+
+            string fontPath = "C:\\Users\\Admin\\Desktop\\DoAn\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
+            //string fontPath = "C:\\Users\\Admin\\Documents\\GitHub\\HRM\\HRM.UI\\ViewModels\\Font\\times.ttf"; // Thay đổi đường dẫn tới font tiếng Việt
 
             // Đăng ký font Unicode tiếng Việt cho iTextSharp
             FontFactory.Register(fontPath, "MyVietnameseFont");
@@ -278,8 +297,45 @@ namespace HRM.UI.ViewModels
 
                 // Font settings
                 BaseFont vietnameseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
                 Font headerFont = new Font(vietnameseFont, 8, Font.BOLD);
-                Font bodyFont = new Font(vietnameseFont, 8, Font.NORMAL);
+                Font title = new Font(vietnameseFont, 8, Font.NORMAL);
+                Font table_title_font = new Font(vietnameseFont, 8, Font.NORMAL);
+                Font table_footer_font = new Font(vietnameseFont, 8, Font.ITALIC);
+                Font bodyFont = new Font(vietnameseFont, 7, Font.NORMAL);
+
+                // Tạo bảng với hai cột
+                PdfPTable table_title = new PdfPTable(2);
+                table_title.WidthPercentage = 100;
+
+                // Tạo ô bên trái với thông tin công ty
+                PdfPCell leftCell = new PdfPCell();
+                leftCell.Border = PdfPCell.NO_BORDER;
+                leftCell.VerticalAlignment = Element.ALIGN_TOP;
+
+                // Thêm thông tin công ty vào ô bên trái
+                leftCell.AddElement(new Paragraph(companyName, title));
+                leftCell.AddElement(new Paragraph(companyTaxCode, title));
+                leftCell.AddElement(new Paragraph(companyAddress, title));
+
+                // Tạo ô bên phải với các dòng khác
+                PdfPCell rightCell = new PdfPCell();
+                rightCell.Border = PdfPCell.NO_BORDER;
+                rightCell.VerticalAlignment = Element.ALIGN_TOP;
+
+                // Thêm các dòng vào ô bên phải
+                rightCell.AddElement(new Paragraph(bieuNgu1, title) { Alignment = Element.ALIGN_CENTER });
+                rightCell.AddElement(new Paragraph(bieuNgu2, title) { Alignment = Element.ALIGN_CENTER });
+                rightCell.AddElement(new Paragraph(pattern, title) { Alignment = Element.ALIGN_CENTER });
+
+                // Thêm các ô vào bảng
+                table_title.AddCell(leftCell);
+                table_title.AddCell(rightCell);
+
+                // Thêm bảng vào tài liệu
+                document.Add(table_title);
+
+                document.Add(new Paragraph("\n")); 
 
                 // Thêm dòng chữ "Bảng lương tháng... năm..."
                 var header = new Paragraph(monthYearString, headerFont);
@@ -299,7 +355,7 @@ namespace HRM.UI.ViewModels
 
                 foreach (string headerText in headers)
                 {
-                    PdfPCell cell = new PdfPCell(new Phrase(headerText, headerFont))
+                    PdfPCell cell = new PdfPCell(new Phrase(headerText, table_title_font))
                     {
                         HorizontalAlignment = Element.ALIGN_CENTER,
                         VerticalAlignment = Element.ALIGN_MIDDLE,
@@ -358,18 +414,52 @@ namespace HRM.UI.ViewModels
 
                 // Tự động điều chỉnh kích thước cột theo nội dung
                 table.WidthPercentage = 100;
+                document.Add(table);
 
-                //// Thêm dòng "Người lập biểu" và "Giám đốc"
-                //Paragraph maker = new Paragraph(voucherMaker, bodyFont);
-                //maker.Alignment = Element.ALIGN_LEFT;
+                document.Add(new Paragraph("\n")); // Thêm một dòng trống
+
+                // Tạo bảng với hai cột
+                PdfPTable table_footer = new PdfPTable(2);
+                table_footer.WidthPercentage = 100;
+
+                // Đặt tỷ lệ độ rộng các cột
+                float[] widths = new float[] { 0.3f, 0.3f };
+                table_footer.SetWidths(widths);
+
+                // Tạo ô cho "Người lập biểu"
+                PdfPCell leftCell_ft = new PdfPCell();
+                leftCell_ft.Border = PdfPCell.NO_BORDER;
+                leftCell_ft.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                leftCell_ft.AddElement(new Paragraph(" ", headerFont) { Alignment = Element.ALIGN_CENTER });
+                leftCell_ft.AddElement(new Paragraph(voucherMaker, headerFont) { Alignment = Element.ALIGN_CENTER });
+                leftCell_ft.AddElement(new Paragraph(sign_maker, table_footer_font) { Alignment = Element.ALIGN_CENTER });
+
+                // Tạo ô cho "Giám đốc"
+                PdfPCell rightCell_ft = new PdfPCell();
+                rightCell_ft.Border = PdfPCell.NO_BORDER;
+                rightCell_ft.HorizontalAlignment = Element.ALIGN_TOP;
+
+                rightCell_ft.AddElement(new Paragraph(datetime, table_footer_font) { Alignment = Element.ALIGN_CENTER });
+                rightCell_ft.AddElement(new Paragraph(Manager, headerFont) { Alignment = Element.ALIGN_CENTER });
+                rightCell_ft.AddElement(new Paragraph(sign_manager, table_footer_font) { Alignment = Element.ALIGN_CENTER });
+
+
+                // Thêm các ô vào bảng
+                table_footer.AddCell(leftCell_ft);
+                table_footer.AddCell(rightCell_ft);
+
+                // Thêm bảng vào tài liệu
+                document.Add(table_footer);
+
+                //Paragraph maker = new Paragraph(voucherMaker, table_title_font);
+                //maker.Alignment = Element.ALIGN_UNDEFINED;
                 //document.Add(maker);
 
-                //Paragraph ceo = new Paragraph(Manager, bodyFont);
-                //ceo.Alignment = Element.ALIGN_RIGHT;
+                //Paragraph ceo = new Paragraph(Manager, table_title_font);
+                //ceo.Alignment = Element.ALIGN_UNDEFINED;
                 //document.Add(ceo);
 
-
-                document.Add(table);
                 document.Close();
                 writer.Close();
             }
