@@ -317,6 +317,32 @@
                     </TreeViewItem.Header>
                 </TreeViewItem>
             </TreeViewItem>
+            <TreeViewItem IsExpanded="True"
+                          Style="{StaticResource TreeViewItem_Style}">
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="./Images/options.png"
+                               Style="{StaticResource Image_Style}" />
+                        <TextBlock Text="Báo cáo, thống kê" />
+                    </StackPanel>
+                </TreeViewItem.Header>
+
+                <TreeViewItem IsExpanded="True"
+                              Style="{StaticResource TreeViewItem_Style}">
+                    <TreeViewItem.Header>
+                        <Button Background="Transparent"
+                                Command="{Binding ChartReportCommand}"
+                                BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="./Images/PriceInformation.png"
+                                       Style="{StaticResource Image_Style}" />
+                                <TextBlock Text="Thống kê" />
+                            </StackPanel>
+                        </Button>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+
+            </TreeViewItem>
         </TreeView>
 
         <Grid>

@@ -42,6 +42,8 @@ namespace HRM.UI.Defines
         ListTracking,
         // ----------------------- Lương thưởng -----------------------
         Salary,
-        AdvanceSalary
+        AdvanceSalary,
+        // ----------------------- Báo cáo thống kê -----------------------
+        ChartReport
     }
 }

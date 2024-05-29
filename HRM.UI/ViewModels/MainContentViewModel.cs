@@ -38,6 +38,7 @@ namespace HRM.UI.ViewModels
         public ICommand ListRemunerativeCommand { get; set; }
         public ICommand SalaryCommand { get; set; }
         public ICommand AddStaffViewCommand { get; set; }
+        public ICommand ChartReportCommand { get; set; }
 
         public BaseViewModel CurrentViewModel => _mainContentStore.CurrentViewModel;
         public User CurrentUser => _userStore.CurrentUser;
@@ -131,6 +132,12 @@ namespace HRM.UI.ViewModels
             SalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Salary);
+            });
+
+            //báo cáo thống kê
+            ChartReportCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            {
+                _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChartReport);
             });
         }
 

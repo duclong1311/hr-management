@@ -92,5 +92,8 @@
         <DataTemplate DataType="{x:Type vm:ImportTrackingViewModel}">
             <view:ImportTrackingView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ChartReportViewModel}">
+            <view:ChartReportView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

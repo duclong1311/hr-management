@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts.Wpf;
+using LiveCharts;
 
 namespace HRM.UI.Views
 {
@@ -23,6 +25,28 @@ namespace HRM.UI.Views
         public TaxView()
         {
             InitializeComponent();
+
+            // Tạo dữ liệu cho biểu đồ
+            MyChart.Series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "2024",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
+            };
+
+            MyChart.AxisX.Add(new Axis
+            {
+                Title = "Tháng",
+                Labels = new[] { "Jan", "Feb", "Mar", "Apr" }
+            });
+
+            MyChart.AxisY.Add(new Axis
+            {
+                Title = "Doanh thu",
+                LabelFormatter = value => value.ToString("C")
+            });
         }
     }
 }

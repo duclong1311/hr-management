@@ -50,6 +50,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<AddTrainingProcessViewModel>();
                 services.AddScoped<AddPersonalInforViewModel>();
                 services.AddScoped<ImportTrackingViewModel>();
+                services.AddScoped<ChartReportViewModel>();
 
 
                 services.AddScoped<CreateViewModel<LoginViewModel>>(service => () => service.GetRequiredService<LoginViewModel>());
@@ -81,6 +82,7 @@ namespace HRM.UI.HostBuilders
                 services.AddScoped<CreateViewModel<AddTrainingProcessViewModel>>(service => () => service.GetRequiredService<AddTrainingProcessViewModel>());
                 services.AddScoped<CreateViewModel<AddPersonalInforViewModel>>(service => () => service.GetRequiredService<AddPersonalInforViewModel>());
                 services.AddScoped<CreateViewModel<ImportTrackingViewModel>>(service => () => service.GetRequiredService<ImportTrackingViewModel>());
+                services.AddScoped<CreateViewModel<ChartReportViewModel>>(service => () => service.GetRequiredService<ChartReportViewModel>());
 
                 services.AddScoped<IViewModelFactory, ViewModelFactory>();
             });

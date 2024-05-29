@@ -104,7 +104,7 @@ namespace HRM.UI.ViewModels
             }
 
             NamTuTruocDenGio = new ObservableCollection<int>();
-            for (int nam = 2012; nam <= 2024; nam++)
+            for (int nam = 2012; nam <= DateTime.Now.Year; nam++)
             {
                 NamTuTruocDenGio.Add(nam);
             }
