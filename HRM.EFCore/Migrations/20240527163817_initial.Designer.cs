@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240525165641_HRM")]
-    partial class HRM
+    [Migration("20240527163817_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -680,6 +680,32 @@ namespace HRM.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin",
+                            Permission = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Manager",
+                            Permission = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Compensation",
+                            Permission = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Staff",
+                            Permission = ""
+                        });
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.UngLuong", b =>
@@ -729,6 +755,9 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -737,9 +766,34 @@ namespace HRM.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "1",
+                            Email = "admin",
                             Name = "admin",
-                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*"
+                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "manager",
+                            Name = "manager",
+                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*",
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "compensation",
+                            Name = "compensation",
+                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*",
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "staff",
+                            Name = "staff",
+                            Password = "??_?y??w+???l\0?_?n5?rY?????	?*",
+                            RoleId = 4
                         });
                 });
 

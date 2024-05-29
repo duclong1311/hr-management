@@ -19,8 +19,32 @@ namespace HRM.Domain.Configurations
             {
                 Id = 1,
                 Name = "admin",
-                Email = "1",
+                Email = "admin",
                 Password = CryptographyUtil.SHA256Hash("111111"),
+                RoleId = 1
+            }, new User()
+            {
+                Id = 2,
+                Name = "manager",
+                Email = "manager",
+                Password = CryptographyUtil.SHA256Hash("111111"),
+                RoleId = 2
+            },
+            new User()
+            {
+                Id = 3,
+                Name = "compensation",
+                Email = "compensation",
+                Password = CryptographyUtil.SHA256Hash("111111"),
+                RoleId = 3
+            },
+            new User()
+            {
+                Id = 4,
+                Name = "staff",
+                Email = "staff",
+                Password = CryptographyUtil.SHA256Hash("111111"),
+                RoleId = 4
             });
         }
     }

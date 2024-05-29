@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class HRM : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -127,7 +127,8 @@ namespace HRM.EFCore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,9 +415,26 @@ namespace HRM.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name", "Permission" },
+                values: new object[,]
+                {
+                    { 1, "Admin", "" },
+                    { 2, "Manager", "" },
+                    { 3, "Compensation", "" },
+                    { 4, "Staff", "" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "Name", "Password" },
-                values: new object[] { 1, "1", "admin", "??_?y??w+???l\0?_?n5?rY?????	?*" });
+                columns: new[] { "Id", "Email", "Name", "Password", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "admin", "admin", "??_?y??w+???l\0?_?n5?rY?????	?*", 1 },
+                    { 2, "manager", "manager", "??_?y??w+???l\0?_?n5?rY?????	?*", 2 },
+                    { 3, "compensation", "compensation", "??_?y??w+???l\0?_?n5?rY?????	?*", 3 },
+                    { 4, "staff", "staff", "??_?y??w+???l\0?_?n5?rY?????	?*", 4 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BangCongNhanSus_BangCongId",

@@ -18,10 +18,10 @@ namespace HRM.UI.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton<MainViewModel>();
-                services.AddScoped<LoginViewModel>();
-                services.AddScoped<RegisterViewModel>();
-                services.AddScoped<MainContentViewModel>();
+                services.AddTransient<MainViewModel>();
+                services.AddTransient<LoginViewModel>();
+                services.AddTransient<RegisterViewModel>();
+                services.AddTransient<MainContentViewModel>();
                 services.AddScoped<PersonalInforViewModel>();
                 services.AddScoped<FamilyInforViewModel>();
                 services.AddScoped<TrainingProcessViewModel>();
