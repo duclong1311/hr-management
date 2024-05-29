@@ -60,7 +60,7 @@ namespace HRM.UI.ViewModels
 
                 _navigationStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Login);
             });
-            StaffListCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            StaffListCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListStaff);
             });
@@ -72,7 +72,7 @@ namespace HRM.UI.ViewModels
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.StaffCV);
             });
-            DepartmentCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            DepartmentCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Department);
             });
