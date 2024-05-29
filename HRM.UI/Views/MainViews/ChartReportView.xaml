@@ -66,7 +66,7 @@
                               LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>-->
-            <Grid Margin="10">
+            <Grid Margin="50">
                 <lvc:PieChart Series="{Binding SeriesCollection}"
                               LegendLocation="Right">
                 </lvc:PieChart>
