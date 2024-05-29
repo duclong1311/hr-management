@@ -8,11 +8,49 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRM.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class HRM : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BangLuongs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LuongCoBan = table.Column<double>(type: "float", nullable: true),
+                    TongSoNgayCong = table.Column<int>(type: "int", nullable: false),
+                    TienCongThuong = table.Column<double>(type: "float", nullable: false),
+                    LuongThucTe = table.Column<double>(type: "float", nullable: false),
+                    NgayCongChuNhat = table.Column<int>(type: "int", nullable: false),
+                    TienCongCN = table.Column<double>(type: "float", nullable: false),
+                    SoGioOT = table.Column<double>(type: "float", nullable: false),
+                    PhuCapAnTrua = table.Column<double>(type: "float", nullable: false),
+                    PhuCapDiLai = table.Column<double>(type: "float", nullable: false),
+                    PhuCap = table.Column<double>(type: "float", nullable: false),
+                    TongLuong = table.Column<double>(type: "float", nullable: false),
+                    BaoHiemXaHoi = table.Column<double>(type: "float", nullable: false),
+                    BaoHiemYTe = table.Column<double>(type: "float", nullable: false),
+                    SoGioDiMuonVeSom = table.Column<double>(type: "float", nullable: false),
+                    TienCongNgayLe = table.Column<double>(type: "float", nullable: false),
+                    TienTangCa = table.Column<double>(type: "float", nullable: false),
+                    TienNgayNghiPhep = table.Column<double>(type: "float", nullable: false),
+                    TienDiSomVeMuon = table.Column<double>(type: "float", nullable: false),
+                    TienBaoHiem = table.Column<double>(type: "float", nullable: false),
+                    UngLuong = table.Column<double>(type: "float", nullable: false),
+                    TongKhauTru = table.Column<double>(type: "float", nullable: false),
+                    ThucNhan = table.Column<double>(type: "float", nullable: false),
+                    ThueTNCN = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BangLuongs", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "BoPhans",
                 columns: table => new
@@ -506,6 +544,9 @@ namespace HRM.EFCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BangCongNhanSus");
+
+            migrationBuilder.DropTable(
+                name: "BangLuongs");
 
             migrationBuilder.DropTable(
                 name: "DanhMucKhenThuongKyLuats");

@@ -48,7 +48,7 @@ namespace HRM.EFCore
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new NhanSuChucVuConfiguration());
             modelBuilder.ApplyConfiguration(new BangCongNhanSuConfiguration());
-            modelBuilder.ApplyConfiguration(new BangLuongfiguration());
+            modelBuilder.ApplyConfiguration(new BangLuongConfiguration());
         }
     }
 }

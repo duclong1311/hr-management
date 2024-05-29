@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240527163817_initial")]
-    partial class initial
+    [Migration("20240529033220_HRM")]
+    partial class HRM
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,100 @@ namespace HRM.EFCore.Migrations
                     b.HasIndex("BangCongId");
 
                     b.ToTable("BangCongNhanSus");
+                });
+
+            modelBuilder.Entity("HRM.Domain.Models.BangLuong", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("BaoHiemXaHoi")
+                        .HasColumnType("float");
+
+                    b.Property<double>("BaoHiemYTe")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ChucVu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("LuongCoBan")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LuongThucTe")
+                        .HasColumnType("float");
+
+                    b.Property<string>("MaNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NgayCongChuNhat")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PhuCap")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PhuCapAnTrua")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PhuCapDiLai")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SoGioDiMuonVeSom")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SoGioOT")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ThucNhan")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ThueTNCN")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienBaoHiem")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienCongCN")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienCongNgayLe")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienCongThuong")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienDiSomVeMuon")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienNgayNghiPhep")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TienTangCa")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TongKhauTru")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TongLuong")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TongSoNgayCong")
+                        .HasColumnType("int");
+
+                    b.Property<double>("UngLuong")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BangLuongs");
                 });
 
             modelBuilder.Entity("HRM.Domain.Models.BoPhan", b =>
