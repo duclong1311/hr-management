@@ -23,17 +23,60 @@
     <None Remove="ViewModels\Font\timesi.ttf" />
     <None Remove="Views\Images\++_logo_red %282%29.png" />
     <None Remove="Views\Images\++_logo_red %284%29.png" />
+    <None Remove="Views\Images\analytics.png" />
     <None Remove="Views\Images\back_groud.png" />
+    <None Remove="Views\Images\budget.png" />
     <None Remove="Views\Images\Currentcy.png" />
+    <None Remove="Views\Images\department.png" />
+    <None Remove="Views\Images\discipline.png" />
+    <None Remove="Views\Images\fingerprint.png" />
+    <None Remove="Views\Images\hierarchical-structure.png" />
+    <None Remove="Views\Images\hr-manager.png" />
+    <None Remove="Views\Images\hr.png" />
+    <None Remove="Views\Images\human-resources.png" />
     <None Remove="Views\Images\Information.png" />
     <None Remove="Views\Images\key-icon.png" />
+    <None Remove="Views\Images\motivation.png" />
+    <None Remove="Views\Images\negotiation.png" />
+    <None Remove="Views\Images\network.png" />
     <None Remove="Views\Images\options.png" />
+    <None Remove="Views\Images\planing.png" />
+    <None Remove="Views\Images\policy.png" />
     <None Remove="Views\Images\PriceInformation.png" />
     <None Remove="Views\Images\Product.png" />
     <None Remove="Views\Images\Replace.png" />
+    <None Remove="Views\Images\salary %281%29.png" />
+    <None Remove="Views\Images\salary %282%29.png" />
+    <None Remove="Views\Images\salary.png" />
+    <None Remove="Views\Images\staff.png" />
     <None Remove="Views\Images\Supplier.png" />
+    <None Remove="Views\Images\systems.png" />
+    <None Remove="Views\Images\table-content.png" />
+    <None Remove="Views\Images\table.png" />
+    <None Remove="Views\Images\timekeeper.png" />
     <None Remove="Views\Images\Unit.png" />
     <None Remove="Views\Images\user-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Images\department.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\discipline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\fingerprint.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\hierarchical-structure.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\hr-manager.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\hr.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -74,15 +117,63 @@
     <Resource Include="Views\Images\++_logo_red (4).png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Images\analytics.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\back_groud.png" />
+    <Resource Include="Views\Images\budget.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Currentcy.png" />
+    <Resource Include="Views\Images\human-resources.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Information.png" />
     <Resource Include="Views\Images\key-icon.png" />
+    <Resource Include="Views\Images\motivation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\negotiation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\network.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\options.png" />
+    <Resource Include="Views\Images\planing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\policy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\PriceInformation.png" />
     <Resource Include="Views\Images\Product.png" />
     <Resource Include="Views\Images\Replace.png" />
+    <Resource Include="Views\Images\salary (1).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\salary (2).png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\salary.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\staff.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Supplier.png" />
+    <Resource Include="Views\Images\systems.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\table-content.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\table.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\timekeeper.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Images\Unit.png" />
     <Resource Include="Views\Images\user-icon.png" />
   </ItemGroup>

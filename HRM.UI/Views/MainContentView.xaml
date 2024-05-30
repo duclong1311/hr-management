@@ -38,7 +38,7 @@
                           Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="./Images/options.png"
+                        <Image Source="./Images/hr.png"
                                Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Nhân sự" />
                     </StackPanel>
@@ -66,7 +66,7 @@
                                 Command="{Binding StaffCVCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Product.png"
+                                <Image Source="./Images/Staff.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Danh sách nhân sự" />
                             </StackPanel>
@@ -80,7 +80,7 @@
                                 Command="{Binding DepartmentCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Product.png"
+                                <Image Source="./Images/department.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Bộ phận" />
                             </StackPanel>
@@ -94,7 +94,7 @@
                                 Command="{Binding PositionCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Product.png"
+                                <Image Source="./Images/hierarchical-structure.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Chức vụ" />
                             </StackPanel>
@@ -108,7 +108,7 @@
                                 Command="{Binding DisciplineCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Product.png"
+                                <Image Source="./Images/table-content.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Danh mục khen thưởng, kỷ luật" />
                             </StackPanel>
@@ -122,7 +122,7 @@
                                 Command="{Binding PositionStaffCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Product.png"
+                                <Image Source="./Images/hierarchical-structure.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Bổ nhiệm" />
                             </StackPanel>
@@ -136,7 +136,7 @@
                                 Command="{Binding AddStaffViewCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Replace.png"
+                                <Image Source="./Images/human-resources.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Thêm hồ sơ" />
                             </StackPanel>
@@ -151,7 +151,7 @@
                                 Command="{Binding ListRemunerativeCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Replace.png"
+                                <Image Source="./Images/policy.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Khen thưởng, kỷ luật" />
                             </StackPanel>
@@ -166,7 +166,7 @@
                                 Command="{Binding ListContractCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Replace.png"
+                                <Image Source="./Images/negotiation.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Hợp đồng" />
                             </StackPanel>
@@ -226,7 +226,7 @@
                           Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="./Images/options.png"
+                        <Image Source="./Images/fingerprint.png"
                                Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Chấm công" />
                     </StackPanel>
@@ -238,7 +238,7 @@
                                 Command="{Binding ImportTrackingCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/PriceInformation.png"
+                                <Image Source="./Images/timekeeper.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Nhập công" />
                             </StackPanel>
@@ -268,7 +268,7 @@
                                 Command="{Binding ListTrackingTableCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Replace.png"
+                                <Image Source="./Images/table.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Bảng công" />
                             </StackPanel>
@@ -281,7 +281,7 @@
                           Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="./Images/options.png"
+                        <Image Source="./Images/salary (2).png"
                                Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Lương thưởng" />
                     </StackPanel>
@@ -294,7 +294,7 @@
                                 Command="{Binding AdvanceSalaryCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/PriceInformation.png"
+                                <Image Source="./Images/salary.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Ứng lương" />
                             </StackPanel>
@@ -309,7 +309,7 @@
                                 Command="{Binding SalaryCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/Replace.png"
+                                <Image Source="./Images/salary (1).png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Tính lương" />
                             </StackPanel>
@@ -321,7 +321,7 @@
                           Style="{StaticResource TreeViewItem_Style}">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="./Images/options.png"
+                        <Image Source="./Images/budget.png"
                                Style="{StaticResource Image_Style}" />
                         <TextBlock Text="Báo cáo, thống kê" />
                     </StackPanel>
@@ -334,7 +334,7 @@
                                 Command="{Binding ChartReportCommand}"
                                 BorderThickness="0">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="./Images/PriceInformation.png"
+                                <Image Source="./Images/analytics.png"
                                        Style="{StaticResource Image_Style}" />
                                 <TextBlock Text="Thống kê" />
                             </StackPanel>

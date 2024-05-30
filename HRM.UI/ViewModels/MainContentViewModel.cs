@@ -130,7 +130,7 @@ namespace HRM.UI.ViewModels
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AdvanceSalary);
             });
-            SalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsCompensation || CurrentUserRole.IsManager, p =>
+            SalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsCompensation, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Salary);
             });
