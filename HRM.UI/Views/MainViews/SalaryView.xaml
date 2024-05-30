@@ -180,7 +180,7 @@
                         Style="{StaticResource Button_Style}"
                         Command="{Binding ExportExcelCommand}" />
                 <Button Height="50"
-                        Content="Lưu bảng công"
+                        Content="Lưu bảng lương"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding AddCommand}" />
             </StackPanel>
