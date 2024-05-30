@@ -61,81 +61,82 @@ namespace HRM.UI.ViewModels
 
                 _navigationStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Login);
             });
+
             StaffListCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListStaff);
             });
-            AddStaffViewCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            AddStaffViewCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AddChildContent);
             });
-            StaffCVCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            StaffCVCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.StaffCV);
             });
-            DepartmentCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsManager, p =>
+            DepartmentCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Department);
             });
-            PositionCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            PositionCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Position);
             });
-            AddCVCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            AddCVCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _userStore.CurrentNhanSu = null;
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PersonalInfor);
             });
-            RemunerativeCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            RemunerativeCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Remunerative);
             });
-            DisciplineCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            DisciplineCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Discipline);
             });
-            ContractCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ContractCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Contract);
             });
-            ListContractCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ListContractCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListContract);
             });
-            TrackingCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            TrackingCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Tracking);
             });
-            ListTrackingTableCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ListTrackingTableCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListTracking);
             });
-            PositionStaffCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            PositionStaffCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.PositionStaff);
             });
-            ListRemunerativeCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ListRemunerativeCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ListRemunerative);
             });
 
-            ImportTrackingCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ImportTrackingCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsStaff, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ImportTracking);
             });
 
             //Lương 
-            AdvanceSalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            AdvanceSalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsCompensation, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.AdvanceSalary);
             });
-            SalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            SalaryCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsCompensation || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.Salary);
             });
 
             //báo cáo thống kê
-            ChartReportCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin, p =>
+            ChartReportCommand = new RelayCommand<object>(p => CurrentUserRole.IsAdmin || CurrentUserRole.IsManager, p =>
             {
                 _mainContentStore.CurrentViewModel = _viewModelFactory.CreateViewModel(Defines.EViewTypes.ChartReport);
             });

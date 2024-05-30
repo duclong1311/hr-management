@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM.EFCore.Migrations
 {
     [DbContext(typeof(HRMDbContext))]
-    [Migration("20240529033220_HRM")]
+    [Migration("20240530041035_HRM")]
     partial class HRM
     {
         /// <inheritdoc />
@@ -144,6 +144,9 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Nam")
+                        .HasColumnType("int");
+
                     b.Property<int>("NgayCongChuNhat")
                         .HasColumnType("int");
 
@@ -161,6 +164,9 @@ namespace HRM.EFCore.Migrations
 
                     b.Property<double>("SoGioOT")
                         .HasColumnType("float");
+
+                    b.Property<int>("Thang")
+                        .HasColumnType("int");
 
                     b.Property<double>("ThucNhan")
                         .HasColumnType("float");

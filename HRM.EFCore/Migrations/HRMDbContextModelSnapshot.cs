@@ -141,6 +141,9 @@ namespace HRM.EFCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Nam")
+                        .HasColumnType("int");
+
                     b.Property<int>("NgayCongChuNhat")
                         .HasColumnType("int");
 
@@ -158,6 +161,9 @@ namespace HRM.EFCore.Migrations
 
                     b.Property<double>("SoGioOT")
                         .HasColumnType("float");
+
+                    b.Property<int>("Thang")
+                        .HasColumnType("int");
 
                     b.Property<double>("ThucNhan")
                         .HasColumnType("float");

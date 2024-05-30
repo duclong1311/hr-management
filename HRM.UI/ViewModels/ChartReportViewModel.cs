@@ -21,6 +21,7 @@ namespace HRM.UI.ViewModels
     public class ChartReportViewModel : BaseViewModel
     {
         private readonly IRepository<BangCong> _repositoryBangCong;
+        private readonly IRepository<BangLuong> _repositoryBangLuong;
 
         private readonly IUnitOfWork _unitOfWork;
         public ICommand CalculateCommand { get; set; }
@@ -52,6 +53,16 @@ namespace HRM.UI.ViewModels
             set
             {
                 _listBangCong = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<BangLuong> _listBangLuong;
+        public ObservableCollection<BangLuong> ListBangLuong
+        {
+            get => _listBangLuong;
+            set
+            {
+                _listBangLuong = value;
                 OnPropertyChanged();
             }
         }
@@ -124,6 +135,12 @@ namespace HRM.UI.ViewModels
         public double? TotalWorkingTime_Sunday; // tổng số giờ đi làm ngày chủ nhật
         public double? TotalUnworkingTime; // tổng số giờ đi làm về sớm
         public double? TotalOTTime; // tổng số giờ làm thêm
+        public double? TotalBasicSalary;
+        public double? TotalOTSalary;
+        public double? TotalWorkingDayOffSalary;
+        public double? TotalLunchBenefit;
+        public double? TotalMoveBenefit;
+        public double? TotalPositionBenefit;
         private double TotalDefaultWorkingTime(int Thang, int Staff_number)
         {
             double total = 0;
@@ -143,13 +160,13 @@ namespace HRM.UI.ViewModels
         }
         private void ThongKe(int Month, int Year, string Type)
         {
-            TotalWorkingTime = 0;
-            TotalWorkingTime_Sunday = 0;
-            TotalUnworkingTime = 0;
-            TotalOTTime = 0;
-
             if (Type.Equals("Giờ làm việc"))
             {
+                TotalWorkingTime = 0;
+                TotalWorkingTime_Sunday = 0;
+                TotalUnworkingTime = 0;
+                TotalOTTime = 0;
+
                 ListBangCong = new ObservableCollection<BangCong>(_repositoryBangCong
                 .AsQueryable()
                 .Where(x => x.Thang == Month && x.Nam == Year)
@@ -173,26 +190,97 @@ namespace HRM.UI.ViewModels
                 {
                     new PieSeries
                     {
-                        Title = "Giờ làm việc",
+                        Title = "Số giờ làm việc trong tháng",
                         Values = new ChartValues<double> { TotalWorkingTime ?? 0 },
                         DataLabels = true
                     },
                     new PieSeries
                     {
-                        Title = "Giờ làm việc CN",
+                        Title = "Số giờ làm việc cuối tuần",
                         Values = new ChartValues<double> { TotalWorkingTime_Sunday ?? 0 },
                         DataLabels = true
                     },
                     new PieSeries
                     {
-                        Title = "Giờ đi sớm",
+                        Title = "Số giờ đi muộn, về sớm",
                         Values = new ChartValues<double> { TotalUnworkingTime ?? 0 },
                         DataLabels = true
                     },
                     new PieSeries
                     {
-                        Title = "Giờ làm thêm",
+                        Title = "Số giờ làm thêm",
                         Values = new ChartValues<double> { TotalOTTime ?? 0 },
+                        DataLabels = true
+                    }
+                };
+            }
+
+            else if (Type.Equals("Tiền lương"))
+            {
+                TotalBasicSalary = 0;
+                TotalOTSalary = 0;
+                TotalWorkingDayOffSalary = 0;
+                TotalLunchBenefit = 0;
+                TotalMoveBenefit = 0;
+                TotalPositionBenefit = 0;
+
+                ListBangLuong = new ObservableCollection<BangLuong>(_repositoryBangLuong
+                        .AsQueryable()
+                        .Where(x => x.Thang == Month && x.Nam == Year)
+                        .ToList());
+
+                if (ListBangLuong.Count == 0)
+                {
+                    MessageBox.Show($"Bảng lương tháng {Month}, năm {Year} không tồn tại.");
+                    return;
+                }
+
+                for (int i = 0; i < ListBangLuong.Count; i++)
+                {
+                    TotalBasicSalary += ListBangLuong[i].LuongCoBan;
+                    TotalOTSalary += ListBangLuong[i].TienTangCa;
+                    TotalWorkingDayOffSalary += ListBangLuong[i].TienCongCN;
+                    TotalLunchBenefit += ListBangLuong[i].PhuCapAnTrua;
+                    TotalMoveBenefit += ListBangLuong[i].PhuCapDiLai;
+                    TotalPositionBenefit += ListBangLuong[i].PhuCap;
+                }
+
+                SeriesCollection = new SeriesCollection
+                {
+                    new PieSeries
+                    {
+                        Title = "Lương cơ bản",
+                        Values = new ChartValues<double> { TotalBasicSalary ?? 0 },
+                        DataLabels = true
+                    },
+                    new PieSeries
+                    {
+                        Title = "Lương tăng ca",
+                        Values = new ChartValues<double> { TotalOTSalary ?? 0 },
+                        DataLabels = true
+                    },
+                    new PieSeries
+                    {
+                        Title = "Lương tăng ca cuối tuần",
+                        Values = new ChartValues<double> { TotalWorkingDayOffSalary ?? 0 },
+                        DataLabels = true
+                    },
+                    new PieSeries
+                    {
+                        Title = "Phụ cấp ăn trưa",
+                        Values = new ChartValues<double> { TotalLunchBenefit ?? 0 },
+                        DataLabels = true
+                    },
+                    new PieSeries
+                    {
+                        Title = "Phụ cấp đi lại",
+                        Values = new ChartValues<double> { TotalMoveBenefit ?? 0 },
+                        DataLabels = true
+                    },
+                    new PieSeries
+                    {
+                        Title = "Phụ cấp chức vụ",
+                        Values = new ChartValues<double> { TotalPositionBenefit ?? 0 },
                         DataLabels = true
                     }
                 };
@@ -209,15 +297,16 @@ namespace HRM.UI.ViewModels
             ChartTypes = new ObservableCollection<string> { "Biểu đồ tròn", "Biểu đồ cột" };
         }
 
-        public ChartReportViewModel(IRepository<BangCong> repositoryBangCong, IUnitOfWork unitOfWork)
+        public ChartReportViewModel(IRepository<BangCong> repositoryBangCong, IRepository<BangLuong> repositoryBangLuong, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _repositoryBangCong = repositoryBangCong;
+            _repositoryBangLuong = repositoryBangLuong;
 
             LoadComboBoxData();
 
             SelectedMonth = 1;
-            SelectedYear = 2012;
+            SelectedYear = 2024;
             //SelectedType = "Giờ làm việc";
 
             CalculateCommand = new RelayCommand<object>(p =>

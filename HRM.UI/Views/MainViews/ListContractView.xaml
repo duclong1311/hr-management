@@ -76,7 +76,9 @@
                                  Style="{StaticResource TextBox_Style}" />
                         <TextBox Text="{Binding LoaiHopDong}"
                                  Style="{StaticResource TextBox_Style}" />
-                        <TextBox Text="{Binding LuongCoBan, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}"
+                        <TextBox Text="{Binding LuongCoBan, StringFormat={}{0:N0}
+                            , ConverterCulture='vi-VN'
+                            ,UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBox_Style}" />
                     </StackPanel>
                 </Grid>
@@ -126,7 +128,7 @@
 
 
                         <ListView Margin="10"
-                                  Height="300"
+                                  Height="400"
                                   Name="ListStaffView_Pick"
                                   BorderBrush="Black"
                                   ItemsSource="{Binding List}"

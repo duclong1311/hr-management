@@ -30,6 +30,7 @@ using DocumentFormat.OpenXml.ExtendedProperties;
 using OfficeOpenXml.Style;
 using OfficeOpenXml;
 using System.IO.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace HRM.UI.ViewModels
 {
@@ -236,14 +237,16 @@ namespace HRM.UI.ViewModels
                      GiamTruGiaCanh = TinhGiamTruGiaCanh(quanHe);
                 }
                 
-
                 if (hopDong == null)
                 {
                     MessageBox.Show($"Nhân viên \"{ListBangCong[i].HoTen}\" không có hợp đồng.");
                     continue;
                 }
 
-                double? luongcoban = _repositoryHopDong.AsQueryable().OrderByDescending(x => x.NgayBatDau).FirstOrDefault(x => x.MaNhanVien == ListBangCong[i].MaNhanVien).LuongCoBan;
+                double? luongcoban = _repositoryHopDong
+                    .AsQueryable()
+                    .OrderByDescending(x => x.NgayBatDau)
+                    .FirstOrDefault(x => x.MaNhanVien == ListBangCong[i].MaNhanVien).LuongCoBan;
 
                 int ngaycongthucte;
                 if (Thang == 1 || Thang == 3 || Thang == 5 || Thang == 7 || Thang == 8 || Thang == 10 || Thang == 12)
@@ -269,6 +272,16 @@ namespace HRM.UI.ViewModels
                     .Where(x => x.NhanSu.MaNhanVien == ListBangCong[i].MaNhanVien)
                     .OrderByDescending(x => x.PhuCapChucVu)
                     .FirstOrDefault().PhuCapChucVu;
+
+                if (phucap == null)
+                {
+                    MessageBox.Show($"Nhân viên \"{ListBangCong[i].HoTen}\" không có chức vụ.");
+                    continue;
+                }
+                else
+                {
+                    phucap = (double)phucap;
+                }
 
                 double? ungluong = null;
 
@@ -658,11 +671,13 @@ namespace HRM.UI.ViewModels
         private readonly IRepository<ChucVu> _repositoryChucVu;
         private readonly IRepository<UngLuong> _repositoryUngLuong;
         private readonly IRepository<QuanHeGiaDinh> _repositoryQuanHeGiaDinh;
+        private readonly IRepository<BangLuong> _repositoryBangLuong;
         private readonly IUnitOfWork _unitOfWork;
         public ICommand CalculateCommand { get; set; }
         public ICommand ExportPDFCommand { get; set; }
         public ICommand ExportExcelCommand { get; set; }
-        public SalaryViewModel(IRepository<UngLuong> repositoryUngLuong, IRepository<ChucVu> repositoryChucVu, IRepository<NhanSuChucVu> repositoryNhanSuChucVu, IRepository<HopDong> repositoryHopDong, IRepository<BangCong> repositoryBangCong, IRepository<QuanHeGiaDinh> repositoryQuanHeGiaDinh, IUnitOfWork unitOfWork)
+        public ICommand AddCommand { get; set; }
+        public SalaryViewModel(IRepository<UngLuong> repositoryUngLuong, IRepository<ChucVu> repositoryChucVu, IRepository<NhanSuChucVu> repositoryNhanSuChucVu, IRepository<HopDong> repositoryHopDong, IRepository<BangCong> repositoryBangCong, IRepository<QuanHeGiaDinh> repositoryQuanHeGiaDinh, IRepository<BangLuong> repositoryBangLuong, IUnitOfWork unitOfWork)
         {
             _repositoryHopDong = repositoryHopDong;
             _repositoryBangCong = repositoryBangCong;
@@ -670,6 +685,7 @@ namespace HRM.UI.ViewModels
             _repositoryChucVu = repositoryChucVu;
             _repositoryUngLuong = repositoryUngLuong;
             _repositoryQuanHeGiaDinh = repositoryQuanHeGiaDinh;
+            _repositoryBangLuong = repositoryBangLuong;
             _unitOfWork = unitOfWork;
             LoadComboBoxData();
 
@@ -691,6 +707,62 @@ namespace HRM.UI.ViewModels
                 {
                     await _unitOfWork.RollbackAsync();
                     MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
+            AddCommand = new RelayCommand<object>(p =>
+            {
+                if (ListLuongNhanVien.Count == 0)
+                    return false;
+                else
+                    return true;
+            }, async (p) =>
+            {
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    foreach (var luongNhanVien in ListLuongNhanVien)
+                    {
+                        var bangluong = new BangLuong()
+                        {
+                            Thang = Thang,
+                            Nam = Nam,
+                            MaNhanVien = luongNhanVien.MaNhanVien,
+                            HoTen = luongNhanVien.HoTen,
+                            ChucVu = luongNhanVien.ChucVu,
+                            LuongCoBan = luongNhanVien.LuongCoBan,
+                            TongSoNgayCong = luongNhanVien.TongSoNgayCong,
+                            TienCongThuong = luongNhanVien.TienCongThuong,
+                            NgayCongChuNhat = luongNhanVien.NgayCongChuNhat,
+                            TienCongCN = luongNhanVien.TienCongCN,
+                            SoGioOT = luongNhanVien.SoGioOT,
+                            TienTangCa = luongNhanVien.TienTangCa,
+                            PhuCapAnTrua = luongNhanVien.PhuCapAnTrua,
+                            PhuCapDiLai = luongNhanVien.PhuCapDiLai,
+                            PhuCap = luongNhanVien.PhuCap,
+                            BaoHiemXaHoi = luongNhanVien.BaoHiemXaHoi,
+                            BaoHiemYTe = luongNhanVien.BaoHiemYTe,
+                            SoGioDiMuonVeSom = luongNhanVien.SoGioDiMuonVeSom,
+                            TienDiSomVeMuon = luongNhanVien.TienDiSomVeMuon,
+                            TienNgayNghiPhep = luongNhanVien.TienNgayNghiPhep,
+                            TienBaoHiem = luongNhanVien.TienBaoHiem,
+                            UngLuong = luongNhanVien.UngLuong,
+                            TongKhauTru = luongNhanVien.TongKhauTru,
+                            TongLuong = luongNhanVien.TongLuong,
+                            ThucNhan = luongNhanVien.ThucNhan,
+                            ThueTNCN = luongNhanVien.ThueTNCN
+                        };
+
+                        await _repositoryBangLuong.AddAsync(bangluong);
+                    }
+
+                    await _unitOfWork.CommitAsync();
+                    MessageBox.Show("Thêm thành công");
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackAsync();
+                    MessageBox.Show("Lỗi hệ thống: " + ex.Message);
                 }
             });
 

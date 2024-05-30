@@ -19,6 +19,8 @@ namespace HRM.EFCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Thang = table.Column<int>(type: "int", nullable: false),
+                    Nam = table.Column<int>(type: "int", nullable: false),
                     MaNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),

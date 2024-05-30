@@ -111,50 +111,59 @@
 
                 <Grid Grid.Row="3"
                       Grid.ColumnSpan="4">
-                    <ListView Margin="10"
-                              Name="ListStaffView_Pick"
-                              BorderBrush="Black"
-                              ItemsSource="{Binding ListNhanSuChucVu}"
-                              SelectedItem="{Binding SelectedItem}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Left" />
-                                <Setter Property="Padding"
-                                        Value="5,0,0,0" />
-                                <Setter Property="FontSize"
-                                        Value="14" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã nhân viên"
-                                                Width="100"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
-                                <GridViewColumn Header="Tên nhân viên"
-                                                Width="200"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding NhanSu.HoTen }" />
-                                <GridViewColumn Header="Chức vụ"
-                                                Width="120"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
-                                <GridViewColumn Header="Phụ cấp chức vụ"
-                                                Width="150"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding ChucVu.PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
-                                <GridViewColumn Header="Ngày bắt đầu"
-                                                Width="150"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding NgayBatDau , StringFormat='dd/MM/yyyy'}" />
-                                <GridViewColumn Header="Ngày kết thúc"
-                                                Width="150"
-                                                HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
-                                                DisplayMemberBinding="{Binding NgayKetThuc , StringFormat='dd/MM/yyyy'}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <StackPanel>
+                        <TextBox Width="200"
+                                 Margin="10"
+                                 Style="{StaticResource TextBox_Style}"
+                                 HorizontalAlignment="Right"
+                                 Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <ListView Margin="10"
+                                  Name="ListStaffView_Pick"
+                                  BorderBrush="Black"
+                                  Height="400"
+                                  ItemsSource="{Binding ListNhanSuChucVu}"
+                                  SelectedItem="{Binding SelectedItem}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Left" />
+                                    <Setter Property="Padding"
+                                            Value="5,0,0,0" />
+                                    <Setter Property="FontSize"
+                                            Value="14" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã nhân viên"
+                                                    Width="100"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NhanSu.MaNhanVien }" />
+                                    <GridViewColumn Header="Tên nhân viên"
+                                                    Width="200"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NhanSu.HoTen }" />
+                                    <GridViewColumn Header="Chức vụ"
+                                                    Width="120"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding ChucVu.TenChucVu}" />
+                                    <GridViewColumn Header="Phụ cấp chức vụ"
+                                                    Width="150"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding ChucVu.PhuCapChucVu, StringFormat={}{0:N0}, ConverterCulture='vi-VN'}" />
+                                    <GridViewColumn Header="Ngày bắt đầu"
+                                                    Width="150"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NgayBatDau , StringFormat='dd/MM/yyyy'}" />
+                                    <GridViewColumn Header="Ngày kết thúc"
+                                                    Width="150"
+                                                    HeaderContainerStyle="{StaticResource GridViewHeader_Style}"
+                                                    DisplayMemberBinding="{Binding NgayKetThuc , StringFormat='dd/MM/yyyy'}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
                 </Grid>
 
             </Grid>

@@ -41,6 +41,17 @@ namespace HRM.UI.ViewModels
             get { return _ngayKetThuc; }
             set { _ngayKetThuc = value; OnPropertyChanged(); }
         }
+        private string _filter;
+        public string Filter
+        {
+            get => _filter;
+            set
+            {
+                _filter = value;
+                OnPropertyChanged();
+                LoadData();
+            }
+        }
         private NhanSuChucVu _selectedItem;
 
         public NhanSuChucVu SelectedItem
@@ -83,6 +94,17 @@ namespace HRM.UI.ViewModels
         private void LoadData()
         {
             ListNhanSuChucVu = new ObservableCollection<NhanSuChucVu>(_nhanSuChucVuRepository.AsQueryable().ToList());
+
+            if (string.IsNullOrWhiteSpace(Filter))
+            {
+                ListNhanSuChucVu = new ObservableCollection<NhanSuChucVu>(_nhanSuChucVuRepository.AsQueryable().ToList());
+            }
+            else
+            {
+                ListNhanSuChucVu = new ObservableCollection<NhanSuChucVu>(_nhanSuChucVuRepository.AsQueryable()
+                    .Where(x => x.NhanSu.MaNhanVien.Contains(Filter) || x.NhanSu.HoTen.Contains(Filter))
+                    .ToList());
+            }
         }
         public string GetPhuCapChucVu()
         {

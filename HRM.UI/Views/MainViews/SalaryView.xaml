@@ -179,6 +179,10 @@
                         Content="Xuất Excel"
                         Style="{StaticResource Button_Style}"
                         Command="{Binding ExportExcelCommand}" />
+                <Button Height="50"
+                        Content="Lưu bảng công"
+                        Style="{StaticResource Button_Style}"
+                        Command="{Binding AddCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

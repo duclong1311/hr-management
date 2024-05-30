@@ -9,6 +9,8 @@ namespace HRM.Domain.Models
 {
     public class BangLuong : IEntity
     {
+        public int Thang { get; set; }
+        public int Nam { get; set; }
         public string MaNhanVien { get; set; }
         public string HoTen { get; set; }
         public string ChucVu { get; set; }//
